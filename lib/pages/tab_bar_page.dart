@@ -1,14 +1,8 @@
-import '/custom/custom_app_bar.dart';
-import '/custom/custom_bottom_nav_bar.dart';
-import '/custom/custom_card.dart';
-import '/custom/custom_column.dart';
-import '/custom/custom_image.dart';
-import '/custom/custom_padding.dart';
-import '/custom/custom_row.dart';
-import '/custom/custom_tab_bar.dart';
-import '/custom/custom_text.dart';
 import 'package:flutter/material.dart';
 
+import '../custom/widgets.dart';
+
+/// TabBar & BottomNavBar 사용 예제 페이지
 class TabBarPage extends StatefulWidget {
   const TabBarPage({super.key});
 

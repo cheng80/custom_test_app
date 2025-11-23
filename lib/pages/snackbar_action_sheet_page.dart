@@ -1,13 +1,8 @@
-import '/custom/custom_action_sheet.dart';
-import '/custom/custom_app_bar.dart';
-import '/custom/custom_button.dart';
-import '/custom/custom_card.dart';
-import '/custom/custom_column.dart';
-import '/custom/custom_padding.dart';
-import '/custom/custom_snack_bar.dart';
-import '/custom/custom_text.dart';
 import 'package:flutter/material.dart';
 
+import '../custom/widgets.dart';
+
+/// SnackBar & ActionSheet 사용 예제 페이지
 class SnackBarActionSheetPage extends StatefulWidget {
   const SnackBarActionSheetPage({super.key});
 

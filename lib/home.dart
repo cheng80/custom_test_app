@@ -1,19 +1,10 @@
-import '/custom/custom_app_bar.dart';
-import '/custom/custom_button.dart';
-import '/custom/custom_card.dart';
-import '/custom/custom_column.dart';
-import '/custom/custom_container.dart';
-import '/custom/custom_icon_button.dart';
-import '/custom/custom_image.dart';
-import '/custom/custom_padding.dart';
-import '/custom/custom_row.dart';
-import '/custom/custom_text.dart';
-import '/pages/dialog_page.dart';
-import '/pages/list_view_page.dart';
-import '/pages/snackbar_action_sheet_page.dart';
-import '/pages/tab_bar_page.dart';
-import '/pages/text_field_page.dart';
-import '/pages/util_page.dart';
+import 'custom/custom.dart';
+import 'pages/dialog_page.dart';
+import 'pages/list_view_page.dart';
+import 'pages/snackbar_action_sheet_page.dart';
+import 'pages/tab_bar_page.dart';
+import 'pages/text_field_page.dart';
+import 'pages/util_page.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {

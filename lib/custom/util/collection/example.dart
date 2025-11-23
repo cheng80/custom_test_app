@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/custom/util/collection/custom_collection_util.dart';
+import 'custom_collection_util.dart';
 
 /// CollectionUtil 사용 예제
 void main() {

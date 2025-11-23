@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'home.dart';
 import 'pages/dialog_page.dart';
 import 'pages/list_view_page.dart';
+import 'pages/network_page.dart';
 import 'pages/snackbar_action_sheet_page.dart';
+import 'pages/storage_page.dart';
 import 'pages/tab_bar_page.dart';
 import 'pages/text_field_page.dart';
 import 'pages/util_page.dart';
@@ -28,6 +30,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const Home(),
         '/util': (context) => const UtilPage(),
+        '/storage': (context) => const StoragePage(),
+        '/network': (context) => const NetworkPage(),
         '/textfield': (context) => const TextFieldPage(),
         '/listview': (context) => const ListViewPage(),
         '/dialog': (context) => const DialogPage(),

@@ -1,13 +1,8 @@
-import '/custom/custom_app_bar.dart';
-import '/custom/custom_button.dart';
-import '/custom/custom_column.dart';
-import '/custom/custom_dialog.dart';
-import '/custom/custom_padding.dart';
-import '/custom/custom_row.dart';
-import '/custom/custom_text.dart';
-import '/custom/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
+import '../custom/widgets.dart';
+
+/// TextField 사용 예제 페이지
 class TextFieldPage extends StatefulWidget {
   const TextFieldPage({super.key});
 
@@ -56,7 +51,10 @@ class _TextFieldPageState extends State<TextFieldPage> {
       behavior: HitTestBehavior.opaque, // 자식 위젯이 터치를 소비해도 onTap이 호출되도록 설정
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: CustomAppBar(title: "TextField 예시", backgroundColor: Colors.green),
+        appBar: CustomAppBar(
+          title: "TextField 예시",
+          backgroundColor: Colors.green,
+        ),
         body: SingleChildScrollView(
           child: CustomPadding.all(
             16.0,
@@ -180,7 +178,11 @@ class _TextFieldPageState extends State<TextFieldPage> {
                 CustomColumn(
                   spacing: 12,
                   children: [
-                    CustomText("숫자 입력", fontSize: 18, fontWeight: FontWeight.bold),
+                    CustomText(
+                      "숫자 입력",
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                     CustomTextField(
                       controller: _numberController,
                       labelText: "숫자를 입력하세요",
@@ -188,8 +190,6 @@ class _TextFieldPageState extends State<TextFieldPage> {
                     ),
                   ],
                 ),
-
-                const SizedBox(height: 20),
 
                 const SizedBox(height: 20),
 

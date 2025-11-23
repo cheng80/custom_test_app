@@ -442,7 +442,11 @@ lib/
 ├── custom.dart                    # 편의용: widgets + utils 모두 export
 └── common/
     ├── widgets.dart               # 위젯만 export
-    ├── utils.dart                 # 유틸리티만 export
+    ├── utils_core.dart            # 핵심 유틸리티만 export (의존성 없음)
+    └── util/                      # 유틸리티 폴더
+        ├── storage/               # 스토리지 유틸리티
+        └── network/               # 네트워크 유틸리티
+    ├── custom_full.dart           # 전체 기능 export (의존성 필요)
     └── ... (기존 파일들 그대로)
 ```
 
@@ -453,7 +457,7 @@ lib/
 import 'package:custom_test_app/common/widgets.dart';
 
 // 유틸리티만 필요한 경우
-import 'package:custom_test_app/common/utils.dart';
+import 'package:custom_test_app/custom/utils_core.dart';
 
 // 둘 다 필요한 경우
 import 'package:custom_test_app/custom.dart';
@@ -474,7 +478,11 @@ lib/
 ├── custom.dart                    # widgets + utils 모두 export
 └── common/
     ├── widgets.dart               # 위젯들 export (경로만 변경)
-    ├── utils.dart                 # 유틸리티들 export (경로만 변경)
+    ├── utils_core.dart            # 핵심 유틸리티 export
+    └── util/                      # 유틸리티 폴더
+        ├── storage/               # 스토리지 유틸리티
+        └── network/               # 네트워크 유틸리티
+    ├── custom_full.dart           # 전체 기능 export
     ├── widgets/
     │   ├── basic/                 # 기본 위젯 (Text, Button, Column, Row, Padding)
     │   ├── layout/                # 레이아웃 위젯 (Card, Container, Image, IconButton, ListView)
@@ -495,7 +503,8 @@ lib/
 **전환 시 작업**:
 
 - 파일 이동: 위젯 파일들을 카테고리별 폴더로 이동
-- Export 파일 수정: `widgets.dart`와 `utils.dart`의 export 경로만 변경
+- Export 파일 수정: `widgets.dart`, `utils_core.dart`의 export 경로 변경
+- `custom_full.dart`에서 `util/storage/custom_storage_util.dart`, `util/network/custom_network_util.dart` 직접 export
 - 사용자 코드 변경: 없음 (export 파일을 통해 접근하므로)
 
 **상태**: 🔮 향후 리팩토링 예정 (방법 2 완료 후 진행)

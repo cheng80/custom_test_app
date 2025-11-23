@@ -1,13 +1,8 @@
-import '/custom/custom_app_bar.dart';
-import '/custom/custom_card.dart';
-import '/custom/custom_column.dart';
-import '/custom/custom_image.dart';
-import '/custom/custom_list_view.dart';
-import '/custom/custom_padding.dart';
-import '/custom/custom_row.dart';
-import '/custom/custom_text.dart';
 import 'package:flutter/material.dart';
 
+import '../custom/widgets.dart';
+
+/// ListView 사용 예제 페이지
 class ListViewPage extends StatefulWidget {
   const ListViewPage({super.key});
 
@@ -31,7 +26,10 @@ class _ListViewPageState extends State<ListViewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: CustomAppBar(title: "ListView 예시", backgroundColor: Colors.purple),
+      appBar: CustomAppBar(
+        title: "ListView 예시",
+        backgroundColor: Colors.purple,
+      ),
       body: CustomPadding.all(
         16.0,
         child: CustomColumn(

@@ -1,5 +1,5 @@
-import '/custom/custom_text.dart';
-import '/custom/custom_common_util.dart';
+import 'custom_text.dart';
+import 'custom_common_util.dart';
 import 'package:flutter/material.dart';
 
 /// 버튼 타입을 선택하는 enum

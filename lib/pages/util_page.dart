@@ -1,15 +1,9 @@
-import '/custom/custom_app_bar.dart';
-import '/custom/custom_button.dart';
-import '/custom/custom_card.dart';
-import '/custom/custom_column.dart';
-import '/custom/custom_padding.dart';
-import '/custom/custom_text.dart';
-import '/custom/util/collection/example.dart';
-import '/custom/util/json/example.dart';
-import '/custom/util/network/example.dart';
-import '/custom/util/storage/example.dart';
-import '/custom/util/timer/example.dart';
 import 'package:flutter/material.dart';
+
+import '../custom/util/collection/example.dart';
+import '../custom/util/json/example.dart';
+import '../custom/util/timer/example.dart';
+import '../custom/widgets.dart';
 
 /// 유틸리티 예제 페이지 목록
 class UtilPage extends StatelessWidget {
@@ -51,6 +45,7 @@ class UtilPage extends StatelessWidget {
 
               // StorageUtil 예제
               CustomCard(
+                padding: const EdgeInsets.all(16),
                 child: CustomColumn(
                   spacing: 12,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,16 +60,19 @@ class UtilPage extends StatelessWidget {
                       fontSize: 14,
                       color: Colors.grey[700]!,
                     ),
-                    CustomButton(
-                      btnText: '예제 보기',
-                      onCallBack: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const StorageExamplePage(),
-                          ),
-                        );
-                      },
+                    CustomText(
+                      '⚠️ 별도 페이지로 이동: StorageUtil 예제 페이지',
+                      fontSize: 12,
+                      color: Colors.orange[700]!,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: CustomButton(
+                        btnText: '예제 보기',
+                        onCallBack: () {
+                          Navigator.pushNamed(context, '/storage');
+                        },
+                      ),
                     ),
                   ],
                 ),
@@ -82,6 +80,7 @@ class UtilPage extends StatelessWidget {
 
               // CollectionUtil 예제
               CustomCard(
+                padding: const EdgeInsets.all(16),
                 child: CustomColumn(
                   spacing: 12,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,16 +95,20 @@ class UtilPage extends StatelessWidget {
                       fontSize: 14,
                       color: Colors.grey[700]!,
                     ),
-                    CustomButton(
-                      btnText: '예제 보기',
-                      onCallBack: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const CollectionExamplePage(),
-                          ),
-                        );
-                      },
+                    SizedBox(
+                      width: double.infinity,
+                      child: CustomButton(
+                        btnText: '예제 보기',
+                        onCallBack: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const CollectionExamplePage(),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),
@@ -113,6 +116,7 @@ class UtilPage extends StatelessWidget {
 
               // TimerUtil 예제
               CustomCard(
+                padding: const EdgeInsets.all(16),
                 child: CustomColumn(
                   spacing: 12,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -127,16 +131,19 @@ class UtilPage extends StatelessWidget {
                       fontSize: 14,
                       color: Colors.grey[700]!,
                     ),
-                    CustomButton(
-                      btnText: '예제 보기',
-                      onCallBack: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const TimerExamplePage(),
-                          ),
-                        );
-                      },
+                    SizedBox(
+                      width: double.infinity,
+                      child: CustomButton(
+                        btnText: '예제 보기',
+                        onCallBack: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const TimerExamplePage(),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),
@@ -144,6 +151,7 @@ class UtilPage extends StatelessWidget {
 
               // JsonUtil 예제
               CustomCard(
+                padding: const EdgeInsets.all(16),
                 child: CustomColumn(
                   spacing: 12,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -158,16 +166,19 @@ class UtilPage extends StatelessWidget {
                       fontSize: 14,
                       color: Colors.grey[700]!,
                     ),
-                    CustomButton(
-                      btnText: '예제 보기',
-                      onCallBack: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const JsonUtilExamplePage(),
-                          ),
-                        );
-                      },
+                    SizedBox(
+                      width: double.infinity,
+                      child: CustomButton(
+                        btnText: '예제 보기',
+                        onCallBack: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const JsonUtilExamplePage(),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),
@@ -175,6 +186,7 @@ class UtilPage extends StatelessWidget {
 
               // NetworkUtil 예제
               CustomCard(
+                padding: const EdgeInsets.all(16),
                 child: CustomColumn(
                   spacing: 12,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -189,17 +201,19 @@ class UtilPage extends StatelessWidget {
                       fontSize: 14,
                       color: Colors.grey[700]!,
                     ),
-                    CustomButton(
-                      btnText: '예제 보기',
-                      onCallBack: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                const NetworkUtilExamplePage(),
-                          ),
-                        );
-                      },
+                    CustomText(
+                      '⚠️ 별도 페이지로 이동: NetworkUtil 예제 페이지',
+                      fontSize: 12,
+                      color: Colors.orange[700]!,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: CustomButton(
+                        btnText: '예제 보기',
+                        onCallBack: () {
+                          Navigator.pushNamed(context, '/network');
+                        },
+                      ),
                     ),
                   ],
                 ),

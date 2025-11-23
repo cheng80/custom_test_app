@@ -21,7 +21,11 @@ lib/
 └── custom/                        # 커스텀 위젯 및 유틸리티 (일관된 구조)
     ├── custom.dart                # 편의용: widgets + utils 모두 export
     ├── widgets.dart               # 위젯만 export
-    ├── utils.dart                 # 유틸리티만 export
+    ├── utils_core.dart            # 핵심 유틸리티만 export (의존성 없음)
+    ├── custom_full.dart           # 전체 기능 export (의존성 필요)
+    └── util/                      # 유틸리티 폴더
+        ├── storage/               # 스토리지 유틸리티 (shared_preferences 필요)
+        └── network/               # 네트워크 유틸리티 (http 필요)
     ├── custom_text.dart           # 텍스트 위젯
     ├── custom_button.dart         # 버튼 위젯 (TextButton, ElevatedButton, OutlinedButton)
     ├── custom_column.dart         # Column 위젯
@@ -270,14 +274,17 @@ CustomCommonUtil.formatDate(DateTime.now(), 'yyyy-MM-dd');
 // 위젯만 필요한 경우
 import 'package:custom_test_app/custom/widgets.dart';
 
-// 유틸리티만 필요한 경우
-import 'package:custom_test_app/custom/utils.dart';
+// 핵심 유틸리티만 필요한 경우
+import 'package:custom_test_app/custom/utils_core.dart';
+
+// 전체 유틸리티 (외부 패키지 의존성 필요)
+import 'package:custom_test_app/custom/custom_full.dart';
 
 // 둘 다 필요한 경우
 import 'package:custom_test_app/custom/custom.dart';
 // 또는
 import 'package:custom_test_app/custom/widgets.dart';
-import 'package:custom_test_app/custom/utils.dart';
+import 'package:custom_test_app/custom/utils_core.dart';
 ```
 
 ### 기존 방식 (개별 Import)

@@ -50,8 +50,11 @@ import 'package:custom_test_app/custom/custom.dart';
 // 선택적 import - 위젯만 필요한 경우
 import 'package:custom_test_app/custom/widgets.dart';
 
-// 선택적 import - 유틸리티만 필요한 경우
-import 'package:custom_test_app/custom/utils.dart';
+// 선택적 import - 핵심 유틸리티만 필요한 경우
+import 'package:custom_test_app/custom/utils_core.dart';
+
+// 선택적 import - 전체 유틸리티 (외부 패키지 의존성 필요)
+import 'package:custom_test_app/custom/custom_full.dart';
 ```
 
 ### 사용 예시
