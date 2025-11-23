@@ -97,7 +97,7 @@ class CustomContainer extends StatelessWidget {
                 shadowOffset != null)
             ? [
                 BoxShadow(
-                  color: shadowColor ?? Colors.grey.withOpacity(0.2),
+                  color: shadowColor ?? Colors.grey.withValues(alpha: 0.2),
                   spreadRadius: spreadRadius ?? 1.0,
                   blurRadius: blurRadius ?? 8.0,
                   offset: shadowOffset ?? const Offset(0, 2),

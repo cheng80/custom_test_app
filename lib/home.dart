@@ -16,6 +16,10 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   //Property
+  bool _switchValue = false;
+  bool? _checkboxValue = false;
+  String? _radioValue;
+  double _sliderValue = 50.0;
 
   @override
   Widget build(BuildContext context) {
@@ -306,6 +310,194 @@ class _HomeState extends State<Home> {
 
               const SizedBox(height: 16),
 
+              // 입력 위젯 예시 섹션
+              CustomCard(
+                padding: const EdgeInsets.all(20),
+                child: CustomColumn(
+                  spacing: 16,
+                  children: [
+                    CustomText(
+                      "🎛️ 입력 위젯 예시",
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    CustomText(
+                      "Switch, Checkbox, Radio, Slider 위젯 사용 예시",
+                      fontSize: 14,
+                      color: Colors.grey.shade600,
+                    ),
+                    // Switch 예시
+                    CustomColumn(
+                      spacing: 12,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          "Switch",
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        CustomRow(
+                          spacing: 12,
+                          children: [
+                            CustomSwitch(
+                              value: _switchValue,
+                              onChanged: (value) {
+                                setState(() {
+                                  _switchValue = value;
+                                });
+                              },
+                              label: "알림 받기",
+                            ),
+                            CustomSwitch(
+                              value: !_switchValue,
+                              onChanged: (value) {
+                                setState(() {
+                                  _switchValue = !value;
+                                });
+                              },
+                              activeColor: Colors.green,
+                              label: "다크 모드",
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const Divider(),
+                    // Checkbox 예시
+                    CustomColumn(
+                      spacing: 12,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          "Checkbox",
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        CustomColumn(
+                          spacing: 8,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomCheckbox(
+                              value: _checkboxValue,
+                              onChanged: (value) {
+                                setState(() {
+                                  _checkboxValue = value;
+                                });
+                              },
+                              label: "이용약관 동의",
+                            ),
+                            CustomCheckbox(
+                              value: _checkboxValue == true,
+                              onChanged: (value) {
+                                setState(() {
+                                  _checkboxValue = value;
+                                });
+                              },
+                              activeColor: Colors.purple,
+                              label: "개인정보 처리방침 동의",
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const Divider(),
+                    // Radio 예시
+                    CustomColumn(
+                      spacing: 12,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          "Radio",
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        CustomColumn(
+                          spacing: 8,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomRadio<String>(
+                              value: "option1",
+                              groupValue: _radioValue,
+                              onChanged: (value) {
+                                setState(() {
+                                  _radioValue = value;
+                                });
+                              },
+                              label: "옵션 1",
+                            ),
+                            CustomRadio<String>(
+                              value: "option2",
+                              groupValue: _radioValue,
+                              onChanged: (value) {
+                                setState(() {
+                                  _radioValue = value;
+                                });
+                              },
+                              activeColor: Colors.orange,
+                              label: "옵션 2",
+                            ),
+                            CustomRadio<String>(
+                              value: "option3",
+                              groupValue: _radioValue,
+                              onChanged: (value) {
+                                setState(() {
+                                  _radioValue = value;
+                                });
+                              },
+                              activeColor: Colors.teal,
+                              label: "옵션 3",
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const Divider(),
+                    // Slider 예시
+                    CustomColumn(
+                      spacing: 12,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          "Slider",
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        CustomSlider(
+                          value: _sliderValue,
+                          min: 0,
+                          max: 100,
+                          divisions: 10,
+                          title: "볼륨 조절",
+                          showValue: true,
+                          activeColor: Colors.blue,
+                          onChanged: (value) {
+                            setState(() {
+                              _sliderValue = value;
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 8),
+                        CustomSlider(
+                          value: _sliderValue / 100,
+                          min: 0,
+                          max: 1,
+                          title: "진행률",
+                          showValue: true,
+                          activeColor: Colors.green,
+                          onChanged: (value) {
+                            setState(() {
+                              _sliderValue = value * 100;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 16),
+
               // 이미지 갤러리 섹션
               CustomCard(
                 padding: const EdgeInsets.all(20),
@@ -534,7 +726,7 @@ class _HomeState extends State<Home> {
                             borderRadius: 12,
                             borderColor: Colors.blue,
                             borderWidth: 2,
-                            shadowColor: Colors.blue.withOpacity(0.3),
+                            shadowColor: Colors.blue.withValues(alpha: 0.3),
                             blurRadius: 8,
                             child: CustomColumn(
                               spacing: 8,

@@ -36,6 +36,10 @@ lib/
     ├── custom_card.dart           # Card 위젯
     ├── custom_container.dart      # Container 위젯
     ├── custom_text_field.dart     # TextField 위젯
+    ├── custom_switch.dart          # Switch 위젯
+    ├── custom_checkbox.dart       # Checkbox 위젯
+    ├── custom_radio.dart           # Radio 위젯
+    ├── custom_slider.dart          # Slider 위젯
     ├── custom_app_bar.dart        # AppBar 위젯 (String/Widget 지원)
     ├── custom_dialog.dart         # AlertDialog 헬퍼
     ├── custom_list_view.dart      # ListView.builder 위젯
@@ -111,6 +115,10 @@ doc/                               # 개발 문서
 ### 입력 위젯
 
 - **CustomTextField**: 기본 검증 및 키보드 관리 기능 포함
+- **CustomSwitch**: 스위치(켜짐/꺼짐) 토글 위젯
+- **CustomCheckbox**: 체크박스 위젯
+- **CustomRadio**: 라디오 버튼 위젯 (Flutter 3.24+ Radio.adaptive 지원)
+- **CustomSlider**: 슬라이더 위젯 (연속적인 값 선택)
 
 ### 네비게이션 위젯
 

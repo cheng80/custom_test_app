@@ -143,3 +143,352 @@ Form(
   ),
 )
 ```
+
+---
+
+## CustomSwitch
+
+스위치(켜짐/꺼짐) 토글 위젯입니다.
+
+### 기본 사용법
+
+```dart
+CustomSwitch(
+  value: _isSwitched,
+  onChanged: (value) {
+    setState(() {
+      _isSwitched = value;
+    });
+  },
+)
+```
+
+### 주요 속성
+
+| 속성                    | 타입                     | 기본값        | 설명                           |
+| ----------------------- | ------------------------ | ------------- | ------------------------------ |
+| `value`                 | `bool`                   | 필수          | Switch의 현재 값               |
+| `onChanged`             | `ValueChanged<bool>`     | 필수          | 값 변경 시 호출되는 콜백       |
+| `activeColor`           | `Color?`                 | `Colors.blue` | 활성화 상태의 색상             |
+| `inactiveColor`         | `Color?`                 | `null`        | 비활성화 상태의 색상           |
+| `inactiveThumbColor`    | `Color?`                 | `null`        | 비활성화 상태의 썸(thumb) 색상 |
+| `inactiveTrackColor`    | `Color?`                 | `null`        | 비활성화 상태의 트랙 색상      |
+| `thumbColor`            | `Color?`                 | `null`        | 활성화 상태의 썸(thumb) 색상   |
+| `trackColor`            | `Color?`                 | `null`        | 활성화 상태의 트랙 색상        |
+| `label`                 | `String?`                | `null`        | Switch 옆에 표시할 레이블      |
+| `labelStyle`            | `TextStyle?`             | `null`        | 레이블 텍스트 스타일           |
+| `spacing`               | `double?`                | `12`          | Switch와 레이블 사이의 간격    |
+| `materialTapTargetSize` | `MaterialTapTargetSize?` | `null`        | Switch 크기 조절               |
+| `switchTheme`           | `SwitchThemeData?`       | `null`        | 커스텀 SwitchThemeData         |
+
+### 사용 예시
+
+```dart
+// 기본 사용
+CustomSwitch(
+  value: _isSwitched,
+  onChanged: (value) {
+    setState(() {
+      _isSwitched = value;
+    });
+  },
+)
+
+// 레이블 포함
+CustomSwitch(
+  value: _isSwitched,
+  label: "알림 받기",
+  onChanged: (value) {
+    setState(() {
+      _isSwitched = value;
+    });
+  },
+)
+
+// 색상 변경
+CustomSwitch(
+  value: _isSwitched,
+  activeColor: Colors.green,
+  label: "다크 모드",
+  onChanged: (value) {
+    setState(() {
+      _isSwitched = value;
+    });
+  },
+)
+```
+
+---
+
+## CustomCheckbox
+
+체크박스 위젯입니다.
+
+### 기본 사용법
+
+```dart
+CustomCheckbox(
+  value: _isChecked,
+  onChanged: (value) {
+    setState(() {
+      _isChecked = value;
+    });
+  },
+)
+```
+
+### 주요 속성
+
+| 속성                    | 타입                     | 기본값         | 설명                          |
+| ----------------------- | ------------------------ | -------------- | ----------------------------- |
+| `value`                 | `bool?`                  | 필수           | Checkbox의 현재 값            |
+| `onChanged`             | `ValueChanged<bool?>?`   | 필수           | 값 변경 시 호출되는 콜백      |
+| `activeColor`           | `Color?`                 | `Colors.blue`  | 활성화 상태의 색상            |
+| `inactiveColor`         | `Color?`                 | `null`         | 비활성화 상태의 색상          |
+| `checkColor`            | `Color?`                 | `Colors.white` | 체크 마크 색상                |
+| `label`                 | `String?`                | `null`         | Checkbox 옆에 표시할 레이블   |
+| `labelStyle`            | `TextStyle?`             | `null`         | 레이블 텍스트 스타일          |
+| `spacing`               | `double?`                | `8`            | Checkbox와 레이블 사이의 간격 |
+| `materialTapTargetSize` | `MaterialTapTargetSize?` | `null`         | Checkbox 크기 조절            |
+| `visualDensity`         | `VisualDensity?`         | `null`         | 시각적 밀도                   |
+| `checkboxTheme`         | `CheckboxThemeData?`     | `null`         | 커스텀 CheckboxThemeData      |
+
+### 사용 예시
+
+```dart
+// 기본 사용
+CustomCheckbox(
+  value: _isChecked,
+  onChanged: (value) {
+    setState(() {
+      _isChecked = value;
+    });
+  },
+)
+
+// 레이블 포함
+CustomCheckbox(
+  value: _isChecked,
+  label: "이용약관 동의",
+  onChanged: (value) {
+    setState(() {
+      _isChecked = value;
+    });
+  },
+)
+
+// 색상 변경
+CustomCheckbox(
+  value: _isChecked,
+  activeColor: Colors.purple,
+  label: "개인정보 처리방침 동의",
+  onChanged: (value) {
+    setState(() {
+      _isChecked = value;
+    });
+  },
+)
+```
+
+---
+
+## CustomRadio
+
+라디오 버튼 위젯입니다. 여러 옵션 중 하나를 선택할 때 사용합니다.
+
+**Flutter 3.24+ 버전에서는 `Radio.adaptive`를 사용하여 플랫폼에 맞는 스타일을 자동으로 적용합니다.**
+
+### 기본 사용법
+
+```dart
+CustomRadio<String>(
+  value: "option1",
+  groupValue: _selectedOption,
+  onChanged: (value) {
+    setState(() {
+      _selectedOption = value;
+    });
+  },
+)
+```
+
+### 주요 속성
+
+| 속성                    | 타입                     | 기본값        | 설명                       |
+| ----------------------- | ------------------------ | ------------- | -------------------------- |
+| `value`                 | `T`                      | 필수          | Radio의 값                 |
+| `groupValue`            | `T?`                     | 필수          | 현재 선택된 그룹 값        |
+| `onChanged`             | `ValueChanged<T?>?`      | 필수          | 값 변경 시 호출되는 콜백   |
+| `activeColor`           | `Color?`                 | `Colors.blue` | 활성화 상태의 색상         |
+| `inactiveColor`         | `Color?`                 | `null`        | 비활성화 상태의 색상       |
+| `label`                 | `String?`                | `null`        | Radio 옆에 표시할 레이블   |
+| `labelStyle`            | `TextStyle?`             | `null`        | 레이블 텍스트 스타일       |
+| `spacing`               | `double?`                | `8`           | Radio와 레이블 사이의 간격 |
+| `materialTapTargetSize` | `MaterialTapTargetSize?` | `null`        | Radio 크기 조절            |
+| `visualDensity`         | `VisualDensity?`         | `null`        | 시각적 밀도                |
+| `adaptive`              | `bool`                   | `true`        | Radio.adaptive 사용 여부   |
+| `radioTheme`            | `RadioThemeData?`        | `null`        | 커스텀 RadioThemeData      |
+
+### 사용 예시
+
+```dart
+// 기본 사용
+CustomRadio<String>(
+  value: "option1",
+  groupValue: _selectedOption,
+  onChanged: (value) {
+    setState(() {
+      _selectedOption = value;
+    });
+  },
+)
+
+// 레이블 포함
+CustomRadio<String>(
+  value: "option1",
+  groupValue: _selectedOption,
+  label: "옵션 1",
+  onChanged: (value) {
+    setState(() {
+      _selectedOption = value;
+    });
+  },
+)
+
+// 여러 옵션 그룹
+Column(
+  children: [
+    CustomRadio<String>(
+      value: "option1",
+      groupValue: _selectedOption,
+      label: "옵션 1",
+      onChanged: (value) {
+        setState(() {
+          _selectedOption = value;
+        });
+      },
+    ),
+    CustomRadio<String>(
+      value: "option2",
+      groupValue: _selectedOption,
+      label: "옵션 2",
+      activeColor: Colors.orange,
+      onChanged: (value) {
+        setState(() {
+          _selectedOption = value;
+        });
+      },
+    ),
+    CustomRadio<String>(
+      value: "option3",
+      groupValue: _selectedOption,
+      label: "옵션 3",
+      activeColor: Colors.teal,
+      onChanged: (value) {
+        setState(() {
+          _selectedOption = value;
+        });
+      },
+    ),
+  ],
+)
+```
+
+---
+
+## CustomSlider
+
+슬라이더 위젯입니다. 연속적인 값이나 범위를 선택할 때 사용합니다.
+
+### 기본 사용법
+
+```dart
+CustomSlider(
+  value: _sliderValue,
+  onChanged: (value) {
+    setState(() {
+      _sliderValue = value;
+    });
+  },
+)
+```
+
+### 주요 속성
+
+| 속성            | 타입                    | 기본값                 | 설명                          |
+| --------------- | ----------------------- | ---------------------- | ----------------------------- |
+| `value`         | `double`                | 필수                   | Slider의 현재 값              |
+| `onChanged`     | `ValueChanged<double>?` | 필수                   | 값 변경 시 호출되는 콜백      |
+| `onChangeEnd`   | `ValueChanged<double>?` | `null`                 | 값 변경 완료 시 호출되는 콜백 |
+| `onChangeStart` | `ValueChanged<double>?` | `null`                 | 값 변경 시작 시 호출되는 콜백 |
+| `min`           | `double?`               | `0.0`                  | Slider의 최소값               |
+| `max`           | `double?`               | `1.0`                  | Slider의 최대값               |
+| `divisions`     | `int?`                  | `null`                 | 분할 수 (null이면 연속)       |
+| `label`         | `String?`               | `null`                 | Slider의 레이블 텍스트        |
+| `activeColor`   | `Color?`                | `Colors.blue`          | 활성화 상태의 색상            |
+| `inactiveColor` | `Color?`                | `Colors.grey.shade300` | 비활성화 상태의 색상          |
+| `thumbColor`    | `Color?`                | `null`                 | 썸(thumb) 색상                |
+| `overlayColor`  | `Color?`                | `null`                 | 오버레이 색상                 |
+| `title`         | `String?`               | `null`                 | Slider 위에 표시할 제목       |
+| `titleStyle`    | `TextStyle?`            | `null`                 | 제목 텍스트 스타일            |
+| `showValue`     | `bool`                  | `false`                | 현재 값 표시 여부             |
+| `valueStyle`    | `TextStyle?`            | `null`                 | 값 텍스트 스타일              |
+| `spacing`       | `double?`               | `8`                    | 제목/값과 Slider 사이의 간격  |
+| `visualDensity` | `VisualDensity?`        | `null`                 | 시각적 밀도                   |
+| `sliderTheme`   | `SliderThemeData?`      | `null`                 | 커스텀 SliderThemeData        |
+
+### 사용 예시
+
+```dart
+// 기본 사용
+CustomSlider(
+  value: _sliderValue,
+  onChanged: (value) {
+    setState(() {
+      _sliderValue = value;
+    });
+  },
+)
+
+// 범위 지정
+CustomSlider(
+  value: _sliderValue,
+  min: 0,
+  max: 100,
+  onChanged: (value) {
+    setState(() {
+      _sliderValue = value;
+    });
+  },
+)
+
+// 제목과 값 표시
+CustomSlider(
+  value: _sliderValue,
+  min: 0,
+  max: 100,
+  divisions: 10,
+  title: "볼륨 조절",
+  showValue: true,
+  onChanged: (value) {
+    setState(() {
+      _sliderValue = value;
+    });
+  },
+)
+
+// 진행률 표시
+CustomSlider(
+  value: _progress,
+  min: 0,
+  max: 1,
+  title: "진행률",
+  showValue: true,
+  activeColor: Colors.green,
+  onChanged: (value) {
+    setState(() {
+      _progress = value;
+    });
+  },
+)
+```
