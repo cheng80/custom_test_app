@@ -1,12 +1,12 @@
-import 'package:custom_test_app/common/custom_app_bar.dart';
-import 'package:custom_test_app/common/custom_bottom_nav_bar.dart';
-import 'package:custom_test_app/common/custom_card.dart';
-import 'package:custom_test_app/common/custom_column.dart';
-import 'package:custom_test_app/common/custom_image.dart';
-import 'package:custom_test_app/common/custom_padding.dart';
-import 'package:custom_test_app/common/custom_row.dart';
-import 'package:custom_test_app/common/custom_tab_bar.dart';
-import 'package:custom_test_app/common/custom_text.dart';
+import 'package:custom_test_app/custom/custom_app_bar.dart';
+import 'package:custom_test_app/custom/custom_bottom_nav_bar.dart';
+import 'package:custom_test_app/custom/custom_card.dart';
+import 'package:custom_test_app/custom/custom_column.dart';
+import 'package:custom_test_app/custom/custom_image.dart';
+import 'package:custom_test_app/custom/custom_padding.dart';
+import 'package:custom_test_app/custom/custom_row.dart';
+import 'package:custom_test_app/custom/custom_tab_bar.dart';
+import 'package:custom_test_app/custom/custom_text.dart';
 import 'package:flutter/material.dart';
 
 class TabBarPage extends StatefulWidget {

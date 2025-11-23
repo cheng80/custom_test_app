@@ -41,6 +41,21 @@
 
 ## 빠른 시작
 
+### Import 방법
+
+```dart
+// 단일 import (권장) - 모든 위젯과 유틸리티 사용
+import 'package:custom_test_app/custom/custom.dart';
+
+// 선택적 import - 위젯만 필요한 경우
+import 'package:custom_test_app/custom/widgets.dart';
+
+// 선택적 import - 유틸리티만 필요한 경우
+import 'package:custom_test_app/custom/utils.dart';
+```
+
+### 사용 예시
+
 ```dart
 // 기본 사용
 CustomText("안녕하세요")
@@ -51,4 +66,8 @@ CustomButton(
   btnText: Row(children: [Icon(Icons.check), Text("확인")]),
   onCallBack: () {},
 )
+
+// 유틸리티 사용
+CustomCommonUtil.formatDate(DateTime.now(), 'yyyy-MM-dd');
+CustomCollectionUtil.unique([1, 2, 2, 3]);
 ```

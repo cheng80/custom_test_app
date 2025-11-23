@@ -1,5 +1,5 @@
-import 'package:custom_test_app/common/custom_text.dart';
-import 'package:custom_test_app/common/custom_common_util.dart';
+import 'package:custom_test_app/custom/custom_text.dart';
+import 'package:custom_test_app/custom/custom_common_util.dart';
 import 'package:flutter/material.dart';
 
 /// 커스텀 SnackBar 헬퍼 클래스

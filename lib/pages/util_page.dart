@@ -1,14 +1,14 @@
-import 'package:custom_test_app/common/custom_app_bar.dart';
-import 'package:custom_test_app/common/custom_button.dart';
-import 'package:custom_test_app/common/custom_card.dart';
-import 'package:custom_test_app/common/custom_column.dart';
-import 'package:custom_test_app/common/custom_padding.dart';
-import 'package:custom_test_app/common/custom_text.dart';
-import 'package:custom_test_app/common/util/collection/example.dart';
-import 'package:custom_test_app/common/util/json/example.dart';
-import 'package:custom_test_app/common/util/network/example.dart';
-import 'package:custom_test_app/common/util/storage/example.dart';
-import 'package:custom_test_app/common/util/timer/example.dart';
+import 'package:custom_test_app/custom/custom_app_bar.dart';
+import 'package:custom_test_app/custom/custom_button.dart';
+import 'package:custom_test_app/custom/custom_card.dart';
+import 'package:custom_test_app/custom/custom_column.dart';
+import 'package:custom_test_app/custom/custom_padding.dart';
+import 'package:custom_test_app/custom/custom_text.dart';
+import 'package:custom_test_app/custom/util/collection/example.dart';
+import 'package:custom_test_app/custom/util/json/example.dart';
+import 'package:custom_test_app/custom/util/network/example.dart';
+import 'package:custom_test_app/custom/util/storage/example.dart';
+import 'package:custom_test_app/custom/util/timer/example.dart';
 import 'package:flutter/material.dart';
 
 /// 유틸리티 예제 페이지 목록

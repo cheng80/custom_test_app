@@ -426,3 +426,76 @@ final response = await CustomNetworkUtil.delete('/api/users/1');
 - 각 유틸리티는 필요에 따라 점진적으로 추가하는 것을 권장
 - 프로젝트 특성에 맞는 유틸리티만 선택적으로 구현
 - 외부 패키지가 필요한 경우, 의존성을 명확히 문서화
+
+---
+
+## 구조 개선 계획
+
+### 단일 Import 구조 구현 (방법 2) ✅ 진행 중
+
+**목표**: GetX처럼 `import 'package:custom_test_app/custom.dart';` 하나로 모든 위젯과 유틸리티 사용 가능
+
+**구조**:
+
+```
+lib/
+├── custom.dart                    # 편의용: widgets + utils 모두 export
+└── common/
+    ├── widgets.dart               # 위젯만 export
+    ├── utils.dart                 # 유틸리티만 export
+    └── ... (기존 파일들 그대로)
+```
+
+**사용 방법**:
+
+```dart
+// 위젯만 필요한 경우
+import 'package:custom_test_app/common/widgets.dart';
+
+// 유틸리티만 필요한 경우
+import 'package:custom_test_app/common/utils.dart';
+
+// 둘 다 필요한 경우
+import 'package:custom_test_app/custom.dart';
+```
+
+**상태**: 📋 진행 중
+
+---
+
+### 향후 리팩토링 계획 (방법 3) 🔮
+
+**목표**: 위젯을 카테고리별 폴더로 재구성하여 더 체계적인 구조 만들기
+
+**구조**:
+
+```
+lib/
+├── custom.dart                    # widgets + utils 모두 export
+└── common/
+    ├── widgets.dart               # 위젯들 export (경로만 변경)
+    ├── utils.dart                 # 유틸리티들 export (경로만 변경)
+    ├── widgets/
+    │   ├── basic/                 # 기본 위젯 (Text, Button, Column, Row, Padding)
+    │   ├── layout/                # 레이아웃 위젯 (Card, Container, Image, IconButton, ListView)
+    │   ├── input/                 # 입력 위젯 (TextField)
+    │   ├── navigation/            # 네비게이션 위젯 (AppBar, BottomNavBar, TabBar)
+    │   └── dialog/                # 다이얼로그/알림 (Dialog, SnackBar, ActionSheet)
+    └── utils/
+        ├── custom_common_util.dart
+        └── util/ (기존 구조 유지)
+```
+
+**장점**:
+
+- 더 체계적인 파일 구조
+- 카테고리별 관리 용이
+- 확장성 향상
+
+**전환 시 작업**:
+
+- 파일 이동: 위젯 파일들을 카테고리별 폴더로 이동
+- Export 파일 수정: `widgets.dart`와 `utils.dart`의 export 경로만 변경
+- 사용자 코드 변경: 없음 (export 파일을 통해 접근하므로)
+
+**상태**: 🔮 향후 리팩토링 예정 (방법 2 완료 후 진행)

@@ -1,4 +1,4 @@
-import 'package:custom_test_app/common/custom_common_util.dart';
+import 'package:custom_test_app/custom/custom_common_util.dart';
 import 'package:flutter/material.dart';
 
 /// 하단 네비게이션 바 아이템 모델

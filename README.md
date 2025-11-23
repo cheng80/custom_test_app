@@ -18,56 +18,58 @@ Flutter 커스텀 위젯 및 유틸리티 라이브러리 프로젝트입니다.
 
 ```
 lib/
-├── common/                          # 커스텀 위젯 및 유틸리티
-│   ├── custom_text.dart            # 텍스트 위젯
-│   ├── custom_button.dart          # 버튼 위젯 (TextButton, ElevatedButton, OutlinedButton)
-│   ├── custom_column.dart          # Column 위젯
-│   ├── custom_row.dart             # Row 위젯
-│   ├── custom_padding.dart         # Padding 위젯
-│   ├── custom_image.dart           # Image.asset 위젯
-│   ├── custom_icon_button.dart     # IconButton 위젯
-│   ├── custom_card.dart            # Card 위젯
-│   ├── custom_container.dart       # Container 위젯
-│   ├── custom_text_field.dart      # TextField 위젯
-│   ├── custom_app_bar.dart         # AppBar 위젯 (String/Widget 지원)
-│   ├── app_app_bar.dart            # AppBar 위젯 (String만 지원)
-│   ├── custom_dialog.dart          # AlertDialog 헬퍼
-│   ├── custom_list_view.dart       # ListView.builder 위젯
-│   ├── custom_tab_bar.dart         # TabBar 위젯
-│   ├── custom_bottom_nav_bar.dart  # BottomNavigationBar 위젯
-│   ├── custom_snack_bar.dart       # SnackBar 헬퍼
-│   ├── custom_action_sheet.dart    # ActionSheet 헬퍼
-│   ├── custom_common_util.dart     # 공용 유틸리티 (날짜, 문자열, 검증, 포맷팅, 숫자)
-│   └── util/                       # 추가 유틸리티
-│       ├── storage/                # 로컬 스토리지 유틸리티
-│       │   ├── custom_storage_util.dart
-│       │   ├── example.dart
-│       │   └── README.md
-│       ├── collection/             # 컬렉션 유틸리티
-│       │   ├── custom_collection_util.dart
-│       │   ├── example.dart
-│       │   └── README.md
-│       ├── json/                   # JSON 변환 유틸리티
-│       │   ├── custom_json_util.dart
-│       │   ├── example.dart
-│       │   └── README.md
-│       ├── timer/                  # 타이머 유틸리티
-│       │   ├── custom_timer_util.dart
-│       │   ├── example.dart
-│       │   └── README.md
-│       └── network/                 # HTTP 통신 유틸리티
-│           ├── custom_network_util.dart
-│           ├── network_response.dart
-│           ├── example.dart
-│           └── README.md
-├── pages/                          # 예제 페이지
-│   ├── text_field_page.dart       # TextField 예제
-│   ├── list_view_page.dart        # ListView 예제
-│   ├── dialog_page.dart           # Dialog 예제
-│   ├── tab_bar_page.dart          # TabBar & BottomNavBar 예제
+└── custom/                        # 커스텀 위젯 및 유틸리티 (일관된 구조)
+    ├── custom.dart                # 편의용: widgets + utils 모두 export
+    ├── widgets.dart               # 위젯만 export
+    ├── utils.dart                 # 유틸리티만 export
+    ├── custom_text.dart           # 텍스트 위젯
+    ├── custom_button.dart         # 버튼 위젯 (TextButton, ElevatedButton, OutlinedButton)
+    ├── custom_column.dart         # Column 위젯
+    ├── custom_row.dart            # Row 위젯
+    ├── custom_padding.dart        # Padding 위젯
+    ├── custom_image.dart          # Image.asset 위젯
+    ├── custom_icon_button.dart    # IconButton 위젯
+    ├── custom_card.dart           # Card 위젯
+    ├── custom_container.dart      # Container 위젯
+    ├── custom_text_field.dart     # TextField 위젯
+    ├── custom_app_bar.dart        # AppBar 위젯 (String/Widget 지원)
+    ├── custom_dialog.dart         # AlertDialog 헬퍼
+    ├── custom_list_view.dart      # ListView.builder 위젯
+    ├── custom_tab_bar.dart        # TabBar 위젯
+    ├── custom_bottom_nav_bar.dart # BottomNavigationBar 위젯
+    ├── custom_snack_bar.dart      # SnackBar 헬퍼
+    ├── custom_action_sheet.dart   # ActionSheet 헬퍼
+    ├── custom_common_util.dart    # 공용 유틸리티 (날짜, 문자열, 검증, 포맷팅, 숫자)
+    └── util/                      # 추가 유틸리티
+        ├── storage/               # 로컬 스토리지 유틸리티
+        │   ├── custom_storage_util.dart
+        │   ├── example.dart
+        │   └── README.md
+        ├── collection/            # 컬렉션 유틸리티
+        │   ├── custom_collection_util.dart
+        │   ├── example.dart
+        │   └── README.md
+        ├── json/                  # JSON 변환 유틸리티
+        │   ├── custom_json_util.dart
+        │   ├── example.dart
+        │   └── README.md
+        ├── timer/                 # 타이머 유틸리티
+        │   ├── custom_timer_util.dart
+        │   ├── example.dart
+        │   └── README.md
+        └── network/               # HTTP 통신 유틸리티
+            ├── custom_network_util.dart
+            ├── network_response.dart
+            ├── example.dart
+            └── README.md
+├── pages/                         # 예제 페이지
+│   ├── text_field_page.dart      # TextField 예제
+│   ├── list_view_page.dart       # ListView 예제
+│   ├── dialog_page.dart          # Dialog 예제
+│   ├── tab_bar_page.dart         # TabBar & BottomNavBar 예제
 │   └── snackbar_action_sheet_page.dart  # SnackBar & ActionSheet 예제
-├── home.dart                      # 메인 홈 화면 (모든 위젯 예제)
-└── main.dart                      # 앱 진입점
+├── home.dart                     # 메인 홈 화면 (모든 위젯 예제)
+└── main.dart                     # 앱 진입점
 
 doc/                               # 개발 문서
 ├── README.md                      # 문서 개요
@@ -243,6 +245,51 @@ void main() async {
   runApp(MyApp());
 }
 ```
+
+## 📦 Import 방법
+
+### 단일 Import (권장)
+
+GetX처럼 하나의 import로 모든 위젯과 유틸리티를 사용할 수 있습니다:
+
+```dart
+// 모든 위젯과 유틸리티 사용
+import 'package:custom_test_app/custom/custom.dart';
+
+// 사용 예시
+CustomText("안녕하세요")
+CustomButton(btnText: "확인", onCallBack: () {})
+CustomCommonUtil.formatDate(DateTime.now(), 'yyyy-MM-dd');
+```
+
+### 선택적 Import
+
+필요에 따라 위젯만 또는 유틸리티만 import할 수 있습니다:
+
+```dart
+// 위젯만 필요한 경우
+import 'package:custom_test_app/custom/widgets.dart';
+
+// 유틸리티만 필요한 경우
+import 'package:custom_test_app/custom/utils.dart';
+
+// 둘 다 필요한 경우
+import 'package:custom_test_app/custom/custom.dart';
+// 또는
+import 'package:custom_test_app/custom/widgets.dart';
+import 'package:custom_test_app/custom/utils.dart';
+```
+
+### 기존 방식 (개별 Import)
+
+기존처럼 개별 파일을 직접 import하는 것도 가능합니다:
+
+```dart
+import 'package:custom_test_app/custom/custom_text.dart';
+import 'package:custom_test_app/custom/custom_button.dart';
+```
+
+**참고**: 단일 import 방식을 사용하면 코드가 더 간결하고 유지보수가 쉬워집니다. 또한 `lib/custom/` 폴더 구조로 향후 라이브러리로 분리할 때도 용이합니다.
 
 ## 💡 사용 예시
 
