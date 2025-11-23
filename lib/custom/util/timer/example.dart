@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:custom_test_app/custom/util/timer/custom_timer_util.dart';
+import '/custom/util/timer/custom_timer_util.dart';
 
 /// TimerUtil 사용 예제
 void main() {

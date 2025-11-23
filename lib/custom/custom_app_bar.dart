@@ -1,4 +1,4 @@
-import 'package:custom_test_app/custom/custom_common_util.dart';
+import '/custom/custom_common_util.dart';
 import 'package:flutter/material.dart';
 
 /// 커스텀 AppBar 위젯 클래스

@@ -1,5 +1,5 @@
 import 'package:http/http.dart' as http;
-import 'package:custom_test_app/custom/util/json/custom_json_util.dart';
+import '/custom/util/json/custom_json_util.dart';
 import 'network_response.dart';
 
 /// 네트워크 통신 유틸리티 클래스

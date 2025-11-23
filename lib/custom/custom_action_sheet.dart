@@ -1,5 +1,5 @@
-import 'package:custom_test_app/custom/custom_text.dart';
-import 'package:custom_test_app/custom/custom_common_util.dart';
+import '/custom/custom_text.dart';
+import '/custom/custom_common_util.dart';
 import 'package:flutter/material.dart';
 
 /// 액션시트 아이템 클래스

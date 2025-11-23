@@ -1,6 +1,6 @@
-import 'package:custom_test_app/custom/custom_button.dart';
-import 'package:custom_test_app/custom/custom_text.dart';
-import 'package:custom_test_app/custom/custom_common_util.dart';
+import '/custom/custom_button.dart';
+import '/custom/custom_text.dart';
+import '/custom/custom_common_util.dart';
 import 'package:flutter/material.dart';
 
 /// 다이얼로그 타입 enum

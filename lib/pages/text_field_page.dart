@@ -1,11 +1,11 @@
-import 'package:custom_test_app/custom/custom_app_bar.dart';
-import 'package:custom_test_app/custom/custom_button.dart';
-import 'package:custom_test_app/custom/custom_column.dart';
-import 'package:custom_test_app/custom/custom_dialog.dart';
-import 'package:custom_test_app/custom/custom_padding.dart';
-import 'package:custom_test_app/custom/custom_row.dart';
-import 'package:custom_test_app/custom/custom_text.dart';
-import 'package:custom_test_app/custom/custom_text_field.dart';
+import '/custom/custom_app_bar.dart';
+import '/custom/custom_button.dart';
+import '/custom/custom_column.dart';
+import '/custom/custom_dialog.dart';
+import '/custom/custom_padding.dart';
+import '/custom/custom_row.dart';
+import '/custom/custom_text.dart';
+import '/custom/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldPage extends StatefulWidget {

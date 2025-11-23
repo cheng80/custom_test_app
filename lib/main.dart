@@ -1,12 +1,13 @@
 //main.dart
-import 'package:custom_test_app/home.dart';
-import 'package:custom_test_app/pages/dialog_page.dart';
-import 'package:custom_test_app/pages/list_view_page.dart';
-import 'package:custom_test_app/pages/snackbar_action_sheet_page.dart';
-import 'package:custom_test_app/pages/tab_bar_page.dart';
-import 'package:custom_test_app/pages/text_field_page.dart';
-import 'package:custom_test_app/pages/util_page.dart';
 import 'package:flutter/material.dart';
+
+import 'home.dart';
+import 'pages/dialog_page.dart';
+import 'pages/list_view_page.dart';
+import 'pages/snackbar_action_sheet_page.dart';
+import 'pages/tab_bar_page.dart';
+import 'pages/text_field_page.dart';
+import 'pages/util_page.dart';
 
 //import 'package:프로젝트명/home.dart';
 void main() {

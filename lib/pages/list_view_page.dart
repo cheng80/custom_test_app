@@ -1,11 +1,11 @@
-import 'package:custom_test_app/custom/custom_app_bar.dart';
-import 'package:custom_test_app/custom/custom_card.dart';
-import 'package:custom_test_app/custom/custom_column.dart';
-import 'package:custom_test_app/custom/custom_image.dart';
-import 'package:custom_test_app/custom/custom_list_view.dart';
-import 'package:custom_test_app/custom/custom_padding.dart';
-import 'package:custom_test_app/custom/custom_row.dart';
-import 'package:custom_test_app/custom/custom_text.dart';
+import '/custom/custom_app_bar.dart';
+import '/custom/custom_card.dart';
+import '/custom/custom_column.dart';
+import '/custom/custom_image.dart';
+import '/custom/custom_list_view.dart';
+import '/custom/custom_padding.dart';
+import '/custom/custom_row.dart';
+import '/custom/custom_text.dart';
 import 'package:flutter/material.dart';
 
 class ListViewPage extends StatefulWidget {
