@@ -532,8 +532,7 @@ class _TimerInfo {
     this.interval,
     this.delayedCallback,
     this.periodicCallback,
-    this.isPaused = false,
-  });
+  }) : isPaused = false;
 }
 
 /// ID 기반 타이머 관리 클래스
