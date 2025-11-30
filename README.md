@@ -42,13 +42,20 @@ lib/
     ├── custom_picker_view.dart     # PickerView 위젯
     ├── custom_grid_view.dart       # GridView.builder 위젯
     ├── custom_dropdown_button.dart # DropdownButton 위젯
+    ├── custom_expansion_tile.dart  # ExpansionTile 위젯
+    ├── custom_chip.dart            # Chip 위젯
+    ├── custom_progress_indicator.dart  # ProgressIndicator 위젯
+    ├── custom_refresh_indicator.dart   # RefreshIndicator 위젯
     ├── custom_app_bar.dart        # AppBar 위젯 (String/Widget 지원)
     ├── custom_dialog.dart         # AlertDialog 헬퍼
     ├── custom_list_view.dart      # ListView.builder 위젯
     ├── custom_tab_bar.dart        # TabBar 위젯
     ├── custom_bottom_nav_bar.dart # BottomNavigationBar 위젯
+    ├── custom_floating_action_button.dart  # FloatingActionButton 위젯
+    ├── custom_drawer.dart         # Drawer 위젯
     ├── custom_snack_bar.dart      # SnackBar 헬퍼
     ├── custom_action_sheet.dart   # ActionSheet 헬퍼
+    ├── custom_bottom_sheet.dart   # BottomSheet 헬퍼
     ├── custom_common_util.dart    # 공용 유틸리티 (날짜, 문자열, 검증, 포맷팅, 숫자)
     └── util/                      # 추가 유틸리티 (외부 의존성 없음)
         ├── collection/            # 컬렉션 유틸리티
@@ -80,6 +87,9 @@ lib/
 │   ├── tab_bar_page.dart         # TabBar & BottomNavBar 예제
 │   ├── snackbar_action_sheet_page.dart  # SnackBar & ActionSheet 예제
 │   ├── picker_grid_page.dart     # Picker & Grid 예제
+│   ├── layout_widgets_page.dart  # ExpansionTile, Chip, ProgressIndicator, RefreshIndicator 예제
+│   ├── bottom_sheet_page.dart    # BottomSheet 예제
+│   ├── navigation_widgets_page.dart  # FloatingActionButton, Drawer 예제
 │   ├── storage_page.dart         # StorageUtil 예제
 │   ├── network_page.dart         # NetworkUtil 예제
 │   └── util_page.dart            # 유틸리티 예제
@@ -88,17 +98,16 @@ lib/
 
 lib_doc/                           # 개발 문서
 ├── README.md                      # 문서 개요
-├── 01_Basic_Widgets.md            # 기본 위젯 문서
-├── 02_Layout_Widgets.md           # 레이아웃 위젯 문서
-├── 03_Input_Widgets.md            # 입력 위젯 문서
-├── 04_Navigation_Widgets.md       # 네비게이션 위젯 문서
-├── 05_Dialog_Notifications.md     # 다이얼로그 및 알림 문서
-├── 06_Utilities.md                # 유틸리티 문서
 ├── TODO.md                        # 향후 구현 계획
-└── Examples/                      # 예제 문서
-    ├── 01_Basic_Examples.md
-    ├── 02_Advanced_Examples.md
-    └── 03_Widget_Examples.md
+└── Reference/                     # 레퍼런스 문서
+    ├── Widgets/                   # 위젯 문서
+    │   ├── 01_Basic_Widgets.md    # 기본 위젯 문서
+    │   ├── 02_Layout_Widgets.md   # 레이아웃 위젯 문서
+    │   ├── 03_Input_Widgets.md    # 입력 위젯 문서
+    │   ├── 04_Navigation_Widgets.md  # 네비게이션 위젯 문서
+    │   └── 05_Dialog_Notifications.md  # 다이얼로그 및 알림 문서
+    └── Utilities/                  # 유틸리티 문서
+        └── 06_Utilities.md         # 유틸리티 문서
 ```
 
 ## 🎨 커스텀 위젯 목록
@@ -117,6 +126,10 @@ lib_doc/                           # 개발 문서
 - **CustomContainer**: 유연한 스타일링이 가능한 Container
 - **CustomImage**: 에러 처리와 로딩 위젯 지원
 - **CustomIconButton**: 배경색과 둥근 모서리 지원
+- **CustomExpansionTile**: 접을 수 있는 리스트 아이템 위젯
+- **CustomChip**: 태그, 필터, 선택 표시용 Chip 위젯
+- **CustomProgressIndicator**: 로딩 및 진행률 표시 위젯 (원형/선형)
+- **CustomRefreshIndicator**: Pull to refresh 기능 제공
 
 ### 입력 위젯
 
@@ -132,12 +145,15 @@ lib_doc/                           # 개발 문서
 - **CustomAppBar**: 기본 스타일이 적용된 AppBar
 - **CustomBottomNavBar**: 페이지 전환을 자동으로 처리하는 BottomNavigationBar
 - **CustomTabBar**: TabBar와 TabBarView를 통합한 위젯
+- **CustomFloatingActionButton**: FloatingActionButton 래핑 (일반/작은/확장형)
+- **CustomDrawer**: 사이드 드로어 메뉴 위젯
 
 ### 다이얼로그 및 알림
 
 - **CustomDialog**: AlertDialog 헬퍼 클래스
 - **CustomSnackBar**: SnackBar 헬퍼 클래스 (success, error, warning, info)
 - **CustomActionSheet**: ActionSheet 헬퍼 클래스
+- **CustomBottomSheet**: 하단 시트 다이얼로그 헬퍼
 
 ### 리스트 및 그리드
 
@@ -438,6 +454,24 @@ CustomCollectionUtil.unique([1, 2, 2, 3]); // [1, 2, 3]
 
 // Record 처리
 final records = [(id: 1, name: '홍길동'), (id: 2, name: '김철수')];
+
+// BottomSheet
+CustomBottomSheet.show(
+  context: context,
+  title: "옵션 선택",
+  items: [BottomSheetItem(label: "옵션 1", onTap: () {})],
+)
+
+// FloatingActionButton
+CustomFloatingActionButton(
+  onPressed: () {},
+  icon: Icons.add,
+)
+
+// Drawer
+CustomDrawer(
+  items: [DrawerItem(label: "홈", icon: Icons.home, onTap: () {})],
+)
 final names = CustomCollectionUtil.extractField(records, (r) => r.name);
 
 // JSON 변환
@@ -482,6 +516,43 @@ CustomPickerView<String>(
   items: ['옵션1', '옵션2', '옵션3'],
   selectedItem: selectedValue,
   onItemSelected: (item) {},
+)
+
+// ExpansionTile
+CustomExpansionTile(
+  title: Text("FAQ"),
+  children: [Text("답변 내용")],
+)
+
+// Chip
+CustomChip(label: "태그", onDeleted: () {})
+
+// ProgressIndicator
+CustomProgressIndicator.circular()
+CustomProgressIndicator.linear(value: 0.5, label: "50%")
+
+// RefreshIndicator
+CustomRefreshIndicator(
+  onRefresh: () async {},
+  child: ListView(...),
+)
+
+// BottomSheet
+CustomBottomSheet.show(
+  context: context,
+  title: "옵션 선택",
+  items: [BottomSheetItem(label: "옵션 1", onTap: () {})],
+)
+
+// FloatingActionButton
+CustomFloatingActionButton(
+  onPressed: () {},
+  icon: Icons.add,
+)
+
+// Drawer
+CustomDrawer(
+  items: [DrawerItem(label: "홈", icon: Icons.home, onTap: () {})],
 )
 
 // 그리드 뷰

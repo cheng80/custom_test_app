@@ -128,4 +128,41 @@ CustomGridView(
   crossAxisCount: 2,
   itemBuilder: (context, index) => Card(...),
 )
+
+// ExpansionTile
+CustomExpansionTile(
+  title: Text("FAQ"),
+  children: [Text("답변 내용")],
+)
+
+// Chip
+CustomChip(label: "태그", onDeleted: () {})
+
+// BottomSheet
+CustomBottomSheet.show(
+  context: context,
+  title: "옵션 선택",
+  items: [BottomSheetItem(label: "옵션 1", onTap: () {})],
+)
+
+// ProgressIndicator
+CustomProgressIndicator.circular()
+CustomProgressIndicator.linear(value: 0.5, label: "50%")
+
+// RefreshIndicator
+CustomRefreshIndicator(
+  onRefresh: () async {},
+  child: ListView(...),
+)
+
+// FloatingActionButton
+CustomFloatingActionButton(
+  onPressed: () {},
+  icon: Icons.add,
+)
+
+// Drawer
+CustomDrawer(
+  items: [DrawerItem(label: "홈", icon: Icons.home, onTap: () {})],
+)
 ```

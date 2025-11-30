@@ -13,6 +13,13 @@
 - ✅ **CustomPickerView** - 리스트 선택 위젯
 - ✅ **CustomGridView** - 그리드 레이아웃
 - ✅ **CustomDropdownButton** - 드롭다운 메뉴
+- ✅ **CustomExpansionTile** - 접을 수 있는 리스트 아이템 위젯
+- ✅ **CustomChip** - 태그, 필터, 선택 표시용 Chip 위젯
+- ✅ **CustomBottomSheet** - 하단 시트 다이얼로그 헬퍼
+- ✅ **CustomProgressIndicator** - 로딩 및 진행률 표시 위젯
+- ✅ **CustomRefreshIndicator** - Pull to refresh 기능
+- ✅ **CustomFloatingActionButton** - FloatingActionButton 래핑
+- ✅ **CustomDrawer** - 사이드 드로어 메뉴 위젯
 
 ### 중간 우선순위
 
@@ -27,248 +34,6 @@
 ---
 
 ## 남은 구현 항목
-
-### 높은 우선순위 (즉시 구현)
-
-#### 1. CustomExpansionTile
-
-**우선순위**: 높음 ⭐⭐⭐  
-**파일**: `lib/custom/custom_expansion_tile.dart`
-
-**기능 설명**:
-
-- 접을 수 있는 리스트 아이템 위젯
-- ExpansionTile을 래핑하여 간편하게 사용
-- 기본 스타일 및 애니메이션 제공
-
-**주요 사용 사례**:
-
-- FAQ 섹션
-- 아코디언 메뉴
-- 접을 수 있는 정보 섹션
-- 설정 메뉴
-
-**예시 사용법**:
-
-```dart
-CustomExpansionTile(
-  title: "자주 묻는 질문",
-  children: [
-    ListTile(title: Text("답변 1")),
-    ListTile(title: Text("답변 2")),
-  ],
-)
-```
-
-**상태**: ✅ 완료
-
----
-
-#### 2. CustomChip
-
-**우선순위**: 높음 ⭐⭐⭐  
-**파일**: `lib/custom/custom_chip.dart`
-
-**기능 설명**:
-
-- 태그, 필터, 선택 표시용 Chip 위젯
-- Chip을 래핑하여 간편하게 사용
-- String/Widget 지원
-
-**주요 사용 사례**:
-
-- 태그 표시
-- 필터 옵션
-- 선택된 항목 표시
-- 카테고리 표시
-
-**예시 사용법**:
-
-```dart
-CustomChip(
-  label: "태그",
-  onDeleted: () {},
-)
-
-// 선택 가능한 Chip
-CustomChip(
-  label: "필터",
-  selected: true,
-  onSelected: (selected) {},
-)
-```
-
-**상태**: ✅ 완료
-
----
-
-#### 3. CustomBottomSheet
-
-**우선순위**: 높음 ⭐⭐⭐  
-**파일**: `lib/custom/custom_bottom_sheet.dart`
-
-**기능 설명**:
-
-- 하단 시트 다이얼로그 헬퍼
-- showModalBottomSheet를 래핑하여 간편하게 사용
-- 기본 스타일 및 옵션 제공
-
-**주요 사용 사례**:
-
-- 하단 옵션 메뉴
-- 상세 정보 표시
-- 선택 옵션 제공
-- ActionSheet보다 유연한 UI
-
-**예시 사용법**:
-
-```dart
-CustomBottomSheet.show(
-  context: context,
-  title: "옵션 선택",
-  items: [
-    BottomSheetItem(label: "옵션 1", onTap: () {}),
-    BottomSheetItem(label: "옵션 2", onTap: () {}),
-  ],
-)
-```
-
-**상태**: ✅ 완료
-
----
-
-#### 4. CustomProgressIndicator
-
-**우선순위**: 높음 ⭐⭐⭐  
-**파일**: `lib/custom/custom_progress_indicator.dart`
-
-**기능 설명**:
-
-- 로딩 및 진행률 표시 위젯
-- CircularProgressIndicator, LinearProgressIndicator 래핑
-- 기본 스타일 및 커스터마이징 제공
-
-**주요 사용 사례**:
-
-- 로딩 표시
-- 진행률 표시
-- 파일 업로드/다운로드 진행률
-- 작업 진행 상태
-
-**예시 사용법**:
-
-```dart
-// 원형 로딩
-CustomProgressIndicator.circular()
-
-// 선형 진행률
-CustomProgressIndicator.linear(
-  value: 0.5,
-  label: "50%",
-)
-```
-
-**상태**: ✅ 완료
-
----
-
-#### 5. CustomRefreshIndicator
-
-**우선순위**: 높음 ⭐⭐⭐  
-**파일**: `lib/custom/custom_refresh_indicator.dart`
-
-**기능 설명**:
-
-- Pull to refresh 기능 제공
-- RefreshIndicator를 래핑하여 간편하게 사용
-- 기본 스타일 및 콜백 제공
-
-**주요 사용 사례**:
-
-- 리스트 새로고침
-- 데이터 갱신
-- Pull to refresh 패턴
-
-**예시 사용법**:
-
-```dart
-CustomRefreshIndicator(
-  onRefresh: () async {
-    await fetchData();
-  },
-  child: ListView(...),
-)
-```
-
-**상태**: ✅ 완료
-
----
-
-#### 6. CustomFloatingActionButton
-
-**우선순위**: 높음 ⭐⭐⭐  
-**파일**: `lib/custom/custom_floating_action_button.dart`
-
-**기능 설명**:
-
-- FloatingActionButton 래핑
-- 기본 스타일 및 위치 설정 제공
-
-**주요 사용 사례**:
-
-- 주요 액션 버튼
-- Material Design 패턴
-
-**예시 사용법**:
-
-```dart
-CustomFloatingActionButton(
-  onPressed: () {},
-  icon: Icons.add,
-  tooltip: "추가",
-)
-```
-
-**상태**: ✅ 완료
-
----
-
-#### 7. CustomDrawer
-
-**우선순위**: 중간 ⭐⭐  
-**파일**: `lib/custom/custom_drawer.dart`
-
-**기능 설명**:
-
-- 사이드 드로어 메뉴 위젯
-- Drawer를 래핑하여 간편하게 사용
-- 기본 헤더 및 메뉴 아이템 제공
-
-**주요 사용 사례**:
-
-- 사이드 메뉴
-- 네비게이션 메뉴
-- 설정 메뉴 접근
-- 사용자 프로필 접근
-
-**예시 사용법**:
-
-```dart
-Scaffold(
-  appBar: CustomAppBar(title: "홈"),
-  drawer: CustomDrawer(
-    header: DrawerHeader(...),
-    items: [
-      DrawerItem(icon: Icons.home, label: "홈", onTap: () {}),
-      DrawerItem(icon: Icons.settings, label: "설정", onTap: () {}),
-    ],
-  ),
-)
-```
-
-**상태**: ✅ 완료
-
----
 
 ### 중간 우선순위 (필요시 추가)
 
@@ -676,15 +441,15 @@ CustomAudioUtil.stopAll();
 
 ## 구현 우선순위 요약
 
-### 즉시 구현 권장 (높은 우선순위)
+### ✅ 완료된 높은 우선순위 항목
 
-1. **CustomExpansionTile** - FAQ, 아코디언 메뉴에 필수
-2. **CustomChip** - 태그, 필터에 매우 유용
-3. **CustomBottomSheet** - 하단 시트 UI에 필수
-4. **CustomProgressIndicator** - 로딩 표시에 필수
-5. **CustomRefreshIndicator** - Pull to refresh에 필수
-6. **CustomFloatingActionButton** - 주요 액션 버튼에 필수
-7. **CustomDrawer** - 사이드 메뉴에 유용
+1. ✅ **CustomExpansionTile** - FAQ, 아코디언 메뉴에 필수
+2. ✅ **CustomChip** - 태그, 필터에 매우 유용
+3. ✅ **CustomBottomSheet** - 하단 시트 UI에 필수
+4. ✅ **CustomProgressIndicator** - 로딩 표시에 필수
+5. ✅ **CustomRefreshIndicator** - Pull to refresh에 필수
+6. ✅ **CustomFloatingActionButton** - 주요 액션 버튼에 필수
+7. ✅ **CustomDrawer** - 사이드 메뉴에 유용
 
 ### 필요시 구현 (중간 우선순위)
 
@@ -754,7 +519,7 @@ CustomAudioUtil.stopAll();
 
 ## 구조 개선 계획
 
-### 단일 Import 구조 구현 (방법 2) ✅ 진행 중
+### 단일 Import 구조 구현 (방법 2) ✅ 완료
 
 **목표**: GetX처럼 `import 'package:custom_test_app/custom.dart';` 하나로 모든 위젯과 유틸리티 사용 가능
 
@@ -787,6 +552,37 @@ import 'package:custom_test_app/custom/custom.dart';
 ```
 
 **상태**: ✅ 완료
+
+---
+
+## 최근 완료 사항 (2024)
+
+### 높은 우선순위 위젯 7개 구현 완료 ✅
+
+다음 위젯들이 구현되어 예제 페이지와 함께 제공됩니다:
+
+1. ✅ **CustomExpansionTile** - FAQ, 아코디언 메뉴에 필수
+2. ✅ **CustomChip** - 태그, 필터에 매우 유용
+3. ✅ **CustomBottomSheet** - 하단 시트 UI에 필수
+4. ✅ **CustomProgressIndicator** - 로딩 표시에 필수
+5. ✅ **CustomRefreshIndicator** - Pull to refresh에 필수
+6. ✅ **CustomFloatingActionButton** - 주요 액션 버튼에 필수
+7. ✅ **CustomDrawer** - 사이드 메뉴에 유용
+
+**예제 페이지**:
+- `layout_widgets_page.dart`: ExpansionTile, Chip, ProgressIndicator, RefreshIndicator 예시
+- `bottom_sheet_page.dart`: BottomSheet 다양한 사용 예시
+- `navigation_widgets_page.dart`: FAB 타입별 예시 및 Drawer 예시
+
+**문서 업데이트**:
+- Reference 폴더 구조로 문서 재구성 완료
+- 각 위젯별 상세 문서 추가 완료
+- README.md에 새로운 위젯 반영 완료
+
+**버그 수정**:
+- DrawerHeader overflow 문제 해결
+- FAB 타입별 예시를 실제로 동작하도록 개선
+- Drawer에서 홈으로 돌아가기 기능 추가
 
 ---
 
