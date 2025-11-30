@@ -95,7 +95,6 @@ lib_doc/                           # 개발 문서
 ├── 05_Dialog_Notifications.md     # 다이얼로그 및 알림 문서
 ├── 06_Utilities.md                # 유틸리티 문서
 ├── TODO.md                        # 향후 구현 계획
-├── UTILITY_RECOMMENDATIONS.md     # 유틸리티 추천 목록
 └── Examples/                      # 예제 문서
     ├── 01_Basic_Examples.md
     ├── 02_Advanced_Examples.md
@@ -497,14 +496,21 @@ CustomGridView(
 
 자세한 사용법과 API 문서는 `lib_doc/` 폴더를 참고하세요:
 
-- [기본 위젯 문서](lib_doc/01_Basic_Widgets.md)
-- [레이아웃 위젯 문서](lib_doc/02_Layout_Widgets.md)
-- [입력 위젯 문서](lib_doc/03_Input_Widgets.md)
-- [네비게이션 위젯 문서](lib_doc/04_Navigation_Widgets.md)
-- [다이얼로그 및 알림 문서](lib_doc/05_Dialog_Notifications.md)
-- [유틸리티 문서](lib_doc/06_Utilities.md)
-- [예제 문서](lib_doc/Examples/)
-- [가이드 문서](lib_doc/Guide/) - 오디오, 코루틴, 네트워크 설계 가이드
+### 위젯 레퍼런스
+
+- [기본 위젯](lib_doc/Reference/Widgets/01_Basic_Widgets.md) - Text, Button, Column, Row, Padding 등
+- [레이아웃 위젯](lib_doc/Reference/Widgets/02_Layout_Widgets.md) - Card, Container, Image, GridView 등
+- [입력 위젯](lib_doc/Reference/Widgets/03_Input_Widgets.md) - TextField, Switch, Checkbox, Radio, Slider, DropdownButton 등
+- [네비게이션 위젯](lib_doc/Reference/Widgets/04_Navigation_Widgets.md) - AppBar, BottomNavBar, TabBar 등
+- [다이얼로그 및 알림](lib_doc/Reference/Widgets/05_Dialog_Notifications.md) - Dialog, SnackBar, ActionSheet
+
+### 유틸리티 레퍼런스
+
+- [유틸리티](lib_doc/Reference/Utilities/06_Utilities.md) - CommonUtil, StorageUtil, CollectionUtil, TimerUtil, JsonUtil, NetworkUtil
+
+### 기타 문서
+
+- [TODO](lib_doc/TODO.md) - 구현 계획 및 진행 상황
 
 ## 🎯 주요 원칙
 

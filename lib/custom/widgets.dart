@@ -50,6 +50,18 @@ export 'custom_icon_button.dart';
 /// ListView 위젯
 export 'custom_list_view.dart';
 
+/// ExpansionTile 위젯
+export 'custom_expansion_tile.dart';
+
+/// Chip 위젯
+export 'custom_chip.dart';
+
+/// ProgressIndicator 위젯
+export 'custom_progress_indicator.dart';
+
+/// RefreshIndicator 위젯
+export 'custom_refresh_indicator.dart';
+
 // ============================================
 // 입력 위젯
 // ============================================
@@ -97,6 +109,12 @@ export 'custom_bottom_nav_bar.dart';
 /// TabBar 위젯
 export 'custom_tab_bar.dart';
 
+/// FloatingActionButton 위젯
+export 'custom_floating_action_button.dart';
+
+/// Drawer 위젯 (CustomText, CustomCommonUtil 의존)
+export 'custom_drawer.dart';
+
 // ============================================
 // 다이얼로그 및 알림
 // ============================================
@@ -109,3 +127,6 @@ export 'custom_snack_bar.dart';
 
 /// ActionSheet 헬퍼 (CustomText, CustomCommonUtil 의존)
 export 'custom_action_sheet.dart';
+
+/// BottomSheet 헬퍼 (CustomText, CustomCommonUtil 의존)
+export 'custom_bottom_sheet.dart';

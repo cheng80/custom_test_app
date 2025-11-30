@@ -1,6 +1,9 @@
 import 'custom/custom.dart';
+import 'pages/bottom_sheet_page.dart';
 import 'pages/dialog_page.dart';
+import 'pages/layout_widgets_page.dart';
 import 'pages/list_view_page.dart';
+import 'pages/navigation_widgets_page.dart';
 import 'pages/picker_grid_page.dart';
 import 'pages/snackbar_action_sheet_page.dart';
 import 'pages/tab_bar_page.dart';
@@ -144,6 +147,42 @@ class _HomeState extends State<Home> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => const PickerGridPage(),
+                          ),
+                        );
+                      },
+                    ),
+                    CustomButton(
+                      btnText: "레이아웃 위젯 예시",
+                      backgroundColor: Colors.teal,
+                      onCallBack: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LayoutWidgetsPage(),
+                          ),
+                        );
+                      },
+                    ),
+                    CustomButton(
+                      btnText: "BottomSheet 예시",
+                      backgroundColor: Colors.purple,
+                      onCallBack: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BottomSheetPage(),
+                          ),
+                        );
+                      },
+                    ),
+                    CustomButton(
+                      btnText: "네비게이션 위젯 예시",
+                      backgroundColor: Colors.indigo,
+                      onCallBack: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const NavigationWidgetsPage(),
                           ),
                         );
                       },

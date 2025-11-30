@@ -492,3 +492,70 @@ CustomSlider(
   },
 )
 ```
+
+---
+
+## 실전 예제
+
+### CustomTextField 실전 예제
+
+#### Form과 함께 사용
+
+```dart
+final _formKey = GlobalKey<FormState>();
+final _nameController = TextEditingController();
+final _emailController = TextEditingController();
+
+Form(
+  key: _formKey,
+  child: CustomColumn(
+    spacing: 16,
+    children: [
+      CustomTextField(
+        controller: _nameController,
+        labelText: "이름",
+        required: true,
+        requiredMessage: "이름을 입력해주세요",
+      ),
+      CustomTextField(
+        controller: _emailController,
+        labelText: "이메일",
+        keyboardType: TextInputType.emailAddress,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return "이메일을 입력해주세요";
+          }
+          if (!value.contains('@')) {
+            return "올바른 이메일 형식이 아닙니다";
+          }
+          return null;
+        },
+      ),
+      CustomButton(
+        btnText: "제출",
+        onCallBack: () {
+          if (_formKey.currentState!.validate()) {
+            print("제출 성공");
+          }
+        },
+      ),
+    ],
+  ),
+)
+```
+
+#### 키보드 자동 내리기
+
+```dart
+GestureDetector(
+  onTap: () {
+    FocusScope.of(context).unfocus();
+  },
+  child: Scaffold(
+    body: CustomTextField(
+      controller: _controller,
+      labelText: "입력",
+    ),
+  ),
+)
+```

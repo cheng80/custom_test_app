@@ -279,3 +279,174 @@ CustomPadding(
   padding: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
 )
 ```
+
+---
+
+## 실전 예제
+
+### CustomText 실전 예제
+
+#### 스타일 커스터마이징
+
+```dart
+CustomText(
+  "커스텀 텍스트",
+  fontSize: 24,
+  color: Colors.blue,
+  fontWeight: FontWeight.bold,
+  textAlign: TextAlign.center,
+)
+```
+
+### CustomButton 실전 예제
+
+#### 다양한 버튼 타입
+
+```dart
+// TextButton
+CustomButton(
+  btnText: "TextButton",
+  buttonType: ButtonType.text,
+  backgroundColor: Colors.blue,
+  onCallBack: () {},
+)
+
+// ElevatedButton
+CustomButton(
+  btnText: "Elevated",
+  buttonType: ButtonType.elevated,
+  backgroundColor: Colors.green,
+  onCallBack: () {},
+)
+
+// OutlinedButton
+CustomButton(
+  btnText: "Outlined",
+  buttonType: ButtonType.outlined,
+  backgroundColor: Colors.red,
+  onCallBack: () {},
+)
+```
+
+#### 버튼 스타일 커스터마이징
+
+```dart
+CustomButton(
+  btnText: "커스텀 버튼",
+  backgroundColor: Colors.purple,
+  minimumSize: Size(150, 50),
+  borderRadius: 20,
+  textFontSize: 18,
+  textColor: Colors.white,
+  onCallBack: () {},
+)
+```
+
+#### Widget 사용 - 아이콘 + 텍스트
+
+```dart
+CustomButton(
+  btnText: Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Icon(Icons.check_circle, color: Colors.white, size: 20),
+      SizedBox(width: 8),
+      Text("확인", style: TextStyle(color: Colors.white)),
+    ],
+  ),
+  backgroundColor: Colors.blue,
+  onCallBack: () {
+    print("확인 버튼 클릭");
+  },
+)
+```
+
+#### Widget 사용 - 커스텀 스타일 텍스트
+
+```dart
+CustomButton(
+  btnText: CustomText(
+    "커스텀 버튼",
+    fontSize: 18,
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+  ),
+  backgroundColor: Colors.purple,
+  onCallBack: () {},
+)
+```
+
+#### Widget 사용 - 복잡한 레이아웃
+
+```dart
+CustomButton(
+  btnText: Column(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Icon(Icons.download, color: Colors.white),
+      SizedBox(height: 4),
+      Text("다운로드", style: TextStyle(color: Colors.white)),
+    ],
+  ),
+  backgroundColor: Colors.green,
+  minimumSize: Size(120, 80),
+  onCallBack: () {},
+)
+```
+
+### CustomColumn / CustomRow 실전 예제
+
+#### CustomColumn - 정렬 및 스타일
+
+```dart
+CustomColumn(
+  spacing: 16,
+  mainAxisAlignment: MainAxisAlignment.center,
+  crossAxisAlignment: CrossAxisAlignment.start,
+  padding: EdgeInsets.all(16),
+  backgroundColor: Colors.grey.shade100,
+  children: [
+    CustomText("첫 번째 항목"),
+    CustomText("두 번째 항목"),
+    CustomText("세 번째 항목"),
+  ],
+)
+```
+
+#### CustomRow - 간격 및 정렬
+
+```dart
+CustomRow(
+  spacing: 12,
+  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  children: [
+    CustomText("왼쪽"),
+    CustomText("가운데"),
+    CustomText("오른쪽"),
+  ],
+)
+```
+
+### CustomPadding 실전 예제
+
+#### 편의 생성자 사용
+
+```dart
+// 모든 방향
+CustomPadding.all(16, child: CustomText("텍스트"))
+
+// 수평 방향만
+CustomPadding.horizontal(16, child: CustomText("텍스트"))
+
+// 수직 방향만
+CustomPadding.vertical(16, child: CustomText("텍스트"))
+
+// 개별 방향
+CustomPadding(
+  child: CustomText("텍스트"),
+  top: 20,
+  bottom: 10,
+  left: 16,
+  right: 16,
+)
+```

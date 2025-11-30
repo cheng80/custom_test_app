@@ -1129,3 +1129,53 @@ Navigator.push(
   MaterialPageRoute(builder: (context) => const UtilPage()),
 );
 ```
+
+---
+
+## 실전 예제
+
+### CustomListView 실전 예제
+
+#### 기본 사용
+
+```dart
+CustomListView(
+  itemCount: items.length,
+  itemBuilder: (context, index) {
+    return CustomCard(
+      child: CustomText(items[index]),
+    );
+  },
+)
+```
+
+#### 간격 및 구분선
+
+```dart
+CustomListView(
+  itemCount: items.length,
+  itemSpacing: 8,
+  separator: Divider(height: 1),
+  itemBuilder: (context, index) {
+    return ListTile(
+      title: CustomText(items[index]),
+    );
+  },
+)
+```
+
+#### 로딩 및 빈 상태 처리
+
+```dart
+CustomListView(
+  itemCount: items.length,
+  isLoading: isLoading,
+  loadingWidget: CircularProgressIndicator(),
+  emptyWidget: CustomText("항목이 없습니다"),
+  itemBuilder: (context, index) {
+    return CustomCard(
+      child: CustomText(items[index]),
+    );
+  },
+)
+```

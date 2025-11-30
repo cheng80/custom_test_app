@@ -4,8 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'home.dart';
+import 'pages/bottom_sheet_page.dart';
 import 'pages/dialog_page.dart';
+import 'pages/layout_widgets_page.dart';
 import 'pages/list_view_page.dart';
+import 'pages/navigation_widgets_page.dart';
 import 'pages/network_page.dart';
 import 'pages/snackbar_action_sheet_page.dart';
 import 'pages/storage_page.dart';
@@ -52,6 +55,9 @@ class MyApp extends StatelessWidget {
         '/dialog': (context) => const DialogPage(),
         '/tabbar': (context) => const TabBarPage(),
         '/snackbar': (context) => const SnackBarActionSheetPage(),
+        '/layout': (context) => const LayoutWidgetsPage(),
+        '/bottomsheet': (context) => const BottomSheetPage(),
+        '/navigation': (context) => const NavigationWidgetsPage(),
       },
     );
   }
