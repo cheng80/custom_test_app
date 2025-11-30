@@ -157,12 +157,12 @@ class _TextFieldPageState extends State<TextFieldPage> {
                   ],
                 ),
 
-                // 전화번호 입력
+                // 전화번호 입력 (textCheck 예시)
                 CustomColumn(
                   spacing: 12,
                   children: [
                     CustomText(
-                      "전화번호 입력",
+                      "전화번호 입력 (textCheck 사용 예시)",
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
@@ -170,6 +170,39 @@ class _TextFieldPageState extends State<TextFieldPage> {
                       controller: _phoneController,
                       labelText: "전화번호",
                       keyboardType: TextInputType.phone,
+                    ),
+                    CustomButton(
+                      btnText: "textCheck 검증",
+                      backgroundColor: Colors.orange,
+                      minimumSize: const Size(double.infinity, 50),
+                      onCallBack: () {
+                        // textCheck를 사용한 검증 예시
+                        // 전화번호 필드가 비어있는지 체크
+                        if (!CustomTextField.textCheck(context, _phoneController)) {
+                          CustomSnackBar.showError(
+                            context,
+                            message: "전화번호를 입력해주세요",
+                          );
+                          return;
+                        }
+                        
+                        // 여러 필드를 체크하는 예시
+                        if (!CustomTextField.textCheck(context, _nameController)) {
+                          CustomSnackBar.showError(
+                            context,
+                            message: "이름을 입력해주세요",
+                          );
+                          return;
+                        }
+                        
+                        // 모든 검증 통과
+                        CustomDialog.show(
+                          context,
+                          title: "검증 성공",
+                          message: "전화번호와 이름이 모두 입력되었습니다.",
+                          type: DialogType.single,
+                        );
+                      },
                     ),
                   ],
                 ),
