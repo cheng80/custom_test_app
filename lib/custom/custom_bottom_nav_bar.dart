@@ -41,15 +41,17 @@ class BottomNavItem {
        );
 }
 
-/// 커스텀 하단 네비게이션 바 위젯 클래스
-/// BottomNavigationBar를 간편하게 사용할 수 있도록 기본값을 설정합니다.
+/// 하단 네비게이션 바 위젯
 ///
 /// 사용 예시:
-/// - 아이콘 + 텍스트: BottomNavItem(icon: Icons.home, label: "홈", page: HomePage())
-/// - 아이콘만: BottomNavItem(icon: Icons.favorite, page: FavoritePage())
-/// - 텍스트만: BottomNavItem(label: "프로필", page: ProfilePage())
-/// - 개별 색상 지정: BottomNavItem(label: "프로필", page: ProfilePage(), selectedColor: Colors.purple, unselectedColor: Colors.grey.shade700)
-/// - 전체 색상 지정: CustomBottomNavBar(items: [...], selectedColor: Colors.blue, unselectedColor: Colors.grey)
+/// ```dart
+/// CustomBottomNavBar(
+///   items: [
+///     BottomNavItem(icon: Icons.home, label: "홈", page: HomePage()),
+///     BottomNavItem(icon: Icons.favorite, page: FavoritePage()),
+///   ],
+/// )
+/// ```
 class CustomBottomNavBar extends StatefulWidget {
   /// 하단 네비게이션 바 아이템 리스트 (필수, 최소 2개, 최대 5개)
   final List<BottomNavItem> items;

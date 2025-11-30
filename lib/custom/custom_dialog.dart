@@ -12,14 +12,13 @@ enum DialogType {
   dual,
 }
 
-/// 커스텀 다이얼로그 헬퍼 클래스
-/// AlertDialog를 간편하게 표시할 수 있는 정적 메서드들을 제공합니다.
+/// 다이얼로그 헬퍼 클래스
 ///
 /// 사용 예시:
-/// - 단일 버튼: CustomDialog.show(context, title: "알림", message: "메시지")
-/// - 이중 버튼: CustomDialog.show(context, title: "확인", message: "진행하시겠습니까?", type: DialogType.dual, onConfirm: () {})
-/// - 버튼 정렬: CustomDialog.show(context, title: "알림", message: "메시지", actionsAlignment: MainAxisAlignment.start)
-/// - Widget 사용: CustomDialog.show(context, title: CustomText("알림", fontSize: 20), message: CustomText("메시지"))
+/// ```dart
+/// CustomDialog.show(context, title: "알림", message: "메시지")
+/// CustomDialog.show(context, title: "확인", message: "진행하시겠습니까?", type: DialogType.dual, onConfirm: () {})
+/// ```
 class CustomDialog {
   /// 다이얼로그를 표시하는 정적 메서드
   static Future<void> show(

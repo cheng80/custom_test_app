@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-/// 커스텀 Container 위젯 클래스
-/// Container의 자주 사용하는 속성들을 기본값으로 설정하여 간편하게 사용할 수 있습니다.
-/// CustomCard보다 더 유연한 커스터마이징이 가능합니다.
+/// Container 위젯
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomContainer(child: Widget())
-/// - 패딩 포함: CustomContainer(child: Widget(), padding: EdgeInsets.all(16))
-/// - 색상 지정: CustomContainer(child: Widget(), backgroundColor: Colors.white)
+/// ```dart
+/// CustomContainer(child: Widget())
+/// CustomContainer(child: Widget(), padding: EdgeInsets.all(16), backgroundColor: Colors.white)
+/// ```
 class CustomContainer extends StatelessWidget {
   /// Container 내부에 표시할 자식 위젯 (필수)
   final Widget child;

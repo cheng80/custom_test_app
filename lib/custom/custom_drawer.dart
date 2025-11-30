@@ -2,8 +2,7 @@ import 'custom_text.dart';
 import 'custom_common_util.dart';
 import 'package:flutter/material.dart';
 
-/// Drawer 아이템 클래스
-/// 각 Drawer 메뉴 항목의 정보를 담는 클래스입니다.
+/// Drawer 메뉴 항목 정보 클래스
 class DrawerItem {
   /// 메뉴 항목의 텍스트 또는 위젯
   /// String인 경우 CustomText로 자동 변환, Widget인 경우 그대로 사용
@@ -41,13 +40,15 @@ class DrawerItem {
        );
 }
 
-/// 커스텀 Drawer 위젯 클래스
-/// 사이드 드로어 메뉴 위젯으로, Drawer를 래핑하여 간편하게 사용할 수 있습니다.
+/// 사이드 드로어 메뉴 위젯
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomDrawer(items: [DrawerItem(label: "홈", icon: Icons.home, onTap: () {})])
-/// - 헤더 포함: CustomDrawer(header: DrawerHeader(...), items: [DrawerItem(...)])
-/// - 선택된 항목: CustomDrawer(items: [DrawerItem(label: "홈", selected: true, onTap: () {})])
+/// ```dart
+/// CustomDrawer(
+///   header: DrawerHeader(...),
+///   items: [DrawerItem(label: "홈", icon: Icons.home, onTap: () {})],
+/// )
+/// ```
 class CustomDrawer extends StatelessWidget {
   /// Drawer 상단에 표시할 헤더 위젯 (선택사항)
   final Widget? header;

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-/// 커스텀 ListView 위젯 클래스
-/// ListView.builder를 간편하게 사용할 수 있도록 기본값을 설정합니다.
+/// ListView 위젯
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomListView(itemCount: 10, itemBuilder: (context, index) => Widget())
-/// - 스크롤 방향: CustomListView(itemCount: 10, scrollDirection: Axis.horizontal, itemBuilder: ...)
+/// ```dart
+/// CustomListView(itemCount: 10, itemBuilder: (context, index) => Widget())
+/// ```
 class CustomListView extends StatelessWidget {
   /// 리스트 아이템 개수 (필수)
   final int itemCount;

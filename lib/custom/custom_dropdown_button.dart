@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'custom_common_util.dart';
 
-/// 커스텀 DropdownButton 위젯 클래스
-/// DropdownButton를 래핑하여 간편하게 사용할 수 있습니다.
-/// String/Widget을 모두 지원합니다.
+/// DropdownButton 위젯 (String/Widget 지원)
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomDropdownButton(value: selectedValue, items: ['옵션1', '옵션2'], onChanged: (value) {})
-/// - Widget 아이템: CustomDropdownButton(value: selectedValue, items: [Widget(), Widget()], onChanged: (value) {})
-/// - 커스텀 스타일: CustomDropdownButton(value: selectedValue, items: items, backgroundColor: Colors.white, onChanged: (value) {})
+/// ```dart
+/// CustomDropdownButton(value: selectedValue, items: ['옵션1', '옵션2'], onChanged: (value) {})
+/// ```
 class CustomDropdownButton<T> extends StatelessWidget {
   /// 현재 선택된 값
   final T? value;

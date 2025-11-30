@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-/// 커스텀 Checkbox 위젯 클래스
-/// 기본 스타일이 적용되어 있어 필수 요소만 입력하면 기본형으로 생성됩니다.
+/// Checkbox 위젯
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomCheckbox(value: _isChecked, onChanged: (value) { setState(() { _isChecked = value ?? false; }); })
-/// - 색상 변경: CustomCheckbox(value: _isChecked, activeColor: Colors.green, onChanged: (value) {})
-/// - 레이블 포함: CustomCheckbox(value: _isChecked, label: "이용약관 동의", onChanged: (value) {})
+/// ```dart
+/// CustomCheckbox(value: _isChecked, onChanged: (value) {})
+/// CustomCheckbox(value: _isChecked, label: "이용약관 동의", onChanged: (value) {})
+/// ```
 class CustomCheckbox extends StatelessWidget {
   /// Checkbox의 현재 값 (필수)
   final bool? value;

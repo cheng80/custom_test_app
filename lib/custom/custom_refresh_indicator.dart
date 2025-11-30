@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
-/// 커스텀 RefreshIndicator 위젯 클래스
-/// Pull to refresh 기능을 제공하는 위젯으로, RefreshIndicator를 래핑하여 간편하게 사용할 수 있습니다.
+/// Pull to refresh 기능 위젯
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomRefreshIndicator(onRefresh: () async {}, child: ListView(...))
-/// - 색상 지정: CustomRefreshIndicator(onRefresh: () async {}, color: Colors.blue, child: ListView(...))
-/// - 디스플레이 모드: CustomRefreshIndicator(onRefresh: () async {}, displacement: 40, child: ListView(...))
+/// ```dart
+/// CustomRefreshIndicator(
+///   onRefresh: () async {},
+///   child: ListView(...),
+/// )
+/// ```
 class CustomRefreshIndicator extends StatelessWidget {
   /// 새로고침 시 실행될 비동기 콜백 (필수)
   final Future<void> Function() onRefresh;

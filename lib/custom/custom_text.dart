@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-/// 커스텀 Text 위젯 클래스
-/// 기본 스타일이 적용되어 있어 필수 요소만 입력하면 기본형으로 생성됩니다.
+/// Text 위젯
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomText("확인")
-/// - 스타일 커스터마이징: CustomText("확인", fontSize: 24, color: Colors.blue)
+/// ```dart
+/// CustomText("확인")
+/// CustomText("확인", fontSize: 24, color: Colors.blue)
+/// ```
 class CustomText extends StatelessWidget {
   /// 표시할 텍스트 내용 (필수)
   final String text;

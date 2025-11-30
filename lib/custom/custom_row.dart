@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-/// 커스텀 Row 위젯 클래스
-/// 자주 사용하는 속성들을 기본값으로 설정하여 간편하게 사용할 수 있습니다.
+/// Row 위젯
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomRow(children: [Widget1(), Widget2()])
-/// - spacing 지정: CustomRow(children: [...], spacing: 16)
-/// - padding 포함: CustomRow(children: [...], padding: EdgeInsets.all(16))
+/// ```dart
+/// CustomRow(children: [Widget1(), Widget2()])
+/// CustomRow(children: [...], spacing: 16, padding: EdgeInsets.all(16))
+/// ```
 class CustomRow extends StatelessWidget {
   /// Row의 자식 위젯들 (필수)
   final List<Widget> children;

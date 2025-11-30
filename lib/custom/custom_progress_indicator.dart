@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-/// 커스텀 ProgressIndicator 위젯 클래스
-/// 로딩 및 진행률 표시 위젯으로, CircularProgressIndicator와 LinearProgressIndicator를 래핑하여 간편하게 사용할 수 있습니다.
+/// 로딩 및 진행률 표시 위젯
 ///
 /// 사용 예시:
-/// - 원형 로딩: CustomProgressIndicator.circular()
-/// - 선형 진행률: CustomProgressIndicator.linear(value: 0.5, label: "50%")
-/// - 색상 지정: CustomProgressIndicator.circular(color: Colors.blue)
+/// ```dart
+/// CustomProgressIndicator.circular()
+/// CustomProgressIndicator.linear(value: 0.5, label: "50%")
+/// ```
 class CustomProgressIndicator extends StatelessWidget {
   /// 진행률 값 (0.0 ~ 1.0, linear 타입일 때만 사용)
   final double? value;

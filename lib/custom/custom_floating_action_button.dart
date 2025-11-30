@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-/// 커스텀 FloatingActionButton 위젯 클래스
-/// FloatingActionButton을 래핑하여 간편하게 사용할 수 있습니다.
+/// FloatingActionButton 위젯
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomFloatingActionButton(onPressed: () {}, icon: Icons.add)
-/// - 확장형: CustomFloatingActionButton.extended(onPressed: () {}, label: "추가", icon: Icons.add)
-/// - 작은 크기: CustomFloatingActionButton.small(onPressed: () {}, icon: Icons.add)
+/// ```dart
+/// CustomFloatingActionButton(onPressed: () {}, icon: Icons.add)
+/// CustomFloatingActionButton.extended(onPressed: () {}, label: "추가", icon: Icons.add)
+/// ```
 class CustomFloatingActionButton extends StatelessWidget {
   /// 버튼 클릭 시 실행될 콜백 (필수)
   final VoidCallback? onPressed;

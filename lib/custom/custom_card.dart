@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
-/// 커스텀 Card 위젯 클래스
-/// Material Design의 Card 위젯을 기반으로 자주 사용하는 속성들을 기본값으로 설정하여 간편하게 사용할 수 있습니다.
-/// CustomContainer보다 Material Design 스타일이 자동으로 적용됩니다.
+/// Material Design Card 위젯
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomCard(child: Widget())
-/// - 패딩 포함: CustomCard(child: Widget(), padding: EdgeInsets.all(16))
-/// - 색상 지정: CustomCard(child: Widget(), color: Colors.white)
-/// - elevation 조정: CustomCard(child: Widget(), elevation: 5)
+/// ```dart
+/// CustomCard(child: Widget())
+/// CustomCard(child: Widget(), padding: EdgeInsets.all(16), elevation: 5)
+/// ```
 class CustomCard extends StatelessWidget {
   /// 카드 내부에 표시할 자식 위젯 (필수)
   final Widget child;

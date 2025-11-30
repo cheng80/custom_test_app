@@ -2,15 +2,14 @@ import 'custom_text.dart';
 import 'custom_common_util.dart';
 import 'package:flutter/material.dart';
 
-/// 커스텀 SnackBar 헬퍼 클래스
-/// SnackBar를 간편하게 표시할 수 있는 정적 메서드들을 제공합니다.
+/// SnackBar 헬퍼 클래스
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomSnackBar.show(context, message: "메시지")
-/// - 성공 메시지: CustomSnackBar.showSuccess(context, message: "성공했습니다")
-/// - 에러 메시지: CustomSnackBar.showError(context, message: "에러가 발생했습니다")
-/// - 액션 버튼 포함: CustomSnackBar.show(context, message: "메시지", actionLabel: "실행", onAction: () {})
-/// - Widget 사용: CustomSnackBar.show(context, message: CustomText("메시지", color: Colors.white))
+/// ```dart
+/// CustomSnackBar.show(context, message: "메시지")
+/// CustomSnackBar.showSuccess(context, message: "성공했습니다")
+/// CustomSnackBar.showError(context, message: "에러가 발생했습니다")
+/// ```
 class CustomSnackBar {
   /// SnackBar를 표시하는 정적 메서드
   static void show(

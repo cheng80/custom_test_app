@@ -1,14 +1,13 @@
 import 'custom_common_util.dart';
 import 'package:flutter/material.dart';
 
-/// 커스텀 AppBar 위젯 클래스
-/// 자주 사용하는 속성들을 기본값으로 설정하여 간편하게 사용할 수 있습니다.
+/// AppBar 위젯
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomAppBar(title: "홈")
-/// - 색상 지정: CustomAppBar(title: "홈", backgroundColor: Colors.blue)
-/// - 액션 버튼: CustomAppBar(title: "홈", actions: [IconButton(...)])
-/// - Widget 사용: CustomAppBar(title: CustomText("홈", fontSize: 24), backgroundColor: Colors.blue)
+/// ```dart
+/// CustomAppBar(title: "홈")
+/// CustomAppBar(title: "홈", backgroundColor: Colors.blue, actions: [IconButton(...)])
+/// ```
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// AppBar 제목 (필수)
   /// String인 경우 Text 위젯으로 자동 변환, Widget인 경우 그대로 사용

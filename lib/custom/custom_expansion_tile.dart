@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-/// 커스텀 ExpansionTile 위젯 클래스
-/// 접을 수 있는 리스트 아이템 위젯으로, ExpansionTile을 래핑하여 간편하게 사용할 수 있습니다.
+/// 접을 수 있는 리스트 아이템 위젯
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomExpansionTile(title: "제목", children: [Widget()])
-/// - 아이콘 포함: CustomExpansionTile(title: "제목", leading: Icon(Icons.info), children: [Widget()])
-/// - 초기 확장 상태: CustomExpansionTile(title: "제목", initiallyExpanded: true, children: [Widget()])
+/// ```dart
+/// CustomExpansionTile(title: "제목", children: [Widget()])
+/// CustomExpansionTile(title: "제목", leading: Icon(Icons.info), initiallyExpanded: true, children: [Widget()])
+/// ```
 class CustomExpansionTile extends StatelessWidget {
   /// 확장 타일의 제목 (필수)
   final Widget title;

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-/// 커스텀 Slider 위젯 클래스
-/// 기본 스타일이 적용되어 있어 필수 요소만 입력하면 기본형으로 생성됩니다.
+/// Slider 위젯
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomSlider(value: _sliderValue, onChanged: (value) { setState(() { _sliderValue = value; }); })
-/// - 범위 지정: CustomSlider(value: _sliderValue, min: 0, max: 100, onChanged: (value) {})
-/// - 레이블 포함: CustomSlider(value: _sliderValue, label: "볼륨", onChanged: (value) {})
-/// - 분할 표시: CustomSlider(value: _sliderValue, divisions: 10, onChanged: (value) {})
+/// ```dart
+/// CustomSlider(value: _sliderValue, onChanged: (value) {})
+/// CustomSlider(value: _sliderValue, min: 0, max: 100, label: "볼륨", divisions: 10, onChanged: (value) {})
+/// ```
 class CustomSlider extends StatelessWidget {
   /// Slider의 현재 값 (필수)
   final double value;

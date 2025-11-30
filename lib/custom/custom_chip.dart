@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-/// 커스텀 Chip 위젯 클래스
-/// 태그, 필터, 선택 표시용 Chip 위젯으로, Chip을 래핑하여 간편하게 사용할 수 있습니다.
+/// 태그, 필터, 선택 표시용 Chip 위젯
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomChip(label: "태그")
-/// - 삭제 가능: CustomChip(label: "태그", onDeleted: () {})
-/// - 선택 가능: CustomChip(label: "필터", selected: true, onSelected: (selected) {})
+/// ```dart
+/// CustomChip(label: "태그", onDeleted: () {})
+/// CustomChip(label: "필터", selectable: true, selected: true, onSelected: (selected) {})
+/// ```
 class CustomChip extends StatelessWidget {
   /// Chip에 표시할 라벨 (필수)
   /// String인 경우 Text로 자동 변환, Widget인 경우 그대로 사용

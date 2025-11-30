@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-/// 커스텀 TextField 위젯 클래스
-/// 자주 사용하는 속성들을 기본값으로 설정하여 간편하게 사용할 수 있습니다.
+/// 텍스트 입력 필드 위젯
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomTextField(controller: controller, labelText: "입력하세요")
-/// - 필수 입력: CustomTextField(controller: controller, labelText: "아이디", required: true)
-/// - 비밀번호: CustomTextField(controller: controller, labelText: "비밀번호", obscureText: true)
-/// - 숫자 입력: CustomTextField(controller: controller, labelText: "숫자", keyboardType: TextInputType.number)
+/// ```dart
+/// CustomTextField(controller: controller, labelText: "입력하세요")
+/// CustomTextField(controller: controller, labelText: "비밀번호", obscureText: true)
+/// ```
 class CustomTextField extends StatelessWidget {
   /// 텍스트 입력 컨트롤러 (필수)
   final TextEditingController controller;

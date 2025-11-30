@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-/// 커스텀 DatePicker 헬퍼 클래스
-/// Material Design 날짜 선택 다이얼로그를 간편하게 사용할 수 있습니다.
+/// 날짜 선택 다이얼로그 헬퍼 클래스
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomDatePicker.show(context: context)
-/// - 초기 날짜 설정: CustomDatePicker.show(context: context, initialDate: DateTime(2024, 1, 1))
-/// - 날짜 범위 제한: CustomDatePicker.show(context: context, firstDate: DateTime(2000), lastDate: DateTime(2100))
+/// ```dart
+/// CustomDatePicker.show(context: context)
+/// CustomDatePicker.show(context: context, initialDate: DateTime(2024, 1, 1), firstDate: DateTime(2000), lastDate: DateTime(2100))
+/// ```
 class CustomDatePicker {
   /// 날짜 선택 다이얼로그를 표시합니다.
   ///

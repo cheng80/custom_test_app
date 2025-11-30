@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-/// 커스텀 상단 TabBar 위젯 클래스
-/// TabBar와 TabBarView를 함께 사용하여 간편하게 탭 기능을 구현할 수 있습니다.
+/// TabBar 위젯 (TabBarView 포함)
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomTabBar(tabs: ["탭1", "탭2"], children: [Widget1(), Widget2()])
-/// - 색상 지정: CustomTabBar(tabs: ["탭1", "탭2"], tabColor: Colors.blue, children: [...])
+/// ```dart
+/// CustomTabBar(tabs: ["탭1", "탭2"], children: [Widget1(), Widget2()])
+/// ```
 class CustomTabBar extends StatefulWidget {
   /// 탭 라벨 리스트 (필수)
   final List<String> tabs;

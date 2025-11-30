@@ -14,14 +14,13 @@ enum ButtonType {
   outlined,
 }
 
-/// 커스텀 버튼 위젯 클래스
-/// CustomText를 child로 활용하며, 기본 스타일이 적용되어 있어 필수 요소만 입력하면 기본형으로 생성됩니다.
+/// 버튼 위젯 (TextButton, ElevatedButton, OutlinedButton 지원)
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomButton(btnText: "확인", onCallBack: () {})
-/// - 버튼 타입 변경: CustomButton(btnText: "확인", buttonType: ButtonType.elevated, onCallBack: () {})
-/// - 색상 변경: CustomButton(btnText: "확인", backgroundColor: Colors.red, onCallBack: () {})
-/// - Widget 사용: CustomButton(btnText: Row(children: [Icon(Icons.check), Text("확인")]), onCallBack: () {})
+/// ```dart
+/// CustomButton(btnText: "확인", onCallBack: () {})
+/// CustomButton(btnText: "확인", buttonType: ButtonType.elevated, backgroundColor: Colors.red, onCallBack: () {})
+/// ```
 class CustomButton extends StatelessWidget {
   /// 버튼에 표시할 텍스트 또는 위젯 (필수)
   /// String인 경우 CustomText로 자동 변환, Widget인 경우 그대로 사용

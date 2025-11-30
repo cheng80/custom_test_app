@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-/// 커스텀 Column 위젯 클래스
-/// 자주 사용하는 속성들을 기본값으로 설정하여 간편하게 사용할 수 있습니다.
+/// Column 위젯
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomColumn(children: [Widget1(), Widget2()])
-/// - spacing 지정: CustomColumn(children: [...], spacing: 16)
-/// - padding 포함: CustomColumn(children: [...], padding: EdgeInsets.all(16))
+/// ```dart
+/// CustomColumn(children: [Widget1(), Widget2()])
+/// CustomColumn(children: [...], spacing: 16, padding: EdgeInsets.all(16))
+/// ```
 class CustomColumn extends StatelessWidget {
   /// Column의 자식 위젯들 (필수)
   final List<Widget> children;

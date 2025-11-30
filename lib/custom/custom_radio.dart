@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
-/// 커스텀 Radio 위젯 클래스
-/// 기본 스타일이 적용되어 있어 필수 요소만 입력하면 기본형으로 생성됩니다.
-///
-/// Flutter 3.24+ 버전에서는 Radio.adaptive를 사용하여 플랫폼에 맞는 스타일을 자동으로 적용합니다.
+/// Radio 위젯
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomRadio<String>(value: "option1", groupValue: _selectedOption, onChanged: (value) { setState(() { _selectedOption = value; }); })
-/// - 색상 변경: CustomRadio<String>(value: "option1", groupValue: _selectedOption, activeColor: Colors.green, onChanged: (value) {})
-/// - 레이블 포함: CustomRadio<String>(value: "option1", groupValue: _selectedOption, label: "옵션 1", onChanged: (value) {})
+/// ```dart
+/// CustomRadio<String>(value: "option1", groupValue: _selectedOption, onChanged: (value) {})
+/// CustomRadio<String>(value: "option1", groupValue: _selectedOption, label: "옵션 1", onChanged: (value) {})
+/// ```
 class CustomRadio<T> extends StatelessWidget {
   /// Radio의 값 (필수)
   final T value;

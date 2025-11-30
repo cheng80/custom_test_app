@@ -33,13 +33,16 @@ class ActionSheetItem {
        );
 }
 
-/// 커스텀 ActionSheet 헬퍼 클래스
-/// ActionSheet를 간편하게 표시할 수 있는 정적 메서드들을 제공합니다.
+/// ActionSheet 헬퍼 클래스
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomActionSheet.show(context, items: [ActionSheetItem(label: "옵션1", onTap: () {})])
-/// - 취소 버튼 포함: CustomActionSheet.show(context, items: [...], showCancel: true)
-/// - 제목 포함: CustomActionSheet.show(context, title: "선택하세요", items: [...])
+/// ```dart
+/// CustomActionSheet.show(
+///   context,
+///   title: "선택하세요",
+///   items: [ActionSheetItem(label: "옵션1", onTap: () {})],
+/// )
+/// ```
 class CustomActionSheet {
   /// ActionSheet를 표시하는 정적 메서드
   static Future<void> show(

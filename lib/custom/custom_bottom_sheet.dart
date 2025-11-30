@@ -2,8 +2,7 @@ import 'custom_text.dart';
 import 'custom_common_util.dart';
 import 'package:flutter/material.dart';
 
-/// BottomSheet 아이템 클래스
-/// 각 BottomSheet 항목의 정보를 담는 클래스입니다.
+/// BottomSheet 항목 정보 클래스
 class BottomSheetItem {
   /// 항목의 텍스트 또는 위젯
   /// String인 경우 CustomText로 자동 변환, Widget인 경우 그대로 사용
@@ -33,13 +32,16 @@ class BottomSheetItem {
        );
 }
 
-/// 커스텀 BottomSheet 헬퍼 클래스
-/// 하단 시트 다이얼로그를 간편하게 표시할 수 있는 정적 메서드들을 제공합니다.
+/// 하단 시트 다이얼로그 헬퍼 클래스
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomBottomSheet.show(context, title: "옵션 선택", items: [BottomSheetItem(label: "옵션1", onTap: () {})])
-/// - 제목 없이: CustomBottomSheet.show(context, items: [BottomSheetItem(label: "옵션1", onTap: () {})])
-/// - 커스텀 위젯: CustomBottomSheet.show(context, child: CustomWidget())
+/// ```dart
+/// CustomBottomSheet.show(
+///   context: context,
+///   title: "옵션 선택",
+///   items: [BottomSheetItem(label: "옵션1", onTap: () {})],
+/// )
+/// ```
 class CustomBottomSheet {
   /// BottomSheet를 표시하는 정적 메서드
   static Future<T?> show<T>({

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-/// 커스텀 Switch 위젯 클래스
-/// 기본 스타일이 적용되어 있어 필수 요소만 입력하면 기본형으로 생성됩니다.
+/// Switch 위젯
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomSwitch(value: _isSwitched, onChanged: (value) { setState(() { _isSwitched = value; }); })
-/// - 색상 변경: CustomSwitch(value: _isSwitched, activeColor: Colors.green, onChanged: (value) {})
-/// - 레이블 포함: CustomSwitch(value: _isSwitched, label: "알림 받기", onChanged: (value) {})
+/// ```dart
+/// CustomSwitch(value: _isSwitched, onChanged: (value) {})
+/// CustomSwitch(value: _isSwitched, label: "알림 받기", onChanged: (value) {})
+/// ```
 class CustomSwitch extends StatelessWidget {
   /// Switch의 현재 값 (필수)
   final bool value;

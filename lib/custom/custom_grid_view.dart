@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-/// 커스텀 GridView 위젯 클래스
-/// GridView.builder를 간편하게 사용할 수 있도록 기본값을 설정합니다.
+/// GridView 위젯
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomGridView(itemCount: 20, crossAxisCount: 2, itemBuilder: (context, index) => Widget())
-/// - 간격 설정: CustomGridView(itemCount: 20, crossAxisCount: 2, spacing: 8, itemBuilder: ...)
-/// - 패딩 설정: CustomGridView(itemCount: 20, crossAxisCount: 2, padding: EdgeInsets.all(16), itemBuilder: ...)
+/// ```dart
+/// CustomGridView(itemCount: 20, crossAxisCount: 2, itemBuilder: (context, index) => Widget())
+/// ```
 class CustomGridView extends StatelessWidget {
   /// 그리드 아이템 개수 (필수)
   final int itemCount;

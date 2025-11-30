@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-/// 커스텀 Padding 위젯 클래스
-/// 자주 사용하는 패딩 값들을 간편하게 적용할 수 있습니다.
+/// Padding 위젯
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomPadding.all(16, child: Widget())
-/// - 특정 방향만: CustomPadding.horizontal(16, child: Widget())
-/// - 커스텀: CustomPadding(child: Widget(), padding: EdgeInsets.symmetric(horizontal: 16))
+/// ```dart
+/// CustomPadding.all(16, child: Widget())
+/// CustomPadding.horizontal(16, child: Widget())
+/// ```
 class CustomPadding extends StatelessWidget {
   /// 패딩을 적용할 자식 위젯 (필수)
   final Widget child;

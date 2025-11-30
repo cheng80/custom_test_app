@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-/// 커스텀 IconButton 위젯 클래스
-/// 자주 사용하는 속성들을 기본값으로 설정하여 간편하게 사용할 수 있습니다.
+/// IconButton 위젯
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomIconButton(icon: Icons.favorite, onPressed: () {})
-/// - 색상 지정: CustomIconButton(icon: Icons.star, iconColor: Colors.amber, onPressed: () {})
-/// - 크기 지정: CustomIconButton(icon: Icons.home, iconSize: 32, onPressed: () {})
+/// ```dart
+/// CustomIconButton(icon: Icons.favorite, onPressed: () {})
+/// CustomIconButton(icon: Icons.star, iconColor: Colors.amber, iconSize: 32, onPressed: () {})
+/// ```
 class CustomIconButton extends StatelessWidget {
   /// 표시할 아이콘 (필수)
   final IconData icon;

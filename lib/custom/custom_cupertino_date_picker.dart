@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 
-/// 커스텀 CupertinoDatePicker 위젯 클래스
-/// iOS 스타일 날짜 선택기를 간편하게 사용할 수 있습니다.
+/// iOS 스타일 날짜 선택기 위젯
 ///
 /// 사용 예시:
-/// - 날짜 선택: CustomCupertinoDatePicker(mode: CupertinoDatePickerMode.date, onDateTimeChanged: (date) {})
-/// - 시간 선택: CustomCupertinoDatePicker(mode: CupertinoDatePickerMode.time, onDateTimeChanged: (time) {})
-/// - 날짜+시간: CustomCupertinoDatePicker(mode: CupertinoDatePickerMode.dateAndTime, onDateTimeChanged: (dateTime) {})
+/// ```dart
+/// CustomCupertinoDatePicker(mode: CupertinoDatePickerMode.date, onDateTimeChanged: (date) {})
+/// CustomCupertinoDatePicker(mode: CupertinoDatePickerMode.dateAndTime, onDateTimeChanged: (dateTime) {})
+/// ```
 class CustomCupertinoDatePicker extends StatelessWidget {
   /// 날짜 선택기 모드 (필수)
   final CupertinoDatePickerMode mode;

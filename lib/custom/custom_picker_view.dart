@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-/// 커스텀 PickerView 위젯 클래스
-/// 리스트에서 항목을 선택할 수 있는 선택기 위젯입니다.
+/// 리스트 선택기 위젯
 ///
 /// 사용 예시:
-/// - 기본 사용: CustomPickerView(items: ['옵션1', '옵션2'], selectedItem: '옵션1', onItemSelected: (item) {})
-/// - 커스텀 아이템: CustomPickerView(items: items, itemBuilder: (item) => CustomWidget(item), onItemSelected: (item) {})
+/// ```dart
+/// CustomPickerView(items: ['옵션1', '옵션2'], selectedItem: '옵션1', onItemSelected: (item) {})
+/// ```
 class CustomPickerView<T> extends StatelessWidget {
   /// 선택 가능한 항목 리스트 (필수)
   final List<T> items;
