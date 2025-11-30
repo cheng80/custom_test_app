@@ -13,11 +13,11 @@
 
 - ✅ **NumberUtil** - 숫자 관련 유틸리티 (CustomCommonUtil에 통합)
 - ✅ **DebounceUtil / ThrottleUtil** - 디바운싱/스로틀링 유틸리티 (TimerUtil에 통합)
-- ✅ **StorageUtil** - 로컬 데이터 저장 유틸리티 (`lib/common/util/storage/`)
+- ✅ **StorageUtil** - 로컬 데이터 저장 유틸리티 (`lib/custom/external_util/storage/`)
 - ✅ **CollectionUtil** - 컬렉션 조작 유틸리티 (`lib/common/util/collection/`)
 - ✅ **TimerUtil** - 타이머 관리 유틸리티 (`lib/common/util/timer/`)
 - ✅ **JsonUtil** - JSON 변환 유틸리티 (`lib/common/util/json/`)
-- ✅ **NetworkUtil** - HTTP 통신 유틸리티 (`lib/common/util/network/`) - http 패키지 사용
+- ✅ **NetworkUtil** - HTTP 통신 유틸리티 (`lib/custom/external_util/network/`) - http 패키지 사용
 
 ---
 
@@ -107,7 +107,7 @@ CustomAudioUtil.stopAll();
 
 **의존성**: `audioplayers` 또는 `just_audio` 패키지 필요
 
-**참고 문서**: `doc/AUDIO_GUIDE.md`
+**참고 문서**: `lib_doc/Guide/AUDIO_GUIDE.md`
 
 **상태**: 📋 계획 중
 
@@ -305,7 +305,7 @@ final merged = CustomJsonUtil.merge(json1, json2);
 #### 13. NetworkUtil
 
 **우선순위**: 중간  
-**파일**: `lib/common/util/network/custom_network_util.dart` (별도 파일)
+**파일**: `lib/custom/external_util/network/custom_network_util.dart` (별도 파일)
 
 **기능 설명**:
 
@@ -363,9 +363,9 @@ final response = await CustomNetworkUtil.delete('/api/users/1');
 
 **의존성**: `http: ^1.1.0` 패키지 필요
 
-**참고 문서**: `doc/NETWORK_UTIL_DESIGN.md`
+**참고 문서**: `lib_doc/Guide/NETWORK_UTIL_DESIGN.md`
 
-**상태**: ✅ 완료 (`lib/common/util/network/`) - http 패키지 사용
+**상태**: ✅ 완료 (`lib/custom/external_util/network/`) - http 패키지 사용
 
 ---
 
@@ -504,7 +504,7 @@ lib/
 
 - 파일 이동: 위젯 파일들을 카테고리별 폴더로 이동
 - Export 파일 수정: `widgets.dart`, `utils_core.dart`의 export 경로 변경
-- `custom_full.dart`에서 `util/storage/custom_storage_util.dart`, `util/network/custom_network_util.dart` 직접 export
+- `custom_full.dart`에서 `external_util/storage/custom_storage_util.dart`, `external_util/network/custom_network_util.dart` 직접 export
 - 사용자 코드 변경: 없음 (export 파일을 통해 접근하므로)
 
 **상태**: 🔮 향후 리팩토링 예정 (방법 2 완료 후 진행)

@@ -794,7 +794,7 @@ final savedItems = await CustomStorageUtil.getList<Item>(
 | `clear()`                     | 모든 데이터 삭제         |
 | `containsKey(key)`            | 키 존재 여부 확인        |
 
-자세한 내용은 [StorageUtil README](../lib/common/util/storage/README.md)를 참고하세요.
+자세한 내용은 [StorageUtil README](../../lib/custom/external_util/storage/README.md)를 참고하세요.
 
 ---
 
@@ -1103,7 +1103,7 @@ class NetworkResponse<T> {
 }
 ```
 
-자세한 내용은 [NetworkUtil README](../lib/common/util/network/README.md)를 참고하세요.
+자세한 내용은 [NetworkUtil README](../../lib/custom/external_util/network/README.md)를 참고하세요.
 
 ---
 
@@ -1112,11 +1112,11 @@ class NetworkResponse<T> {
 | 클래스                 | 위치                          | 의존성               | 주요 용도                                        |
 | ---------------------- | ----------------------------- | -------------------- | ------------------------------------------------ |
 | `CustomCommonUtil`     | `lib/common/`                 | 없음                 | 위젯 헬퍼, 날짜/시간, 문자열, 검증, 포맷팅, 숫자 |
-| `CustomStorageUtil`    | `lib/common/util/storage/`    | `shared_preferences` | 로컬 데이터 저장                                 |
+| `CustomStorageUtil`    | `lib/custom/external_util/storage/`    | `shared_preferences` | 로컬 데이터 저장                                 |
 | `CustomCollectionUtil` | `lib/common/util/collection/` | 없음                 | 리스트/맵 조작                                   |
 | `CustomTimerUtil`      | `lib/common/util/timer/`      | 없음                 | 타이머 관리, 코루틴 유사 기능                    |
 | `CustomJsonUtil`       | `lib/common/util/json/`       | 없음                 | JSON 변환                                        |
-| `CustomNetworkUtil`    | `lib/common/util/network/`    | `http`               | HTTP 통신                                        |
+| `CustomNetworkUtil`    | `lib/custom/external_util/network/`    | `http`               | HTTP 통신                                        |
 
 ## 예제 페이지
 

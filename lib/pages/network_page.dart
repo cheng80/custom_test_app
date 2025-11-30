@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../custom/util/network/custom_network_util.dart';
+import '../custom/external_util/network/custom_network_util.dart';
 import '../custom/widgets.dart';
 
 /// NetworkUtil 사용 예제 페이지

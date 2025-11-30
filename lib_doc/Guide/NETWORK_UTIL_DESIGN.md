@@ -300,7 +300,7 @@ final response = await CustomNetworkUtil.get(
 ## 파일 구조
 
 ```
-lib/common/util/network/
+lib/custom/external_util/network/
 ├── custom_network_util.dart    # 메인 클래스
 ├── network_response.dart        # 응답 모델
 ├── network_error.dart           # 에러 모델

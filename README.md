@@ -23,9 +23,6 @@ lib/
     ├── widgets.dart               # 위젯만 export
     ├── utils_core.dart            # 핵심 유틸리티만 export (의존성 없음)
     ├── custom_full.dart           # 전체 기능 export (의존성 필요)
-    └── util/                      # 유틸리티 폴더
-        ├── storage/               # 스토리지 유틸리티 (shared_preferences 필요)
-        └── network/               # 네트워크 유틸리티 (http 필요)
     ├── custom_text.dart           # 텍스트 위젯
     ├── custom_button.dart         # 버튼 위젯 (TextButton, ElevatedButton, OutlinedButton)
     ├── custom_column.dart         # Column 위젯
@@ -48,11 +45,7 @@ lib/
     ├── custom_snack_bar.dart      # SnackBar 헬퍼
     ├── custom_action_sheet.dart   # ActionSheet 헬퍼
     ├── custom_common_util.dart    # 공용 유틸리티 (날짜, 문자열, 검증, 포맷팅, 숫자)
-    └── util/                      # 추가 유틸리티
-        ├── storage/               # 로컬 스토리지 유틸리티
-        │   ├── custom_storage_util.dart
-        │   ├── example.dart
-        │   └── README.md
+    └── util/                      # 추가 유틸리티 (외부 의존성 없음)
         ├── collection/            # 컬렉션 유틸리티
         │   ├── custom_collection_util.dart
         │   ├── example.dart
@@ -61,11 +54,16 @@ lib/
         │   ├── custom_json_util.dart
         │   ├── example.dart
         │   └── README.md
-        ├── timer/                 # 타이머 유틸리티
-        │   ├── custom_timer_util.dart
+        └── timer/                 # 타이머 유틸리티
+            ├── custom_timer_util.dart
+            ├── example.dart
+            └── README.md
+    └── external_util/            # 외부 의존성이 필요한 유틸리티
+        ├── storage/               # 로컬 스토리지 유틸리티 (shared_preferences 필요)
+        │   ├── custom_storage_util.dart
         │   ├── example.dart
         │   └── README.md
-        └── network/               # HTTP 통신 유틸리티
+        └── network/               # HTTP 통신 유틸리티 (http 패키지 필요)
             ├── custom_network_util.dart
             ├── network_response.dart
             ├── example.dart
@@ -75,11 +73,14 @@ lib/
 │   ├── list_view_page.dart       # ListView 예제
 │   ├── dialog_page.dart          # Dialog 예제
 │   ├── tab_bar_page.dart         # TabBar & BottomNavBar 예제
-│   └── snackbar_action_sheet_page.dart  # SnackBar & ActionSheet 예제
+│   ├── snackbar_action_sheet_page.dart  # SnackBar & ActionSheet 예제
+│   ├── storage_page.dart         # StorageUtil 예제
+│   ├── network_page.dart         # NetworkUtil 예제
+│   └── util_page.dart            # 유틸리티 예제
 ├── home.dart                     # 메인 홈 화면 (모든 위젯 예제)
 └── main.dart                     # 앱 진입점
 
-doc/                               # 개발 문서
+lib_doc/                           # 개발 문서
 ├── README.md                      # 문서 개요
 ├── 01_Basic_Widgets.md            # 기본 위젯 문서
 ├── 02_Layout_Widgets.md           # 레이아웃 위젯 문서
@@ -382,15 +383,15 @@ final response = await CustomNetworkUtil.get<User>(
 
 ## 📚 문서
 
-자세한 사용법과 API 문서는 `doc/` 폴더를 참고하세요:
+자세한 사용법과 API 문서는 `lib_doc/` 폴더를 참고하세요:
 
-- [기본 위젯 문서](doc/01_Basic_Widgets.md)
-- [레이아웃 위젯 문서](doc/02_Layout_Widgets.md)
-- [입력 위젯 문서](doc/03_Input_Widgets.md)
-- [네비게이션 위젯 문서](doc/04_Navigation_Widgets.md)
-- [다이얼로그 및 알림 문서](doc/05_Dialog_Notifications.md)
-- [유틸리티 문서](doc/06_Utilities.md)
-- [예제 문서](doc/Examples/)
+- [기본 위젯 문서](lib_doc/01_Basic_Widgets.md)
+- [레이아웃 위젯 문서](lib_doc/02_Layout_Widgets.md)
+- [입력 위젯 문서](lib_doc/03_Input_Widgets.md)
+- [네비게이션 위젯 문서](lib_doc/04_Navigation_Widgets.md)
+- [다이얼로그 및 알림 문서](lib_doc/05_Dialog_Notifications.md)
+- [유틸리티 문서](lib_doc/06_Utilities.md)
+- [예제 문서](lib_doc/Examples/)
 
 ## 🎯 주요 원칙
 
@@ -402,7 +403,7 @@ final response = await CustomNetworkUtil.get<User>(
 
 ## 🔄 향후 계획
 
-향후 구현 계획은 [TODO.md](doc/TODO.md)를 참고하세요.
+향후 구현 계획은 [TODO.md](lib_doc/TODO.md)를 참고하세요.
 
 주요 예정 항목:
 

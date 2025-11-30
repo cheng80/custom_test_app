@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../custom/util/storage/custom_storage_util.dart';
+import '../custom/external_util/storage/custom_storage_util.dart';
 import '../custom/widgets.dart';
 
 /// StorageUtil 사용 예제 페이지

@@ -27,8 +27,8 @@
 /// - 위젯만 필요한 경우: `import 'package:custom_test_app/custom/widgets.dart';`
 /// - 핵심 유틸리티만: `import 'package:custom_test_app/custom/utils_core.dart';`
 /// - 전체 유틸리티 (외부 패키지 의존성 필요): `import 'package:custom_test_app/custom/custom_full.dart';`
-/// - 스토리지 유틸리티만: `import 'package:custom_test_app/custom/util/storage/custom_storage_util.dart';`
-/// - 네트워크 유틸리티만: `import 'package:custom_test_app/custom/util/network/custom_network_util.dart';`
+/// - 스토리지 유틸리티만: `import 'package:custom_test_app/custom/external_util/storage/custom_storage_util.dart';`
+/// - 네트워크 유틸리티만: `import 'package:custom_test_app/custom/external_util/network/custom_network_util.dart';`
 library;
 
 // 위젯 export

@@ -88,10 +88,10 @@ import 'package:your_project/custom/widgets.dart';
 import 'package:your_project/custom/utils_core.dart';
 
 // 스토리지 유틸리티만 (shared_preferences 필요)
-import 'package:your_project/custom/util/storage/custom_storage_util.dart';
+import 'package:your_project/custom/external_util/storage/custom_storage_util.dart';
 
 // 네트워크 유틸리티만 (http 패키지 필요)
-import 'package:your_project/custom/util/network/custom_network_util.dart';
+import 'package:your_project/custom/external_util/network/custom_network_util.dart';
 ```
 
 ### 3. 의존성 관리 (중요!)
@@ -130,8 +130,8 @@ import 'package:your_project/custom/util/network/custom_network_util.dart';
 ```dart
 // ❌ 이 경우 의존성 필요
 import 'package:your_project/custom/custom_full.dart';  // storage/network 포함
-import 'package:your_project/custom/util/storage/custom_storage_util.dart';  // shared_preferences 필요
-import 'package:your_project/custom/util/network/custom_network_util.dart';  // http 패키지 필요
+import 'package:your_project/custom/external_util/storage/custom_storage_util.dart';  // shared_preferences 필요
+import 'package:your_project/custom/external_util/network/custom_network_util.dart';  // http 패키지 필요
 
 // ⚠️ 주의: custom.dart를 사용해도 storage/network 폴더가 존재하면 의존성 필요
 import 'package:your_project/custom/custom.dart';  // utils_core만 export (하지만 폴더 존재 시 의존성 필요)
@@ -152,15 +152,23 @@ storage/network를 전혀 사용하지 않는 경우 폴더를 삭제:
 
 ```bash
 # 스토리지 유틸리티 사용하지 않는 경우
-rm -rf lib/custom/util/storage
+rm -rf lib/custom/external_util/storage
 
 # 네트워크 유틸리티 사용하지 않는 경우
-rm -rf lib/custom/util/network
+rm -rf lib/custom/external_util/network
 ```
 
 **장점**: 진짜로 의존성이 필요 없어집니다.
 
-**주의**: 폴더를 삭제한 경우 `custom_full.dart`에서 해당 export도 제거해야 합니다.
+**⚠️ 중요**: 폴더를 삭제한 경우 `custom_full.dart`에서 해당 export도 제거해야 합니다.
+그렇지 않으면 컴파일 에러가 발생합니다.
+
+예시:
+```dart
+// custom_full.dart에서 삭제하거나 주석 처리
+// export 'external_util/storage/custom_storage_util.dart';  // 폴더 삭제 시 주석 처리
+// export 'external_util/network/custom_network_util.dart';  // 폴더 삭제 시 주석 처리
+```
 
 #### 옵션 B: pubspec.yaml에 의존성 추가
 
@@ -182,10 +190,10 @@ dependencies:
 
 ```dart
 // 스토리지 유틸리티만 필요한 경우
-import 'package:your_project/custom/util/storage/custom_storage_util.dart';
+import 'package:your_project/custom/external_util/storage/custom_storage_util.dart';
 
 // 네트워크 유틸리티만 필요한 경우
-import 'package:your_project/custom/util/network/custom_network_util.dart';
+import 'package:your_project/custom/external_util/network/custom_network_util.dart';
 ```
 
 **주의**: 폴더가 존재하면 pubspec.yaml에 의존성을 추가해야 합니다.
@@ -269,7 +277,7 @@ class MyPage extends StatelessWidget {
 ```dart
 import 'package:your_project/custom/widgets.dart';
 import 'package:your_project/custom/utils_core.dart';
-import 'package:your_project/custom/util/storage/custom_storage_util.dart';
+import 'package:your_project/custom/external_util/storage/custom_storage_util.dart';
 
 // pubspec.yaml에 shared_preferences 추가 필요
 void main() async {
@@ -284,7 +292,7 @@ void main() async {
 ```dart
 import 'package:your_project/custom/widgets.dart';
 import 'package:your_project/custom/utils_core.dart';
-import 'package:your_project/custom/util/network/custom_network_util.dart';
+import 'package:your_project/custom/external_util/network/custom_network_util.dart';
 
 // pubspec.yaml에 http 패키지 추가 필요
 Future<void> fetchData() async {
