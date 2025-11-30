@@ -1,6 +1,7 @@
 import 'custom/custom.dart';
 import 'pages/dialog_page.dart';
 import 'pages/list_view_page.dart';
+import 'pages/picker_grid_page.dart';
 import 'pages/snackbar_action_sheet_page.dart';
 import 'pages/tab_bar_page.dart';
 import 'pages/text_field_page.dart';
@@ -20,6 +21,8 @@ class _HomeState extends State<Home> {
   bool? _checkboxValue = false;
   String? _radioValue;
   double _sliderValue = 50.0;
+  String? _selectedDropdownValue;
+  final List<String> _dropdownItems = ['선택 1', '선택 2', '선택 3', '선택 4'];
 
   @override
   Widget build(BuildContext context) {
@@ -129,6 +132,18 @@ class _HomeState extends State<Home> {
                           MaterialPageRoute(
                             builder: (context) =>
                                 const SnackBarActionSheetPage(),
+                          ),
+                        );
+                      },
+                    ),
+                    CustomButton(
+                      btnText: "Picker & Grid 예시",
+                      backgroundColor: Colors.indigo,
+                      onCallBack: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const PickerGridPage(),
                           ),
                         );
                       },
@@ -243,6 +258,58 @@ class _HomeState extends State<Home> {
                       ),
                       backgroundColor: Colors.purple,
                       onCallBack: () => print("Widget 버튼 클릭"),
+                    ),
+                    const SizedBox(height: 16),
+                    CustomText(
+                      "DropdownButton 예시",
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue,
+                    ),
+                    CustomDropdownButton<String>(
+                      value: _selectedDropdownValue,
+                      items: _dropdownItems,
+                      hint: "항목을 선택하세요",
+                      onChanged: (String? value) {
+                        setState(() {
+                          _selectedDropdownValue = value;
+                        });
+                      },
+                      backgroundColor: Colors.white,
+                      borderColor: Colors.grey.shade300,
+                      borderRadius: 8,
+                    ),
+                    if (_selectedDropdownValue != null)
+                      CustomText(
+                        "선택된 값: $_selectedDropdownValue",
+                        fontSize: 14,
+                        color: Colors.blue,
+                      ),
+                    const SizedBox(height: 12),
+                    CustomText(
+                      "커스텀 스타일 DropdownButton",
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    CustomDropdownButton<String>(
+                      value: _selectedDropdownValue,
+                      items: _dropdownItems,
+                      hint: "선택하세요",
+                      onChanged: (String? value) {
+                        setState(() {
+                          _selectedDropdownValue = value;
+                        });
+                      },
+                      backgroundColor: Colors.blue.shade50,
+                      borderColor: Colors.blue,
+                      borderWidth: 2,
+                      borderRadius: 12,
+                      textStyle: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                      ),
+                      iconColor: Colors.blue,
                     ),
                   ],
                 ),

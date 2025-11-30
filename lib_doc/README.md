@@ -7,10 +7,12 @@
 ### 위젯 개발 문서
 
 - [기본 위젯](./01_Basic_Widgets.md) - Text, Button, Column, Row, Padding 등
-- [레이아웃 위젯](./02_Layout_Widgets.md) - Card, Container, Image 등
-- [입력 위젯](./03_Input_Widgets.md) - TextField 등
+- [레이아웃 위젯](./02_Layout_Widgets.md) - Card, Container, Image, GridView 등
+- [입력 위젯](./03_Input_Widgets.md) - TextField, Switch, Checkbox, Radio, Slider, DropdownButton 등
 - [네비게이션 위젯](./04_Navigation_Widgets.md) - AppBar, BottomNavBar, TabBar 등
 - [다이얼로그 및 알림](./05_Dialog_Notifications.md) - Dialog, SnackBar, ActionSheet
+- [날짜/시간 선택](./README.md#날짜시간-선택) - DatePicker, CupertinoDatePicker
+- [선택 위젯](./README.md#선택-위젯) - PickerView
 - [유틸리티](./06_Utilities.md) - CommonUtil, StorageUtil, CollectionUtil, TimerUtil, JsonUtil, NetworkUtil
 
 ### 예제 문서
@@ -40,6 +42,54 @@
 - **일관된 네이밍**: Custom 접두사 사용
 
 ## 빠른 시작
+
+### 다국어 지원 설정
+
+DatePicker 및 CupertinoDatePicker의 언어는 MaterialApp의 `localizationsDelegates`와 `supportedLocales` 설정에 따라 결정됩니다.
+
+**pubspec.yaml 설정:**
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+```
+
+**main.dart 설정 예시:**
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      // 다국어 지원
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en', 'US'), // 영어
+        const Locale('ko', 'KR'), // 한국어
+        const Locale('ja', 'JP'), // 일본어
+      ],
+      // ... 기타 설정
+    );
+  }
+}
+```
+
+**주의사항:**
+
+- DatePicker의 언어는 디바이스의 언어 설정에 따라 자동으로 변경됩니다.
+- 특정 언어를 강제하려면 `CustomDatePicker.show()`의 `locale` 파라미터를 사용하세요.
+- `flutter_localizations`는 Flutter SDK에 포함되어 있어 `pubspec.yaml`에 추가만 하면 됩니다.
 
 ### Import 방법
 
@@ -73,4 +123,21 @@ CustomButton(
 // 유틸리티 사용
 CustomCommonUtil.formatDate(DateTime.now(), 'yyyy-MM-dd');
 CustomCollectionUtil.unique([1, 2, 2, 3]);
+
+// 날짜 선택
+final selectedDate = await CustomDatePicker.show(context: context);
+
+// 드롭다운 메뉴
+CustomDropdownButton<String>(
+  value: selectedValue,
+  items: ['옵션1', '옵션2'],
+  onChanged: (value) {},
+)
+
+// 그리드 뷰
+CustomGridView(
+  itemCount: 20,
+  crossAxisCount: 2,
+  itemBuilder: (context, index) => Card(...),
+)
 ```

@@ -23,6 +23,174 @@
 
 ## 남은 구현 항목
 
+### 높은 우선순위 (즉시 구현)
+
+#### 1. CustomCupertinoDatePicker
+
+**우선순위**: 높음 ⭐⭐⭐  
+**파일**: `lib/custom/custom_cupertino_date_picker.dart`
+
+**기능 설명**:
+
+- iOS 스타일 날짜 선택기 위젯
+- CupertinoDatePicker를 래핑하여 간편하게 사용
+- 날짜, 시간, 날짜+시간 모드 지원
+
+**주요 사용 사례**:
+
+- iOS 스타일 날짜 선택
+- 시간 선택
+- 날짜와 시간 동시 선택
+
+**예시 사용법**:
+
+```dart
+CustomCupertinoDatePicker(
+  mode: CupertinoDatePickerMode.date,
+  initialDateTime: DateTime.now(),
+  onDateTimeChanged: (DateTime dateTime) {
+    print('선택된 날짜: $dateTime');
+  },
+)
+```
+
+**상태**: 📋 진행 중
+
+---
+
+#### 2. CustomDatePicker
+
+**우선순위**: 높음 ⭐⭐⭐  
+**파일**: `lib/custom/custom_date_picker.dart`
+
+**기능 설명**:
+
+- Material Design 날짜 선택 다이얼로그 헬퍼
+- showDatePicker를 래핑하여 간편하게 사용
+- 기본값 설정 및 에러 처리 포함
+
+**주요 사용 사례**:
+
+- Material Design 스타일 날짜 선택
+- 날짜 범위 선택
+- 생년월일 선택
+
+**예시 사용법**:
+
+```dart
+final selectedDate = await CustomDatePicker.show(
+  context: context,
+  initialDate: DateTime.now(),
+  firstDate: DateTime(2000),
+  lastDate: DateTime(2100),
+);
+```
+
+**상태**: 📋 진행 중
+
+---
+
+#### 3. CustomPickerView
+
+**우선순위**: 높음 ⭐⭐⭐  
+**파일**: `lib/custom/custom_picker_view.dart`
+
+**기능 설명**:
+
+- 일반적인 선택기 위젯
+- 리스트에서 항목 선택
+- 다중 선택 지원 (선택적)
+
+**주요 사용 사례**:
+
+- 단일 항목 선택
+- 다중 항목 선택
+- 커스텀 선택 UI
+
+**예시 사용법**:
+
+```dart
+CustomPickerView<String>(
+  items: ['옵션1', '옵션2', '옵션3'],
+  selectedItem: '옵션1',
+  onItemSelected: (String item) {
+    print('선택된 항목: $item');
+  },
+)
+```
+
+**상태**: 📋 진행 중
+
+---
+
+#### 4. CustomGridView
+
+**우선순위**: 높음 ⭐⭐⭐  
+**파일**: `lib/custom/custom_grid_view.dart`
+
+**기능 설명**:
+
+- GridView.builder를 래핑하여 간편하게 사용
+- 기본 spacing, padding 설정
+- 크로스 액시스 카운트 자동 계산 지원
+
+**주요 사용 사례**:
+
+- 그리드 레이아웃
+- 이미지 갤러리
+- 상품 목록
+
+**예시 사용법**:
+
+```dart
+CustomGridView(
+  itemCount: 20,
+  crossAxisCount: 2,
+  itemBuilder: (context, index) => Card(...),
+  spacing: 8,
+  padding: EdgeInsets.all(16),
+)
+```
+
+**상태**: 📋 진행 중
+
+---
+
+#### 5. CustomDropdownButton
+
+**우선순위**: 높음 ⭐⭐⭐  
+**파일**: `lib/custom/custom_dropdown_button.dart`
+
+**기능 설명**:
+
+- DropdownButton를 래핑하여 간편하게 사용
+- String/Widget 지원
+- 기본 스타일 적용
+
+**주요 사용 사례**:
+
+- 드롭다운 메뉴
+- 선택 목록
+- 필터링 옵션
+
+**예시 사용법**:
+
+```dart
+CustomDropdownButton<String>(
+  value: selectedValue,
+  items: ['옵션1', '옵션2', '옵션3'],
+  onChanged: (String? value) {
+    setState(() {
+      selectedValue = value;
+    });
+  },
+)
+```
+
+**상태**: 📋 진행 중
+
+---
+
 ### 중간 우선순위 (필요시 추가)
 
 #### 8. AudioUtil
@@ -508,3 +676,98 @@ lib/
 - 사용자 코드 변경: 없음 (export 파일을 통해 접근하므로)
 
 **상태**: 🔮 향후 리팩토링 예정 (방법 2 완료 후 진행)
+
+---
+
+## 전체 다국어 지원 적용
+
+**우선순위**: 낮음 (최후 순위)  
+**상태**: 📋 계획 중
+
+**기능 설명**:
+
+- 모든 커스텀 위젯과 유틸리티에 다국어 지원 추가
+- intl 패키지를 활용한 자동 생성 방식 또는 직접 리소스 관리 방식 선택
+- 모든 하드코딩된 문자열을 다국어 리소스로 변환
+
+**참고**:
+
+- DatePicker, CupertinoDatePicker 등은 이미 MaterialApp의 `localizationsDelegates`와 `supportedLocales` 설정으로 다국어 지원이 완료됨
+- 이 항목은 위젯 내부의 모든 텍스트(버튼 라벨, 에러 메시지, 힌트 텍스트 등)에 대한 다국어 지원을 의미함
+
+**주요 작업 내용**:
+
+1. **다국어 리소스 파일 생성**
+
+   - `lib/l10n/` 폴더 구조 생성
+   - ARB 파일 또는 직접 리소스 파일 생성
+   - 지원 언어: 한국어, 영어, 일본어 (필요시 확장)
+
+2. **위젯별 다국어 적용**
+
+   - CustomText: 다국어 문자열 지원
+   - CustomButton: 버튼 텍스트 다국어화
+   - CustomDialog: 다이얼로그 메시지 다국어화
+   - CustomSnackBar: 알림 메시지 다국어화
+   - CustomTextField: 힌트, 에러 메시지 다국어화
+   - CustomAppBar: 제목 다국어화
+   - 기타 모든 위젯의 하드코딩된 문자열
+
+3. **유틸리티 다국어 적용**
+
+   - CustomCommonUtil: 에러 메시지, 포맷팅 텍스트
+   - 기타 유틸리티의 메시지들
+
+4. **문서화**
+   - 다국어 지원 가이드 작성
+   - 사용 예시 추가
+
+**예상 구현 방법**:
+
+**옵션 1: intl 패키지 사용 (권장)**
+
+```yaml
+dependencies:
+  intl: ^0.19.0
+```
+
+```dart
+// l10n/app_en.arb
+{
+  "@@locale": "en",
+  "confirm": "Confirm",
+  "cancel": "Cancel",
+  "@confirm": {
+    "description": "Confirm button text"
+  }
+}
+
+// l10n/app_ko.arb
+{
+  "@@locale": "ko",
+  "confirm": "확인",
+  "cancel": "취소"
+}
+```
+
+**옵션 2: 직접 리소스 관리**
+
+```dart
+// lib/l10n/strings.dart
+class Strings {
+  static String getString(BuildContext context, String key) {
+    // 로케일 기반 문자열 반환
+  }
+}
+```
+
+**구현 필요 사항**:
+
+- 다국어 리소스 파일 구조 설계
+- 모든 위젯의 하드코딩된 문자열 식별 및 리소스화
+- 다국어 지원 유틸리티 클래스 또는 Extension 생성
+- 테스트 및 검증
+
+**의존성**: `intl: ^0.19.0` (옵션 1 선택 시)
+
+**상태**: 📋 계획 중 (최후 순위)
