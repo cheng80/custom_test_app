@@ -37,6 +37,9 @@ class CustomTabBar extends StatefulWidget {
   /// 탭 위치 (기본값: TabBarPosition.top)
   final TabBarPosition position;
 
+  /// 탭 클릭 시 콜백 (선택된 탭 인덱스 전달)
+  final ValueChanged<int>? onTap;
+
   const CustomTabBar({
     super.key,
     required this.tabs,
@@ -49,6 +52,7 @@ class CustomTabBar extends StatefulWidget {
     this.unselectedLabelStyle,
     this.isScrollable = false,
     this.position = TabBarPosition.top,
+    this.onTap,
   }) : assert(tabs.length == children.length, 'tabs와 children의 개수가 동일해야 합니다.');
 
   @override
@@ -93,6 +97,7 @@ class _CustomTabBarState extends State<CustomTabBar>
           widget.unselectedLabelStyle ??
           const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
       tabs: widget.tabs.map((tab) => Tab(text: tab)).toList(),
+      onTap: widget.onTap,
     );
 
     final tabBarView = TabBarView(

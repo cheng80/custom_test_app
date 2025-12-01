@@ -22,12 +22,13 @@ class _NavigationWidgetsPageState extends State<NavigationWidgetsPage> {
       appBar: CustomAppBar(
         title: "네비게이션 위젯 예시",
         backgroundColor: Colors.indigo,
+        drawerIcon: Icons.menu, // Drawer 아이콘 커스텀 (기본값: Icons.menu)
+        drawerIconColor: Colors.white, // Drawer 아이콘 색상
+        drawerIconSize: 28.0, // Drawer 아이콘 크기
       ),
       drawer: CustomDrawer(
         header: DrawerHeader(
-          decoration: BoxDecoration(
-            color: Colors.indigo,
-          ),
+          decoration: BoxDecoration(color: Colors.indigo),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           child: CustomColumn(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -36,11 +37,7 @@ class _NavigationWidgetsPageState extends State<NavigationWidgetsPage> {
               CircleAvatar(
                 radius: 28,
                 backgroundColor: Colors.white,
-                child: Icon(
-                  Icons.person,
-                  size: 28,
-                  color: Colors.indigo,
-                ),
+                child: Icon(Icons.person, size: 28, color: Colors.indigo),
               ),
               CustomText(
                 "사용자 이름",
@@ -77,10 +74,7 @@ class _NavigationWidgetsPageState extends State<NavigationWidgetsPage> {
               setState(() {
                 _selectedDrawerIndex = 1;
               });
-              CustomSnackBar.show(
-                context,
-                message: "프로필 선택됨",
-              );
+              CustomSnackBar.show(context, message: "프로필 선택됨");
             },
           ),
           DrawerItem(
@@ -93,10 +87,7 @@ class _NavigationWidgetsPageState extends State<NavigationWidgetsPage> {
               setState(() {
                 _selectedDrawerIndex = 2;
               });
-              CustomSnackBar.show(
-                context,
-                message: "설정 선택됨",
-              );
+              CustomSnackBar.show(context, message: "설정 선택됨");
             },
           ),
           DrawerItem(
@@ -109,20 +100,13 @@ class _NavigationWidgetsPageState extends State<NavigationWidgetsPage> {
               setState(() {
                 _selectedDrawerIndex = 3;
               });
-              CustomSnackBar.show(
-                context,
-                message: "도움말 선택됨",
-              );
+              CustomSnackBar.show(context, message: "도움말 선택됨");
             },
           ),
         ],
         footer: Container(
           padding: const EdgeInsets.all(16),
-          child: CustomText(
-            "버전 1.0.0",
-            fontSize: 12,
-            color: Colors.grey,
-          ),
+          child: CustomText("버전 1.0.0", fontSize: 12, color: Colors.grey),
         ),
       ),
       body: SingleChildScrollView(
@@ -175,12 +159,15 @@ class _NavigationWidgetsPageState extends State<NavigationWidgetsPage> {
                             Expanded(
                               child: CustomButton(
                                 btnText: "일반 FAB",
-                                backgroundColor: _currentFABType == FloatingActionButtonType.regular
+                                backgroundColor:
+                                    _currentFABType ==
+                                        FloatingActionButtonType.regular
                                     ? Colors.indigo.shade700
                                     : Colors.indigo,
                                 onCallBack: () {
                                   setState(() {
-                                    _currentFABType = FloatingActionButtonType.regular;
+                                    _currentFABType =
+                                        FloatingActionButtonType.regular;
                                   });
                                   CustomSnackBar.show(
                                     context,
@@ -192,12 +179,15 @@ class _NavigationWidgetsPageState extends State<NavigationWidgetsPage> {
                             Expanded(
                               child: CustomButton(
                                 btnText: "작은 FAB",
-                                backgroundColor: _currentFABType == FloatingActionButtonType.small
+                                backgroundColor:
+                                    _currentFABType ==
+                                        FloatingActionButtonType.small
                                     ? Colors.blue.shade700
                                     : Colors.blue,
                                 onCallBack: () {
                                   setState(() {
-                                    _currentFABType = FloatingActionButtonType.small;
+                                    _currentFABType =
+                                        FloatingActionButtonType.small;
                                   });
                                   CustomSnackBar.show(
                                     context,
@@ -209,12 +199,15 @@ class _NavigationWidgetsPageState extends State<NavigationWidgetsPage> {
                             Expanded(
                               child: CustomButton(
                                 btnText: "확장형 FAB",
-                                backgroundColor: _currentFABType == FloatingActionButtonType.extended
+                                backgroundColor:
+                                    _currentFABType ==
+                                        FloatingActionButtonType.extended
                                     ? Colors.purple.shade700
                                     : Colors.purple,
                                 onCallBack: () {
                                   setState(() {
-                                    _currentFABType = FloatingActionButtonType.extended;
+                                    _currentFABType =
+                                        FloatingActionButtonType.extended;
                                   });
                                   CustomSnackBar.show(
                                     context,
@@ -283,6 +276,12 @@ class _NavigationWidgetsPageState extends State<NavigationWidgetsPage> {
                           fontWeight: FontWeight.bold,
                           color: Colors.indigo,
                         ),
+                        CustomText(
+                          "참고: leading과 drawer를 함께 사용하려면, leading에 Drawer 아이콘을 포함해야 합니다.",
+                          fontSize: 12,
+                          color: Colors.orange.shade700,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ],
                     ),
                   ),
@@ -340,10 +339,7 @@ class _NavigationWidgetsPageState extends State<NavigationWidgetsPage> {
             setState(() {
               _counter++;
             });
-            CustomSnackBar.show(
-              context,
-              message: "일반 FAB 클릭됨: $_counter",
-            );
+            CustomSnackBar.show(context, message: "일반 FAB 클릭됨: $_counter");
           },
           icon: Icons.add,
           tooltip: "추가 (일반 FAB)",
@@ -356,10 +352,7 @@ class _NavigationWidgetsPageState extends State<NavigationWidgetsPage> {
             setState(() {
               _counter++;
             });
-            CustomSnackBar.show(
-              context,
-              message: "작은 FAB 클릭됨: $_counter",
-            );
+            CustomSnackBar.show(context, message: "작은 FAB 클릭됨: $_counter");
           },
           icon: Icons.add,
           tooltip: "추가 (작은 FAB)",
@@ -372,10 +365,7 @@ class _NavigationWidgetsPageState extends State<NavigationWidgetsPage> {
             setState(() {
               _counter++;
             });
-            CustomSnackBar.show(
-              context,
-              message: "확장형 FAB 클릭됨: $_counter",
-            );
+            CustomSnackBar.show(context, message: "확장형 FAB 클릭됨: $_counter");
           },
           label: "추가하기",
           icon: Icons.add,
@@ -397,4 +387,3 @@ class _NavigationWidgetsPageState extends State<NavigationWidgetsPage> {
     }
   }
 }
-

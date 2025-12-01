@@ -12,17 +12,20 @@ class LayoutWidgetsPage extends StatefulWidget {
 
 class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
   double _progressValue = 0.5;
-  List<String> _selectedChips = [];
-  final List<String> _availableTags = ['Flutter', 'Dart', 'Widget', 'UI', 'Design'];
+  final List<String> _selectedChips = [];
+  final List<String> _availableTags = [
+    'Flutter',
+    'Dart',
+    'Widget',
+    'UI',
+    'Design',
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: CustomAppBar(
-        title: "레이아웃 위젯 예시",
-        backgroundColor: Colors.teal,
-      ),
+      appBar: CustomAppBar(title: "레이아웃 위젯 예시", backgroundColor: Colors.teal),
       body: CustomRefreshIndicator(
         onRefresh: () async {
           await Future.delayed(const Duration(seconds: 2));
@@ -60,6 +63,8 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
                         fontWeight: FontWeight.bold,
                       ),
                       leading: Icon(Icons.help_outline, color: Colors.teal),
+                      backgroundColor: Colors.teal.shade50,
+                      borderRadius: 12,
                       children: [
                         ListTile(
                           title: CustomText("Q: Flutter란 무엇인가요?"),
@@ -79,8 +84,6 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
                           ),
                         ),
                       ],
-                      backgroundColor: Colors.teal.shade50,
-                      borderRadius: 12,
                     ),
                     CustomExpansionTile(
                       title: CustomText(
@@ -90,6 +93,8 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
                       ),
                       leading: Icon(Icons.settings, color: Colors.blue),
                       initiallyExpanded: false,
+                      backgroundColor: Colors.blue.shade50,
+                      borderRadius: 12,
                       children: [
                         ListTile(
                           leading: Icon(Icons.notifications),
@@ -107,8 +112,6 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
                           onTap: () => print("다크 모드"),
                         ),
                       ],
-                      backgroundColor: Colors.blue.shade50,
-                      borderRadius: 12,
                     ),
                   ],
                 ),
@@ -143,7 +146,11 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
                           label: "아바타",
                           avatar: CircleAvatar(
                             backgroundColor: Colors.teal,
-                            child: Icon(Icons.person, size: 16, color: Colors.white),
+                            child: Icon(
+                              Icons.person,
+                              size: 16,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ],
@@ -308,4 +315,3 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
     );
   }
 }
-

@@ -64,6 +64,12 @@ class _TabBarPageState extends State<TabBarPage> {
         tabs: const ["동물", "과일", "꽃"],
         tabColor: Colors.blue,
         children: [_buildAnimalTab(), _buildFruitTab(), _buildFlowerTab()],
+        onTap: (index) {
+          // 탭 변경 이벤트 처리 예시
+          final tabNames = ["동물", "과일", "꽃"];
+          print("${tabNames[index]} 탭 선택됨");
+          // 필요 시 상태 업데이트 또는 다른 로직 처리 가능
+        },
       ),
     );
   }

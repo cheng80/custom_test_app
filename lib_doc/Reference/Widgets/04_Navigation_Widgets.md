@@ -19,6 +19,10 @@ CustomAppBar(title: "홈")
 | `foregroundColor`           | `Color?`        | `Colors.white`   | AppBar 전경색/아이콘 색상        |
 | `centerTitle`               | `bool`          | `true`           | 제목 중앙 정렬 여부              |
 | `leading`                   | `Widget?`       | `null`           | 왼쪽에 표시할 위젯               |
+| `drawerIcon`                | `IconData?`     | `null`           | Drawer 아이콘 (drawer가 있고 leading이 없을 때 사용) |
+| `drawerIconColor`           | `Color?`        | `foregroundColor` | Drawer 아이콘 색상 (drawerIcon 사용 시) |
+| `drawerIconSize`            | `double?`       | `24.0`           | Drawer 아이콘 크기 (drawerIcon 사용 시) |
+| `drawerIconWidget`          | `Widget?`       | `null`           | Drawer 아이콘 위젯 (완전한 커스터마이징, drawerIcon보다 우선) |
 | `actions`                   | `List<Widget>?` | `null`           | 오른쪽에 표시할 액션 버튼들      |
 | `toolbarHeight`             | `double?`       | `kToolbarHeight` | AppBar 높이                      |
 | `titleTextStyle`            | `TextStyle?`    | `null`           | 제목 텍스트 스타일               |
@@ -62,6 +66,118 @@ CustomAppBar(
       onPressed: () {},
     ),
   ],
+)
+
+// Drawer 아이콘 커스텀 (IconData만)
+Scaffold(
+  appBar: CustomAppBar(
+    title: "홈",
+    drawerIcon: Icons.menu_open, // 커스텀 Drawer 아이콘
+  ),
+  drawer: CustomDrawer(
+    items: [
+      DrawerItem(label: "홈", icon: Icons.home, onTap: () {}),
+    ],
+  ),
+  body: Container(),
+)
+
+// Drawer 아이콘 색상 및 크기 커스텀
+Scaffold(
+  appBar: CustomAppBar(
+    title: "홈",
+    drawerIcon: Icons.menu,
+    drawerIconColor: Colors.red, // 아이콘 색상 커스텀
+    drawerIconSize: 32.0, // 아이콘 크기 커스텀
+  ),
+  drawer: CustomDrawer(
+    items: [
+      DrawerItem(label: "홈", icon: Icons.home, onTap: () {}),
+    ],
+  ),
+  body: Container(),
+)
+
+// Drawer 아이콘 완전 커스텀 (Widget 사용)
+Scaffold(
+  appBar: CustomAppBar(
+    title: "홈",
+    drawerIconWidget: Icon(
+      Icons.menu,
+      color: Colors.purple,
+      size: 28,
+    ), // 완전히 커스텀된 위젯 사용
+  ),
+  drawer: CustomDrawer(
+    items: [
+      DrawerItem(label: "홈", icon: Icons.home, onTap: () {}),
+    ],
+  ),
+  body: Container(),
+)
+
+// leading과 drawerIcon 함께 사용
+Scaffold(
+  appBar: CustomAppBar(
+    title: "홈",
+    leading: IconButton(
+      icon: Icon(Icons.arrow_back),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    ),
+    // leading이 있으면 drawerIcon은 무시됩니다.
+    drawerIcon: Icons.menu,
+  ),
+  drawer: CustomDrawer(
+    items: [
+      DrawerItem(label: "홈", icon: Icons.home, onTap: () {}),
+    ],
+  ),
+  body: Container(),
+)
+
+// leading에서 Drawer 열기 (Builder 사용 권장)
+Scaffold(
+  appBar: CustomAppBar(
+    title: "홈",
+    leading: Builder(
+      builder: (context) => CustomIconButton(
+        icon: Icons.menu,
+        onPressed: () {
+          Scaffold.maybeOf(context)?.openDrawer();
+        },
+      ),
+    ),
+  ),
+  drawer: CustomDrawer(
+    items: [
+      DrawerItem(label: "홈", icon: Icons.home, onTap: () {}),
+    ],
+  ),
+  body: Container(),
+)
+
+// leading에서 Drawer 열기 (간단한 방법, Builder 없이)
+// 주의: CustomAppBar의 build context가 Scaffold 하위가 아닐 수 있으므로
+// Builder를 사용하는 것이 더 안전합니다.
+Scaffold(
+  appBar: CustomAppBar(
+    title: "홈",
+    leading: CustomIconButton(
+      icon: Icons.menu,
+      onPressed: () {
+        // Scaffold.maybeOf를 사용하여 null-safe 처리
+        Scaffold.maybeOf(context)?.openDrawer();
+      },
+    ),
+  ),
+  drawer: CustomDrawer(
+    items: [
+      DrawerItem(label: "홈", icon: Icons.home, onTap: () {}),
+    ],
+  ),
+  body: Container(),
 )
 ```
 
@@ -202,6 +318,7 @@ CustomTabBar(
 | `unselectedLabelStyle` | `TextStyle?`     | `null`               | 선택되지 않은 탭 라벨 스타일                    |
 | `isScrollable`         | `bool`           | `false`              | 탭이 스크롤 가능한지 여부                       |
 | `position`             | `TabBarPosition` | `TabBarPosition.top` | 탭 위치 (top, bottom)                           |
+| `onTap`                | `ValueChanged<int>?` | `null`            | 탭 클릭 시 콜백 (선택된 탭 인덱스 전달)         |
 
 ### TabBarPosition
 
@@ -255,6 +372,23 @@ CustomTabBar(
     Tab4Content(),
     Tab5Content(),
   ],
+)
+
+// 탭 클릭 이벤트 처리
+CustomTabBar(
+  tabs: ["동물", "과일", "꽃"],
+  tabColor: Colors.blue,
+  children: [
+    AnimalTab(),
+    FruitTab(),
+    FlowerTab(),
+  ],
+  onTap: (index) {
+    print("탭 $index 선택됨");
+    // 탭 변경 시 필요한 로직 처리
+    final tabNames = ["동물", "과일", "꽃"];
+    print("${tabNames[index]} 탭 선택됨");
+  },
 )
 ```
 

@@ -23,7 +23,26 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool centerTitle;
 
   /// 왼쪽에 표시할 위젯 (뒤로가기 버튼 등)
+  /// leading이 지정되어 있으면 drawer가 있어도 leading이 우선 표시됩니다.
   final Widget? leading;
+
+  /// Drawer 아이콘 (drawer가 있고 leading이 없을 때 사용)
+  /// 기본값: Icons.menu
+  /// drawer가 있고 leading이 없으면 이 아이콘으로 Drawer를 여는 버튼이 자동으로 표시됩니다.
+  final IconData? drawerIcon;
+
+  /// Drawer 아이콘 색상 (drawerIcon 사용 시)
+  /// 기본값: foregroundColor 또는 Colors.white
+  final Color? drawerIconColor;
+
+  /// Drawer 아이콘 크기 (drawerIcon 사용 시)
+  /// 기본값: 24.0
+  final double? drawerIconSize;
+
+  /// Drawer 아이콘 위젯 (drawer가 있고 leading이 없을 때 사용)
+  /// drawerIconWidget이 지정되면 drawerIcon, drawerIconColor, drawerIconSize는 무시됩니다.
+  /// drawerIconWidget을 사용하면 완전히 커스텀된 위젯을 사용할 수 있습니다.
+  final Widget? drawerIconWidget;
 
   /// 오른쪽에 표시할 액션 버튼들
   final List<Widget>? actions;
@@ -44,6 +63,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.foregroundColor,
     this.centerTitle = true,
     this.leading,
+    this.drawerIcon,
+    this.drawerIconColor,
+    this.drawerIconSize,
+    this.drawerIconWidget,
     this.actions,
     this.toolbarHeight,
     this.titleTextStyle,
@@ -77,15 +100,65 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       titleWidget = title as Widget;
     }
 
+    Widget? finalLeading = leading;
+    bool shouldImplyLeading;
+
+    // drawerIconWidget이 지정되어 있고 leading이 없으면 커스텀 Drawer 버튼 생성
+    if (drawerIconWidget != null && leading == null) {
+      finalLeading = Builder(
+        builder: (builderContext) {
+          return IconButton(
+            icon: drawerIconWidget!,
+            onPressed: () {
+              final scaffoldState = Scaffold.maybeOf(builderContext);
+              scaffoldState?.openDrawer();
+            },
+            tooltip: MaterialLocalizations.of(
+              builderContext,
+            ).openAppDrawerTooltip,
+          );
+        },
+      );
+      shouldImplyLeading = false; // leading을 직접 지정했으므로 false
+    }
+    // drawerIcon이 지정되어 있고 leading이 없으면 커스텀 Drawer 버튼 생성
+    else if (drawerIcon != null && leading == null) {
+      final iconColor = drawerIconColor ?? fgColor;
+      final iconSize = drawerIconSize ?? 24.0;
+      finalLeading = Builder(
+        builder: (builderContext) {
+          return IconButton(
+            icon: Icon(drawerIcon, color: iconColor, size: iconSize),
+            onPressed: () {
+              final scaffoldState = Scaffold.maybeOf(builderContext);
+              scaffoldState?.openDrawer();
+            },
+            tooltip: MaterialLocalizations.of(
+              builderContext,
+            ).openAppDrawerTooltip,
+          );
+        },
+      );
+      shouldImplyLeading = false; // leading을 직접 지정했으므로 false
+    } else if (leading == null) {
+      // leading이 없으면 automaticallyImplyLeading 값에 따라 자동으로 뒤로가기/Drawer 아이콘 표시
+      // Flutter가 자동으로 drawer가 있으면 Icons.menu를 표시합니다.
+      shouldImplyLeading = automaticallyImplyLeading;
+    } else {
+      // leading이 있으면 automaticallyImplyLeading을 false로 설정하여
+      // 사용자가 지정한 leading을 표시
+      shouldImplyLeading = false;
+    }
+
     return AppBar(
       title: titleWidget,
       backgroundColor: bgColor,
       foregroundColor: fgColor,
       centerTitle: centerTitle,
-      leading: leading,
+      leading: finalLeading,
       actions: actions,
       toolbarHeight: toolbarHeight,
-      automaticallyImplyLeading: automaticallyImplyLeading && leading == null,
+      automaticallyImplyLeading: shouldImplyLeading,
     );
   }
 
