@@ -303,6 +303,350 @@ class _DialogPageState extends State<DialogPage> {
                   ],
                 ),
               ),
+
+              // 자동 닫힘 제어 예시
+              CustomColumn(
+                spacing: 12,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText(
+                    "자동 닫힘 제어 예시",
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: CustomButton(
+                      btnText: "닫히지 않는 다이얼로그",
+                      backgroundColor: Colors.amber,
+                      onCallBack: () {
+                        showDialog(
+                          context: context,
+                          builder: (dialogContext) {
+                            return AlertDialog(
+                              title: CustomText(
+                                "처리 중",
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  CustomText(
+                                    "확인 버튼을 눌러도 닫히지 않습니다.\n내부 버튼으로 수동으로 닫아주세요.",
+                                    fontSize: 16,
+                                  ),
+                                  const SizedBox(height: 16),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child: CustomButton(
+                                      btnText: "다이얼로그 닫기",
+                                      backgroundColor: Colors.blue,
+                                      onCallBack: () {
+                                        Navigator.pop(dialogContext);
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              actions: [
+                                CustomButton(
+                                  btnText: "확인",
+                                  backgroundColor: Colors.blue,
+                                  minimumSize: const Size(100, 40),
+                                  onCallBack: () {
+                                    // 다이얼로그가 자동으로 닫히지 않음
+                                    print("확인 버튼 클릭됨 - 다이얼로그는 열려있음");
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: CustomButton(
+                      btnText: "비동기 작업 후 닫기",
+                      backgroundColor: Colors.cyan,
+                      onCallBack: () {
+                        CustomDialog.show(
+                          context,
+                          title: "처리 중",
+                          message: "작업을 수행한 후 자동으로 닫힙니다...",
+                          type: DialogType.single,
+                          autoDismissOnConfirm: false,
+                          confirmText: "처리 시작",
+                          onConfirm: () async {
+                            // 비동기 작업 시뮬레이션
+                            await Future.delayed(const Duration(seconds: 2));
+                            if (context.mounted) {
+                              Navigator.pop(context);
+                              // 완료 다이얼로그 표시
+                              CustomDialog.show(
+                                context,
+                                title: "완료",
+                                message: "작업이 완료되었습니다!",
+                                type: DialogType.single,
+                              );
+                            }
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: CustomButton(
+                      btnText: "확인은 닫지 않고 취소만 닫기",
+                      backgroundColor: Colors.pink,
+                      onCallBack: () {
+                        CustomDialog.show(
+                          context,
+                          title: "확인",
+                          message: "확인 버튼은 닫히지 않고,\n취소 버튼만 다이얼로그를 닫습니다.",
+                          type: DialogType.dual,
+                          autoDismissOnConfirm: false,
+                          autoDismissOnCancel: true,
+                          onConfirm: () {
+                            print("확인 클릭 - 다이얼로그는 열려있음");
+                          },
+                          onCancel: () {
+                            print("취소 클릭 - 다이얼로그가 닫힘");
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+
+              // 커스텀 버튼 예시
+              CustomColumn(
+                spacing: 12,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText(
+                    "커스텀 버튼 예시",
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: CustomButton(
+                      btnText: "3개 버튼 다이얼로그",
+                      backgroundColor: Colors.teal,
+                      onCallBack: () {
+                        CustomDialog.show(
+                          context,
+                          title: "작업 선택",
+                          message: "원하는 작업을 선택해주세요.",
+                          customActions: [
+                            DialogActionItem(
+                              label: "저장",
+                              backgroundColor: Colors.green,
+                              onTap: () {
+                                print("저장 선택");
+                              },
+                              autoDismiss: true,
+                            ),
+                            DialogActionItem(
+                              label: "수정",
+                              backgroundColor: Colors.blue,
+                              onTap: () {
+                                print("수정 선택");
+                              },
+                              autoDismiss: true,
+                            ),
+                            DialogActionItem(
+                              label: "취소",
+                              buttonType: ButtonType.outlined,
+                              backgroundColor: Colors.grey,
+                              onTap: () {
+                                print("취소 선택");
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: CustomButton(
+                      btnText: "4개 버튼 (저장/수정/삭제/취소)",
+                      backgroundColor: Colors.indigo,
+                      onCallBack: () {
+                        CustomDialog.show(
+                          context,
+                          title: "파일 관리",
+                          message: "이 파일에 대해 어떤 작업을 하시겠습니까?",
+                          customActions: [
+                            DialogActionItem(
+                              label: "저장",
+                              backgroundColor: Colors.green,
+                              minimumSize: const Size(70, 40),
+                              onTap: () {
+                                print("저장");
+                                if (context.mounted) {
+                                  Navigator.pop(context);
+                                  CustomDialog.show(
+                                    context,
+                                    title: "저장 완료",
+                                    message: "파일이 저장되었습니다.",
+                                    type: DialogType.single,
+                                  );
+                                }
+                              },
+                            ),
+                            DialogActionItem(
+                              label: "수정",
+                              backgroundColor: Colors.blue,
+                              minimumSize: const Size(70, 40),
+                              onTap: () {
+                                print("수정");
+                              },
+                            ),
+                            DialogActionItem(
+                              label: "삭제",
+                              backgroundColor: Colors.red,
+                              buttonType: ButtonType.outlined,
+                              minimumSize: const Size(70, 40),
+                              onTap: () {
+                                print("삭제");
+                              },
+                            ),
+                            DialogActionItem(
+                              label: "취소",
+                              buttonType: ButtonType.outlined,
+                              backgroundColor: Colors.grey,
+                              minimumSize: const Size(70, 40),
+                              onTap: () {},
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: CustomButton(
+                      btnText: "닫히지 않는 커스텀 버튼",
+                      backgroundColor: Colors.deepOrange,
+                      onCallBack: () {
+                        showDialog(
+                          context: context,
+                          builder: (dialogContext) {
+                            return AlertDialog(
+                              title: CustomText(
+                                "선택",
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  CustomText(
+                                    "저장 버튼은 다이얼로그를 닫지 않습니다.\n내부 버튼으로 수동으로 닫을 수 있습니다.",
+                                    fontSize: 16,
+                                  ),
+                                  const SizedBox(height: 16),
+                                  CustomButton(
+                                    btnText: "다이얼로그 닫기",
+                                    backgroundColor: Colors.red,
+                                    onCallBack: () {
+                                      Navigator.pop(dialogContext);
+                                    },
+                                  ),
+                                ],
+                              ),
+                              actions: [
+                                CustomButton(
+                                  btnText: "저장",
+                                  backgroundColor: Colors.green,
+                                  minimumSize: const Size(80, 40),
+                                  onCallBack: () {
+                                    print("저장 중... (다이얼로그는 열려있음)");
+                                    // 다이얼로그를 열어둔 채로 다른 작업 수행 가능
+                                  },
+                                ),
+                                CustomButton(
+                                  btnText: "취소",
+                                  buttonType: ButtonType.outlined,
+                                  backgroundColor: Colors.grey,
+                                  minimumSize: const Size(80, 40),
+                                  onCallBack: () {
+                                    Navigator.pop(dialogContext);
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: CustomButton(
+                      btnText: "Widget 라벨 커스텀 버튼",
+                      backgroundColor: Colors.brown,
+                      onCallBack: () {
+                        CustomDialog.show(
+                          context,
+                          title: "선택",
+                          message: "버튼 라벨에 아이콘을 포함할 수 있습니다.",
+                          customActions: [
+                            DialogActionItem(
+                              label: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(Icons.save, color: Colors.white, size: 20),
+                                  const SizedBox(width: 4),
+                                  CustomText("저장", fontSize: 16),
+                                ],
+                              ),
+                              backgroundColor: Colors.green,
+                              onTap: () {
+                                print("저장");
+                              },
+                            ),
+                            DialogActionItem(
+                              label: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(Icons.delete, color: Colors.white, size: 20),
+                                  const SizedBox(width: 4),
+                                  CustomText("삭제", fontSize: 16),
+                                ],
+                              ),
+                              backgroundColor: Colors.red,
+                              onTap: () {
+                                print("삭제");
+                              },
+                            ),
+                            DialogActionItem(
+                              label: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(Icons.cancel, color: Colors.grey.shade700, size: 20),
+                                  const SizedBox(width: 4),
+                                  CustomText("취소", fontSize: 16, color: Colors.grey.shade700),
+                                ],
+                              ),
+                              buttonType: ButtonType.outlined,
+                              backgroundColor: Colors.grey,
+                              onTap: () {},
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

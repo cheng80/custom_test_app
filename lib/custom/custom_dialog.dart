@@ -10,6 +10,52 @@ enum DialogType {
 
   /// 확인/취소가 있는 다이얼로그 (이중 버튼)
   dual,
+
+  /// 커스텀 버튼들을 사용하는 다이얼로그
+  custom,
+}
+
+/// 다이얼로그 액션 아이템 클래스
+/// 각 버튼의 정보를 담는 클래스입니다.
+class DialogActionItem {
+  /// 버튼에 표시할 텍스트 또는 위젯
+  /// String인 경우 CustomText로 자동 변환, Widget인 경우 그대로 사용
+  final dynamic label;
+
+  /// 버튼 클릭 시 실행될 콜백
+  final VoidCallback? onTap;
+
+  /// 버튼 타입 (기본값: ButtonType.text)
+  final ButtonType buttonType;
+
+  /// 버튼 배경색
+  final Color? backgroundColor;
+
+  /// 버튼 전경색/텍스트 색상
+  final Color? foregroundColor;
+
+  /// 버튼 최소 크기
+  final Size? minimumSize;
+
+  /// 버튼 모서리 둥글기
+  final double? borderRadius;
+
+  /// 이 버튼 클릭 시 다이얼로그가 자동으로 닫힐지 여부 (기본값: true)
+  final bool autoDismiss;
+
+  DialogActionItem({
+    required this.label,
+    this.onTap,
+    this.buttonType = ButtonType.text,
+    this.backgroundColor,
+    this.foregroundColor,
+    this.minimumSize,
+    this.borderRadius,
+    this.autoDismiss = true,
+  }) : assert(
+         CustomCommonUtil.isString(label) || CustomCommonUtil.isWidget(label),
+         'label은 String 또는 Widget이어야 합니다.',
+       );
 }
 
 /// 다이얼로그 헬퍼 클래스
@@ -30,6 +76,9 @@ class CustomDialog {
     String cancelText = "취소",
     VoidCallback? onConfirm,
     VoidCallback? onCancel,
+    bool autoDismissOnConfirm = true,
+    bool autoDismissOnCancel = true,
+    List<DialogActionItem>? customActions,
     bool barrierDismissible = false,
     Color? backgroundColor,
     double? borderRadius,
@@ -44,6 +93,11 @@ class CustomDialog {
       CustomCommonUtil.isString(message) || CustomCommonUtil.isWidget(message),
       'message는 String 또는 Widget이어야 합니다.',
     );
+
+    // 커스텀 액션이 있으면 타입을 custom으로 설정
+    final effectiveType = customActions != null && customActions.isNotEmpty
+        ? DialogType.custom
+        : type;
 
     // title Widget 생성
     Widget titleWidget;
@@ -87,11 +141,14 @@ class CustomDialog {
           actionsAlignment: actionsAlignment,
           actions: _buildActions(
             ctx: ctx,
-            type: type,
+            type: effectiveType,
             confirmText: confirmText,
             cancelText: cancelText,
             onConfirm: onConfirm,
             onCancel: onCancel,
+            autoDismissOnConfirm: autoDismissOnConfirm,
+            autoDismissOnCancel: autoDismissOnCancel,
+            customActions: customActions,
           ),
         );
       },
@@ -106,8 +163,29 @@ class CustomDialog {
     required String cancelText,
     VoidCallback? onConfirm,
     VoidCallback? onCancel,
+    bool autoDismissOnConfirm = true,
+    bool autoDismissOnCancel = true,
+    List<DialogActionItem>? customActions,
   }) {
-    if (type == DialogType.single) {
+    if (type == DialogType.custom && customActions != null) {
+      // 커스텀 버튼들
+      return customActions.map((action) {
+        return CustomButton(
+          btnText: action.label,
+          buttonType: action.buttonType,
+          backgroundColor: action.backgroundColor,
+          foregroundColor: action.foregroundColor,
+          minimumSize: action.minimumSize ?? const Size(80, 40),
+          borderRadius: action.borderRadius,
+          onCallBack: () {
+            action.onTap?.call();
+            if (action.autoDismiss) {
+              Navigator.pop(ctx);
+            }
+          },
+        );
+      }).toList();
+    } else if (type == DialogType.single) {
       // 단일 버튼 (확인만)
       return [
         CustomButton(
@@ -116,7 +194,9 @@ class CustomDialog {
           minimumSize: const Size(100, 40),
           onCallBack: () {
             onConfirm?.call();
-            Navigator.pop(ctx);
+            if (autoDismissOnConfirm) {
+              Navigator.pop(ctx);
+            }
           },
         ),
       ];
@@ -130,7 +210,9 @@ class CustomDialog {
           minimumSize: const Size(80, 40),
           onCallBack: () {
             onCancel?.call();
-            Navigator.pop(ctx);
+            if (autoDismissOnCancel) {
+              Navigator.pop(ctx);
+            }
           },
         ),
         CustomButton(
@@ -139,7 +221,9 @@ class CustomDialog {
           minimumSize: const Size(80, 40),
           onCallBack: () {
             onConfirm?.call();
-            Navigator.pop(ctx);
+            if (autoDismissOnConfirm) {
+              Navigator.pop(ctx);
+            }
           },
         ),
       ];

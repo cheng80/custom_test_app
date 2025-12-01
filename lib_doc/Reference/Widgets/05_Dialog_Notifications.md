@@ -22,25 +22,46 @@ CustomDialog.show(
 
 **파라미터:**
 
-| 파라미터             | 타입                | 기본값                     | 설명                                   |
-| -------------------- | ------------------- | -------------------------- | -------------------------------------- |
-| `context`            | `BuildContext`      | 필수                       | BuildContext                           |
-| `title`              | `dynamic`           | 필수                       | 다이얼로그 제목 (String 또는 Widget)   |
-| `message`            | `dynamic`           | 필수                       | 다이얼로그 메시지 (String 또는 Widget) |
-| `type`               | `DialogType`        | `DialogType.single`        | 다이얼로그 타입                        |
-| `confirmText`        | `String`            | "확인"                     | 확인 버튼 텍스트                       |
-| `cancelText`         | `String`            | "취소"                     | 취소 버튼 텍스트                       |
-| `onConfirm`          | `VoidCallback?`     | `null`                     | 확인 버튼 클릭 시 콜백                 |
-| `onCancel`           | `VoidCallback?`     | `null`                     | 취소 버튼 클릭 시 콜백                 |
-| `barrierDismissible` | `bool`              | `false`                    | 배경 탭으로 닫기 가능 여부             |
-| `backgroundColor`    | `Color?`            | `Colors.white`             | 다이얼로그 배경색                      |
-| `borderRadius`       | `double?`           | `null`                     | 다이얼로그 모서리 둥글기               |
-| `actionsAlignment`   | `MainAxisAlignment` | `MainAxisAlignment.center` | 버튼 정렬 방식                         |
+| 파라미터             | 타입                     | 기본값                     | 설명                                   |
+| -------------------- | ------------------------ | -------------------------- | -------------------------------------- |
+| `context`            | `BuildContext`           | 필수                       | BuildContext                           |
+| `title`              | `dynamic`                | 필수                       | 다이얼로그 제목 (String 또는 Widget)   |
+| `message`            | `dynamic`                | 필수                       | 다이얼로그 메시지 (String 또는 Widget) |
+| `type`               | `DialogType`             | `DialogType.single`        | 다이얼로그 타입                        |
+| `confirmText`        | `String`                 | "확인"                     | 확인 버튼 텍스트                       |
+| `cancelText`         | `String`                 | "취소"                     | 취소 버튼 텍스트                       |
+| `onConfirm`          | `VoidCallback?`          | `null`                     | 확인 버튼 클릭 시 콜백                 |
+| `onCancel`           | `VoidCallback?`          | `null`                     | 취소 버튼 클릭 시 콜백                 |
+| `autoDismissOnConfirm` | `bool`                 | `true`                     | 확인 버튼 클릭 시 자동으로 다이얼로그 닫기 여부 |
+| `autoDismissOnCancel` | `bool`                  | `true`                     | 취소 버튼 클릭 시 자동으로 다이얼로그 닫기 여부 |
+| `customActions`      | `List<DialogActionItem>?` | `null`                     | 커스텀 버튼 리스트 (여러 버튼 사용 시) |
+| `barrierDismissible` | `bool`                   | `false`                    | 배경 탭으로 닫기 가능 여부             |
+| `backgroundColor`    | `Color?`                 | `Colors.white`             | 다이얼로그 배경색                      |
+| `borderRadius`       | `double?`                | `null`                     | 다이얼로그 모서리 둥글기               |
+| `actionsAlignment`   | `MainAxisAlignment`      | `MainAxisAlignment.center` | 버튼 정렬 방식                         |
 
 ### DialogType
 
 - `DialogType.single`: 확인 버튼만 있는 다이얼로그
 - `DialogType.dual`: 확인/취소 버튼이 있는 다이얼로그
+- `DialogType.custom`: 커스텀 버튼들을 사용하는 다이얼로그 (`customActions` 사용 시 자동 설정)
+
+### DialogActionItem
+
+커스텀 버튼의 정보를 담는 클래스입니다. 여러 버튼을 사용할 때 각 버튼의 설정을 정의합니다.
+
+**속성:**
+
+| 속성             | 타입            | 기본값                   | 설명                                              |
+| ---------------- | --------------- | ------------------------ | ------------------------------------------------- |
+| `label`          | `dynamic`       | 필수                     | 버튼 라벨 (String 또는 Widget)                    |
+| `onTap`          | `VoidCallback?` | `null`                   | 버튼 클릭 시 실행될 콜백                          |
+| `buttonType`     | `ButtonType`    | `ButtonType.text`        | 버튼 타입 (text, elevated, outlined)             |
+| `backgroundColor` | `Color?`        | `null`                   | 버튼 배경색                                       |
+| `foregroundColor` | `Color?`        | `null`                   | 버튼 전경색/텍스트 색상                           |
+| `minimumSize`    | `Size?`         | `null`                   | 버튼 최소 크기                                    |
+| `borderRadius`   | `double?`       | `null`                   | 버튼 모서리 둥글기                                |
+| `autoDismiss`    | `bool`          | `true`                   | 버튼 클릭 시 다이얼로그가 자동으로 닫힐지 여부    |
 
 ### 사용 예시
 
@@ -95,6 +116,130 @@ CustomDialog.show(
   message: "버튼이 왼쪽 정렬됩니다.",
   type: DialogType.dual,
   actionsAlignment: MainAxisAlignment.start,
+)
+
+// 자동 닫힘 제어 - 확인 버튼 클릭 시 닫히지 않음
+CustomDialog.show(
+  context,
+  title: "처리 중",
+  message: "확인 버튼을 눌러도 닫히지 않습니다.",
+  type: DialogType.single,
+  autoDismissOnConfirm: false,
+  onConfirm: () {
+    // 다이얼로그가 자동으로 닫히지 않음
+    // 필요 시 수동으로 Navigator.pop(context) 호출
+  },
+)
+
+// 자동 닫힘 제어 - 확인은 닫지 않고 취소만 닫기
+CustomDialog.show(
+  context,
+  title: "확인",
+  message: "확인 버튼은 닫히지 않고, 취소 버튼만 닫습니다.",
+  type: DialogType.dual,
+  autoDismissOnConfirm: false,
+  autoDismissOnCancel: true,
+  onConfirm: () {
+    print("확인 클릭 - 다이얼로그는 열려있음");
+  },
+  onCancel: () {
+    print("취소 클릭 - 다이얼로그가 닫힘");
+  },
+)
+
+// 커스텀 버튼 - 여러 버튼 사용
+CustomDialog.show(
+  context,
+  title: "작업 선택",
+  message: "원하는 작업을 선택해주세요.",
+  customActions: [
+    DialogActionItem(
+      label: "저장",
+      backgroundColor: Colors.green,
+      onTap: () {
+        print("저장");
+      },
+      autoDismiss: true,
+    ),
+    DialogActionItem(
+      label: "수정",
+      backgroundColor: Colors.blue,
+      onTap: () {
+        print("수정");
+      },
+    ),
+    DialogActionItem(
+      label: "취소",
+      buttonType: ButtonType.outlined,
+      backgroundColor: Colors.grey,
+      onTap: () {
+        print("취소");
+      },
+    ),
+  ],
+)
+
+// 커스텀 버튼 - Widget 라벨 사용 (아이콘 포함)
+CustomDialog.show(
+  context,
+  title: "선택",
+  message: "버튼 라벨에 아이콘을 포함할 수 있습니다.",
+  customActions: [
+    DialogActionItem(
+      label: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.save, color: Colors.white, size: 20),
+          SizedBox(width: 4),
+          Text("저장"),
+        ],
+      ),
+      backgroundColor: Colors.green,
+      onTap: () {
+        print("저장");
+      },
+    ),
+    DialogActionItem(
+      label: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.delete, color: Colors.white, size: 20),
+          SizedBox(width: 4),
+          Text("삭제"),
+        ],
+      ),
+      backgroundColor: Colors.red,
+      onTap: () {
+        print("삭제");
+      },
+    ),
+  ],
+)
+
+// 커스텀 버튼 - 자동 닫힘 제어
+CustomDialog.show(
+  context,
+  title: "선택",
+  message: "저장 버튼은 다이얼로그를 닫지 않습니다.",
+  customActions: [
+    DialogActionItem(
+      label: "저장",
+      backgroundColor: Colors.green,
+      onTap: () {
+        print("저장 중... (다이얼로그는 열려있음)");
+      },
+      autoDismiss: false, // 자동으로 닫히지 않음
+    ),
+    DialogActionItem(
+      label: "취소",
+      buttonType: ButtonType.outlined,
+      backgroundColor: Colors.grey,
+      onTap: () {
+        print("취소 (다이얼로그 닫힘)");
+      },
+      autoDismiss: true, // 자동으로 닫힘
+    ),
+  ],
 )
 ```
 
@@ -418,6 +563,137 @@ CustomDialog.show(
   onConfirm: () {
     print("확인");
   },
+)
+```
+
+#### 자동 닫힘 제어 - 비동기 작업 후 수동으로 닫기
+
+```dart
+CustomDialog.show(
+  context,
+  title: "처리 중",
+  message: "작업을 수행한 후 자동으로 닫힙니다...",
+  type: DialogType.single,
+  autoDismissOnConfirm: false,
+  confirmText: "처리 시작",
+  onConfirm: () async {
+    // 비동기 작업 시뮬레이션
+    await Future.delayed(Duration(seconds: 2));
+    if (context.mounted) {
+      Navigator.pop(context);
+      // 완료 다이얼로그 표시
+      CustomDialog.show(
+        context,
+        title: "완료",
+        message: "작업이 완료되었습니다!",
+        type: DialogType.single,
+      );
+    }
+  },
+)
+```
+
+#### 커스텀 버튼 - 여러 버튼 사용
+
+```dart
+CustomDialog.show(
+  context,
+  title: "파일 관리",
+  message: "이 파일에 대해 어떤 작업을 하시겠습니까?",
+  customActions: [
+    DialogActionItem(
+      label: "저장",
+      backgroundColor: Colors.green,
+      minimumSize: Size(70, 40),
+      onTap: () {
+        print("저장");
+        Navigator.pop(context);
+        CustomDialog.show(
+          context,
+          title: "저장 완료",
+          message: "파일이 저장되었습니다.",
+          type: DialogType.single,
+        );
+      },
+    ),
+    DialogActionItem(
+      label: "수정",
+      backgroundColor: Colors.blue,
+      minimumSize: Size(70, 40),
+      onTap: () {
+        print("수정");
+      },
+    ),
+    DialogActionItem(
+      label: "삭제",
+      backgroundColor: Colors.red,
+      buttonType: ButtonType.outlined,
+      minimumSize: Size(70, 40),
+      onTap: () {
+        print("삭제");
+      },
+    ),
+    DialogActionItem(
+      label: "취소",
+      buttonType: ButtonType.outlined,
+      backgroundColor: Colors.grey,
+      minimumSize: Size(70, 40),
+      onTap: () {},
+    ),
+  ],
+)
+```
+
+#### 커스텀 버튼 - Widget 라벨 사용
+
+```dart
+CustomDialog.show(
+  context,
+  title: "선택",
+  message: "버튼 라벨에 아이콘을 포함할 수 있습니다.",
+  customActions: [
+    DialogActionItem(
+      label: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.save, color: Colors.white, size: 20),
+          SizedBox(width: 4),
+          CustomText("저장", fontSize: 16),
+        ],
+      ),
+      backgroundColor: Colors.green,
+      onTap: () {
+        print("저장");
+      },
+    ),
+    DialogActionItem(
+      label: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.delete, color: Colors.white, size: 20),
+          SizedBox(width: 4),
+          CustomText("삭제", fontSize: 16),
+        ],
+      ),
+      backgroundColor: Colors.red,
+      onTap: () {
+        print("삭제");
+      },
+    ),
+    DialogActionItem(
+      label: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.cancel, color: Colors.grey.shade700, size: 20),
+          SizedBox(width: 4),
+          CustomText("취소", fontSize: 16, color: Colors.grey.shade700),
+        ],
+      ),
+      buttonType: ButtonType.outlined,
+      backgroundColor: Colors.grey,
+      onTap: () {},
+    ),
+  ],
 )
 ```
 
