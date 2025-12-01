@@ -423,6 +423,104 @@ class _DialogPageState extends State<DialogPage> {
                 ],
               ),
 
+              // Dialog와 SnackBar 함께 사용 테스트
+              CustomColumn(
+                spacing: 12,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText(
+                    "Dialog와 SnackBar 함께 사용 테스트",
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: CustomButton(
+                      btnText: "Dialog 내부에서 SnackBar 표시 (fixed)",
+                      backgroundColor: Colors.deepPurple.shade300,
+                      onCallBack: () {
+                        CustomDialog.show(
+                          context,
+                          title: "SnackBar 테스트",
+                          message:
+                              "확인 버튼을 누르면 Dialog가 닫히지 않고 SnackBar가 표시됩니다.\nDialog는 수동으로 닫아야 합니다.",
+                          type: DialogType.dual,
+                          autoDismissOnConfirm: false,
+                          onConfirmWithContexts: (dialogContext, dialogScaffoldCtx) {
+                            // Dialog 내부 Scaffold의 context를 사용하여 SnackBar 표시
+                            // Dialog 위에 SnackBar가 표시됨 (자동으로 처리됨)
+                            // behavior: SnackBarBehavior.fixed (하단 고정, margin 사용 불가)
+                            CustomSnackBar.showSuccess(
+                              dialogScaffoldCtx,
+                              message:
+                                  "Dialog 내부에서 표시된 SnackBar (fixed - 하단 고정)",
+                              behavior: SnackBarBehavior.fixed,
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: CustomButton(
+                      btnText: "Dialog 내부에서 SnackBar 표시 (floating)",
+                      backgroundColor: Colors.deepPurple.shade400,
+                      onCallBack: () {
+                        CustomDialog.show(
+                          context,
+                          title: "SnackBar 테스트",
+                          message:
+                              "확인 버튼을 누르면 Dialog가 닫히지 않고 SnackBar가 표시됩니다.\nDialog는 수동으로 닫아야 합니다.",
+                          type: DialogType.dual,
+                          autoDismissOnConfirm: false,
+                          onConfirmWithContexts: (dialogContext, dialogScaffoldCtx) {
+                            // Dialog 내부 Scaffold의 context를 사용하여 SnackBar 표시
+                            // Dialog 위에 SnackBar가 표시됨 (자동으로 처리됨)
+                            // behavior: SnackBarBehavior.floating (공중에 떠있는 형태, margin 사용 가능)
+                            CustomSnackBar.showSuccess(
+                              dialogScaffoldCtx,
+                              message:
+                                  "Dialog 내부에서 표시된 SnackBar (floating - 공중에 떠있음)",
+                              behavior: SnackBarBehavior.floating,
+                              margin: const EdgeInsets.all(
+                                16,
+                              ), // floating에서만 사용 가능
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: CustomButton(
+                      btnText: "Dialog 닫은 후 SnackBar 표시 (기본 사용법)",
+                      backgroundColor: Colors.deepPurple.shade400,
+                      onCallBack: () async {
+                        // Dialog가 닫힌 후에 SnackBar 표시
+                        await CustomDialog.show(
+                          context,
+                          title: "SnackBar 테스트",
+                          message: "확인 버튼을 누르면 Dialog가 닫힌 후 SnackBar가 표시됩니다.",
+                          type: DialogType.dual,
+                          onConfirm: () {
+                            // Dialog는 자동으로 닫힘 (autoDismissOnConfirm: true)
+                          },
+                        );
+                        // Dialog가 닫힌 후에 SnackBar 표시 (기본 사용법)
+                        if (context.mounted) {
+                          CustomSnackBar.showSuccess(
+                            context,
+                            message: "Dialog 닫은 후 표시된 SnackBar (정상적으로 표시됨)",
+                          );
+                        }
+                      },
+                    ),
+                  ),
+                ],
+              ),
+
               // 커스텀 버튼 예시
               CustomColumn(
                 spacing: 12,
@@ -436,7 +534,7 @@ class _DialogPageState extends State<DialogPage> {
                   SizedBox(
                     width: double.infinity,
                     child: CustomButton(
-                      btnText: "3개 버튼 다이얼로그",
+                      btnText: "3개 버튼 다이얼로그 (세로 배치)",
                       backgroundColor: Colors.teal,
                       onCallBack: () {
                         CustomDialog.show(
@@ -467,6 +565,176 @@ class _DialogPageState extends State<DialogPage> {
                               onTap: () {
                                 print("취소 선택");
                               },
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: CustomButton(
+                      btnText: "3개 버튼 다이얼로그 (가로 배치 - DialogActionGroup)",
+                      backgroundColor: Colors.teal.shade700,
+                      onCallBack: () {
+                        CustomDialog.show(
+                          context,
+                          title: "작업 선택",
+                          message: "원하는 작업을 선택해주세요.",
+                          customActionGroups: [
+                            DialogActionGroup(
+                              actions: [
+                                DialogActionItem(
+                                  label: "저장",
+                                  backgroundColor: Colors.green,
+                                  onTap: () {
+                                    print("저장 선택");
+                                  },
+                                  autoDismiss: true,
+                                ),
+                                DialogActionItem(
+                                  label: "수정",
+                                  backgroundColor: Colors.blue,
+                                  onTap: () {
+                                    print("수정 선택");
+                                  },
+                                  autoDismiss: true,
+                                ),
+                                DialogActionItem(
+                                  label: "취소",
+                                  buttonType: ButtonType.outlined,
+                                  backgroundColor: Colors.grey,
+                                  onTap: () {
+                                    print("취소 선택");
+                                  },
+                                  autoDismiss: true,
+                                ),
+                              ],
+                              direction: Axis.horizontal,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              spacing: 8,
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: CustomButton(
+                      btnText: "그리드 배치 (Row + Column 혼합)",
+                      backgroundColor: Colors.teal.shade900,
+                      onCallBack: () {
+                        CustomDialog.show(
+                          context,
+                          title: "작업 선택",
+                          message: "원하는 작업을 선택해주세요.",
+                          customActionGroups: [
+                            // 첫 번째 행: 가로 배치
+                            DialogActionGroup(
+                              actions: [
+                                DialogActionItem(
+                                  label: "저장",
+                                  backgroundColor: Colors.green,
+                                  onTap: () {
+                                    print("저장 선택");
+                                  },
+                                  autoDismiss: true,
+                                ),
+                                DialogActionItem(
+                                  label: "수정",
+                                  backgroundColor: Colors.blue,
+                                  onTap: () {
+                                    print("수정 선택");
+                                  },
+                                  autoDismiss: true,
+                                ),
+                              ],
+                              direction: Axis.horizontal,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              spacing: 8,
+                            ),
+                            // 두 번째 행: 가로 배치
+                            DialogActionGroup(
+                              actions: [
+                                DialogActionItem(
+                                  label: "삭제",
+                                  backgroundColor: Colors.red,
+                                  onTap: () {
+                                    print("삭제 선택");
+                                  },
+                                  autoDismiss: true,
+                                ),
+                                DialogActionItem(
+                                  label: "취소",
+                                  buttonType: ButtonType.outlined,
+                                  backgroundColor: Colors.grey,
+                                  onTap: () {
+                                    print("취소 선택");
+                                  },
+                                  autoDismiss: true,
+                                ),
+                              ],
+                              direction: Axis.horizontal,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              spacing: 8,
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: CustomButton(
+                      btnText: "직접 위젯 전달 (actions 파라미터)",
+                      backgroundColor: Colors.indigo,
+                      onCallBack: () {
+                        CustomDialog.show(
+                          context,
+                          title: "작업 선택",
+                          message: "원하는 작업을 선택해주세요.",
+                          actions: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Expanded(
+                                  child: CustomButton(
+                                    btnText: "저장",
+                                    backgroundColor: Colors.green,
+                                    minimumSize: const Size(0, 40),
+                                    onCallBack: () {
+                                      print("저장 선택");
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: CustomButton(
+                                    btnText: "수정",
+                                    backgroundColor: Colors.blue,
+                                    minimumSize: const Size(0, 40),
+                                    onCallBack: () {
+                                      print("수정 선택");
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: CustomButton(
+                                    btnText: "취소",
+                                    buttonType: ButtonType.outlined,
+                                    backgroundColor: Colors.grey,
+                                    minimumSize: const Size(0, 40),
+                                    onCallBack: () {
+                                      print("취소 선택");
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         );
@@ -603,7 +871,11 @@ class _DialogPageState extends State<DialogPage> {
                               label: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Icon(Icons.save, color: Colors.white, size: 20),
+                                  Icon(
+                                    Icons.save,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
                                   const SizedBox(width: 4),
                                   CustomText("저장", fontSize: 16),
                                 ],
@@ -617,7 +889,11 @@ class _DialogPageState extends State<DialogPage> {
                               label: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Icon(Icons.delete, color: Colors.white, size: 20),
+                                  Icon(
+                                    Icons.delete,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
                                   const SizedBox(width: 4),
                                   CustomText("삭제", fontSize: 16),
                                 ],
@@ -631,9 +907,17 @@ class _DialogPageState extends State<DialogPage> {
                               label: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Icon(Icons.cancel, color: Colors.grey.shade700, size: 20),
+                                  Icon(
+                                    Icons.cancel,
+                                    color: Colors.grey.shade700,
+                                    size: 20,
+                                  ),
                                   const SizedBox(width: 4),
-                                  CustomText("취소", fontSize: 16, color: Colors.grey.shade700),
+                                  CustomText(
+                                    "취소",
+                                    fontSize: 16,
+                                    color: Colors.grey.shade700,
+                                  ),
                                 ],
                               ),
                               buttonType: ButtonType.outlined,

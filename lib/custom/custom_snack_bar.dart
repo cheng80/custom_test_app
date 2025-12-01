@@ -21,6 +21,7 @@ class CustomSnackBar {
     Color? backgroundColor,
     Color? textColor,
     SnackBarBehavior behavior = SnackBarBehavior.fixed,
+    EdgeInsetsGeometry? margin,
   }) {
     // message가 String인지 Widget인지 확인
     assert(
@@ -43,12 +44,16 @@ class CustomSnackBar {
       messageWidget = message as Widget;
     }
 
+    // 전달받은 context를 그대로 사용
+    // Dialog 내부에서 사용할 때는 원래 Scaffold의 context를 전달받아 사용
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: messageWidget,
         backgroundColor: backgroundColor ?? Colors.grey.shade800,
         duration: duration,
         behavior: behavior,
+        // margin은 floating에서만 사용 가능
+        margin: behavior == SnackBarBehavior.floating ? margin : null,
         action: actionLabel != null && onAction != null
             ? SnackBarAction(
                 label: actionLabel,
@@ -68,6 +73,7 @@ class CustomSnackBar {
     VoidCallback? onAction,
     Duration duration = const Duration(seconds: 3),
     SnackBarBehavior behavior = SnackBarBehavior.fixed,
+    EdgeInsetsGeometry? margin,
   }) {
     show(
       context,
@@ -78,6 +84,7 @@ class CustomSnackBar {
       backgroundColor: Colors.green,
       textColor: Colors.white,
       behavior: behavior,
+      margin: margin,
     );
   }
 
@@ -89,6 +96,7 @@ class CustomSnackBar {
     VoidCallback? onAction,
     Duration duration = const Duration(seconds: 4),
     SnackBarBehavior behavior = SnackBarBehavior.fixed,
+    EdgeInsetsGeometry? margin,
   }) {
     show(
       context,
@@ -99,6 +107,7 @@ class CustomSnackBar {
       backgroundColor: Colors.red,
       textColor: Colors.white,
       behavior: behavior,
+      margin: margin,
     );
   }
 
@@ -110,6 +119,7 @@ class CustomSnackBar {
     VoidCallback? onAction,
     Duration duration = const Duration(seconds: 3),
     SnackBarBehavior behavior = SnackBarBehavior.fixed,
+    EdgeInsetsGeometry? margin,
   }) {
     show(
       context,
@@ -120,6 +130,7 @@ class CustomSnackBar {
       backgroundColor: Colors.orange,
       textColor: Colors.white,
       behavior: behavior,
+      margin: margin,
     );
   }
 
@@ -131,6 +142,7 @@ class CustomSnackBar {
     VoidCallback? onAction,
     Duration duration = const Duration(seconds: 3),
     SnackBarBehavior behavior = SnackBarBehavior.fixed,
+    EdgeInsetsGeometry? margin,
   }) {
     show(
       context,
@@ -141,6 +153,7 @@ class CustomSnackBar {
       backgroundColor: Colors.blue,
       textColor: Colors.white,
       behavior: behavior,
+      margin: margin,
     );
   }
 }

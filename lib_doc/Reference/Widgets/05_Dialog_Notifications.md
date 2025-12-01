@@ -34,11 +34,13 @@ CustomDialog.show(
 | `onCancel`           | `VoidCallback?`          | `null`                     | 취소 버튼 클릭 시 콜백                 |
 | `autoDismissOnConfirm` | `bool`                 | `true`                     | 확인 버튼 클릭 시 자동으로 다이얼로그 닫기 여부 |
 | `autoDismissOnCancel` | `bool`                  | `true`                     | 취소 버튼 클릭 시 자동으로 다이얼로그 닫기 여부 |
-| `customActions`      | `List<DialogActionItem>?` | `null`                     | 커스텀 버튼 리스트 (여러 버튼 사용 시) |
+| `customActions`      | `List<DialogActionItem>?` | `null`                     | 커스텀 버튼 리스트 (세로 배치, 하위 호환성) |
+| `customActionGroups` | `List<DialogActionGroup>?` | `null`                     | 커스텀 버튼 그룹 리스트 (가로/세로 배치 자율성) |
+| `actions`            | `List<Widget>?`         | `null`                     | 직접 위젯 리스트 전달 (완전한 자율성) |
 | `barrierDismissible` | `bool`                   | `false`                    | 배경 탭으로 닫기 가능 여부             |
 | `backgroundColor`    | `Color?`                 | `Colors.white`             | 다이얼로그 배경색                      |
 | `borderRadius`       | `double?`                | `null`                     | 다이얼로그 모서리 둥글기               |
-| `actionsAlignment`   | `MainAxisAlignment`      | `MainAxisAlignment.center` | 버튼 정렬 방식                         |
+| `actionsAlignment`   | `MainAxisAlignment`      | `MainAxisAlignment.center` | 버튼 정렬 방식 (기본 버튼 2개일 때만 적용) |
 
 ### DialogType
 
@@ -62,6 +64,23 @@ CustomDialog.show(
 | `minimumSize`    | `Size?`         | `null`                   | 버튼 최소 크기                                    |
 | `borderRadius`   | `double?`       | `null`                   | 버튼 모서리 둥글기                                |
 | `autoDismiss`    | `bool`          | `true`                   | 버튼 클릭 시 다이얼로그가 자동으로 닫힐지 여부    |
+
+### DialogActionGroup
+
+버튼들을 그룹으로 묶어서 배치 방향을 지정할 수 있는 클래스입니다. Column과 Row를 섞어서 그리드처럼 배치할 수 있습니다.
+
+**속성:**
+
+| 속성             | 타입            | 기본값                   | 설명                                              |
+| ---------------- | --------------- | ------------------------ | ------------------------------------------------- |
+| `actions`        | `List<DialogActionItem>` | 필수                     | 이 그룹의 버튼들                                  |
+| `direction`      | `Axis`           | `Axis.vertical`           | 배치 방향 (horizontal: 가로, vertical: 세로)      |
+| `mainAxisAlignment` | `MainAxisAlignment` | `MainAxisAlignment.start` | 주축 정렬 방식                                    |
+| `crossAxisAlignment` | `CrossAxisAlignment` | `CrossAxisAlignment.stretch` | 교차축 정렬 방식                                |
+| `spacing`        | `double?`        | `null`                    | 버튼 간 간격                                      |
+
+**우선순위:**
+- `actions` (최우선) → `customActionGroups` → `customActions` (하위 호환)
 
 ### 사용 예시
 
@@ -257,16 +276,17 @@ SnackBar를 표시하는 정적 메서드입니다.
 
 **파라미터:**
 
-| 파라미터          | 타입               | 기본값                   | 설명                        |
-| ----------------- | ------------------ | ------------------------ | --------------------------- |
-| `context`         | `BuildContext`     | 필수                     | BuildContext                |
-| `message`         | `dynamic`          | 필수                     | 메시지 (String 또는 Widget) |
-| `actionLabel`     | `String?`          | `null`                   | 액션 버튼 라벨              |
-| `onAction`        | `VoidCallback?`    | `null`                   | 액션 버튼 클릭 시 콜백      |
-| `duration`        | `Duration`         | `Duration(seconds: 3)`   | 표시 시간                   |
-| `backgroundColor` | `Color?`           | `Colors.grey.shade800`   | 배경색                      |
-| `textColor`       | `Color?`           | `Colors.white`           | 텍스트 색상 (String인 경우) |
-| `behavior`        | `SnackBarBehavior` | `SnackBarBehavior.fixed` | SnackBar 동작 방식          |
+| 파라미터          | 타입                    | 기본값                   | 설명                                                      |
+| ----------------- | ----------------------- | ------------------------ | --------------------------------------------------------- |
+| `context`         | `BuildContext`          | 필수                     | BuildContext                                              |
+| `message`         | `dynamic`               | 필수                     | 메시지 (String 또는 Widget)                                |
+| `actionLabel`     | `String?`               | `null`                   | 액션 버튼 라벨                                            |
+| `onAction`        | `VoidCallback?`         | `null`                   | 액션 버튼 클릭 시 콜백                                    |
+| `duration`        | `Duration`              | `Duration(seconds: 3)`   | 표시 시간                                                 |
+| `backgroundColor` | `Color?`                | `Colors.grey.shade800`   | 배경색                                                    |
+| `textColor`       | `Color?`                | `Colors.white`           | 텍스트 색상 (String인 경우)                                |
+| `behavior`        | `SnackBarBehavior`      | `SnackBarBehavior.fixed` | SnackBar 동작 방식 (`fixed` 또는 `floating`)             |
+| `margin`          | `EdgeInsetsGeometry?`  | `null`                   | SnackBar 여백 (floating에서만 사용 가능)                  |
 
 #### `showSuccess`
 
@@ -340,6 +360,50 @@ CustomSnackBar.show(
   ),
   backgroundColor: Colors.green,
 )
+
+// behavior 옵션 사용
+CustomSnackBar.show(
+  context,
+  message: "메시지",
+  behavior: SnackBarBehavior.floating, // 공중에 떠있는 형태
+)
+
+// margin 사용 (floating에서만 가능)
+CustomSnackBar.show(
+  context,
+  message: "메시지",
+  behavior: SnackBarBehavior.floating,
+  margin: EdgeInsets.all(16), // 여백 설정
+)
+```
+
+### Dialog 내부에서 SnackBar 사용
+
+Dialog 내부에서 SnackBar를 표시할 때는 `CustomDialog`의 `onConfirmWithContexts` 콜백을 사용하여 Dialog 위에 SnackBar가 표시되도록 할 수 있습니다.
+
+```dart
+CustomDialog.show(
+  context,
+  title: "알림",
+  message: "확인 버튼을 누르면 SnackBar가 표시됩니다.",
+  type: DialogType.dual,
+  autoDismissOnConfirm: false,
+  onConfirmWithContexts: (dialogContext, dialogScaffoldCtx) {
+    // Dialog 내부 Scaffold의 context를 사용하여 SnackBar 표시
+    // Dialog 위에 SnackBar가 표시됨
+    CustomSnackBar.showSuccess(
+      dialogScaffoldCtx,
+      message: "Dialog 내부에서 표시된 SnackBar",
+      behavior: SnackBarBehavior.floating, // Dialog 위에 띄울 때는 floating 권장
+    );
+  },
+)
+```
+
+**주의사항:**
+- `margin`은 `SnackBarBehavior.floating`에서만 사용 가능합니다.
+- `SnackBarBehavior.fixed`에서는 `margin`을 사용할 수 없습니다.
+- Dialog 내부에서 SnackBar를 표시할 때는 `floating`을 사용하는 것이 깔끔합니다.
 ```
 
 ---
@@ -692,6 +756,164 @@ CustomDialog.show(
       buttonType: ButtonType.outlined,
       backgroundColor: Colors.grey,
       onTap: () {},
+    ),
+  ],
+)
+```
+
+#### 커스텀 버튼 그룹 - 가로 배치
+
+```dart
+CustomDialog.show(
+  context,
+  title: "작업 선택",
+  message: "원하는 작업을 선택해주세요.",
+  customActionGroups: [
+    DialogActionGroup(
+      actions: [
+        DialogActionItem(
+          label: "저장",
+          backgroundColor: Colors.green,
+          onTap: () {
+            print("저장 선택");
+          },
+          autoDismiss: true,
+        ),
+        DialogActionItem(
+          label: "수정",
+          backgroundColor: Colors.blue,
+          onTap: () {
+            print("수정 선택");
+          },
+          autoDismiss: true,
+        ),
+        DialogActionItem(
+          label: "취소",
+          buttonType: ButtonType.outlined,
+          backgroundColor: Colors.grey,
+          onTap: () {
+            print("취소 선택");
+          },
+          autoDismiss: true,
+        ),
+      ],
+      direction: Axis.horizontal,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      spacing: 8,
+    ),
+  ],
+)
+```
+
+#### 커스텀 버튼 그룹 - 그리드 배치 (Row + Column 혼합)
+
+```dart
+CustomDialog.show(
+  context,
+  title: "작업 선택",
+  message: "원하는 작업을 선택해주세요.",
+  customActionGroups: [
+    // 첫 번째 행: 가로 배치
+    DialogActionGroup(
+      actions: [
+        DialogActionItem(
+          label: "저장",
+          backgroundColor: Colors.green,
+          onTap: () {
+            print("저장 선택");
+          },
+          autoDismiss: true,
+        ),
+        DialogActionItem(
+          label: "수정",
+          backgroundColor: Colors.blue,
+          onTap: () {
+            print("수정 선택");
+          },
+          autoDismiss: true,
+        ),
+      ],
+      direction: Axis.horizontal,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      spacing: 8,
+    ),
+    // 두 번째 행: 가로 배치
+    DialogActionGroup(
+      actions: [
+        DialogActionItem(
+          label: "삭제",
+          backgroundColor: Colors.red,
+          onTap: () {
+            print("삭제 선택");
+          },
+          autoDismiss: true,
+        ),
+        DialogActionItem(
+          label: "취소",
+          buttonType: ButtonType.outlined,
+          backgroundColor: Colors.grey,
+          onTap: () {
+            print("취소 선택");
+          },
+          autoDismiss: true,
+        ),
+      ],
+      direction: Axis.horizontal,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      spacing: 8,
+    ),
+  ],
+)
+```
+
+#### 직접 위젯 전달 (actions 파라미터)
+
+```dart
+CustomDialog.show(
+  context,
+  title: "작업 선택",
+  message: "원하는 작업을 선택해주세요.",
+  actions: [
+    Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Expanded(
+          child: CustomButton(
+            btnText: "저장",
+            backgroundColor: Colors.green,
+            minimumSize: const Size(0, 40),
+            onCallBack: () {
+              print("저장 선택");
+              Navigator.pop(context);
+            },
+          ),
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          child: CustomButton(
+            btnText: "수정",
+            backgroundColor: Colors.blue,
+            minimumSize: const Size(0, 40),
+            onCallBack: () {
+              print("수정 선택");
+              Navigator.pop(context);
+            },
+          ),
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          child: CustomButton(
+            btnText: "취소",
+            buttonType: ButtonType.outlined,
+            backgroundColor: Colors.grey,
+            minimumSize: const Size(0, 40),
+            onCallBack: () {
+              print("취소 선택");
+              Navigator.pop(context);
+            },
+          ),
+        ),
+      ],
     ),
   ],
 )
