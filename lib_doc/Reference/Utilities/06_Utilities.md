@@ -1107,6 +1107,161 @@ class NetworkResponse<T> {
 
 ---
 
+## CustomAddressUtil
+
+위도/경도로 주소를 가져오는 유틸리티 클래스입니다. BigDataCloud Reverse Geocoding API를 사용하여 좌표로부터 주소 정보를 가져옵니다.
+
+### 주요 기능
+
+- 위도/경도로 직접 주소 가져오기 (API 자동 호출)
+- BigDataCloud API 응답 JSON을 파싱하여 주소 문자열 생성
+- 국가명 포함/제외 옵션
+- 커스텀 구분자 설정
+- 상세 주소 정보 추출
+- 강화된 예외 처리 (좌표 유효성 검증, 네트워크 타임아웃, 상세한 에러 메시지)
+- 타임아웃 설정 가능 (기본값: 10초)
+
+### 기본 사용법
+
+```dart
+import 'package:custom_test_app/custom/utils_core.dart';
+
+// 위도/경도로 주소 가져오기
+try {
+  final address = await CustomAddressUtil.getAddressFromCoordinates(37.497429, 127.127782);
+  print(address); // "대한민국 서울특별시 송파구 가락2동"
+} on AddressException catch (e) {
+  print('주소 가져오기 실패: ${e.message}');
+}
+```
+
+### 주요 메서드
+
+#### `getAddressFromCoordinates`
+
+위도와 경도를 받아서 BigDataCloud API를 호출하고 주소를 반환합니다.
+
+```dart
+static Future<String?> getAddressFromCoordinates(
+  double latitude,
+  double longitude, {
+  String language = 'ko',
+  String separator = " ",
+  bool includeCountry = true,
+  Duration? timeout,
+})
+```
+
+**파라미터:**
+- `latitude`: 위도 (-90 ~ 90)
+- `longitude`: 경도 (-180 ~ 180)
+- `language`: 언어 코드 (기본값: "ko" - 한국어)
+- `separator`: 주소 구성 요소 사이의 구분자 (기본값: " ")
+- `includeCountry`: 국가명 포함 여부 (기본값: true)
+- `timeout`: 요청 타임아웃 (기본값: 10초)
+
+**반환값:** 파싱된 주소 문자열 또는 `null`
+
+**예외:** `AddressException` - 좌표가 유효하지 않거나, 네트워크 오류, API 오류 발생 시
+
+#### `getSimpleAddressFromCoordinates`
+
+위도와 경도로 간단한 주소를 가져옵니다 (국가 제외).
+
+```dart
+static Future<String?> getSimpleAddressFromCoordinates(
+  double latitude,
+  double longitude, {
+  String language = 'ko',
+  Duration? timeout,
+})
+```
+
+#### `getAddressInfoFromCoordinates`
+
+위도와 경도로 상세 주소 정보를 가져옵니다.
+
+```dart
+static Future<Map<String, String?>?> getAddressInfoFromCoordinates(
+  double latitude,
+  double longitude, {
+  String language = 'ko',
+  Duration? timeout,
+})
+```
+
+**반환값:** 주소 정보가 담긴 Map
+- `countryName`: 국가명
+- `province`: 시/도
+- `city`: 시
+- `district`: 구/군
+- `locality`: 동/읍/면
+- `fullAddress`: 전체 주소
+
+#### `parseAddress`
+
+JSON 문자열을 파싱하여 주소 텍스트를 반환합니다.
+
+```dart
+static String? parseAddress(
+  String jsonString, {
+  String separator = " ",
+  bool includeCountry = true,
+})
+```
+
+### 예외 처리
+
+모든 API 호출 메서드는 `AddressException`을 던질 수 있습니다. 예외 코드로 오류 유형을 구분할 수 있습니다:
+
+- `INVALID_COORDINATE`: 유효하지 않은 좌표
+- `TIMEOUT`: API 요청 타임아웃
+- `NETWORK_ERROR`: 네트워크 연결 오류
+- `HTTP_ERROR`: HTTP 상태 코드 오류
+- `PARSE_ERROR`: JSON 파싱 오류
+- `DECODE_ERROR`: JSON 디코딩 오류
+- `INVALID_FORMAT`: 잘못된 JSON 형식
+- `EMPTY_JSON`: 빈 JSON 문자열
+- `NO_ADDRESS_DATA`: 주소 데이터 없음
+- `UNKNOWN_ERROR`: 알 수 없는 오류
+
+### 사용 예시
+
+```dart
+// 위도/경도로 주소 가져오기
+try {
+  final address = await CustomAddressUtil.getAddressFromCoordinates(37.497429, 127.127782);
+  print(address); // "대한민국 서울특별시 송파구 가락2동"
+} on AddressException catch (e) {
+  switch (e.code) {
+    case 'INVALID_COORDINATE':
+      print('좌표가 유효하지 않습니다.');
+      break;
+    case 'TIMEOUT':
+      print('요청 시간이 초과되었습니다.');
+      break;
+    case 'NETWORK_ERROR':
+      print('네트워크 연결을 확인해주세요.');
+      break;
+    default:
+      print('오류 발생: ${e.message}');
+  }
+}
+
+// 간단한 주소 (국가 제외)
+final simpleAddress = await CustomAddressUtil.getSimpleAddressFromCoordinates(37.497429, 127.127782);
+print(simpleAddress); // "서울특별시 송파구 가락2동"
+
+// 상세 주소 정보
+final addressInfo = await CustomAddressUtil.getAddressInfoFromCoordinates(37.497429, 127.127782);
+print(addressInfo?['district']); // "송파구"
+print(addressInfo?['fullAddress']); // "대한민국 서울특별시 송파구 가락2동"
+```
+
+자세한 내용은 [AddressUtil README](../../lib/custom/util/address/README.md)를 참고하세요.
+
+---
+
 ## 유틸리티 클래스 요약
 
 | 클래스                 | 위치                          | 의존성               | 주요 용도                                        |
@@ -1116,6 +1271,7 @@ class NetworkResponse<T> {
 | `CustomCollectionUtil` | `lib/common/util/collection/` | 없음                 | 리스트/맵 조작                                   |
 | `CustomTimerUtil`      | `lib/common/util/timer/`      | 없음                 | 타이머 관리, 코루틴 유사 기능                    |
 | `CustomJsonUtil`       | `lib/common/util/json/`       | 없음                 | JSON 변환                                        |
+| `CustomAddressUtil`    | `lib/custom/util/address/`    | `http`               | 위도/경도로 주소 가져오기                        |
 | `CustomNetworkUtil`    | `lib/custom/external_util/network/`    | `http`               | HTTP 통신                                        |
 
 ## 예제 페이지

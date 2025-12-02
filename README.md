@@ -70,6 +70,11 @@ lib/
             ├── custom_timer_util.dart
             ├── example.dart
             └── README.md
+        └── address/             # 주소 파싱 유틸리티 (http 필요)
+            ├── custom_address_util.dart
+            ├── example.dart
+            ├── example_page.dart
+            └── README.md
     └── external_util/            # 외부 의존성이 필요한 유틸리티
         ├── storage/               # 로컬 스토리지 유틸리티 (shared_preferences 필요)
         │   ├── custom_storage_util.dart
@@ -236,6 +241,20 @@ lib_doc/                           # 개발 문서
 
 **의존성**: 없음 (순수 Dart)
 
+### CustomAddressUtil
+
+위도/경도로 주소를 가져오는 유틸리티:
+
+- 위도/경도로 직접 주소 가져오기 (BigDataCloud API 자동 호출)
+- BigDataCloud API 응답 JSON을 파싱하여 주소 문자열 생성
+- 국가명 포함/제외 옵션
+- 커스텀 구분자 설정
+- 상세 주소 정보 추출 (국가, 시/도, 구, 동 등)
+- 강화된 예외 처리 (좌표 유효성 검증, 네트워크 타임아웃, 상세한 에러 메시지)
+- 타임아웃 설정 가능 (기본값: 10초)
+
+**의존성**: `http: ^1.1.0`
+
 ### CustomNetworkUtil
 
 HTTP 통신 유틸리티:
@@ -259,14 +278,14 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.8
   shared_preferences: ^2.2.2 # StorageUtil에서 사용
-  http: ^1.1.0 # NetworkUtil에서 사용
+  http: ^1.1.0 # NetworkUtil, AddressUtil에서 사용
 ```
 
 **참고**:
 
 - `flutter_localizations`는 DatePicker 및 CupertinoDatePicker의 다국어 지원을 위해 필요합니다.
 - `shared_preferences`는 StorageUtil 사용 시 필요합니다.
-- `http`는 NetworkUtil 사용 시 필요합니다.
+- `http`는 NetworkUtil 및 AddressUtil 사용 시 필요합니다.
 
 ## 🚀 시작하기
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../custom/util/address/example_page.dart';
 import '../custom/util/collection/example.dart';
 import '../custom/util/json/example.dart';
 import '../custom/util/timer/example.dart';
@@ -175,6 +176,41 @@ class UtilPage extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => const JsonUtilExamplePage(),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // AddressUtil 예제
+              CustomCard(
+                padding: const EdgeInsets.all(16),
+                child: CustomColumn(
+                  spacing: 12,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomText(
+                      'AddressUtil',
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    CustomText(
+                      '위도/경도로 주소 가져오기 유틸리티 (BigDataCloud API)',
+                      fontSize: 14,
+                      color: Colors.grey[700]!,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: CustomButton(
+                        btnText: '예제 보기',
+                        onCallBack: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const AddressUtilExamplePage(),
                             ),
                           );
                         },

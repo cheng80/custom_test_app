@@ -31,3 +31,6 @@ export 'util/json/custom_json_util.dart';
 
 /// 타이머 유틸리티 (순수 Dart, 의존성 없음)
 export 'util/timer/custom_timer_util.dart';
+
+/// 주소 파싱 유틸리티 (순수 Dart, 의존성 없음)
+export 'util/address/custom_address_util.dart';
