@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'custom/custom.dart';
 import 'pages/bottom_sheet_page.dart';
 import 'pages/dialog_page.dart';
@@ -667,6 +670,180 @@ class _HomeState extends State<Home> {
 
               const SizedBox(height: 16),
 
+              // File 이미지 예시 섹션
+              CustomCard(
+                padding: const EdgeInsets.all(20),
+                child: CustomColumn(
+                  spacing: 16,
+                  children: [
+                    CustomText(
+                      "📁 File 이미지 예시",
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    CustomText(
+                      "CustomImage.file()을 사용한 파일 이미지 표시 예시",
+                      fontSize: 14,
+                      color: Colors.grey.shade600,
+                    ),
+                    CustomText(
+                      "File 이미지는 디바이스의 파일 시스템에서 이미지를 로드합니다.",
+                      fontSize: 12,
+                      color: Colors.grey.shade500,
+                    ),
+                    const SizedBox(height: 8),
+                    // File 이미지 예시
+                    CustomRow(
+                      spacing: 12,
+                      children: [
+                        Expanded(
+                          child: _buildFileImageExample(
+                            "bee.png",
+                            "예시 1: File 이미지",
+                            "CustomImage.file() 사용",
+                          ),
+                        ),
+                        Expanded(
+                          child: _buildFileImageExample(
+                            "cat.png",
+                            "예시 2: 크기 지정",
+                            "width, height 지정",
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    CustomContainer(
+                      padding: const EdgeInsets.all(12),
+                      backgroundColor: Colors.blue.shade50,
+                      borderRadius: 8,
+                      child: CustomColumn(
+                        spacing: 8,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomText(
+                            "💡 사용 방법",
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue.shade900,
+                          ),
+                          CustomText(
+                            "// File 이미지 사용\n"
+                            "final imageFile = File('images/bee.png');\n"
+                            "CustomImage.file(imageFile)\n\n"
+                            "// 크기 지정\n"
+                            "CustomImage.file(\n"
+                            "  File('images/cat.png'),\n"
+                            "  width: 100,\n"
+                            "  height: 100,\n"
+                            "  fit: BoxFit.cover,\n"
+                            ")",
+                            fontSize: 12,
+                            color: Colors.blue.shade800,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 16),
+
+              // Memory 이미지 예시 섹션
+              CustomCard(
+                padding: const EdgeInsets.all(20),
+                child: CustomColumn(
+                  spacing: 16,
+                  children: [
+                    CustomText(
+                      "💾 Memory 이미지 예시",
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    CustomText(
+                      "CustomImage.memory()을 사용한 메모리 이미지 표시 예시",
+                      fontSize: 14,
+                      color: Colors.grey.shade600,
+                    ),
+                    CustomText(
+                      "Memory 이미지는 바이트 데이터(Uint8List)로부터 이미지를 로드합니다.",
+                      fontSize: 12,
+                      color: Colors.grey.shade500,
+                    ),
+                    const SizedBox(height: 8),
+                    // Memory 이미지 예시
+                    FutureBuilder<Uint8List?>(
+                      future: _loadImageAsBytes("images/cow.png"),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return const Center(child: CircularProgressIndicator());
+                        }
+                        if (snapshot.hasData && snapshot.data != null) {
+                          return CustomRow(
+                            spacing: 12,
+                            children: [
+                              Expanded(
+                                child: _buildMemoryImageExample(
+                                  snapshot.data!,
+                                  "예시 1: Memory 이미지",
+                                  "CustomImage.memory() 사용",
+                                ),
+                              ),
+                              Expanded(
+                                child: _buildMemoryImageExample(
+                                  snapshot.data!,
+                                  "예시 2: 크기 지정",
+                                  "width, height 지정",
+                                ),
+                              ),
+                            ],
+                          );
+                        }
+                        return CustomText(
+                          "이미지를 로드할 수 없습니다",
+                          fontSize: 12,
+                          color: Colors.grey.shade600,
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 8),
+                    CustomContainer(
+                      padding: const EdgeInsets.all(12),
+                      backgroundColor: Colors.purple.shade50,
+                      borderRadius: 8,
+                      child: CustomColumn(
+                        spacing: 8,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomText(
+                            "💡 사용 방법",
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.purple.shade900,
+                          ),
+                          CustomText(
+                            "// Memory 이미지 사용\n"
+                            "CustomImage.memory(imageBytes)\n\n"
+                            "// 크기 지정\n"
+                            "CustomImage.memory(\n"
+                            "  imageBytes,\n"
+                            "  width: 100,\n"
+                            "  height: 100,\n"
+                            "  fit: BoxFit.cover,\n"
+                            ")",
+                            fontSize: 12,
+                            color: Colors.purple.shade800,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 16),
+
               // 복합 레이아웃 예시
               CustomCard(
                 padding: const EdgeInsets.all(20),
@@ -889,6 +1066,142 @@ class _HomeState extends State<Home> {
           fontSize: 14,
           fontWeight: FontWeight.w500,
           textAlign: TextAlign.center,
+        ),
+      ],
+    );
+  }
+
+  /// 이미지를 바이트 데이터로 로드하는 헬퍼 메서드
+  Future<Uint8List?> _loadImageAsBytes(String imagePath) async {
+    try {
+      final projectRoot = Directory.current.path;
+      final imageFile = File('$projectRoot/$imagePath');
+      if (await imageFile.exists()) {
+        return await imageFile.readAsBytes();
+      }
+    } catch (e) {
+      // 에러 발생 시 null 반환
+    }
+    return null;
+  }
+
+  /// Memory 이미지 예시를 생성하는 헬퍼 메서드
+  Widget _buildMemoryImageExample(Uint8List imageBytes, String title, String description) {
+    return CustomColumn(
+      spacing: 8,
+      children: [
+        AspectRatio(
+          aspectRatio: 1.0,
+          child: CustomCard(
+            padding: EdgeInsets.zero,
+            borderRadius: 12,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: CustomImage.memory(
+                imageBytes,
+                fit: BoxFit.cover,
+                errorWidget: Container(
+                  color: Colors.grey.shade200,
+                  child: CustomColumn(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    spacing: 8,
+                    children: [
+                      Icon(
+                        Icons.broken_image,
+                        size: 40,
+                        color: Colors.grey.shade400,
+                      ),
+                      CustomText(
+                        "이미지를 표시할 수 없습니다",
+                        fontSize: 12,
+                        color: Colors.grey.shade600,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        CustomColumn(
+          spacing: 4,
+          children: [
+            CustomText(
+              title,
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              textAlign: TextAlign.center,
+            ),
+            CustomText(
+              description,
+              fontSize: 10,
+              color: Colors.grey.shade600,
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  /// File 이미지 예시를 생성하는 헬퍼 메서드
+  Widget _buildFileImageExample(String imageFileName, String title, String description) {
+    // 프로젝트 루트의 images 폴더 경로 사용
+    final projectRoot = Directory.current.path;
+    final imageFile = File('$projectRoot/images/$imageFileName');
+    
+    return CustomColumn(
+      spacing: 8,
+      children: [
+        AspectRatio(
+          aspectRatio: 1.0,
+          child: CustomCard(
+            padding: EdgeInsets.zero,
+            borderRadius: 12,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: CustomImage.file(
+                imageFile,
+                fit: BoxFit.cover,
+                errorWidget: Container(
+                  color: Colors.grey.shade200,
+                  child: CustomColumn(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    spacing: 8,
+                    children: [
+                      Icon(
+                        Icons.broken_image,
+                        size: 40,
+                        color: Colors.grey.shade400,
+                      ),
+                      CustomText(
+                        "이미지를 찾을 수 없습니다",
+                        fontSize: 12,
+                        color: Colors.grey.shade600,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        CustomColumn(
+          spacing: 4,
+          children: [
+            CustomText(
+              title,
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              textAlign: TextAlign.center,
+            ),
+            CustomText(
+              description,
+              fontSize: 10,
+              color: Colors.grey.shade600,
+              textAlign: TextAlign.center,
+            ),
+          ],
         ),
       ],
     );

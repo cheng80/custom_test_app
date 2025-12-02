@@ -131,19 +131,28 @@ CustomContainer(
 
 ## CustomImage
 
-이미지를 표시하는 커스텀 위젯입니다.
+이미지를 표시하는 커스텀 위젯입니다. Asset 이미지, File 이미지, Memory 이미지를 모두 지원합니다.
 
 ### 기본 사용법
 
 ```dart
+// Asset 이미지 사용
 CustomImage("images/logo.png")
+
+// File 이미지 사용
+CustomImage.file(File("/path/to/image.png"))
+
+// Memory 이미지 사용
+CustomImage.memory(Uint8List.fromList([...]))
 ```
 
 ### 주요 속성
 
 | 속성             | 타입                 | 기본값                 | 설명                            |
 | ---------------- | -------------------- | ---------------------- | ------------------------------- |
-| `path`           | `String`             | 필수                   | 이미지 경로                     |
+| `path`           | `String?`            | Asset 이미지 사용 시 필수 | 이미지 경로 (Asset 이미지)     |
+| `file`           | `File?`              | File 이미지 사용 시 필수 | 이미지 파일 (File 이미지)      |
+| `bytes`          | `Uint8List?`         | Memory 이미지 사용 시 필수 | 이미지 바이트 데이터 (Memory 이미지) |
 | `width`          | `double?`            | `null`                 | 이미지 너비                     |
 | `height`         | `double?`            | `null`                 | 이미지 높이                     |
 | `fit`            | `BoxFit?`            | `BoxFit.contain`       | 이미지 크기 조정 방식           |
@@ -155,6 +164,8 @@ CustomImage("images/logo.png")
 | `alignment`      | `AlignmentGeometry?` | `Alignment.center`     | 이미지 정렬 방식                |
 
 ### 사용 예시
+
+#### Asset 이미지
 
 ```dart
 // 기본 사용
@@ -179,6 +190,97 @@ CustomImage(
 CustomImage(
   "images/logo.png",
   errorWidget: Icon(Icons.broken_image, size: 50),
+)
+```
+
+#### File 이미지
+
+```dart
+import 'dart:io';
+
+// 기본 사용
+CustomImage.file(File("/path/to/image.png"))
+
+// 크기 지정
+CustomImage.file(
+  File("/path/to/image.png"),
+  width: 100,
+  height: 100,
+)
+
+// fit 지정
+CustomImage.file(
+  File("/path/to/image.png"),
+  width: 200,
+  height: 200,
+  fit: BoxFit.cover,
+)
+
+// 에러 처리
+CustomImage.file(
+  File("/path/to/image.png"),
+  errorWidget: Icon(Icons.broken_image, size: 50),
+)
+
+// 갤러리에서 선택한 이미지 표시
+File? selectedImage = await pickImageFromGallery();
+if (selectedImage != null) {
+  CustomImage.file(
+    selectedImage,
+    width: 200,
+    height: 200,
+    fit: BoxFit.cover,
+  )
+}
+```
+
+#### Memory 이미지
+
+```dart
+import 'dart:typed_data';
+
+// 기본 사용
+CustomImage.memory(Uint8List.fromList([...]))
+
+// 크기 지정
+CustomImage.memory(
+  imageBytes,
+  width: 100,
+  height: 100,
+)
+
+// fit 지정
+CustomImage.memory(
+  imageBytes,
+  width: 200,
+  height: 200,
+  fit: BoxFit.cover,
+)
+
+// 에러 처리
+CustomImage.memory(
+  imageBytes,
+  errorWidget: Icon(Icons.broken_image, size: 50),
+)
+
+// 네트워크에서 다운로드한 이미지 표시
+final response = await http.get(Uri.parse('https://example.com/image.png'));
+if (response.statusCode == 200) {
+  CustomImage.memory(
+    response.bodyBytes,
+    width: 200,
+    height: 200,
+    fit: BoxFit.cover,
+  )
+}
+
+// File을 Memory로 변환하여 표시
+File imageFile = File('/path/to/image.png');
+Uint8List imageBytes = await imageFile.readAsBytes();
+CustomImage.memory(
+  imageBytes,
+  width: 200,
+  height: 200,
 )
 ```
 
@@ -282,7 +384,7 @@ CustomContainer(
 
 ### CustomImage 실전 예제
 
-#### 크기 지정 및 fit
+#### Asset 이미지 - 크기 지정 및 fit
 
 ```dart
 CustomImage(
@@ -293,7 +395,7 @@ CustomImage(
 )
 ```
 
-#### 에러 및 로딩 처리
+#### Asset 이미지 - 에러 및 로딩 처리
 
 ```dart
 CustomImage(
@@ -301,6 +403,89 @@ CustomImage(
   errorWidget: Icon(Icons.broken_image, size: 50),
   loadingWidget: CircularProgressIndicator(),
 )
+```
+
+#### File 이미지 - 갤러리에서 선택한 이미지 표시
+
+```dart
+import 'dart:io';
+
+// 갤러리에서 이미지 선택 후 표시
+File? selectedImage = await pickImageFromGallery();
+if (selectedImage != null) {
+  CustomImage.file(
+    selectedImage,
+    width: 200,
+    height: 200,
+    fit: BoxFit.cover,
+    errorWidget: Icon(Icons.broken_image, size: 50),
+    loadingWidget: CircularProgressIndicator(),
+  )
+}
+```
+
+#### File 이미지 - 다운로드한 이미지 표시
+
+```dart
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
+
+// 이미지 다운로드 후 표시
+Future<void> displayDownloadedImage() async {
+  final directory = await getApplicationDocumentsDirectory();
+  final imageFile = File('${directory.path}/downloaded_image.png');
+  
+  if (await imageFile.exists()) {
+    CustomImage.file(
+      imageFile,
+      width: 300,
+      height: 300,
+      fit: BoxFit.contain,
+    )
+  }
+}
+```
+
+#### Memory 이미지 - 네트워크에서 다운로드한 이미지 표시
+
+```dart
+import 'dart:typed_data';
+import 'package:http/http.dart' as http;
+
+// 네트워크에서 이미지 다운로드 후 표시
+Future<void> displayNetworkImage() async {
+  final response = await http.get(Uri.parse('https://example.com/image.png'));
+  if (response.statusCode == 200) {
+    CustomImage.memory(
+      response.bodyBytes,
+      width: 300,
+      height: 300,
+      fit: BoxFit.cover,
+      errorWidget: Icon(Icons.broken_image, size: 50),
+    )
+  }
+}
+```
+
+#### Memory 이미지 - File을 Memory로 변환하여 표시
+
+```dart
+import 'dart:io';
+import 'dart:typed_data';
+
+// File을 Memory로 변환하여 표시
+Future<void> displayFileAsMemory() async {
+  File imageFile = File('/path/to/image.png');
+  if (await imageFile.exists()) {
+    Uint8List imageBytes = await imageFile.readAsBytes();
+    CustomImage.memory(
+      imageBytes,
+      width: 300,
+      height: 300,
+      fit: BoxFit.cover,
+    )
+  }
+}
 ```
 
 ### CustomIconButton 실전 예제
