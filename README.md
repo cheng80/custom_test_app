@@ -73,7 +73,6 @@ lib/
         └── address/             # 주소 파싱 유틸리티 (http 필요)
             ├── custom_address_util.dart
             ├── example.dart
-            ├── example_page.dart
             └── README.md
     └── external_util/            # 외부 의존성이 필요한 유틸리티
         ├── storage/               # 로컬 스토리지 유틸리티 (shared_preferences 필요)
@@ -97,6 +96,7 @@ lib/
 │   ├── navigation_widgets_page.dart  # FloatingActionButton, Drawer 예제
 │   ├── storage_page.dart         # StorageUtil 예제
 │   ├── network_page.dart         # NetworkUtil 예제
+│   ├── address_page.dart         # AddressUtil 예제
 │   └── util_page.dart            # 유틸리티 예제
 ├── home.dart                     # 메인 홈 화면 (모든 위젯 예제)
 └── main.dart                     # 앱 진입점
