@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../custom/util/address/example_page.dart';
+import 'address_page.dart';
 import '../custom/util/collection/example.dart';
 import '../custom/util/json/example.dart';
 import '../custom/util/timer/example.dart';
@@ -210,7 +210,7 @@ class UtilPage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const AddressUtilExamplePage(),
+                              builder: (context) => const AddressPage(),
                             ),
                           );
                         },

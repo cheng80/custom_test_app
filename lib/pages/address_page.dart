@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'custom_address_util.dart';
-import '../../widgets.dart';
+
+import '../custom/util/address/custom_address_util.dart';
+import '../custom/widgets.dart';
 
 /// AddressUtil 사용 예제 페이지
-class AddressUtilExamplePage extends StatefulWidget {
-  const AddressUtilExamplePage({super.key});
+class AddressPage extends StatefulWidget {
+  const AddressPage({super.key});
 
   @override
-  State<AddressUtilExamplePage> createState() => _AddressUtilExamplePageState();
+  State<AddressPage> createState() => _AddressPageState();
 }
 
-class _AddressUtilExamplePageState extends State<AddressUtilExamplePage> {
+class _AddressPageState extends State<AddressPage> {
   // 각 예제별 결과와 로딩 상태
   String _result1 = ''; // 위도/경도로 주소 가져오기
   String _result2 = ''; // 간단한 주소 가져오기
