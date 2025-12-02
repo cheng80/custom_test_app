@@ -495,6 +495,160 @@ CustomSlider(
 
 ---
 
+## CustomRating
+
+별점 위젯입니다. 사용자가 별을 클릭하여 점수를 선택할 수 있습니다.
+
+### 기본 사용법
+
+```dart
+CustomRating(
+  rating: _rating,
+  onRatingChanged: (rating) {
+    setState(() {
+      _rating = rating;
+    });
+  },
+)
+```
+
+### 주요 속성
+
+| 속성              | 타입                    | 기본값              | 설명                      |
+| ----------------- | ----------------------- | ------------------- | ------------------------- |
+| `rating`          | `double`                | 필수                | 현재 점수 (0~maxRating)   |
+| `onRatingChanged` | `ValueChanged<double>?`  | `null`              | 점수 변경 시 호출되는 콜백 |
+| `maxRating`       | `int`                   | `5`                 | 최대 별 개수              |
+| `readOnly`        | `bool`                  | `false`             | 읽기 전용 여부            |
+| `starSize`        | `double`                | `24.0`              | 별 크기                  |
+| `filledColor`     | `Color`                 | `Colors.amber`      | 채워진 별 색상            |
+| `unfilledColor`   | `Color`                 | `Colors.grey`       | 비어있는 별 색상          |
+| `starSpacing`     | `double`                | `4.0`               | 별 사이 간격              |
+| `filledIcon`      | `IconData`              | `Icons.star`        | 채워진 아이콘             |
+| `unfilledIcon`    | `IconData`              | `Icons.star_border` | 비어있는 아이콘           |
+
+### 사용 예시
+
+```dart
+// 기본 사용
+CustomRating(
+  rating: _rating,
+  onRatingChanged: (rating) {
+    setState(() {
+      _rating = rating;
+    });
+  },
+)
+
+// 읽기 전용 모드
+CustomRating(
+  rating: 4.0,
+  readOnly: true,
+)
+
+// 커스터마이징
+CustomRating(
+  rating: _rating,
+  onRatingChanged: (rating) => setState(() => _rating = rating),
+  maxRating: 5,
+  starSize: 32.0,
+  filledColor: Colors.orange,
+  unfilledColor: Colors.grey.shade300,
+  starSpacing: 8.0,
+)
+
+// 다양한 아이콘 사용
+// 하트 아이콘
+CustomRating(
+  rating: _rating,
+  onRatingChanged: (rating) => setState(() => _rating = rating),
+  filledIcon: Icons.favorite,
+  unfilledIcon: Icons.favorite_border,
+  filledColor: Colors.red,
+  unfilledColor: Colors.grey.shade300,
+)
+
+// 좋아요 아이콘
+CustomRating(
+  rating: _rating,
+  onRatingChanged: (rating) => setState(() => _rating = rating),
+  filledIcon: Icons.thumb_up,
+  unfilledIcon: Icons.thumb_up_outlined,
+  filledColor: Colors.blue,
+  unfilledColor: Colors.grey.shade300,
+)
+
+// 다이아몬드 아이콘
+CustomRating(
+  rating: _rating,
+  onRatingChanged: (rating) => setState(() => _rating = rating),
+  filledIcon: Icons.diamond,
+  unfilledIcon: Icons.diamond_outlined,
+  filledColor: Colors.cyan,
+  unfilledColor: Colors.grey.shade300,
+)
+```
+
+### TextField와 함께 사용 (리뷰 작성 예제)
+
+```dart
+final TextEditingController _commentController = TextEditingController();
+double _rating = 0.0;
+
+CustomCard(
+  padding: const EdgeInsets.all(16),
+  child: CustomColumn(
+    spacing: 12,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      CustomText(
+        "리뷰 작성",
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+      ),
+      CustomText(
+        "별점을 선택해주세요",
+        fontSize: 14,
+        color: Colors.grey.shade600,
+      ),
+      CustomRating(
+        rating: _rating,
+        onRatingChanged: (rating) {
+          setState(() {
+            _rating = rating;
+          });
+        },
+        starSize: 28.0,
+      ),
+      if (_rating > 0)
+        CustomText(
+          "선택된 점수: $_rating / 5",
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+          color: Colors.amber.shade700,
+        ),
+      const SizedBox(height: 8),
+      CustomTextField(
+        controller: _commentController,
+        labelText: "리뷰 내용",
+        hintText: "리뷰를 작성해주세요",
+        maxLines: 3,
+      ),
+      if (_rating > 0 && _commentController.text.isNotEmpty)
+        CustomButton(
+          btnText: "리뷰 제출",
+          backgroundColor: Colors.green,
+          onCallBack: () {
+            print("별점: $_rating, 리뷰: ${_commentController.text}");
+          },
+        ),
+    ],
+  ),
+)
+```
+
+---
+
 ## 실전 예제
 
 ### CustomTextField 실전 예제

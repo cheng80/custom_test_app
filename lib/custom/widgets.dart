@@ -81,6 +81,9 @@ export 'custom_radio.dart';
 /// Slider 위젯
 export 'custom_slider.dart';
 
+/// Rating 위젯
+export 'custom_rating.dart';
+
 /// CupertinoDatePicker 위젯
 export 'custom_cupertino_date_picker.dart';
 

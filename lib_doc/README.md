@@ -8,7 +8,7 @@
 
 - [기본 위젯](./Reference/Widgets/01_Basic_Widgets.md) - Text, Button, Column, Row, Padding 등
 - [레이아웃 위젯](./Reference/Widgets/02_Layout_Widgets.md) - Card, Container, Image, GridView, ExpansionTile, Chip, ProgressIndicator, RefreshIndicator 등
-- [입력 위젯](./Reference/Widgets/03_Input_Widgets.md) - TextField, Switch, Checkbox, Radio, Slider, DropdownButton 등
+- [입력 위젯](./Reference/Widgets/03_Input_Widgets.md) - TextField, Switch, Checkbox, Radio, Slider, Rating, DropdownButton 등
 - [네비게이션 위젯](./Reference/Widgets/04_Navigation_Widgets.md) - AppBar, BottomNavBar, TabBar, FloatingActionButton, Drawer 등
 - [다이얼로그 및 알림](./Reference/Widgets/05_Dialog_Notifications.md) - Dialog, SnackBar, ActionSheet, BottomSheet
 
@@ -164,5 +164,11 @@ CustomFloatingActionButton(
 // Drawer
 CustomDrawer(
   items: [DrawerItem(label: "홈", icon: Icons.home, onTap: () {})],
+)
+
+// Rating
+CustomRating(
+  rating: _rating,
+  onRatingChanged: (rating) => setState(() => _rating = rating),
 )
 ```

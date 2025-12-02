@@ -27,8 +27,17 @@ class _HomeState extends State<Home> {
   bool? _checkboxValue = false;
   String? _radioValue;
   double _sliderValue = 50.0;
+  double _rating = 0.0;
+  final TextEditingController _ratingCommentController =
+      TextEditingController();
   String? _selectedDropdownValue;
   final List<String> _dropdownItems = ['선택 1', '선택 2', '선택 3', '선택 4'];
+
+  @override
+  void dispose() {
+    _ratingCommentController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -601,6 +610,218 @@ class _HomeState extends State<Home> {
                         ),
                       ],
                     ),
+                    const Divider(),
+                    // Rating 예시
+                    CustomColumn(
+                      spacing: 12,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          "Rating",
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        CustomText(
+                          "별을 클릭하여 점수를 선택할 수 있습니다",
+                          fontSize: 14,
+                          color: Colors.grey.shade600,
+                        ),
+                        CustomRating(
+                          rating: _rating,
+                          onRatingChanged: (rating) {
+                            setState(() {
+                              _rating = rating;
+                            });
+                          },
+                        ),
+                        if (_rating > 0)
+                          CustomText(
+                            "선택된 점수: $_rating / 5",
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.amber.shade700,
+                          ),
+                        const SizedBox(height: 8),
+                        CustomText(
+                          "커스터마이징 예시",
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        CustomRating(
+                          rating: _rating,
+                          onRatingChanged: (rating) {
+                            setState(() {
+                              _rating = rating;
+                            });
+                          },
+                          starSize: 32.0,
+                          filledColor: Colors.orange,
+                          unfilledColor: Colors.grey.shade300,
+                          starSpacing: 8.0,
+                        ),
+                        const SizedBox(height: 8),
+                        CustomText(
+                          "읽기 전용 모드",
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        CustomRating(
+                          rating: 4.0,
+                          readOnly: true,
+                          starSize: 28.0,
+                        ),
+                        const SizedBox(height: 16),
+                        CustomText(
+                          "입력 예제 (TextField와 함께 사용)",
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        CustomCard(
+                          padding: const EdgeInsets.all(16),
+                          child: CustomColumn(
+                            spacing: 12,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomText(
+                                "리뷰 작성",
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              CustomText(
+                                "별점을 선택해주세요",
+                                fontSize: 14,
+                                color: Colors.grey.shade600,
+                              ),
+                              CustomRating(
+                                rating: _rating,
+                                onRatingChanged: (rating) {
+                                  setState(() {
+                                    _rating = rating;
+                                  });
+                                },
+                                starSize: 28.0,
+                              ),
+                              if (_rating > 0)
+                                CustomText(
+                                  "선택된 점수: $_rating / 5",
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.amber.shade700,
+                                ),
+                              const SizedBox(height: 8),
+                              CustomTextField(
+                                controller: _ratingCommentController,
+                                labelText: "리뷰 내용",
+                                hintText: "리뷰를 작성해주세요",
+                                maxLines: 3,
+                                onChanged: (value) {
+                                  // 리뷰 내용 변경 시 처리
+                                },
+                              ),
+                              if (_rating > 0 &&
+                                  _ratingCommentController.text.isNotEmpty)
+                                CustomButton(
+                                  btnText: "리뷰 제출",
+                                  backgroundColor: Colors.green,
+                                  onCallBack: () {
+                                    // 리뷰 제출 로직
+                                    print(
+                                      "별점: $_rating, 리뷰: ${_ratingCommentController.text}",
+                                    );
+                                  },
+                                ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        CustomText(
+                          "다양한 아이콘 버전",
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        CustomText(
+                          "별 이외의 아이콘도 사용할 수 있습니다",
+                          fontSize: 12,
+                          color: Colors.grey.shade600,
+                        ),
+                        const SizedBox(height: 8),
+                        CustomColumn(
+                          spacing: 12,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomText(
+                              "하트 아이콘",
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            CustomRating(
+                              rating: _rating,
+                              onRatingChanged: (rating) {
+                                setState(() {
+                                  _rating = rating;
+                                });
+                              },
+                              filledIcon: Icons.favorite,
+                              unfilledIcon: Icons.favorite_border,
+                              filledColor: Colors.red,
+                              unfilledColor: Colors.grey.shade300,
+                              starSize: 28.0,
+                            ),
+                            CustomText(
+                              "좋아요 아이콘",
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            CustomRating(
+                              rating: _rating,
+                              onRatingChanged: (rating) {
+                                setState(() {
+                                  _rating = rating;
+                                });
+                              },
+                              filledIcon: Icons.thumb_up,
+                              unfilledIcon: Icons.thumb_up_outlined,
+                              filledColor: Colors.blue,
+                              unfilledColor: Colors.grey.shade300,
+                              starSize: 28.0,
+                            ),
+                            CustomText(
+                              "다이아몬드 아이콘",
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            CustomRating(
+                              rating: _rating,
+                              onRatingChanged: (rating) {
+                                setState(() {
+                                  _rating = rating;
+                                });
+                              },
+                              filledIcon: Icons.diamond,
+                              unfilledIcon: Icons.diamond_outlined,
+                              filledColor: Colors.cyan,
+                              unfilledColor: Colors.grey.shade300,
+                              starSize: 28.0,
+                            ),
+                            CustomText(
+                              "불꽃 아이콘 (읽기 전용)",
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            CustomRating(
+                              rating: 4.0,
+                              readOnly: true,
+                              filledIcon: Icons.local_fire_department,
+                              unfilledIcon:
+                                  Icons.local_fire_department_outlined,
+                              filledColor: Colors.orange,
+                              unfilledColor: Colors.grey.shade300,
+                              starSize: 28.0,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
@@ -776,8 +997,11 @@ class _HomeState extends State<Home> {
                     FutureBuilder<Uint8List?>(
                       future: _loadImageAsBytes("images/cow.png"),
                       builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.waiting) {
-                          return const Center(child: CircularProgressIndicator());
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
                         }
                         if (snapshot.hasData && snapshot.data != null) {
                           return CustomRow(
@@ -1086,7 +1310,11 @@ class _HomeState extends State<Home> {
   }
 
   /// Memory 이미지 예시를 생성하는 헬퍼 메서드
-  Widget _buildMemoryImageExample(Uint8List imageBytes, String title, String description) {
+  Widget _buildMemoryImageExample(
+    Uint8List imageBytes,
+    String title,
+    String description,
+  ) {
     return CustomColumn(
       spacing: 8,
       children: [
@@ -1145,11 +1373,15 @@ class _HomeState extends State<Home> {
   }
 
   /// File 이미지 예시를 생성하는 헬퍼 메서드
-  Widget _buildFileImageExample(String imageFileName, String title, String description) {
+  Widget _buildFileImageExample(
+    String imageFileName,
+    String title,
+    String description,
+  ) {
     // 프로젝트 루트의 images 폴더 경로 사용
     final projectRoot = Directory.current.path;
     final imageFile = File('$projectRoot/images/$imageFileName');
-    
+
     return CustomColumn(
       spacing: 8,
       children: [

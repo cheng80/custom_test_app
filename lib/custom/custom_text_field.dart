@@ -66,6 +66,30 @@ class CustomTextField extends StatelessWidget {
   /// 필수 입력일 때 표시할 에러 메시지 (기본값: "이 필드는 필수입니다")
   final String? requiredMessage;
 
+  /// 라벨의 플로팅 동작 (기본값: null)
+  final FloatingLabelBehavior? floatingLabelBehavior;
+
+  /// 라벨 텍스트 스타일
+  final TextStyle? labelStyle;
+
+  /// 활성화된 상태의 테두리 스타일
+  final InputBorder? enabledBorder;
+
+  /// 포커스된 상태의 테두리 스타일
+  final InputBorder? focusedBorder;
+
+  /// 비활성화된 상태의 테두리 스타일
+  final InputBorder? disabledBorder;
+
+  /// 에러 상태의 테두리 스타일
+  final InputBorder? errorBorder;
+
+  /// 포커스된 에러 상태의 테두리 스타일
+  final InputBorder? focusedErrorBorder;
+
+  /// 콘텐츠 패딩
+  final EdgeInsetsGeometry? contentPadding;
+
   const CustomTextField({
     super.key,
     required this.controller,
@@ -87,6 +111,14 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.required = false,
     this.requiredMessage,
+    this.floatingLabelBehavior,
+    this.labelStyle,
+    this.enabledBorder,
+    this.focusedBorder,
+    this.disabledBorder,
+    this.errorBorder,
+    this.focusedErrorBorder,
+    this.contentPadding,
   });
 
   @override
@@ -98,6 +130,14 @@ class CustomTextField extends StatelessWidget {
       border: border ?? const OutlineInputBorder(),
       fillColor: fillColor,
       filled: filled,
+      floatingLabelBehavior: floatingLabelBehavior,
+      labelStyle: labelStyle,
+      enabledBorder: enabledBorder,
+      focusedBorder: focusedBorder,
+      disabledBorder: disabledBorder,
+      errorBorder: errorBorder,
+      focusedErrorBorder: focusedErrorBorder,
+      contentPadding: contentPadding,
     );
 
     // 사용자가 커스텀 decoration을 제공한 경우, 기본 decoration과 병합
@@ -108,6 +148,14 @@ class CustomTextField extends StatelessWidget {
             border: decoration!.border ?? border ?? const OutlineInputBorder(),
             fillColor: decoration!.fillColor ?? fillColor,
             filled: decoration!.filled ?? filled,
+            floatingLabelBehavior: decoration!.floatingLabelBehavior ?? floatingLabelBehavior,
+            labelStyle: decoration!.labelStyle ?? labelStyle,
+            enabledBorder: decoration!.enabledBorder ?? enabledBorder,
+            focusedBorder: decoration!.focusedBorder ?? focusedBorder,
+            disabledBorder: decoration!.disabledBorder ?? disabledBorder,
+            errorBorder: decoration!.errorBorder ?? errorBorder,
+            focusedErrorBorder: decoration!.focusedErrorBorder ?? focusedErrorBorder,
+            contentPadding: decoration!.contentPadding ?? contentPadding,
           )
         : defaultDecoration;
 

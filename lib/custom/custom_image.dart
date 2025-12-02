@@ -109,7 +109,7 @@ class CustomImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final errorBuilder = (BuildContext context, Object error, StackTrace? stackTrace) {
+    Widget errorBuilder(BuildContext context, Object error, StackTrace? stackTrace) {
       return errorWidget ??
           Container(
             width: width,
@@ -123,9 +123,9 @@ class CustomImage extends StatelessWidget {
                   : 48,
             ),
           );
-    };
+    }
 
-    final frameBuilder = (BuildContext context, Widget child, int? frame, bool wasSynchronouslyLoaded) {
+    Widget frameBuilder(BuildContext context, Widget child, int? frame, bool wasSynchronouslyLoaded) {
       if (wasSynchronouslyLoaded) {
         return child;
       }
@@ -133,7 +133,7 @@ class CustomImage extends StatelessWidget {
         return loadingWidget!;
       }
       return child;
-    };
+    }
 
     Widget image;
     if (bytes != null) {
