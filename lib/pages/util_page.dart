@@ -5,6 +5,7 @@ import '../custom/util/collection/example.dart';
 import '../custom/util/json/example.dart';
 import '../custom/util/timer/example.dart';
 import '../custom/widgets.dart';
+import '../theme/app_colors.dart';
 
 /// 유틸리티 예제 페이지 목록
 class UtilPage extends StatelessWidget {
@@ -12,12 +13,12 @@ class UtilPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final p = context.palette;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: p.background,
       appBar: CustomAppBar(
         title: '유틸리티 예제',
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
+        // backgroundColor와 foregroundColor를 지정하지 않으면 테마 색상 자동 적용
       ),
       body: SingleChildScrollView(
         child: CustomPadding.all(
@@ -33,12 +34,12 @@ class UtilPage extends StatelessWidget {
                     '유틸리티 클래스 예제',
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+                    color: p.textPrimary,
                   ),
                   CustomText(
                     '구현된 유틸리티 클래스들의 사용 예제를 확인할 수 있습니다.',
                     fontSize: 16,
-                    color: Colors.grey[600]!,
+                    color: p.textSecondary,
                   ),
                 ],
               ),
@@ -59,12 +60,12 @@ class UtilPage extends StatelessWidget {
                     CustomText(
                       '로컬 데이터 저장 유틸리티 (SharedPreferences 래핑)',
                       fontSize: 14,
-                      color: Colors.grey[700]!,
+                      color: p.textSecondary,
                     ),
                     CustomText(
                       '⚠️ 별도 페이지로 이동: StorageUtil 예제 페이지',
                       fontSize: 12,
-                      color: Colors.orange[700]!,
+                      color: Colors.orange[700]!, // 경고 색상은 유지
                     ),
                     SizedBox(
                       width: double.infinity,
@@ -94,7 +95,7 @@ class UtilPage extends StatelessWidget {
                     CustomText(
                       '컬렉션(리스트, 맵) 조작 유틸리티',
                       fontSize: 14,
-                      color: Colors.grey[700]!,
+                      color: p.textSecondary,
                     ),
                     SizedBox(
                       width: double.infinity,
@@ -240,7 +241,7 @@ class UtilPage extends StatelessWidget {
                     CustomText(
                       '⚠️ 별도 페이지로 이동: NetworkUtil 예제 페이지',
                       fontSize: 12,
-                      color: Colors.orange[700]!,
+                      color: Colors.orange[700]!, // 경고 색상은 유지
                     ),
                     SizedBox(
                       width: double.infinity,

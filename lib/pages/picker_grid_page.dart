@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../custom/widgets.dart';
+import '../theme/app_colors.dart';
 
 /// Picker 및 Grid 위젯 사용 예제 페이지
 class PickerGridPage extends StatefulWidget {
@@ -35,11 +36,12 @@ class _PickerGridPageState extends State<PickerGridPage> {
 
   @override
   Widget build(BuildContext context) {
+    final p = context.palette;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: p.background,
       appBar: CustomAppBar(
         title: "Picker & Grid 예시",
-        backgroundColor: Colors.indigo,
+        backgroundColor: Colors.indigo, // 예제용 색상 유지
       ),
       body: SingleChildScrollView(
         child: CustomPadding.all(
@@ -52,7 +54,7 @@ class _PickerGridPageState extends State<PickerGridPage> {
                 "Picker 및 Grid 위젯 종합 예시",
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: Colors.indigo,
+                color: Colors.indigo, // 예제용 색상 유지
               ),
 
               // DatePicker 섹션
@@ -69,7 +71,7 @@ class _PickerGridPageState extends State<PickerGridPage> {
                     CustomText(
                       "Material Design 날짜 선택 다이얼로그",
                       fontSize: 14,
-                      color: Colors.grey.shade600,
+                      color: p.textSecondary,
                     ),
                     CustomRow(
                       spacing: 12,
@@ -77,7 +79,7 @@ class _PickerGridPageState extends State<PickerGridPage> {
                         Expanded(
                           child: CustomButton(
                             btnText: "날짜 선택",
-                            backgroundColor: Colors.blue,
+                            // backgroundColor를 지정하지 않으면 테마 primary 색상 자동 적용
                             onCallBack: () async {
                               final date = await CustomDatePicker.show(
                                 context: context,
@@ -97,7 +99,7 @@ class _PickerGridPageState extends State<PickerGridPage> {
                         Expanded(
                           child: CustomButton(
                             btnText: "날짜 범위 선택",
-                            backgroundColor: Colors.green,
+                            backgroundColor: Colors.green, // 예제용 색상 유지
                             onCallBack: () async {
                               final range = await CustomDatePicker.showRange(
                                 context: context,
@@ -119,13 +121,13 @@ class _PickerGridPageState extends State<PickerGridPage> {
                       CustomText(
                         "선택된 날짜: ${_selectedDate!.toString().split(' ')[0]}",
                         fontSize: 16,
-                        color: Colors.blue,
+                        color: p.primary,
                       ),
                     if (_selectedDateRange != null)
                       CustomText(
                         "선택된 범위: ${_selectedDateRange!.start.toString().split(' ')[0]} ~ ${_selectedDateRange!.end.toString().split(' ')[0]}",
                         fontSize: 16,
-                        color: Colors.green,
+                        color: Colors.green, // 예제용 색상 유지
                       ),
                   ],
                 ),
@@ -162,7 +164,7 @@ class _PickerGridPageState extends State<PickerGridPage> {
                     CustomText(
                       "선택된 날짜/시간: ${_cupertinoDate.toString().split('.')[0]}",
                       fontSize: 16,
-                      color: Colors.blue,
+                      color: p.primary,
                     ),
                     CustomRow(
                       spacing: 12,
@@ -170,7 +172,7 @@ class _PickerGridPageState extends State<PickerGridPage> {
                         Expanded(
                           child: CustomButton(
                             btnText: "날짜만",
-                            backgroundColor: Colors.purple,
+                            backgroundColor: Colors.purple, // 예제용 색상 유지
                             onCallBack: () {
                               setState(() {
                                 // 모드 변경은 위젯 재생성 필요
@@ -181,7 +183,7 @@ class _PickerGridPageState extends State<PickerGridPage> {
                         Expanded(
                           child: CustomButton(
                             btnText: "시간만",
-                            backgroundColor: Colors.orange,
+                            backgroundColor: Colors.orange, // 예제용 색상 유지
                             onCallBack: () {
                               setState(() {
                                 // 모드 변경은 위젯 재생성 필요
@@ -235,11 +237,11 @@ class _PickerGridPageState extends State<PickerGridPage> {
                                 _selectedPickerItem = item;
                               });
                             },
-                            selectedItemColor: Colors.blue.withOpacity(0.1),
-                            selectedItemStyle: const TextStyle(
+                            selectedItemColor: p.primary.withOpacity(0.1),
+                            selectedItemStyle: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Colors.blue,
+                              color: p.primary,
                             ),
                           ),
                         ),
@@ -247,7 +249,7 @@ class _PickerGridPageState extends State<PickerGridPage> {
                           CustomText(
                             "선택된 항목: $_selectedPickerItem",
                             fontSize: 16,
-                            color: Colors.blue,
+                            color: p.primary,
                           ),
                       ],
                     ),
@@ -279,11 +281,11 @@ class _PickerGridPageState extends State<PickerGridPage> {
                                 _selectedMultiItems = items;
                               });
                             },
-                            selectedItemColor: Colors.green.withOpacity(0.1),
+                            selectedItemColor: Colors.green.withOpacity(0.1), // 예제용 색상 유지
                             selectedItemStyle: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Colors.green,
+                              color: Colors.green, // 예제용 색상 유지
                             ),
                           ),
                         ),
@@ -291,7 +293,7 @@ class _PickerGridPageState extends State<PickerGridPage> {
                           CustomText(
                             "선택된 항목: ${_selectedMultiItems.join(', ')}",
                             fontSize: 16,
-                            color: Colors.green,
+                            color: Colors.green, // 예제용 색상 유지
                           ),
                       ],
                     ),
@@ -313,7 +315,7 @@ class _PickerGridPageState extends State<PickerGridPage> {
                     CustomText(
                       "그리드 레이아웃으로 아이템 표시",
                       fontSize: 14,
-                      color: Colors.grey.shade600,
+                      color: p.textSecondary,
                     ),
                     SizedBox(
                       height: 400,

@@ -13,6 +13,7 @@ Flutter 커스텀 위젯 및 유틸리티 라이브러리 프로젝트입니다.
 - **String/Widget 지원**: 텍스트 관련 속성은 String 또는 Widget 모두 지원
 - **일관된 네이밍**: Custom 접두사 사용
 - **외부 패키지 최소화**: 가능한 한 순수 Dart로 구현
+- **테마 색상 자동 지원**: `AppColorScheme`이 있는 경우 자동으로 테마 색상 사용, 없으면 Material 기본값 사용
 
 ## 🏗️ 프로젝트 구조
 
@@ -416,21 +417,80 @@ import 'package:custom_test_app/custom/custom_button.dart';
 
 **참고**: 단일 import 방식을 사용하면 코드가 더 간결하고 유지보수가 쉬워집니다. 또한 `lib/custom/` 폴더 구조로 향후 라이브러리로 분리할 때도 용이합니다.
 
+## 🎨 테마 색상 자동 적용
+
+커스텀 위젯들은 `AppColorScheme`을 자동으로 감지하여 테마 색상을 사용합니다:
+
+- **테마가 있는 경우**: `context.palette`를 통해 테마 색상 자동 적용
+- **테마가 없는 경우**: Material Theme 기본값 사용 (다른 앱에서도 사용 가능)
+
+### 테마 색상 우선순위
+
+1. **명시적 색상 지정** (최우선)
+   ```dart
+   CustomButton(btnText: "확인", backgroundColor: Colors.red, onCallBack: () {})
+   ```
+
+2. **테마 색상** (AppColorScheme이 있는 경우)
+   ```dart
+   CustomButton(btnText: "확인", onCallBack: () {}) // 테마 primary 색상 자동 적용
+   ```
+
+3. **Material Theme 기본값** (테마가 없는 경우)
+   ```dart
+   // 다른 앱에서도 사용 가능 - Material Theme 기본값 사용
+   CustomButton(btnText: "확인", onCallBack: () {}) // Colors.blue 사용
+   ```
+
+### 사용 예시
+
+```dart
+// 테마 색상 자동 적용 (backgroundColor를 지정하지 않으면 테마 primary 색상 사용)
+CustomButton(btnText: "확인", onCallBack: () {})
+
+// 명시적으로 색상 지정 (테마 색상보다 우선)
+CustomButton(
+  btnText: "확인",
+  backgroundColor: Colors.red, // 명시적 색상이 우선
+  onCallBack: () {},
+)
+
+// 테마 색상 직접 사용
+final p = context.palette;
+CustomButton(
+  btnText: "확인",
+  backgroundColor: p.primary, // 테마 primary 색상
+  onCallBack: () {},
+)
+
+// 기본 사용 (테마 색상 자동 적용)
+CustomText("안녕하세요") // 테마 textPrimary 색상 사용
+CustomAppBar(title: "홈") // 테마 primary 배경색 사용
+```
+
+### 다른 앱에서 사용 시
+
+커스텀 위젯들은 다른 앱에서도 사용할 수 있도록 설계되었습니다:
+
+- `AppColorScheme`이 없는 경우 Material Theme 기본값 사용
+- 테마 색상은 선택적으로 적용되며, 없어도 정상 동작
+- 모든 색상 파라미터는 선택적(optional)이므로 명시적으로 지정 가능
+
 ## 💡 사용 예시
 
 ### 기본 위젯 사용
 
 ```dart
-// 텍스트
-CustomText("안녕하세요")
+// 텍스트 (테마 색상 자동 적용)
+CustomText("안녕하세요") // 테마 textPrimary 색상 사용
 
-// 버튼
+// 버튼 (테마 색상 자동 적용)
 CustomButton(
   btnText: "확인",
   onCallBack: () {
     print("버튼 클릭");
   },
-)
+) // 테마 primary 색상 사용
 
 // Column
 CustomColumn(
@@ -609,6 +669,7 @@ CustomGridView(
 3. **타입 안전성**: null-safety를 고려한 안전한 구현
 4. **외부 패키지 최소화**: 가능한 한 순수 Dart로 구현
 5. **일관된 네이밍**: Custom 접두사 사용
+6. **테마 색상 자동 지원**: `AppColorScheme` 자동 감지 및 적용, 다른 앱에서도 사용 가능
 
 ## 🔄 향후 계획
 

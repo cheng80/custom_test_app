@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../custom/widgets.dart';
+import '../theme/app_colors.dart';
 
 /// 레이아웃 위젯 사용 예제 페이지
 /// CustomExpansionTile, CustomChip, CustomProgressIndicator, CustomRefreshIndicator
@@ -23,9 +24,10 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final p = context.palette;
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: CustomAppBar(title: "레이아웃 위젯 예시", backgroundColor: Colors.teal),
+      backgroundColor: p.background,
+      appBar: CustomAppBar(title: "레이아웃 위젯 예시", backgroundColor: Colors.teal), // 예제용 색상 유지
       body: CustomRefreshIndicator(
         onRefresh: () async {
           await Future.delayed(const Duration(seconds: 2));
@@ -43,7 +45,7 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
                   "레이아웃 위젯 종합 예시",
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.teal,
+                  color: Colors.teal, // 예제용 색상 유지
                 ),
 
                 // CustomExpansionTile 예시
@@ -68,10 +70,10 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
                       children: [
                         ListTile(
                           title: CustomText("Q: Flutter란 무엇인가요?"),
-                          subtitle: CustomText(
+                          subtitle:                         CustomText(
                             "A: Flutter는 Google에서 개발한 크로스 플랫폼 모바일 앱 개발 프레임워크입니다.",
                             fontSize: 14,
-                            color: Colors.grey.shade700,
+                            color: p.textSecondary,
                           ),
                         ),
                         const Divider(),
@@ -130,7 +132,7 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
                       "기본 Chip",
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                      color: Colors.grey.shade700,
+                      color: p.textSecondary,
                     ),
                     Wrap(
                       spacing: 8,
@@ -160,7 +162,7 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
                       "선택 가능한 Chip (필터)",
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                      color: Colors.grey.shade700,
+                      color: p.textSecondary,
                     ),
                     Wrap(
                       spacing: 8,
@@ -209,7 +211,7 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
                       "원형 로딩 인디케이터",
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                      color: Colors.grey.shade700,
+                      color: p.textSecondary,
                     ),
                     CustomRow(
                       spacing: 16,
@@ -232,7 +234,7 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
                       "선형 진행률 인디케이터",
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                      color: Colors.grey.shade700,
+                      color: p.textSecondary,
                     ),
                     CustomProgressIndicator.linear(
                       value: _progressValue,
@@ -280,7 +282,7 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
                     CustomText(
                       "위로 당겨서 새로고침 기능이 이미 적용되어 있습니다!",
                       fontSize: 14,
-                      color: Colors.grey.shade700,
+                      color: p.textSecondary,
                     ),
                     CustomCard(
                       padding: const EdgeInsets.all(16),
@@ -295,12 +297,12 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
                           CustomText(
                             "화면을 위로 당기면 새로고침됩니다.",
                             fontSize: 14,
-                            color: Colors.grey.shade700,
+                            color: p.textSecondary,
                           ),
                           CustomText(
                             "이 페이지 전체가 RefreshIndicator로 감싸져 있습니다.",
                             fontSize: 12,
-                            color: Colors.grey.shade600,
+                            color: p.textSecondary,
                           ),
                         ],
                       ),

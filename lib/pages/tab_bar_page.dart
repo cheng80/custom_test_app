@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../custom/widgets.dart';
+import '../theme/app_colors.dart';
 
 /// TabBar & BottomNavBar 사용 예제 페이지
 class TabBarPage extends StatefulWidget {
@@ -15,6 +16,7 @@ class _TabBarPageState extends State<TabBarPage> {
 
   @override
   Widget build(BuildContext context) {
+    final p = context.palette;
     return CustomBottomNavBar(
       items: [
         // 아이콘 + 텍스트 (기본)
@@ -42,7 +44,7 @@ class _TabBarPageState extends State<TabBarPage> {
           label: "프로필",
           page: _buildProfilePage(),
           selectedColor: Colors.purple,
-          unselectedColor: Colors.grey.shade700, // 어두운 색상으로 설정하여 흰색 배경에서도 보이도록
+          unselectedColor: p.textSecondary,
         ),
       ],
       currentIndex: _currentBottomNavIndex,
@@ -51,18 +53,18 @@ class _TabBarPageState extends State<TabBarPage> {
           _currentBottomNavIndex = index;
         });
       },
-      selectedColor: Colors.blue,
-      unselectedColor: Colors.grey,
+      // selectedColor와 unselectedColor를 지정하지 않으면 테마 색상 자동 적용
     );
   }
 
   /// 홈 페이지 (상단 탭바 예시)
   Widget _buildHomePage() {
+    final p = context.palette;
     return Scaffold(
-      appBar: CustomAppBar(title: "홈", backgroundColor: Colors.blue),
+      appBar: CustomAppBar(title: "홈"), // 테마 primary 색상 자동 적용
       body: CustomTabBar(
         tabs: const ["동물", "과일", "꽃"],
-        tabColor: Colors.blue,
+        // tabColor를 지정하지 않으면 테마 primary 색상 자동 적용
         children: [_buildAnimalTab(), _buildFruitTab(), _buildFlowerTab()],
         onTap: (index) {
           // 탭 변경 이벤트 처리 예시
@@ -76,8 +78,9 @@ class _TabBarPageState extends State<TabBarPage> {
 
   /// 검색 페이지
   Widget _buildSearchPage() {
+    final p = context.palette;
     return Scaffold(
-      appBar: CustomAppBar(title: "검색", backgroundColor: Colors.green),
+      appBar: CustomAppBar(title: "검색", backgroundColor: Colors.green), // 예제용 색상 유지
       body: CustomPadding.all(
         16.0,
         child: CustomColumn(
@@ -87,12 +90,12 @@ class _TabBarPageState extends State<TabBarPage> {
               "검색 페이지",
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Colors.green,
+              color: Colors.green, // 예제용 색상 유지
             ),
             CustomText(
               "여기에 검색 기능을 구현할 수 있습니다.",
               fontSize: 16,
-              color: Colors.grey,
+              color: p.textSecondary,
             ),
           ],
         ),
@@ -102,8 +105,9 @@ class _TabBarPageState extends State<TabBarPage> {
 
   /// 좋아요 페이지
   Widget _buildFavoritePage() {
+    final p = context.palette;
     return Scaffold(
-      appBar: CustomAppBar(title: "좋아요", backgroundColor: Colors.red),
+      appBar: CustomAppBar(title: "좋아요", backgroundColor: Colors.red), // 예제용 색상 유지
       body: CustomPadding.all(
         16.0,
         child: CustomColumn(
@@ -113,9 +117,9 @@ class _TabBarPageState extends State<TabBarPage> {
               "좋아요 페이지",
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Colors.red,
+              color: Colors.red, // 예제용 색상 유지
             ),
-            CustomText("좋아요한 항목들을 표시합니다.", fontSize: 16, color: Colors.grey),
+            CustomText("좋아요한 항목들을 표시합니다.", fontSize: 16, color: p.textSecondary),
           ],
         ),
       ),
@@ -124,8 +128,9 @@ class _TabBarPageState extends State<TabBarPage> {
 
   /// 프로필 페이지
   Widget _buildProfilePage() {
+    final p = context.palette;
     return Scaffold(
-      appBar: CustomAppBar(title: "프로필", backgroundColor: Colors.purple),
+      appBar: CustomAppBar(title: "프로필", backgroundColor: Colors.purple), // 예제용 색상 유지
       body: CustomPadding.all(
         16.0,
         child: CustomColumn(
@@ -135,9 +140,9 @@ class _TabBarPageState extends State<TabBarPage> {
               "프로필 페이지",
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Colors.purple,
+              color: Colors.purple, // 예제용 색상 유지
             ),
-            CustomText("사용자 프로필 정보를 표시합니다.", fontSize: 16, color: Colors.grey),
+            CustomText("사용자 프로필 정보를 표시합니다.", fontSize: 16, color: p.textSecondary),
           ],
         ),
       ),

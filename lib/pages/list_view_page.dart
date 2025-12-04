@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../custom/widgets.dart';
+import '../theme/app_colors.dart';
 
 /// ListView 사용 예제 페이지
 class ListViewPage extends StatefulWidget {
@@ -24,11 +25,12 @@ class _ListViewPageState extends State<ListViewPage> {
 
   @override
   Widget build(BuildContext context) {
+    final p = context.palette;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: p.background,
       appBar: CustomAppBar(
         title: "ListView 예시",
-        backgroundColor: Colors.purple,
+        backgroundColor: Colors.purple, // 예제용 색상 유지
       ),
       body: CustomPadding.all(
         16.0,
@@ -39,7 +41,7 @@ class _ListViewPageState extends State<ListViewPage> {
               "동물 리스트",
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Colors.purple,
+              color: Colors.purple, // 예제용 색상 유지
             ),
             Expanded(
               child: CustomListView(
@@ -75,7 +77,7 @@ class _ListViewPageState extends State<ListViewPage> {
                               CustomText(
                                 animal["description"]!,
                                 fontSize: 14,
-                                color: Colors.grey,
+                                color: p.textSecondary,
                                 fontWeight: FontWeight.normal,
                               ),
                             ],
@@ -83,7 +85,7 @@ class _ListViewPageState extends State<ListViewPage> {
                         ),
                         Icon(
                           Icons.arrow_forward_ios,
-                          color: Colors.grey,
+                          color: p.textSecondary,
                           size: 20,
                         ),
                       ],

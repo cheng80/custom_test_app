@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'custom/custom.dart';
+import 'theme/app_colors.dart';
 import 'pages/bottom_sheet_page.dart';
 import 'pages/dialog_page.dart';
 import 'pages/layout_widgets_page.dart';
@@ -15,7 +16,9 @@ import 'pages/util_page.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final VoidCallback onToggleTheme;
+
+  const Home({super.key, required this.onToggleTheme});
 
   @override
   State<Home> createState() => _HomeState();
@@ -23,15 +26,30 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   //Property
-  bool _switchValue = false;
-  bool? _checkboxValue = false;
-  String? _radioValue;
-  double _sliderValue = 50.0;
-  double _rating = 0.0;
-  final TextEditingController _ratingCommentController =
-      TextEditingController();
-  String? _selectedDropdownValue;
+  late bool _themeBool;
+  late bool _switchValue;
+  late bool? _checkboxValue;
+  late String? _radioValue;
+  late double _sliderValue;
+  late double _rating;
+  late TextEditingController _ratingCommentController;
+  late String? _selectedDropdownValue;
+
   final List<String> _dropdownItems = ['선택 1', '선택 2', '선택 3', '선택 4'];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _themeBool = false;
+    _switchValue = false;
+    _checkboxValue = false;
+    _radioValue = null;
+    _sliderValue = 50.0;
+    _rating = 0.0;
+    _ratingCommentController = TextEditingController();
+     _selectedDropdownValue =_radioValue;
+  }
 
   @override
   void dispose() {
@@ -41,12 +59,23 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final p = context.palette;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: p.background,
       appBar: CustomAppBar(
         title: "커스텀 위젯",
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
+        // backgroundColor와 foregroundColor를 지정하지 않으면 테마 색상 자동 적용
+        actions: [
+          Switch(
+            value: _themeBool,
+            onChanged: (value) {
+              setState(() {
+                _themeBool = value;
+              });
+              widget.onToggleTheme();
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: CustomPadding.all(
@@ -62,12 +91,12 @@ class _HomeState extends State<Home> {
                     "커스텀 위젯 종합 예시",
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
-                    color: Colors.blue,
+                    color: p.primary,
                   ),
                   CustomText(
                     "다양한 위젯들을 조합한 사용 예시입니다",
                     fontSize: 16,
-                    color: Colors.grey.shade600,
+                    color: p.textSecondary,
                   ),
                 ],
               ),
@@ -88,11 +117,11 @@ class _HomeState extends State<Home> {
                     CustomText(
                       "각 위젯의 상세한 사용법과 다양한 예시를 확인할 수 있습니다",
                       fontSize: 14,
-                      color: Colors.grey.shade600,
+                      color: p.textSecondary,
                     ),
                     CustomButton(
                       btnText: "TextField 예시",
-                      backgroundColor: Colors.green,
+                      // backgroundColor를 지정하지 않으면 테마 primary 색상 자동 적용
                       onCallBack: () {
                         Navigator.push(
                           context,
@@ -219,7 +248,7 @@ class _HomeState extends State<Home> {
                     CustomText(
                       "구현된 유틸리티 클래스들의 사용 예제를 확인할 수 있습니다",
                       fontSize: 14,
-                      color: Colors.grey.shade600,
+                      color: p.textSecondary,
                     ),
                     CustomButton(
                       btnText: "유틸리티 예제 보기",
@@ -253,7 +282,7 @@ class _HomeState extends State<Home> {
                     CustomText(
                       "TextButton, ElevatedButton, OutlinedButton 타입을 지원합니다",
                       fontSize: 14,
-                      color: Colors.grey.shade600,
+                      color: p.textSecondary,
                     ),
                     CustomRow(
                       spacing: 8,
@@ -288,7 +317,7 @@ class _HomeState extends State<Home> {
                       "Widget 사용 예시",
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Colors.blue,
+                      color: p.primary,
                     ),
                     CustomButton(
                       btnText: Row(
@@ -315,7 +344,7 @@ class _HomeState extends State<Home> {
                       "DropdownButton 예시",
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Colors.blue,
+                      color: p.primary,
                     ),
                     CustomDropdownButton<String>(
                       value: _selectedDropdownValue,
@@ -334,7 +363,7 @@ class _HomeState extends State<Home> {
                       CustomText(
                         "선택된 값: $_selectedDropdownValue",
                         fontSize: 14,
-                        color: Colors.blue,
+                        color: p.primary,
                       ),
                     const SizedBox(height: 12),
                     CustomText(
@@ -382,7 +411,7 @@ class _HomeState extends State<Home> {
                     CustomText(
                       "배경색과 둥근 모서리를 적용한 아이콘 버튼들",
                       fontSize: 14,
-                      color: Colors.grey.shade600,
+                      color: p.textSecondary,
                     ),
                     CustomRow(
                       spacing: 12,
@@ -442,7 +471,7 @@ class _HomeState extends State<Home> {
                     CustomText(
                       "Switch, Checkbox, Radio, Slider 위젯 사용 예시",
                       fontSize: 14,
-                      color: Colors.grey.shade600,
+                      color: p.textSecondary,
                     ),
                     // Switch 예시
                     CustomColumn(
@@ -624,7 +653,7 @@ class _HomeState extends State<Home> {
                         CustomText(
                           "별을 클릭하여 점수를 선택할 수 있습니다",
                           fontSize: 14,
-                          color: Colors.grey.shade600,
+                          color: p.textSecondary,
                         ),
                         CustomRating(
                           rating: _rating,
@@ -690,7 +719,7 @@ class _HomeState extends State<Home> {
                               CustomText(
                                 "별점을 선택해주세요",
                                 fontSize: 14,
-                                color: Colors.grey.shade600,
+                                color: p.textSecondary,
                               ),
                               CustomRating(
                                 rating: _rating,
@@ -742,7 +771,7 @@ class _HomeState extends State<Home> {
                         CustomText(
                           "별 이외의 아이콘도 사용할 수 있습니다",
                           fontSize: 12,
-                          color: Colors.grey.shade600,
+                          color: p.textSecondary,
                         ),
                         const SizedBox(height: 8),
                         CustomColumn(
@@ -842,18 +871,18 @@ class _HomeState extends State<Home> {
                     CustomText(
                       "CustomImage 위젯을 사용한 이미지 표시 예시",
                       fontSize: 14,
-                      color: Colors.grey.shade600,
+                      color: p.textSecondary,
                     ),
                     // 첫 번째 행: 3개 이미지
                     CustomRow(
                       spacing: 8,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Expanded(child: _buildImageCard("images/bee.png", "벌")),
+                        Expanded(child: _buildImageCard("images/bee.png", "벌", context)),
                         Expanded(
-                          child: _buildImageCard("images/cat.png", "고양이"),
+                          child: _buildImageCard("images/cat.png", "고양이", context),
                         ),
-                        Expanded(child: _buildImageCard("images/cow.png", "소")),
+                        Expanded(child: _buildImageCard("images/cow.png", "소", context)),
                       ],
                     ),
                     // 두 번째 행: 3개 이미지
@@ -862,13 +891,13 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Expanded(
-                          child: _buildImageCard("images/dog.png", "강아지"),
+                          child: _buildImageCard("images/dog.png", "강아지", context),
                         ),
                         Expanded(
-                          child: _buildImageCard("images/fox.png", "여우"),
+                          child: _buildImageCard("images/fox.png", "여우", context),
                         ),
                         Expanded(
-                          child: _buildImageCard("images/monkey.png", "원숭이"),
+                          child: _buildImageCard("images/monkey.png", "원숭이", context),
                         ),
                       ],
                     ),
@@ -878,10 +907,10 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Expanded(
-                          child: _buildImageCard("images/pig.png", "돼지"),
+                          child: _buildImageCard("images/pig.png", "돼지", context),
                         ),
                         Expanded(
-                          child: _buildImageCard("images/wolf.png", "늑대"),
+                          child: _buildImageCard("images/wolf.png", "늑대", context),
                         ),
                       ],
                     ),
@@ -905,12 +934,12 @@ class _HomeState extends State<Home> {
                     CustomText(
                       "CustomImage.file()을 사용한 파일 이미지 표시 예시",
                       fontSize: 14,
-                      color: Colors.grey.shade600,
+                      color: p.textSecondary,
                     ),
                     CustomText(
                       "File 이미지는 디바이스의 파일 시스템에서 이미지를 로드합니다.",
                       fontSize: 12,
-                      color: Colors.grey.shade500,
+                      color: p.textSecondary,
                     ),
                     const SizedBox(height: 8),
                     // File 이미지 예시
@@ -922,6 +951,7 @@ class _HomeState extends State<Home> {
                             "bee.png",
                             "예시 1: File 이미지",
                             "CustomImage.file() 사용",
+                            context,
                           ),
                         ),
                         Expanded(
@@ -929,6 +959,7 @@ class _HomeState extends State<Home> {
                             "cat.png",
                             "예시 2: 크기 지정",
                             "width, height 지정",
+                            context,
                           ),
                         ),
                       ],
@@ -985,12 +1016,12 @@ class _HomeState extends State<Home> {
                     CustomText(
                       "CustomImage.memory()을 사용한 메모리 이미지 표시 예시",
                       fontSize: 14,
-                      color: Colors.grey.shade600,
+                      color: p.textSecondary,
                     ),
                     CustomText(
                       "Memory 이미지는 바이트 데이터(Uint8List)로부터 이미지를 로드합니다.",
                       fontSize: 12,
-                      color: Colors.grey.shade500,
+                      color: p.textSecondary,
                     ),
                     const SizedBox(height: 8),
                     // Memory 이미지 예시
@@ -1012,6 +1043,7 @@ class _HomeState extends State<Home> {
                                   snapshot.data!,
                                   "예시 1: Memory 이미지",
                                   "CustomImage.memory() 사용",
+                                  context,
                                 ),
                               ),
                               Expanded(
@@ -1019,15 +1051,17 @@ class _HomeState extends State<Home> {
                                   snapshot.data!,
                                   "예시 2: 크기 지정",
                                   "width, height 지정",
+                                  context,
                                 ),
                               ),
                             ],
                           );
                         }
+                        final p = context.palette;
                         return CustomText(
                           "이미지를 로드할 수 없습니다",
                           fontSize: 12,
-                          color: Colors.grey.shade600,
+                          color: p.textSecondary,
                         );
                       },
                     ),
@@ -1082,7 +1116,7 @@ class _HomeState extends State<Home> {
                     CustomText(
                       "여러 위젯을 조합한 실제 사용 예시",
                       fontSize: 14,
-                      color: Colors.grey.shade600,
+                      color: p.textSecondary,
                     ),
                     CustomContainer(
                       padding: const EdgeInsets.all(16),
@@ -1118,7 +1152,7 @@ class _HomeState extends State<Home> {
                                     CustomText(
                                       "귀여운 고양이입니다",
                                       fontSize: 14,
-                                      color: Colors.grey.shade600,
+                                      color: p.textSecondary,
                                     ),
                                     CustomRow(
                                       spacing: 8,
@@ -1172,11 +1206,11 @@ class _HomeState extends State<Home> {
                     CustomText(
                       "CustomCard를 사용한 정보 카드 예시",
                       fontSize: 14,
-                      color: Colors.grey.shade600,
+                      color: p.textSecondary,
                     ),
-                    _buildAnimalCard("images/dog.png", "강아지", "충실한 반려동물"),
+                    _buildAnimalCard("images/dog.png", "강아지", "충실한 반려동물", context),
                     const SizedBox(height: 12),
-                    _buildAnimalCard("images/fox.png", "여우", "영리한 동물"),
+                    _buildAnimalCard("images/fox.png", "여우", "영리한 동물", context),
                   ],
                 ),
               ),
@@ -1197,7 +1231,7 @@ class _HomeState extends State<Home> {
                     CustomText(
                       "두 위젯의 차이점과 사용 시나리오",
                       fontSize: 14,
-                      color: Colors.grey.shade600,
+                      color: p.textSecondary,
                     ),
                     CustomRow(
                       spacing: 12,
@@ -1247,7 +1281,7 @@ class _HomeState extends State<Home> {
                                   "Container 기반\n더 유연한 커스터마이징",
                                   fontSize: 12,
                                   fontWeight: FontWeight.normal,
-                                  color: Colors.grey.shade700,
+                                  color: p.textSecondary,
                                 ),
                               ],
                             ),
@@ -1270,7 +1304,8 @@ class _HomeState extends State<Home> {
   //--------Functions ------------
 
   /// 이미지 카드를 생성하는 헬퍼 메서드
-  Widget _buildImageCard(String imagePath, String label) {
+  Widget _buildImageCard(String imagePath, String label, BuildContext context) {
+    final p = context.palette;
     return CustomColumn(
       spacing: 8,
       children: [
@@ -1290,6 +1325,7 @@ class _HomeState extends State<Home> {
           fontSize: 14,
           fontWeight: FontWeight.w500,
           textAlign: TextAlign.center,
+          color: p.textPrimary,
         ),
       ],
     );
@@ -1314,7 +1350,9 @@ class _HomeState extends State<Home> {
     Uint8List imageBytes,
     String title,
     String description,
+    BuildContext context,
   ) {
+    final p = context.palette;
     return CustomColumn(
       spacing: 8,
       children: [
@@ -1342,7 +1380,7 @@ class _HomeState extends State<Home> {
                       CustomText(
                         "이미지를 표시할 수 없습니다",
                         fontSize: 12,
-                        color: Colors.grey.shade600,
+                        color: p.textSecondary,
                       ),
                     ],
                   ),
@@ -1377,7 +1415,9 @@ class _HomeState extends State<Home> {
     String imageFileName,
     String title,
     String description,
+    BuildContext context,
   ) {
+    final p = context.palette;
     // 프로젝트 루트의 images 폴더 경로 사용
     final projectRoot = Directory.current.path;
     final imageFile = File('$projectRoot/images/$imageFileName');
@@ -1409,7 +1449,7 @@ class _HomeState extends State<Home> {
                       CustomText(
                         "이미지를 찾을 수 없습니다",
                         fontSize: 12,
-                        color: Colors.grey.shade600,
+                        color: p.textSecondary,
                       ),
                     ],
                   ),
@@ -1440,7 +1480,8 @@ class _HomeState extends State<Home> {
   }
 
   /// 동물 카드를 생성하는 헬퍼 메서드
-  Widget _buildAnimalCard(String imagePath, String title, String description) {
+  Widget _buildAnimalCard(String imagePath, String title, String description, BuildContext context) {
+    final p = context.palette;
     return CustomCard(
       borderRadius: 16,
       padding: const EdgeInsets.all(16),
@@ -1463,8 +1504,8 @@ class _HomeState extends State<Home> {
                 spacing: 8,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomText(title, fontSize: 20, fontWeight: FontWeight.bold),
-                  CustomText(description, fontSize: 14, color: Colors.grey),
+                  CustomText(title, fontSize: 20, fontWeight: FontWeight.bold, color: p.textPrimary),
+                  CustomText(description, fontSize: 14, color: p.textSecondary),
                 ],
               ),
             ],

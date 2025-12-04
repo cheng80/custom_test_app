@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../custom/widgets.dart';
+import '../theme/app_colors.dart';
 
 /// BottomSheet 사용 예제 페이지
 class BottomSheetPage extends StatefulWidget {
@@ -12,11 +13,12 @@ class BottomSheetPage extends StatefulWidget {
 class _BottomSheetPageState extends State<BottomSheetPage> {
   @override
   Widget build(BuildContext context) {
+    final p = context.palette;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: p.background,
       appBar: CustomAppBar(
         title: "BottomSheet 예시",
-        backgroundColor: Colors.purple,
+        backgroundColor: Colors.purple, // 예제용 색상 유지
       ),
       body: SingleChildScrollView(
         child: CustomPadding.all(
@@ -28,7 +30,7 @@ class _BottomSheetPageState extends State<BottomSheetPage> {
                 "BottomSheet 종합 예시",
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: Colors.purple,
+                color: Colors.purple, // 예제용 색상 유지
               ),
 
               // 기본 사용 예시
@@ -45,7 +47,7 @@ class _BottomSheetPageState extends State<BottomSheetPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "기본 BottomSheet 열기",
-                      backgroundColor: Colors.purple,
+                      backgroundColor: Colors.purple, // 예제용 색상 유지
                       onCallBack: () {
                         CustomBottomSheet.show(
                           context: context,
@@ -103,7 +105,7 @@ class _BottomSheetPageState extends State<BottomSheetPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "메시지 포함 BottomSheet",
-                      backgroundColor: Colors.indigo,
+                      backgroundColor: Colors.indigo, // 예제용 색상 유지
                       onCallBack: () {
                         CustomBottomSheet.show(
                           context: context,
@@ -152,7 +154,7 @@ class _BottomSheetPageState extends State<BottomSheetPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "위험 작업 포함 BottomSheet",
-                      backgroundColor: Colors.red,
+                      backgroundColor: Colors.red, // 예제용 색상 유지
                       onCallBack: () {
                         CustomBottomSheet.show(
                           context: context,
@@ -209,7 +211,7 @@ class _BottomSheetPageState extends State<BottomSheetPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "커스텀 위젯 BottomSheet",
-                      backgroundColor: Colors.deepPurple,
+                      backgroundColor: Colors.deepPurple, // 예제용 색상 유지
                       onCallBack: () {
                         CustomBottomSheet.show(
                           context: context,
@@ -218,24 +220,24 @@ class _BottomSheetPageState extends State<BottomSheetPage> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(20),
-                                child: CustomText(
-                                  "커스텀 위젯",
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              child: CustomText(
+                                "커스텀 위젯",
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
                               ),
-                              ListTile(
-                                leading: Icon(Icons.info, color: Colors.blue),
-                                title: CustomText("정보"),
-                                subtitle: CustomText(
-                                  "이것은 커스텀 위젯을 사용한 BottomSheet입니다",
-                                  fontSize: 12,
-                                  color: Colors.grey,
-                                ),
+                            ),
+                            ListTile(
+                              leading: Icon(Icons.info, color: p.primary),
+                              title: CustomText("정보"),
+                              subtitle: CustomText(
+                                "이것은 커스텀 위젯을 사용한 BottomSheet입니다",
+                                fontSize: 12,
+                                color: p.textSecondary,
+                              ),
                               ),
                               const Divider(),
                               ListTile(
-                                leading: Icon(Icons.settings, color: Colors.grey),
+                                leading: Icon(Icons.settings, color: p.textSecondary),
                                 title: CustomText("설정"),
                                 onTap: () {
                                   Navigator.pop(context);
@@ -246,7 +248,7 @@ class _BottomSheetPageState extends State<BottomSheetPage> {
                                 },
                               ),
                               ListTile(
-                                leading: Icon(Icons.help, color: Colors.orange),
+                                leading: Icon(Icons.help, color: Colors.orange), // 예제용 색상 유지
                                 title: CustomText("도움말"),
                                 onTap: () {
                                   Navigator.pop(context);
@@ -279,7 +281,7 @@ class _BottomSheetPageState extends State<BottomSheetPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "높이 지정 BottomSheet",
-                      backgroundColor: Colors.teal,
+                      backgroundColor: Colors.teal, // 예제용 색상 유지
                       onCallBack: () {
                         CustomBottomSheet.show(
                           context: context,
@@ -320,7 +322,7 @@ class _BottomSheetPageState extends State<BottomSheetPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "커스텀 색상 BottomSheet",
-                      backgroundColor: Colors.orange,
+                      backgroundColor: Colors.orange, // 예제용 색상 유지
                       onCallBack: () {
                         CustomBottomSheet.show(
                           context: context,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../custom/widgets.dart';
+import '../theme/app_colors.dart';
 
 /// Dialog 사용 예제 페이지
 class DialogPage extends StatefulWidget {
@@ -15,9 +16,10 @@ class _DialogPageState extends State<DialogPage> {
 
   @override
   Widget build(BuildContext context) {
+    final p = context.palette;
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: CustomAppBar(title: "Dialog 예시", backgroundColor: Colors.orange),
+      backgroundColor: p.background,
+      appBar: CustomAppBar(title: "Dialog 예시", backgroundColor: Colors.orange), // 예제용 색상 유지
       body: SingleChildScrollView(
         child: CustomPadding.all(
           16.0,
@@ -28,7 +30,7 @@ class _DialogPageState extends State<DialogPage> {
                 "다이얼로그 종합 예시",
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: Colors.orange,
+                color: Colors.orange, // 예제용 색상 유지
               ),
 
               // 단일 버튼 다이얼로그
@@ -45,7 +47,7 @@ class _DialogPageState extends State<DialogPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "알림 다이얼로그",
-                      backgroundColor: Colors.blue,
+                      // backgroundColor를 지정하지 않으면 테마 primary 색상 자동 적용
                       onCallBack: () {
                         CustomDialog.show(
                           context,
@@ -60,7 +62,7 @@ class _DialogPageState extends State<DialogPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "성공 메시지",
-                      backgroundColor: Colors.green,
+                      backgroundColor: Colors.green, // 예제용 색상 유지
                       onCallBack: () {
                         CustomDialog.show(
                           context,
@@ -76,7 +78,7 @@ class _DialogPageState extends State<DialogPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "경고 메시지",
-                      backgroundColor: Colors.orange,
+                      backgroundColor: Colors.orange, // 예제용 색상 유지
                       onCallBack: () {
                         CustomDialog.show(
                           context,
@@ -105,7 +107,7 @@ class _DialogPageState extends State<DialogPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "확인 다이얼로그",
-                      backgroundColor: Colors.teal,
+                      backgroundColor: Colors.teal, // 예제용 색상 유지
                       onCallBack: () {
                         CustomDialog.show(
                           context,
@@ -128,7 +130,7 @@ class _DialogPageState extends State<DialogPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "삭제 확인",
-                      backgroundColor: Colors.red,
+                      backgroundColor: Colors.red, // 예제용 색상 유지
                       onCallBack: () {
                         CustomDialog.show(
                           context,
@@ -166,7 +168,7 @@ class _DialogPageState extends State<DialogPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "가운데 정렬 (기본값)",
-                      backgroundColor: Colors.purple,
+                      backgroundColor: Colors.purple, // 예제용 색상 유지
                       onCallBack: () {
                         CustomDialog.show(
                           context,
@@ -182,7 +184,7 @@ class _DialogPageState extends State<DialogPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "왼쪽 정렬",
-                      backgroundColor: Colors.indigo,
+                      backgroundColor: Colors.indigo, // 예제용 색상 유지
                       onCallBack: () {
                         CustomDialog.show(
                           context,
@@ -198,7 +200,7 @@ class _DialogPageState extends State<DialogPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "오른쪽 정렬",
-                      backgroundColor: Colors.deepPurple,
+                      backgroundColor: Colors.deepPurple, // 예제용 색상 유지
                       onCallBack: () {
                         CustomDialog.show(
                           context,
@@ -214,7 +216,7 @@ class _DialogPageState extends State<DialogPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "양쪽 정렬",
-                      backgroundColor: Colors.purple.shade700,
+                      backgroundColor: Colors.purple.shade700, // 예제용 색상 유지
                       onCallBack: () {
                         CustomDialog.show(
                           context,
@@ -243,14 +245,15 @@ class _DialogPageState extends State<DialogPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "Widget 다이얼로그",
-                      backgroundColor: Colors.deepPurple,
+                      backgroundColor: Colors.deepPurple, // 예제용 색상 유지
                       onCallBack: () {
+                        final p = context.palette;
                         CustomDialog.show(
                           context,
                           title: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(Icons.info, color: Colors.blue),
+                              Icon(Icons.info, color: p.primary),
                               const SizedBox(width: 8),
                               CustomText(
                                 "정보",
@@ -271,7 +274,7 @@ class _DialogPageState extends State<DialogPage> {
                               CustomText(
                                 "제목과 메시지 모두 Widget으로 지정할 수 있습니다.",
                                 fontSize: 14,
-                                color: Colors.grey,
+                                color: p.textSecondary,
                               ),
                             ],
                           ),
@@ -298,7 +301,7 @@ class _DialogPageState extends State<DialogPage> {
                       '$_counter',
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
-                      color: Colors.orange,
+                      color: Colors.orange, // 예제용 색상 유지
                     ),
                   ],
                 ),
@@ -318,7 +321,7 @@ class _DialogPageState extends State<DialogPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "닫히지 않는 다이얼로그",
-                      backgroundColor: Colors.amber,
+                      backgroundColor: Colors.amber, // 예제용 색상 유지
                       onCallBack: () {
                         showDialog(
                           context: context,
@@ -341,7 +344,7 @@ class _DialogPageState extends State<DialogPage> {
                                     width: double.infinity,
                                     child: CustomButton(
                                       btnText: "다이얼로그 닫기",
-                                      backgroundColor: Colors.blue,
+                                      // backgroundColor를 지정하지 않으면 테마 primary 색상 자동 적용
                                       onCallBack: () {
                                         Navigator.pop(dialogContext);
                                       },
@@ -352,7 +355,7 @@ class _DialogPageState extends State<DialogPage> {
                               actions: [
                                 CustomButton(
                                   btnText: "확인",
-                                  backgroundColor: Colors.blue,
+                                  // backgroundColor를 지정하지 않으면 테마 primary 색상 자동 적용
                                   minimumSize: const Size(100, 40),
                                   onCallBack: () {
                                     // 다이얼로그가 자동으로 닫히지 않음
@@ -370,7 +373,7 @@ class _DialogPageState extends State<DialogPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "비동기 작업 후 닫기",
-                      backgroundColor: Colors.cyan,
+                      backgroundColor: Colors.cyan, // 예제용 색상 유지
                       onCallBack: () {
                         CustomDialog.show(
                           context,
@@ -401,7 +404,7 @@ class _DialogPageState extends State<DialogPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "확인은 닫지 않고 취소만 닫기",
-                      backgroundColor: Colors.pink,
+                      backgroundColor: Colors.pink, // 예제용 색상 유지
                       onCallBack: () {
                         CustomDialog.show(
                           context,
@@ -437,7 +440,7 @@ class _DialogPageState extends State<DialogPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "Dialog 내부에서 SnackBar 표시 (fixed)",
-                      backgroundColor: Colors.deepPurple.shade300,
+                      backgroundColor: Colors.deepPurple.shade300, // 예제용 색상 유지
                       onCallBack: () {
                         CustomDialog.show(
                           context,
@@ -465,7 +468,7 @@ class _DialogPageState extends State<DialogPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "Dialog 내부에서 SnackBar 표시 (floating)",
-                      backgroundColor: Colors.deepPurple.shade400,
+                      backgroundColor: Colors.deepPurple.shade400, // 예제용 색상 유지
                       onCallBack: () {
                         CustomDialog.show(
                           context,
@@ -496,7 +499,7 @@ class _DialogPageState extends State<DialogPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "Dialog 닫은 후 SnackBar 표시 (기본 사용법)",
-                      backgroundColor: Colors.deepPurple.shade400,
+                      backgroundColor: Colors.deepPurple.shade400, // 예제용 색상 유지
                       onCallBack: () async {
                         // Dialog가 닫힌 후에 SnackBar 표시
                         await CustomDialog.show(
@@ -535,7 +538,7 @@ class _DialogPageState extends State<DialogPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "3개 버튼 다이얼로그 (세로 배치)",
-                      backgroundColor: Colors.teal,
+                      backgroundColor: Colors.teal, // 예제용 색상 유지
                       onCallBack: () {
                         CustomDialog.show(
                           context,
@@ -575,7 +578,7 @@ class _DialogPageState extends State<DialogPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "3개 버튼 다이얼로그 (가로 배치 - DialogActionGroup)",
-                      backgroundColor: Colors.teal.shade700,
+                      backgroundColor: Colors.teal.shade700, // 예제용 색상 유지
                       onCallBack: () {
                         CustomDialog.show(
                           context,
@@ -623,7 +626,7 @@ class _DialogPageState extends State<DialogPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "그리드 배치 (Row + Column 혼합)",
-                      backgroundColor: Colors.teal.shade900,
+                      backgroundColor: Colors.teal.shade900, // 예제용 색상 유지
                       onCallBack: () {
                         CustomDialog.show(
                           context,
@@ -688,7 +691,7 @@ class _DialogPageState extends State<DialogPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "직접 위젯 전달 (actions 파라미터)",
-                      backgroundColor: Colors.indigo,
+                      backgroundColor: Colors.indigo, // 예제용 색상 유지
                       onCallBack: () {
                         CustomDialog.show(
                           context,
@@ -701,7 +704,7 @@ class _DialogPageState extends State<DialogPage> {
                                 Expanded(
                                   child: CustomButton(
                                     btnText: "저장",
-                                    backgroundColor: Colors.green,
+                                    backgroundColor: Colors.green, // 예제용 색상 유지
                                     minimumSize: const Size(0, 40),
                                     onCallBack: () {
                                       print("저장 선택");
@@ -713,7 +716,7 @@ class _DialogPageState extends State<DialogPage> {
                                 Expanded(
                                   child: CustomButton(
                                     btnText: "수정",
-                                    backgroundColor: Colors.blue,
+                                    // backgroundColor를 지정하지 않으면 테마 primary 색상 자동 적용
                                     minimumSize: const Size(0, 40),
                                     onCallBack: () {
                                       print("수정 선택");
@@ -726,7 +729,7 @@ class _DialogPageState extends State<DialogPage> {
                                   child: CustomButton(
                                     btnText: "취소",
                                     buttonType: ButtonType.outlined,
-                                    backgroundColor: Colors.grey,
+                                    backgroundColor: Colors.grey, // 예제용 색상 유지
                                     minimumSize: const Size(0, 40),
                                     onCallBack: () {
                                       print("취소 선택");
@@ -745,7 +748,7 @@ class _DialogPageState extends State<DialogPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "4개 버튼 (저장/수정/삭제/취소)",
-                      backgroundColor: Colors.indigo,
+                      backgroundColor: Colors.indigo, // 예제용 색상 유지
                       onCallBack: () {
                         CustomDialog.show(
                           context,
@@ -802,7 +805,7 @@ class _DialogPageState extends State<DialogPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "닫히지 않는 커스텀 버튼",
-                      backgroundColor: Colors.deepOrange,
+                      backgroundColor: Colors.deepOrange, // 예제용 색상 유지
                       onCallBack: () {
                         showDialog(
                           context: context,
@@ -823,7 +826,7 @@ class _DialogPageState extends State<DialogPage> {
                                   const SizedBox(height: 16),
                                   CustomButton(
                                     btnText: "다이얼로그 닫기",
-                                    backgroundColor: Colors.red,
+                                    backgroundColor: Colors.red, // 예제용 색상 유지
                                     onCallBack: () {
                                       Navigator.pop(dialogContext);
                                     },
@@ -833,7 +836,7 @@ class _DialogPageState extends State<DialogPage> {
                               actions: [
                                 CustomButton(
                                   btnText: "저장",
-                                  backgroundColor: Colors.green,
+                                  backgroundColor: Colors.green, // 예제용 색상 유지
                                   minimumSize: const Size(80, 40),
                                   onCallBack: () {
                                     print("저장 중... (다이얼로그는 열려있음)");
@@ -843,7 +846,7 @@ class _DialogPageState extends State<DialogPage> {
                                 CustomButton(
                                   btnText: "취소",
                                   buttonType: ButtonType.outlined,
-                                  backgroundColor: Colors.grey,
+                                  backgroundColor: Colors.grey, // 예제용 색상 유지
                                   minimumSize: const Size(80, 40),
                                   onCallBack: () {
                                     Navigator.pop(dialogContext);
@@ -860,7 +863,7 @@ class _DialogPageState extends State<DialogPage> {
                     width: double.infinity,
                     child: CustomButton(
                       btnText: "Widget 라벨 커스텀 버튼",
-                      backgroundColor: Colors.brown,
+                      backgroundColor: Colors.brown, // 예제용 색상 유지
                       onCallBack: () {
                         CustomDialog.show(
                           context,

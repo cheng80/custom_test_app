@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../custom/widgets.dart';
+import '../theme/app_colors.dart';
 
 /// 네비게이션 위젯 사용 예제 페이지
 /// CustomFloatingActionButton, CustomDrawer
@@ -17,11 +18,12 @@ class _NavigationWidgetsPageState extends State<NavigationWidgetsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final p = context.palette;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: p.background,
       appBar: CustomAppBar(
         title: "네비게이션 위젯 예시",
-        backgroundColor: Colors.indigo,
+        backgroundColor: Colors.indigo, // 예제용 색상 유지
         drawerIcon: Icons.menu, // Drawer 아이콘 커스텀 (기본값: Icons.menu)
         drawerIconColor: Colors.white, // Drawer 아이콘 색상
         drawerIconSize: 28.0, // Drawer 아이콘 크기
@@ -106,7 +108,7 @@ class _NavigationWidgetsPageState extends State<NavigationWidgetsPage> {
         ],
         footer: Container(
           padding: const EdgeInsets.all(16),
-          child: CustomText("버전 1.0.0", fontSize: 12, color: Colors.grey),
+          child: CustomText("버전 1.0.0", fontSize: 12, color: p.textSecondary),
         ),
       ),
       body: SingleChildScrollView(
@@ -119,7 +121,7 @@ class _NavigationWidgetsPageState extends State<NavigationWidgetsPage> {
                 "네비게이션 위젯 종합 예시",
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: Colors.indigo,
+                color: Colors.indigo, // 예제용 색상 유지
               ),
 
               // CustomFloatingActionButton 예시
@@ -135,7 +137,7 @@ class _NavigationWidgetsPageState extends State<NavigationWidgetsPage> {
                   CustomText(
                     "이 페이지의 우측 하단에 FloatingActionButton이 표시됩니다.",
                     fontSize: 14,
-                    color: Colors.grey.shade700,
+                    color: p.textSecondary,
                   ),
                   CustomCard(
                     padding: const EdgeInsets.all(16),
@@ -150,7 +152,7 @@ class _NavigationWidgetsPageState extends State<NavigationWidgetsPage> {
                         CustomText(
                           "아래 버튼을 클릭하면 화면 하단의 FAB가 해당 타입으로 변경됩니다.",
                           fontSize: 12,
-                          color: Colors.grey.shade600,
+                          color: p.textSecondary,
                         ),
                         CustomRow(
                           spacing: 8,
@@ -222,7 +224,7 @@ class _NavigationWidgetsPageState extends State<NavigationWidgetsPage> {
                           "현재 타입: ${_getFABTypeName(_currentFABType)}",
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
-                          color: Colors.indigo,
+                          color: Colors.indigo, // 예제용 색상 유지
                         ),
                       ],
                     ),
@@ -303,7 +305,7 @@ class _NavigationWidgetsPageState extends State<NavigationWidgetsPage> {
                       '$_counter',
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
-                      color: Colors.indigo,
+                      color: Colors.indigo, // 예제용 색상 유지
                     ),
                   ],
                 ),

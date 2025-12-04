@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../custom/widgets.dart';
+import '../theme/app_colors.dart';
 
 /// SnackBar & ActionSheet 사용 예제 페이지
 class SnackBarActionSheetPage extends StatefulWidget {
@@ -17,11 +18,12 @@ class _SnackBarActionSheetPageState extends State<SnackBarActionSheetPage> {
 
   @override
   Widget build(BuildContext context) {
+    final p = context.palette;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: p.background,
       appBar: CustomAppBar(
         title: "SnackBar & ActionSheet",
-        backgroundColor: Colors.purple,
+        backgroundColor: Colors.purple, // 예제용 색상 유지
       ),
       body: SingleChildScrollView(
         child: CustomPadding.all(
@@ -33,7 +35,7 @@ class _SnackBarActionSheetPageState extends State<SnackBarActionSheetPage> {
                 "SnackBar & ActionSheet 예시",
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: Colors.purple,
+                color: Colors.purple, // 예제용 색상 유지
               ),
 
               // SnackBar 예시
@@ -47,7 +49,7 @@ class _SnackBarActionSheetPageState extends State<SnackBarActionSheetPage> {
                   ),
                   CustomButton(
                     btnText: "기본 SnackBar",
-                    backgroundColor: Colors.grey.shade700,
+                    backgroundColor: Colors.grey.shade700, // 예제용 색상 유지
                     onCallBack: () {
                       CustomSnackBar.show(
                         context,
@@ -155,7 +157,7 @@ class _SnackBarActionSheetPageState extends State<SnackBarActionSheetPage> {
                     CustomText(
                       "SnackBar와 ActionSheet에서 Widget 사용",
                       fontSize: 14,
-                      color: Colors.grey.shade600,
+                      color: p.textSecondary,
                     ),
                     CustomButton(
                       btnText: "Widget SnackBar",
@@ -459,7 +461,7 @@ class _SnackBarActionSheetPageState extends State<SnackBarActionSheetPage> {
                       _lastAction,
                       fontSize: 18,
                       fontWeight: FontWeight.normal,
-                      color: Colors.purple,
+                      color: Colors.purple, // 예제용 색상 유지
                     ),
                   ],
                 ),

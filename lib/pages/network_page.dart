@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../custom/external_util/network/custom_network_util.dart';
 import '../custom/widgets.dart';
+import '../theme/app_colors.dart';
 
 /// NetworkUtil 사용 예제 페이지
 ///
@@ -25,11 +26,12 @@ class _NetworkPageState extends State<NetworkPage> {
 
   @override
   Widget build(BuildContext context) {
+    final p = context.palette;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: p.background,
       appBar: CustomAppBar(
         title: 'NetworkUtil 예제',
-        backgroundColor: Colors.indigo,
+        backgroundColor: Colors.indigo, // 예제용 색상 유지
         foregroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
@@ -42,12 +44,12 @@ class _NetworkPageState extends State<NetworkPage> {
                 'HTTP 통신 예제',
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: Colors.indigo,
+                color: Colors.indigo, // 예제용 색상 유지
               ),
               CustomText(
                 '주의: 실제 API 서버가 필요합니다',
                 fontSize: 14,
-                color: Colors.grey[600]!,
+                color: p.textSecondary,
               ),
               const SizedBox(height: 8),
 
@@ -55,7 +57,7 @@ class _NetworkPageState extends State<NetworkPage> {
                 width: double.infinity,
                 child: CustomButton(
                   btnText: 'GET 요청 예제',
-                  backgroundColor: Colors.blue,
+                  // backgroundColor를 지정하지 않으면 테마 primary 색상 자동 적용
                   onCallBack: _getExample,
                 ),
               ),
@@ -64,7 +66,7 @@ class _NetworkPageState extends State<NetworkPage> {
                 width: double.infinity,
                 child: CustomButton(
                   btnText: 'POST 요청 예제',
-                  backgroundColor: Colors.green,
+                  backgroundColor: Colors.green, // 예제용 색상 유지
                   onCallBack: _postExample,
                 ),
               ),
@@ -73,7 +75,7 @@ class _NetworkPageState extends State<NetworkPage> {
                 width: double.infinity,
                 child: CustomButton(
                   btnText: 'PUT 요청 예제',
-                  backgroundColor: Colors.orange,
+                  backgroundColor: Colors.orange, // 예제용 색상 유지
                   onCallBack: _putExample,
                 ),
               ),
@@ -82,7 +84,7 @@ class _NetworkPageState extends State<NetworkPage> {
                 width: double.infinity,
                 child: CustomButton(
                   btnText: 'DELETE 요청 예제',
-                  backgroundColor: Colors.red,
+                  backgroundColor: Colors.red, // 예제용 색상 유지
                   onCallBack: _deleteExample,
                 ),
               ),
@@ -91,7 +93,7 @@ class _NetworkPageState extends State<NetworkPage> {
                 width: double.infinity,
                 child: CustomButton(
                   btnText: '쿼리 파라미터 예제',
-                  backgroundColor: Colors.purple,
+                  backgroundColor: Colors.purple, // 예제용 색상 유지
                   onCallBack: _queryParamsExample,
                 ),
               ),
@@ -100,7 +102,7 @@ class _NetworkPageState extends State<NetworkPage> {
                 width: double.infinity,
                 child: CustomButton(
                   btnText: '에러 처리 예제',
-                  backgroundColor: Colors.grey,
+                  backgroundColor: Colors.grey, // 예제용 색상 유지
                   onCallBack: _errorHandlingExample,
                 ),
               ),

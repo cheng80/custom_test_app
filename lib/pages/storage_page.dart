@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../custom/external_util/storage/custom_storage_util.dart';
 import '../custom/widgets.dart';
+import '../theme/app_colors.dart';
 
 /// StorageUtil 사용 예제 페이지
 ///
@@ -132,11 +133,12 @@ class _StoragePageState extends State<StoragePage> {
 
   @override
   Widget build(BuildContext context) {
+    final p = context.palette;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: p.background,
       appBar: CustomAppBar(
         title: 'StorageUtil 예제',
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.teal, // 예제용 색상 유지
         foregroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
@@ -171,7 +173,7 @@ class _StoragePageState extends State<StoragePage> {
                 width: double.infinity,
                 child: CustomButton(
                   btnText: '기본 타입 저장',
-                  backgroundColor: Colors.blue,
+                  // backgroundColor를 지정하지 않으면 테마 primary 색상 자동 적용
                   onCallBack: _saveBasicTypes,
                 ),
               ),

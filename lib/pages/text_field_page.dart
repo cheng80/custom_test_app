@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../custom/widgets.dart';
+import '../theme/app_colors.dart';
 
 /// TextField 사용 예제 페이지
 class TextFieldPage extends StatefulWidget {
@@ -50,10 +51,10 @@ class _TextFieldPageState extends State<TextFieldPage> {
       },
       behavior: HitTestBehavior.opaque, // 자식 위젯이 터치를 소비해도 onTap이 호출되도록 설정
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: context.palette.background,
         appBar: CustomAppBar(
           title: "TextField 예시",
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.green, // 예제용 색상 유지
         ),
         body: SingleChildScrollView(
           child: CustomPadding.all(
@@ -65,7 +66,7 @@ class _TextFieldPageState extends State<TextFieldPage> {
                   "입력 필드 종합 예시",
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.green,
+                  color: Colors.green, // 예제용 색상 유지
                 ),
 
                 // 기본 텍스트 입력
@@ -173,7 +174,7 @@ class _TextFieldPageState extends State<TextFieldPage> {
                     ),
                     CustomButton(
                       btnText: "textCheck 검증",
-                      backgroundColor: Colors.orange,
+                      backgroundColor: Colors.orange, // 예제용 색상 유지
                       minimumSize: const Size(double.infinity, 50),
                       onCallBack: () {
                         // textCheck를 사용한 검증 예시
@@ -268,7 +269,7 @@ class _TextFieldPageState extends State<TextFieldPage> {
                   children: [
                     CustomButton(
                       btnText: "입력값 확인",
-                      backgroundColor: Colors.green,
+                      backgroundColor: Colors.green, // 예제용 색상 유지
                       minimumSize: const Size(150, 50),
                       onCallBack: () {
                         // 버튼 클릭 시 키보드 내리기
@@ -288,7 +289,7 @@ class _TextFieldPageState extends State<TextFieldPage> {
                     ),
                     CustomButton(
                       btnText: "Form 검증",
-                      backgroundColor: Colors.blue,
+                      // backgroundColor를 지정하지 않으면 테마 primary 색상 자동 적용
                       minimumSize: const Size(150, 50),
                       onCallBack: () {
                         // 버튼 클릭 시 키보드 내리기

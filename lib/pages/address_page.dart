@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../custom/util/address/custom_address_util.dart';
 import '../custom/widgets.dart';
+import '../theme/app_colors.dart';
 
 /// AddressUtil 사용 예제 페이지
 class AddressPage extends StatefulWidget {
@@ -25,12 +26,12 @@ class _AddressPageState extends State<AddressPage> {
 
   @override
   Widget build(BuildContext context) {
+    final p = context.palette;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: p.background,
       appBar: CustomAppBar(
         title: 'AddressUtil 예제',
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
+        // backgroundColor와 foregroundColor를 지정하지 않으면 테마 색상 자동 적용
       ),
       body: SingleChildScrollView(
         child: CustomPadding.all(
@@ -46,12 +47,12 @@ class _AddressPageState extends State<AddressPage> {
                     'AddressUtil 예제',
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+                    color: p.textPrimary,
                   ),
                   CustomText(
                     '위도/경도로 주소를 가져오는 예제입니다.',
                     fontSize: 14,
-                    color: Colors.grey[600],
+                    color: p.textSecondary,
                   ),
                 ],
               ),
@@ -71,13 +72,13 @@ class _AddressPageState extends State<AddressPage> {
                     CustomText(
                       '서울 가락동 좌표 (37.497429, 127.127782)',
                       fontSize: 14,
-                      color: Colors.grey[700],
+                      color: p.textSecondary,
                     ),
                     SizedBox(
                       width: double.infinity,
                       child: CustomButton(
                         btnText: _isLoading1 ? '로딩 중...' : '주소 가져오기',
-                        backgroundColor: Colors.blue,
+                        // backgroundColor를 지정하지 않으면 테마 primary 색상 자동 적용
                         onCallBack: _isLoading1
                             ? () {}
                             : () {
@@ -123,13 +124,13 @@ class _AddressPageState extends State<AddressPage> {
                     CustomText(
                       '서울 가락동 좌표 (37.497429, 127.127782)',
                       fontSize: 14,
-                      color: Colors.grey[700],
+                      color: p.textSecondary,
                     ),
                     SizedBox(
                       width: double.infinity,
                       child: CustomButton(
                         btnText: _isLoading2 ? '로딩 중...' : '간단한 주소 가져오기',
-                        backgroundColor: Colors.green,
+                        backgroundColor: Colors.green, // 예제용 색상 유지
                         onCallBack: _isLoading2
                             ? () {}
                             : () {
@@ -175,13 +176,13 @@ class _AddressPageState extends State<AddressPage> {
                     CustomText(
                       '서울 가락동 좌표 (37.497429, 127.127782)',
                       fontSize: 14,
-                      color: Colors.grey[700],
+                      color: p.textSecondary,
                     ),
                     SizedBox(
                       width: double.infinity,
                       child: CustomButton(
                         btnText: _isLoading3 ? '로딩 중...' : '상세 정보 가져오기',
-                        backgroundColor: Colors.purple,
+                        backgroundColor: Colors.purple, // 예제용 색상 유지
                         onCallBack: _isLoading3
                             ? () {}
                             : () {
@@ -233,7 +234,7 @@ class _AddressPageState extends State<AddressPage> {
                       width: double.infinity,
                       child: CustomButton(
                         btnText: 'JSON 파싱 예제',
-                        backgroundColor: Colors.orange,
+                        backgroundColor: Colors.orange, // 예제용 색상 유지
                         onCallBack: _parseJsonExample,
                       ),
                     ),
@@ -281,7 +282,7 @@ class _AddressPageState extends State<AddressPage> {
                       width: double.infinity,
                       child: CustomButton(
                         btnText: '예외 처리 테스트',
-                        backgroundColor: Colors.red,
+                        backgroundColor: Colors.red, // 예제용 색상 유지
                         onCallBack: () => _exceptionExample(),
                       ),
                     ),
