@@ -194,6 +194,50 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
                         color: Colors.teal,
                         fontWeight: FontWeight.bold,
                       ),
+                    const SizedBox(height: 8),
+                    CustomText(
+                      "고정 크기 Chip",
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: p.textSecondary,
+                    ),
+                    CustomText(
+                      "width 파라미터로 크기를 고정할 수 있습니다.",
+                      fontSize: 12,
+                      color: p.textSecondary,
+                    ),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: [
+                        CustomChip(
+                          label: "짧은",
+                          width: 80,
+                        ),
+                        CustomChip(
+                          label: "고정 크기",
+                          width: 120,
+                        ),
+                        CustomChip(
+                          label: "매우 긴 텍스트를 넣어도",
+                          width: 120,
+                        ),
+                        CustomChip(
+                          label: "삭제",
+                          width: 100,
+                          onDeleted: () => print("삭제됨"),
+                        ),
+                        CustomChip(
+                          label: "선택",
+                          width: 90,
+                          selectable: true,
+                          selected: false,
+                          onSelected: (selected) => print("선택: $selected"),
+                          selectedColor: Colors.teal,
+                          selectedLabelColor: Colors.white,
+                        ),
+                      ],
+                    ),
                   ],
                 ),
 

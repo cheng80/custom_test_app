@@ -617,6 +617,7 @@ CustomChip(label: "태그")
 | `iconSize`         | `double?`               | `null`         | 아이콘 크기                              |
 | `deleteIcon`       | `IconData?`             | `null`         | 삭제 아이콘                              |
 | `tooltip`          | `String?`               | `null`         | 툴팁 메시지                              |
+| `width`            | `double?`               | `null`         | Chip의 너비 (지정하면 크기 고정, 생략하면 유동적) |
 
 ### 사용 예시
 
@@ -656,6 +657,38 @@ CustomChip(
   backgroundColor: Colors.blue.shade50,
   labelColor: Colors.blue,
   borderRadius: 20,
+)
+
+// 고정 크기 (width 지정)
+CustomChip(
+  label: "고정 크기",
+  width: 120, // 크기를 120px로 고정
+)
+
+// 긴 텍스트도 고정 크기
+CustomChip(
+  label: "매우 긴 텍스트를 넣어도",
+  width: 120, // 텍스트가 길어도 120px로 고정
+)
+
+// 삭제 가능한 고정 크기
+CustomChip(
+  label: "삭제",
+  width: 100,
+  onDeleted: () {
+    print("삭제됨");
+  },
+)
+
+// 선택 가능한 고정 크기
+CustomChip(
+  label: "선택",
+  width: 90,
+  selectable: true,
+  selected: false,
+  onSelected: (selected) {
+    print("선택: $selected");
+  },
 )
 ```
 

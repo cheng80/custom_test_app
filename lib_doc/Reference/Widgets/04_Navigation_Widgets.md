@@ -685,7 +685,9 @@ Scaffold(
 | 속성              | 타입            | 기본값         | 설명                             |
 | ----------------- | --------------- | -------------- | -------------------------------- |
 | `header`          | `Widget?`        | `null`         | Drawer 상단에 표시할 헤더 위젯    |
+| `middleChildren`  | `List<Widget>?`  | `null`         | 헤더와 메뉴 항목 사이에 표시할 일반 위젯들 (헤더 아래, items 위) |
 | `items`           | `List<DrawerItem>` | 필수         | Drawer 메뉴 항목 리스트           |
+| `bottomChildren`  | `List<Widget>?`  | `null`         | 메뉴 항목과 푸터 사이에 표시할 일반 위젯들 (items 아래, footer 위) |
 | `backgroundColor`  | `Color?`        | `Colors.white` | Drawer 배경색                    |
 | `width`           | `double?`       | `null`         | Drawer 너비                      |
 | `footer`          | `Widget?`       | `null`         | Drawer 하단에 표시할 위젯         |
@@ -768,6 +770,61 @@ CustomDrawer(
 CustomDrawer(
   items: [
     DrawerItem(label: "홈", icon: Icons.home, onTap: () {}),
+  ],
+  footer: Container(
+    padding: EdgeInsets.all(16),
+    child: Text("버전 1.0.0"),
+  ),
+)
+
+// 헤더와 items 사이에 위젯 추가 (middleChildren)
+CustomDrawer(
+  header: DrawerHeader(...),
+  middleChildren: [
+    Divider(),
+    Padding(
+      padding: EdgeInsets.all(16),
+      child: Text("알림", style: TextStyle(fontSize: 12)),
+    ),
+  ],
+  items: [
+    DrawerItem(label: "홈", icon: Icons.home, onTap: () {}),
+  ],
+)
+
+// items 아래 footer 위에 위젯 추가 (bottomChildren)
+CustomDrawer(
+  items: [
+    DrawerItem(label: "홈", icon: Icons.home, onTap: () {}),
+  ],
+  bottomChildren: [
+    Divider(),
+    Padding(
+      padding: EdgeInsets.all(16),
+      child: ElevatedButton(
+        onPressed: () {},
+        child: Text("로그아웃"),
+      ),
+    ),
+  ],
+  footer: Container(
+    padding: EdgeInsets.all(16),
+    child: Text("버전 1.0.0"),
+  ),
+)
+
+// items가 비어있어도 footer가 하단에 정렬됨
+CustomDrawer(
+  header: DrawerHeader(...),
+  items: [], // 빈 리스트 - 공간 차지 안 함
+  bottomChildren: [
+    Padding(
+      padding: EdgeInsets.all(16),
+      child: ElevatedButton(
+        onPressed: () {},
+        child: Text("로그아웃"),
+      ),
+    ),
   ],
   footer: Container(
     padding: EdgeInsets.all(16),
