@@ -46,7 +46,8 @@ Color? _getThemeChipSelectedTextColor(BuildContext context) {
 /// ```dart
 /// CustomChip(label: "태그", onDeleted: () {})
 /// CustomChip(label: "필터", selectable: true, selected: true, onSelected: (selected) {})
-/// CustomChip(label: "고정 크기", width: 120) // 크기 고정
+/// CustomChip(label: "고정 크기", width: 120) // 너비 고정
+/// CustomChip(label: "고정 크기", width: 120, height: 50) // 너비와 높이 모두 고정
 /// ```
 class CustomChip extends StatelessWidget {
   /// Chip에 표시할 라벨 (필수)
@@ -101,6 +102,9 @@ class CustomChip extends StatelessWidget {
   /// Chip의 너비 (지정하면 크기 고정, 생략하면 유동적)
   final double? width;
 
+  /// Chip의 높이 (지정하면 크기 고정, 생략하면 유동적)
+  final double? height;
+
   const CustomChip({
     super.key,
     required this.label,
@@ -120,6 +124,7 @@ class CustomChip extends StatelessWidget {
     this.deleteIcon,
     this.tooltip,
     this.width,
+    this.height,
   }) : assert(
          !selectable || onSelected != null || !selected,
          'selectable이 true일 때 onSelected가 제공되어야 합니다.',
@@ -207,7 +212,8 @@ class CustomChip extends StatelessWidget {
         avatar: avatar,
         backgroundColor: backgroundColor,
         labelStyle: TextStyle(
-          color: labelColor ?? _getThemeTextPrimaryColor(context) ?? Colors.black,
+          color:
+              labelColor ?? _getThemeTextPrimaryColor(context) ?? Colors.black,
         ),
         padding: padding,
         shape: borderRadius != null
@@ -223,12 +229,9 @@ class CustomChip extends StatelessWidget {
       chip = Tooltip(message: tooltip, child: chip);
     }
 
-    // width가 지정되면 크기 고정
-    if (width != null) {
-      chip = SizedBox(
-        width: width,
-        child: chip,
-      );
+    // width 또는 height가 지정되면 크기 고정
+    if (width != null || height != null) {
+      chip = SizedBox(width: width, height: height, child: chip);
     }
 
     return chip;

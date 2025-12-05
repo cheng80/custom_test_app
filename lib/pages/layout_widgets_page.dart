@@ -202,7 +202,7 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
                       color: p.textSecondary,
                     ),
                     CustomText(
-                      "width 파라미터로 크기를 고정할 수 있습니다.",
+                      "width, height 파라미터로 크기를 고정할 수 있습니다.",
                       fontSize: 12,
                       color: p.textSecondary,
                     ),
@@ -215,7 +215,7 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
                           width: 80,
                         ),
                         CustomChip(
-                          label: "고정 크기",
+                          label: "고정 너비",
                           width: 120,
                         ),
                         CustomChip(
@@ -223,13 +223,24 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
                           width: 120,
                         ),
                         CustomChip(
+                          label: "너비+높이",
+                          width: 120,
+                          height: 50,
+                        ),
+                        CustomChip(
+                          label: "높이만",
+                          height: 50,
+                        ),
+                        CustomChip(
                           label: "삭제",
                           width: 100,
+                          height: 40,
                           onDeleted: () => print("삭제됨"),
                         ),
                         CustomChip(
                           label: "선택",
                           width: 90,
+                          height: 45,
                           selectable: true,
                           selected: false,
                           onSelected: (selected) => print("선택: $selected"),
