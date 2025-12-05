@@ -644,6 +644,31 @@ CustomChip(
   },
 )
 
+// 선택 가능한 고정 크기
+CustomChip(
+  label: "필터",
+  width: 100,
+  selectable: true,
+  selected: true,
+  onSelected: (selected) {
+    print("선택됨: $selected");
+  },
+)
+
+// 선택 가능한 고정 크기 (너비와 높이 모두 지정)
+CustomChip(
+  label: "필터",
+  width: 100,
+  height: 40,
+  selectable: true,
+  selected: true,
+  onSelected: (selected) {
+    print("선택됨: $selected");
+  },
+  selectedColor: Colors.teal,
+  selectedLabelColor: Colors.white,
+)
+
 // 아바타 포함
 CustomChip(
   label: "사용자",

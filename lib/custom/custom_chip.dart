@@ -180,6 +180,13 @@ class CustomChip extends StatelessWidget {
                 borderRadius: BorderRadius.circular(borderRadius!),
               )
             : null,
+        // 크기 고정을 위해 visualDensity 조정
+        visualDensity: (width != null || height != null)
+            ? VisualDensity.adaptivePlatformDensity
+            : null,
+        materialTapTargetSize: (width != null || height != null)
+            ? MaterialTapTargetSize.shrinkWrap
+            : null,
       );
     }
     // 삭제 가능한 Chip
@@ -231,7 +238,19 @@ class CustomChip extends StatelessWidget {
 
     // width 또는 height가 지정되면 크기 고정
     if (width != null || height != null) {
-      chip = SizedBox(width: width, height: height, child: chip);
+      chip = SizedBox(
+        width: width,
+        height: height,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minWidth: width ?? 0,
+            maxWidth: width ?? double.infinity,
+            minHeight: height ?? 0,
+            maxHeight: height ?? double.infinity,
+          ),
+          child: chip,
+        ),
+      );
     }
 
     return chip;
