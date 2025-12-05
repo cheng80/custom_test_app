@@ -640,7 +640,9 @@ CustomChip(
   selectable: true,
   selected: true,
   onSelected: (selected) {
-    print("선택됨: $selected");
+    setState(() {
+      // 상태 업데이트
+    });
   },
 )
 
@@ -651,7 +653,9 @@ CustomChip(
   selectable: true,
   selected: true,
   onSelected: (selected) {
-    print("선택됨: $selected");
+    setState(() {
+      // 상태 업데이트
+    });
   },
 )
 
@@ -663,11 +667,15 @@ CustomChip(
   selectable: true,
   selected: true,
   onSelected: (selected) {
-    print("선택됨: $selected");
+    setState(() {
+      // 상태 업데이트
+    });
   },
   selectedColor: Colors.teal,
   selectedLabelColor: Colors.white,
 )
+
+// 참고: 선택 가능한 Chip은 크기를 고정해도 선택된 상태일 때 왼쪽에 체크 아이콘이 정상적으로 표시됩니다.
 
 // 아바타 포함
 CustomChip(
@@ -720,7 +728,7 @@ CustomChip(
   },
 )
 
-// 선택 가능한 고정 크기
+// 선택 가능한 고정 크기 (선택되지 않은 상태)
 CustomChip(
   label: "선택",
   width: 90,
@@ -728,10 +736,54 @@ CustomChip(
   selectable: true,
   selected: false,
   onSelected: (selected) {
-    print("선택: $selected");
+    setState(() {
+      // 상태 업데이트
+    });
   },
 )
+
+// 선택 가능한 고정 크기 (선택된 상태 - 체크 아이콘 표시)
+CustomChip(
+  label: "선택됨",
+  width: 90,
+  height: 45,
+  selectable: true,
+  selected: true,
+  onSelected: (selected) {
+    setState(() {
+      // 상태 업데이트
+    });
+  },
+  selectedColor: Colors.teal,
+  selectedLabelColor: Colors.white,
+)
+
+// 참고: 선택 가능한 Chip은 크기를 고정해도 선택된 상태일 때 왼쪽에 체크 아이콘이 정상적으로 표시됩니다.
+// 크기 고정 시 clipBehavior: Clip.none으로 설정되어 아이콘이 잘리지 않습니다.
+
+// 선택 가능한 고정 크기 (선택되지 않은 상태와 선택된 상태 비교)
+bool _isSelected = false;
+
+CustomChip(
+  label: "필터",
+  width: 100,
+  height: 40,
+  selectable: true,
+  selected: _isSelected,
+  onSelected: (selected) {
+    setState(() {
+      _isSelected = selected;
+    });
+  },
+  selectedColor: Colors.teal,
+  selectedLabelColor: Colors.white,
+)
 ```
+
+### 주의사항
+
+- **선택 가능한 Chip의 크기 고정**: `width` 또는 `height`를 지정하면 크기가 고정되며, 선택된 상태일 때 왼쪽에 체크 아이콘이 표시됩니다. 아이콘이 잘리지 않도록 `clipBehavior: Clip.none`이 자동으로 적용됩니다.
+- **상태 관리**: 선택 가능한 Chip을 사용할 때는 `selected` 상태를 관리하는 변수가 필요하며, `onSelected` 콜백에서 `setState`를 호출하여 상태를 업데이트해야 합니다.
 
 ---
 

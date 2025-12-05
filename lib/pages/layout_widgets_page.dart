@@ -21,6 +21,15 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
     'UI',
     'Design',
   ];
+  // 고정 크기 Chip 선택 상태 관리
+  bool _fixedChip1Selected = false;
+  bool _fixedChip2Selected = false;
+  bool _fixedChip3Selected = false;
+  bool _fixedChip4Selected = true; // 선택됨 예제용
+  bool _fixedChip5Selected = true; // 선택됨 예제용
+  bool _fixedChip6Selected = true; // 선택됨 예제용
+  bool _normalFixedChip1Selected = false;
+  bool _normalFixedChip2Selected = true; // 선택됨 예제용
 
   @override
   Widget build(BuildContext context) {
@@ -201,6 +210,11 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
                       fontWeight: FontWeight.w500,
                       color: p.textSecondary,
                     ),
+                    CustomText(
+                      "선택된 상태의 Chip은 왼쪽에 체크 아이콘이 표시됩니다.",
+                      fontSize: 12,
+                      color: p.textSecondary,
+                    ),
                     Wrap(
                       spacing: 8,
                       runSpacing: 8,
@@ -209,8 +223,25 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
                           label: "선택1",
                           width: 100,
                           selectable: true,
-                          selected: false,
-                          onSelected: (selected) => print("선택1: $selected"),
+                          selected: _fixedChip1Selected,
+                          onSelected: (selected) {
+                            setState(() {
+                              _fixedChip1Selected = selected;
+                            });
+                          },
+                          selectedColor: Colors.teal,
+                          selectedLabelColor: Colors.white,
+                        ),
+                        CustomChip(
+                          label: "선택됨",
+                          width: 100,
+                          selectable: true,
+                          selected: _fixedChip4Selected,
+                          onSelected: (selected) {
+                            setState(() {
+                              _fixedChip4Selected = selected;
+                            });
+                          },
                           selectedColor: Colors.teal,
                           selectedLabelColor: Colors.white,
                         ),
@@ -219,8 +250,26 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
                           width: 100,
                           height: 40,
                           selectable: true,
-                          selected: false,
-                          onSelected: (selected) => print("선택2: $selected"),
+                          selected: _fixedChip2Selected,
+                          onSelected: (selected) {
+                            setState(() {
+                              _fixedChip2Selected = selected;
+                            });
+                          },
+                          selectedColor: Colors.teal,
+                          selectedLabelColor: Colors.white,
+                        ),
+                        CustomChip(
+                          label: "선택됨2",
+                          width: 100,
+                          height: 40,
+                          selectable: true,
+                          selected: _fixedChip5Selected,
+                          onSelected: (selected) {
+                            setState(() {
+                              _fixedChip5Selected = selected;
+                            });
+                          },
                           selectedColor: Colors.teal,
                           selectedLabelColor: Colors.white,
                         ),
@@ -229,8 +278,26 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
                           width: 120,
                           height: 45,
                           selectable: true,
-                          selected: false,
-                          onSelected: (selected) => print("고정 크기: $selected"),
+                          selected: _fixedChip3Selected,
+                          onSelected: (selected) {
+                            setState(() {
+                              _fixedChip3Selected = selected;
+                            });
+                          },
+                          selectedColor: Colors.teal,
+                          selectedLabelColor: Colors.white,
+                        ),
+                        CustomChip(
+                          label: "고정+선택",
+                          width: 120,
+                          height: 45,
+                          selectable: true,
+                          selected: _fixedChip6Selected,
+                          onSelected: (selected) {
+                            setState(() {
+                              _fixedChip6Selected = selected;
+                            });
+                          },
                           selectedColor: Colors.teal,
                           selectedLabelColor: Colors.white,
                         ),
@@ -284,12 +351,37 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
                           width: 90,
                           height: 45,
                           selectable: true,
-                          selected: false,
-                          onSelected: (selected) => print("선택: $selected"),
+                          selected: _normalFixedChip1Selected,
+                          onSelected: (selected) {
+                            setState(() {
+                              _normalFixedChip1Selected = selected;
+                            });
+                          },
+                          selectedColor: Colors.teal,
+                          selectedLabelColor: Colors.white,
+                        ),
+                        CustomChip(
+                          label: "선택됨",
+                          width: 90,
+                          height: 45,
+                          selectable: true,
+                          selected: _normalFixedChip2Selected,
+                          onSelected: (selected) {
+                            setState(() {
+                              _normalFixedChip2Selected = selected;
+                            });
+                          },
                           selectedColor: Colors.teal,
                           selectedLabelColor: Colors.white,
                         ),
                       ],
+                    ),
+                    const SizedBox(height: 8),
+                    CustomText(
+                      "참고: 선택 가능한 Chip은 선택된 상태일 때 왼쪽에 체크 아이콘이 표시됩니다. 크기를 고정해도 아이콘이 정상적으로 표시됩니다.",
+                      fontSize: 12,
+                      color: Colors.orange.shade700,
+                      fontWeight: FontWeight.bold,
                     ),
                   ],
                 ),

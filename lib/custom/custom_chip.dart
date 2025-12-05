@@ -174,7 +174,11 @@ class CustomChip extends StatelessWidget {
                     _getThemeTextPrimaryColor(context) ??
                     Colors.black),
         ),
-        padding: padding,
+        padding:
+            padding ??
+            ((width != null || height != null) && selectable
+                ? const EdgeInsets.symmetric(horizontal: 12, vertical: 8)
+                : null),
         shape: borderRadius != null
             ? RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(borderRadius!),
@@ -182,7 +186,7 @@ class CustomChip extends StatelessWidget {
             : null,
         // 크기 고정을 위해 visualDensity 조정
         visualDensity: (width != null || height != null)
-            ? VisualDensity.adaptivePlatformDensity
+            ? VisualDensity.compact
             : null,
         materialTapTargetSize: (width != null || height != null)
             ? MaterialTapTargetSize.shrinkWrap
@@ -238,18 +242,11 @@ class CustomChip extends StatelessWidget {
 
     // width 또는 height가 지정되면 크기 고정
     if (width != null || height != null) {
-      chip = SizedBox(
+      chip = Container(
         width: width,
         height: height,
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minWidth: width ?? 0,
-            maxWidth: width ?? double.infinity,
-            minHeight: height ?? 0,
-            maxHeight: height ?? double.infinity,
-          ),
-          child: chip,
-        ),
+        clipBehavior: Clip.none, // 선택 아이콘이 잘리지 않도록
+        child: chip,
       );
     }
 
