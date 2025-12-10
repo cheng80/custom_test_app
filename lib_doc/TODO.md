@@ -27,11 +27,12 @@
 - ✅ **NumberUtil** - 숫자 관련 유틸리티 (CustomCommonUtil에 통합)
 - ✅ **DebounceUtil / ThrottleUtil** - 디바운싱/스로틀링 유틸리티 (TimerUtil에 통합)
 - ✅ **StorageUtil** - 로컬 데이터 저장 유틸리티 (`lib/custom/external_util/storage/`)
-- ✅ **CollectionUtil** - 컬렉션 조작 유틸리티 (`lib/custom/util/collection/`)
-- ✅ **TimerUtil** - 타이머 관리 유틸리티 (`lib/custom/util/timer/`)
-- ✅ **JsonUtil** - JSON 변환 유틸리티 (`lib/custom/util/json/`)
+- ✅ **CollectionUtil** - 컬렉션 조작 유틸리티 (`lib/custom/collection/`)
+- ✅ **TimerUtil** - 타이머 관리 유틸리티 (`lib/custom/timer/`)
+- ✅ **JsonUtil** - JSON 변환 유틸리티 (`lib/custom/json/`)
 - ✅ **NetworkUtil** - HTTP 통신 유틸리티 (`lib/custom/external_util/network/`) - http 패키지 사용
-- ✅ **NavigationUtil** - 네비게이션 유틸리티 (`lib/custom/util/navigation/`) - GetX 스타일 네비게이션
+- ✅ **NavigationUtil** - 네비게이션 유틸리티 (`lib/custom/navigation/`) - GetX 스타일 네비게이션
+- ✅ **GlobalStorage** - 전역 인메모리 저장소 (`lib/core/`) - Map, List, 원시 타입 저장
 
 ---
 
@@ -77,7 +78,7 @@ CustomStepper(
 #### 9. LogUtil (AppLogger)
 
 **우선순위**: 중간  
-**파일**: `lib/custom/util/log/custom_log_util.dart` (별도 파일)
+**파일**: `lib/custom/log/custom_log_util.dart` (별도 파일)
 
 **기능 설명**:
 

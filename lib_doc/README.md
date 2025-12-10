@@ -14,7 +14,7 @@
 
 ### 유틸리티 레퍼런스
 
-- [유틸리티](./Reference/Utilities/06_Utilities.md) - CommonUtil, StorageUtil, CollectionUtil, TimerUtil, JsonUtil, NetworkUtil, NavigationUtil, AddressUtil
+- [유틸리티](./Reference/Utilities/06_Utilities.md) - CommonUtil, StorageUtil, CollectionUtil, TimerUtil, JsonUtil, NetworkUtil, NavigationUtil, AddressUtil, GlobalStorage
 
 ### 기타 문서
 
@@ -94,6 +94,9 @@ import 'package:custom_test_app/custom/utils_core.dart';
 
 // 선택적 import - 전체 유틸리티 (외부 패키지 의존성 필요)
 import 'package:custom_test_app/custom/custom_full.dart';
+
+// 전역 저장소 (Core 모듈)
+import 'package:custom_test_app/core/core.dart';
 ```
 
 ### 테마 색상 지원
@@ -146,6 +149,10 @@ CustomCollectionUtil.unique([1, 2, 2, 3]);
 // 네비게이션 유틸리티
 CustomNavigationUtil.to(context, const NextPage());
 CustomNavigationUtil.back(context);
+
+// 전역 저장소
+context.globalStorage.save('userData', {'name': '홍길동'});
+final userData = context.globalStorage.get<Map>('userData');
 
 // 날짜 선택
 final selectedDate = await CustomDatePicker.show(context: context);

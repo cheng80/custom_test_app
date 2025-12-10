@@ -856,7 +856,7 @@ final copiedMap = CustomCollectionUtil.deepCopyMap(originalMap);
 | `deepCopyList<T>(list)`            | 리스트 딥 카피       |
 | `deepCopyMap<K, V>(map)`           | 맵 딥 카피           |
 
-자세한 내용은 [CollectionUtil README](../lib/common/util/collection/README.md)를 참고하세요.
+자세한 내용은 [CollectionUtil README](../../../lib/custom/collection/README.md)를 참고하세요.
 
 ---
 
@@ -925,7 +925,7 @@ CustomTimerUtil.cancelById('counter');
 | `resumeById(id)`                               | ID로 재개               |
 | `cancelById(id)`                               | ID로 취소               |
 
-자세한 내용은 [TimerUtil README](../lib/common/util/timer/README.md)를 참고하세요.
+자세한 내용은 [TimerUtil README](../../../lib/custom/timer/README.md)를 참고하세요.
 
 ---
 
@@ -996,7 +996,7 @@ final name = CustomJsonUtil.getValue(json, 'user.name');
 | `setValue(json, path, value)`       | 경로로 값 설정         |
 | `removeValue(json, path)`           | 경로로 값 삭제         |
 
-자세한 내용은 [JsonUtil README](../lib/common/util/json/README.md)를 참고하세요.
+자세한 내용은 [JsonUtil README](../../../lib/custom/json/README.md)를 참고하세요.
 
 ---
 
@@ -1258,7 +1258,7 @@ print(addressInfo?['district']); // "송파구"
 print(addressInfo?['fullAddress']); // "대한민국 서울특별시 송파구 가락2동"
 ```
 
-자세한 내용은 [AddressUtil README](../../lib/custom/util/address/README.md)를 참고하세요.
+자세한 내용은 [AddressUtil README](../../../lib/custom/address/README.md)를 참고하세요.
 
 ---
 
@@ -1429,7 +1429,151 @@ final args = CustomNavigationUtil.arguments<Map<String, dynamic>>(context);
 | `Get.back()` | `CustomNavigationUtil.back(context)` | 이전 페이지로 돌아가기 |
 | `Get.until(predicate)` | `CustomNavigationUtil.until(context, predicate)` | 조건까지 뒤로 가기 |
 
-자세한 내용은 [NavigationUtil README](../../lib/custom/util/navigation/README.md)를 참고하세요.
+자세한 내용은 [NavigationUtil README](../../../lib/custom/navigation/README.md)를 참고하세요.
+
+---
+
+## GlobalStorage
+
+전역 저장소 클래스입니다. Map, List뿐만 아니라 String, int, bool, double 등 모든 타입을 키-값 형태로 저장하고 관리하는 인메모리 전역 저장소입니다.
+
+### 주요 기능
+
+- **모든 타입 저장**: Map, List, String, int, bool, double 등 모든 타입 저장 가능
+- **타입 안전한 조회**: 제네릭을 통한 타입 안전한 데이터 조회
+- **타입별 조회 메서드**: `getString()`, `getInt()`, `getDouble()`, `getBool()` 등
+- **타입 확인**: 저장된 값의 타입 확인 및 검증
+- **키 관리**: 키 중복 검사, 키 존재 확인, 모든 키 조회
+- **BuildContext Extension**: `context.globalStorage`로 간편하게 접근
+
+### 의존성
+
+외부 패키지 불필요 (순수 Dart)
+
+### 기본 사용법
+
+```dart
+import 'package:custom_test_app/core/core.dart';
+
+// Extension을 통해 사용 (권장)
+context.globalStorage.save('userData', {'name': '홍길동', 'age': 25});
+context.globalStorage.save('items', [1, 2, 3, 4, 5]);
+context.globalStorage.save('userName', '홍길동');
+context.globalStorage.save('userAge', 25);
+context.globalStorage.save('isActive', true);
+context.globalStorage.save('userScore', 95.5);
+
+// 가져오기 (제네릭)
+final userData = context.globalStorage.get<Map>('userData');
+final items = context.globalStorage.get<List>('items');
+
+// 타입별 안전하게 가져오기
+final name = context.globalStorage.getString('userName');
+final age = context.globalStorage.getInt('userAge');
+final isActive = context.globalStorage.getBool('isActive');
+final score = context.globalStorage.getDouble('userScore');
+
+// 또는 직접 인스턴스 접근
+GlobalStorage.instance.save('key', value);
+final value = GlobalStorage.instance.get<Map>('key');
+```
+
+### 주요 메서드
+
+#### 저장 및 조회
+
+| 메서드 | 설명 | 반환값 |
+|--------|------|--------|
+| `save(key, value)` | 값을 저장 (키가 이미 존재하면 덮어씀) | `void` |
+| `get<T>(key)` | 제네릭으로 타입 안전하게 값 가져오기 | `T?` |
+| `getString(key)` | String 타입으로 값 가져오기 | `String?` |
+| `getInt(key)` | int 타입으로 값 가져오기 | `int?` |
+| `getDouble(key)` | double 타입으로 값 가져오기 | `double?` |
+| `getBool(key)` | bool 타입으로 값 가져오기 | `bool?` |
+
+#### 타입 확인
+
+| 메서드 | 설명 | 반환값 |
+|--------|------|--------|
+| `getType(key)` | 저장된 값의 타입 이름 반환 | `String?` |
+| `isType(key, type)` | 특정 타입인지 확인 | `bool` |
+| `isPrimitiveType(key)` | 기본 타입(String, int, bool, double)인지 확인 | `bool` |
+
+#### 키 관리
+
+| 메서드 | 설명 | 반환값 |
+|--------|------|--------|
+| `containsKey(key)` | 키가 존재하는지 확인 | `bool` |
+| `isKeyAvailable(key)` | 키가 사용 가능한지 확인 (중복 검사) | `bool` |
+| `getAllKeys()` | 모든 키 목록 반환 | `List<String>` |
+| `remove(key)` | 키-값 쌍 삭제 | `dynamic` (삭제된 값) |
+| `clear()` | 모든 데이터 삭제 | `void` |
+
+#### 상태 확인
+
+| 속성 | 설명 | 반환값 |
+|------|------|--------|
+| `length` | 저장된 데이터 개수 | `int` |
+| `isEmpty` | 저장소가 비어있는지 확인 | `bool` |
+| `isNotEmpty` | 저장소에 데이터가 있는지 확인 | `bool` |
+
+### 사용 예시
+
+```dart
+import 'package:custom_test_app/core/core.dart';
+
+// Map/List 저장
+context.globalStorage.save('userData', {'name': '홍길동', 'age': 25});
+context.globalStorage.save('items', [1, 2, 3, 4, 5]);
+
+// 단일 변수 저장
+context.globalStorage.save('userName', '홍길동');
+context.globalStorage.save('userAge', 25);
+context.globalStorage.save('isActive', true);
+context.globalStorage.save('userScore', 95.5);
+
+// 가져오기
+final userData = context.globalStorage.get<Map>('userData');
+final items = context.globalStorage.get<List<int>>('items');
+final name = context.globalStorage.getString('userName');
+final age = context.globalStorage.getInt('userAge');
+
+// 타입 확인
+final type = context.globalStorage.getType('userName'); // 'String'
+if (context.globalStorage.isType('userData', 'Map')) {
+  final data = context.globalStorage.get<Map>('userData');
+}
+
+// 키 중복 검사
+if (context.globalStorage.isKeyAvailable('newKey')) {
+  context.globalStorage.save('newKey', value);
+} else {
+  print('키가 이미 존재합니다');
+}
+
+// 모든 키 조회
+final keys = context.globalStorage.getAllKeys();
+print('저장된 키: $keys');
+
+// 데이터 삭제
+context.globalStorage.remove('userData');
+context.globalStorage.clear(); // 모든 데이터 삭제
+```
+
+### 주의사항
+
+- **인메모리 저장소**: 앱이 종료되면 모든 데이터가 삭제됩니다. 영구 저장이 필요한 경우 `CustomStorageUtil`을 사용하세요.
+- **타입 안전성**: `get<T>()` 메서드는 타입 캐스팅을 시도하지만, 잘못된 타입을 요청하면 `null`을 반환할 수 있습니다.
+- **키 중복**: 같은 키로 저장하면 기존 값이 덮어씌워집니다. 중복을 방지하려면 `isKeyAvailable()`로 먼저 확인하세요.
+
+### StorageUtil과의 차이점
+
+| 항목 | GlobalStorage | CustomStorageUtil |
+|------|--------------|-------------------|
+| 저장 방식 | 인메모리 (앱 종료 시 삭제) | 영구 저장 (SharedPreferences) |
+| 타입 지원 | 모든 타입 (Map, List, 원시 타입) | 제한적 (String, int, bool, double, List<String>) |
+| 사용 목적 | 앱 실행 중 임시 데이터 공유 | 설정값, 사용자 데이터 등 영구 저장 |
+| 의존성 | 없음 | `shared_preferences` 패키지 필요 |
 
 ---
 
@@ -1439,12 +1583,13 @@ final args = CustomNavigationUtil.arguments<Map<String, dynamic>>(context);
 | ---------------------- | ----------------------------- | -------------------- | ------------------------------------------------ |
 | `CustomCommonUtil`     | `lib/custom/`                  | 없음                 | 위젯 헬퍼, 날짜/시간, 문자열, 검증, 포맷팅, 숫자 |
 | `CustomStorageUtil`    | `lib/custom/external_util/storage/`    | `shared_preferences` | 로컬 데이터 저장                                 |
-| `CustomCollectionUtil` | `lib/custom/util/collection/` | 없음                 | 리스트/맵 조작                                   |
-| `CustomTimerUtil`      | `lib/custom/util/timer/`      | 없음                 | 타이머 관리, 코루틴 유사 기능                    |
-| `CustomJsonUtil`       | `lib/custom/util/json/`       | 없음                 | JSON 변환                                        |
-| `CustomAddressUtil`    | `lib/custom/util/address/`    | `http`               | 위도/경도로 주소 가져오기                        |
+| `CustomCollectionUtil` | `lib/custom/collection/` | 없음                 | 리스트/맵 조작                                   |
+| `CustomTimerUtil`      | `lib/custom/timer/`      | 없음                 | 타이머 관리, 코루틴 유사 기능                    |
+| `CustomJsonUtil`       | `lib/custom/json/`       | 없음                 | JSON 변환                                        |
+| `CustomAddressUtil`    | `lib/custom/address/`    | `http`               | 위도/경도로 주소 가져오기                        |
 | `CustomNetworkUtil`    | `lib/custom/external_util/network/`    | `http`               | HTTP 통신                                        |
-| `CustomNavigationUtil` | `lib/custom/util/navigation/` | 없음                 | 네비게이션 헬퍼 (GetX 스타일)                    |
+| `CustomNavigationUtil` | `lib/custom/navigation/` | 없음                 | 네비게이션 헬퍼 (GetX 스타일)                    |
+| `GlobalStorage`        | `lib/core/`                   | 없음                 | 전역 인메모리 저장소 (Map, List, 원시 타입)       |
 
 ## 예제 페이지
 
