@@ -20,6 +20,7 @@
 - ✅ **CustomRefreshIndicator** - Pull to refresh 기능
 - ✅ **CustomFloatingActionButton** - FloatingActionButton 래핑
 - ✅ **CustomDrawer** - 사이드 드로어 메뉴 위젯
+- ✅ **CustomNavigationUtil** - 네비게이션 유틸리티 (GetX 스타일)
 
 ### 중간 우선순위
 
@@ -30,6 +31,7 @@
 - ✅ **TimerUtil** - 타이머 관리 유틸리티 (`lib/custom/util/timer/`)
 - ✅ **JsonUtil** - JSON 변환 유틸리티 (`lib/custom/util/json/`)
 - ✅ **NetworkUtil** - HTTP 통신 유틸리티 (`lib/custom/external_util/network/`) - http 패키지 사용
+- ✅ **NavigationUtil** - 네비게이션 유틸리티 (`lib/custom/util/navigation/`) - GetX 스타일 네비게이션
 
 ---
 
@@ -72,17 +74,16 @@ CustomStepper(
 
 ---
 
-#### 9. LogUtil
+#### 9. LogUtil (AppLogger)
 
 **우선순위**: 중간  
 **파일**: `lib/custom/util/log/custom_log_util.dart` (별도 파일)
 
 **기능 설명**:
 
-- 레벨별 로깅 (debug, info, warning, error)
-- 릴리즈 모드에서 자동 비활성화
-- 파일 로깅 지원 (선택적)
-- 로그 포맷팅
+- 레벨별 로깅 (debug, info, warning, error, success)
+- 릴리즈 모드에서 자동 비활성화 (에러 로그는 선택적 활성화 가능)
+- 로그 포맷팅 (이모지 포함)
 
 **주요 사용 사례**:
 
@@ -94,25 +95,29 @@ CustomStepper(
 **예시 사용법**:
 
 ```dart
-LogUtil.d('디버그 메시지');
-LogUtil.i('정보 메시지');
-LogUtil.w('경고 메시지');
-LogUtil.e('에러 메시지', error: exception);
+import 'package:custom_test_app/custom/util/log/custom_log_util.dart';
+
+AppLogger.d('디버그 메시지');
+AppLogger.i('정보 메시지');
+AppLogger.w('경고 메시지');
+AppLogger.e('에러 메시지', error: exception);
+AppLogger.s('성공 메시지');
 
 // 태그와 함께 사용
-LogUtil.d('디버그 메시지', tag: 'API');
+AppLogger.d('디버그 메시지', tag: 'API');
 ```
 
-**구현 필요 메서드**:
+**구현된 메서드**:
 
-- `d(String message, {String? tag, Object? error})` - 디버그 로그
+- `d(String message, {String? tag})` - 디버그 로그
 - `i(String message, {String? tag})` - 정보 로그
 - `w(String message, {String? tag, Object? error})` - 경고 로그
-- `e(String message, {String? tag, Object? error, StackTrace? stackTrace})` - 에러 로그
-- `setEnabled(bool enabled)` - 로깅 활성화/비활성화
-- `setLogLevel(LogLevel level)` - 로그 레벨 설정
+- `e(String message, {String? tag, Object? error, StackTrace? stackTrace})` - 에러 로그 (릴리즈 모드에서도 출력 가능)
+- `s(String message, {String? tag})` - 성공 로그
 
-**상태**: 📋 계획 중
+**참고**: 현재 `AppLogger`라는 이름으로 구현되어 있으며, `utils_core.dart`에 export되지 않았습니다. 필요시 직접 import하여 사용하세요.
+
+**상태**: ✅ 구현 완료 (AppLogger로 구현됨, utils_core에 미포함)
 
 ---
 
@@ -454,7 +459,7 @@ CustomAudioUtil.stopAll();
 ### 필요시 구현 (중간 우선순위)
 
 1. **CustomStepper** - 멀티 스텝 폼에 유용
-2. **LogUtil** - 디버깅에 유용
+2. **LogUtil (AppLogger)** - 디버깅에 유용 (이미 구현됨, utils_core에 미포함)
 
 ### 필요시 구현 (낮은 우선순위)
 

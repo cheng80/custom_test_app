@@ -4,6 +4,7 @@ import 'address_page.dart';
 import '../custom/util/collection/example.dart';
 import '../custom/util/json/example.dart';
 import '../custom/util/timer/example.dart';
+import '../custom/util/log/example.dart';
 import '../custom/widgets.dart';
 import '../theme/app_colors.dart';
 
@@ -249,6 +250,41 @@ class UtilPage extends StatelessWidget {
                         btnText: '예제 보기',
                         onCallBack: () {
                           Navigator.pushNamed(context, '/network');
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // AppLogger 예제
+              CustomCard(
+                padding: const EdgeInsets.all(16),
+                child: CustomColumn(
+                  spacing: 12,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomText(
+                      'AppLogger',
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    CustomText(
+                      '앱 전역 로깅 유틸리티 (디버그/정보/경고/에러/성공 로그)',
+                      fontSize: 14,
+                      color: Colors.grey[700]!,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: CustomButton(
+                        btnText: '예제 보기',
+                        onCallBack: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LogExamplePage(),
+                            ),
+                          );
                         },
                       ),
                     ),

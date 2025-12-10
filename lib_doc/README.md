@@ -14,7 +14,7 @@
 
 ### 유틸리티 레퍼런스
 
-- [유틸리티](./Reference/Utilities/06_Utilities.md) - CommonUtil, StorageUtil, CollectionUtil, TimerUtil, JsonUtil, NetworkUtil
+- [유틸리티](./Reference/Utilities/06_Utilities.md) - CommonUtil, StorageUtil, CollectionUtil, TimerUtil, JsonUtil, NetworkUtil, NavigationUtil, AddressUtil
 
 ### 기타 문서
 
@@ -104,6 +104,7 @@ import 'package:custom_test_app/custom/custom_full.dart';
 - **테마가 없는 경우**: Material Theme 기본값 사용 (다른 앱에서도 사용 가능)
 
 **사용 예시:**
+
 ```dart
 // 테마 색상 자동 적용 (backgroundColor를 지정하지 않으면 테마 primary 색상 사용)
 CustomButton(btnText: "확인", onCallBack: () {})
@@ -141,6 +142,10 @@ CustomButton(
 // 유틸리티 사용
 CustomCommonUtil.formatDate(DateTime.now(), 'yyyy-MM-dd');
 CustomCollectionUtil.unique([1, 2, 2, 3]);
+
+// 네비게이션 유틸리티
+CustomNavigationUtil.to(context, const NextPage());
+CustomNavigationUtil.back(context);
 
 // 날짜 선택
 final selectedDate = await CustomDatePicker.show(context: context);
@@ -217,11 +222,13 @@ CustomRating(
 ### 테마 색상 우선순위
 
 1. **명시적 색상 지정** (최우선)
+
    ```dart
    CustomButton(btnText: "확인", backgroundColor: Colors.red, onCallBack: () {})
    ```
 
 2. **테마 색상** (AppColorScheme이 있는 경우)
+
    ```dart
    CustomButton(btnText: "확인", onCallBack: () {}) // 테마 primary 색상 자동 적용
    ```

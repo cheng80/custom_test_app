@@ -13,6 +13,7 @@ import 'pages/snackbar_action_sheet_page.dart';
 import 'pages/tab_bar_page.dart';
 import 'pages/text_field_page.dart';
 import 'pages/util_page.dart';
+import 'core_global_storage_example.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -48,7 +49,7 @@ class _HomeState extends State<Home> {
     _sliderValue = 50.0;
     _rating = 0.0;
     _ratingCommentController = TextEditingController();
-     _selectedDropdownValue =_radioValue;
+    _selectedDropdownValue = _radioValue;
   }
 
   @override
@@ -258,6 +259,19 @@ class _HomeState extends State<Home> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => const UtilPage(),
+                          ),
+                        );
+                      },
+                    ),
+                    CustomButton(
+                      btnText: "GlobalStorage 예제",
+                      backgroundColor: Colors.blue,
+                      onCallBack: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const CoreGlobalStorageExamplePage(),
                           ),
                         );
                       },
@@ -878,11 +892,27 @@ class _HomeState extends State<Home> {
                       spacing: 8,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Expanded(child: _buildImageCard("images/bee.png", "벌", context)),
                         Expanded(
-                          child: _buildImageCard("images/cat.png", "고양이", context),
+                          child: _buildImageCard(
+                            "images/bee.png",
+                            "벌",
+                            context,
+                          ),
                         ),
-                        Expanded(child: _buildImageCard("images/cow.png", "소", context)),
+                        Expanded(
+                          child: _buildImageCard(
+                            "images/cat.png",
+                            "고양이",
+                            context,
+                          ),
+                        ),
+                        Expanded(
+                          child: _buildImageCard(
+                            "images/cow.png",
+                            "소",
+                            context,
+                          ),
+                        ),
                       ],
                     ),
                     // 두 번째 행: 3개 이미지
@@ -891,13 +921,25 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Expanded(
-                          child: _buildImageCard("images/dog.png", "강아지", context),
+                          child: _buildImageCard(
+                            "images/dog.png",
+                            "강아지",
+                            context,
+                          ),
                         ),
                         Expanded(
-                          child: _buildImageCard("images/fox.png", "여우", context),
+                          child: _buildImageCard(
+                            "images/fox.png",
+                            "여우",
+                            context,
+                          ),
                         ),
                         Expanded(
-                          child: _buildImageCard("images/monkey.png", "원숭이", context),
+                          child: _buildImageCard(
+                            "images/monkey.png",
+                            "원숭이",
+                            context,
+                          ),
                         ),
                       ],
                     ),
@@ -907,10 +949,18 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Expanded(
-                          child: _buildImageCard("images/pig.png", "돼지", context),
+                          child: _buildImageCard(
+                            "images/pig.png",
+                            "돼지",
+                            context,
+                          ),
                         ),
                         Expanded(
-                          child: _buildImageCard("images/wolf.png", "늑대", context),
+                          child: _buildImageCard(
+                            "images/wolf.png",
+                            "늑대",
+                            context,
+                          ),
                         ),
                       ],
                     ),
@@ -1208,7 +1258,12 @@ class _HomeState extends State<Home> {
                       fontSize: 14,
                       color: p.textSecondary,
                     ),
-                    _buildAnimalCard("images/dog.png", "강아지", "충실한 반려동물", context),
+                    _buildAnimalCard(
+                      "images/dog.png",
+                      "강아지",
+                      "충실한 반려동물",
+                      context,
+                    ),
                     const SizedBox(height: 12),
                     _buildAnimalCard("images/fox.png", "여우", "영리한 동물", context),
                   ],
@@ -1480,7 +1535,12 @@ class _HomeState extends State<Home> {
   }
 
   /// 동물 카드를 생성하는 헬퍼 메서드
-  Widget _buildAnimalCard(String imagePath, String title, String description, BuildContext context) {
+  Widget _buildAnimalCard(
+    String imagePath,
+    String title,
+    String description,
+    BuildContext context,
+  ) {
     final p = context.palette;
     return CustomCard(
       borderRadius: 16,
@@ -1504,7 +1564,12 @@ class _HomeState extends State<Home> {
                 spacing: 8,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomText(title, fontSize: 20, fontWeight: FontWeight.bold, color: p.textPrimary),
+                  CustomText(
+                    title,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: p.textPrimary,
+                  ),
                   CustomText(description, fontSize: 14, color: p.textSecondary),
                 ],
               ),

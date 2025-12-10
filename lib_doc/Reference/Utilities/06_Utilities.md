@@ -1262,17 +1262,189 @@ print(addressInfo?['fullAddress']); // "대한민국 서울특별시 송파구 �
 
 ---
 
+## CustomNavigationUtil
+
+GetX의 `Get.to`, `Get.toNamed` 등과 유사한 기능을 제공하는 네비게이션 유틸리티입니다.
+
+Flutter의 기본 `Navigator`를 래핑하여 더 간편하게 사용할 수 있습니다.
+
+### 주요 기능
+
+- **기본 네비게이션**: `to()`, `toNamed()`, `off()`, `offNamed()`, `offAll()`, `offAllNamed()`
+- **뒤로 가기**: `back()`, `until()`, `untilNamed()`, `untilFirst()`
+- **유틸리티**: `currentRoute()`, `arguments()`, `canPop()`, `stackCount()`
+- **스와이프 백 제어**: iOS 스와이프 백 제스처 활성화/비활성화
+- **페이지 전환 애니메이션**: 슬라이드, 페이드, 없음 선택 가능
+
+### 의존성
+
+외부 패키지 불필요 (Flutter Navigator 래핑)
+
+### 기본 사용법
+
+```dart
+import 'package:custom_test_app/custom/utils_core.dart';
+
+// 새 페이지로 이동
+CustomNavigationUtil.to(
+  context,
+  const NextPage(),
+);
+
+// 라우트 이름으로 이동
+CustomNavigationUtil.toNamed(
+  context,
+  '/detail',
+  arguments: {'id': 123},
+);
+
+// 이전 페이지로 돌아가기
+CustomNavigationUtil.back(context);
+
+// 반환값과 함께 돌아가기
+CustomNavigationUtil.back(context, result: '반환값');
+```
+
+### 주요 메서드
+
+#### 기본 네비게이션
+
+| 메서드 | 설명 | 반환값 |
+|--------|------|--------|
+| `to(context, page, {...})` | 새 페이지로 이동 | `Future<T?>` |
+| `toNamed(context, routeName, {...})` | 라우트 이름으로 이동 | `Future<T?>` |
+| `off(context, page, {...})` | 현재 페이지를 대체하고 이동 | `Future<T?>` |
+| `offNamed(context, routeName, {...})` | 현재 페이지를 대체하고 라우트로 이동 | `Future<T?>` |
+| `offAll(context, page, {...})` | 모든 페이지를 제거하고 이동 | `Future<T?>` |
+| `offAllNamed(context, routeName, {...})` | 모든 페이지를 제거하고 라우트로 이동 | `Future<T?>` |
+
+#### 뒤로 가기
+
+| 메서드 | 설명 |
+|--------|------|
+| `back(context, {result})` | 이전 페이지로 돌아가기 |
+| `until(context, predicate)` | 특정 조건까지 뒤로 가기 |
+| `untilNamed(context, routeName)` | 특정 라우트까지 뒤로 가기 |
+| `untilFirst(context)` | 첫 번째 페이지까지 뒤로 가기 |
+
+#### 유틸리티
+
+| 메서드 | 설명 | 반환값 |
+|--------|------|--------|
+| `currentRoute(context)` | 현재 라우트 이름 가져오기 | `String?` |
+| `arguments<T>(context)` | 현재 라우트의 arguments 가져오기 | `T?` |
+| `canPop(context)` | 뒤로 갈 수 있는지 확인 | `bool` |
+| `stackCount(context)` | 스택에 있는 페이지 수 확인 | `int` |
+
+### 페이지 전환 애니메이션
+
+`PageTransitionType` enum을 사용하여 페이지 전환 애니메이션을 선택할 수 있습니다:
+
+- `PageTransitionType.slide`: 슬라이드 애니메이션 (기본값)
+- `PageTransitionType.fade`: 페이드 애니메이션
+- `PageTransitionType.none`: 애니메이션 없음
+
+```dart
+// 페이드 애니메이션 사용
+CustomNavigationUtil.to(
+  context,
+  const NextPage(),
+  transitionType: PageTransitionType.fade,
+);
+
+// 애니메이션 없음
+CustomNavigationUtil.to(
+  context,
+  const NextPage(),
+  transitionType: PageTransitionType.none,
+);
+```
+
+### 스와이프 백 제어
+
+iOS 스와이프 백 제스처를 제어할 수 있습니다:
+
+```dart
+// 스와이프 백 활성화
+CustomNavigationUtil.to(
+  context,
+  const NextPage(),
+  enableSwipeBack: true,
+);
+
+// 스와이프 백 비활성화 (기본값)
+CustomNavigationUtil.to(
+  context,
+  const NextPage(),
+  enableSwipeBack: false,
+);
+```
+
+### 사용 예시
+
+```dart
+// 기본 사용
+CustomNavigationUtil.to(
+  context,
+  const NextPage(),
+);
+
+// Future 반환값 활용
+final result = await CustomNavigationUtil.to(
+  context,
+  const NextPage(),
+);
+print('반환값: $result');
+
+// 현재 페이지 대체
+CustomNavigationUtil.off(
+  context,
+  const LoginPage(),
+);
+
+// 모든 페이지 제거 후 이동
+CustomNavigationUtil.offAll(
+  context,
+  const HomePage(),
+);
+
+// 특정 페이지까지 뒤로 가기
+CustomNavigationUtil.untilNamed(context, '/home');
+
+// 현재 라우트 정보 가져오기
+final route = CustomNavigationUtil.currentRoute(context);
+final args = CustomNavigationUtil.arguments<Map<String, dynamic>>(context);
+```
+
+### GetX와의 비교
+
+| GetX | CustomNavigationUtil | 설명 |
+|------|---------------------|------|
+| `Get.to(Widget)` | `CustomNavigationUtil.to(context, Widget)` | 새 페이지로 이동 |
+| `Get.toNamed(String)` | `CustomNavigationUtil.toNamed(context, String)` | 라우트로 이동 |
+| `Get.off(Widget)` | `CustomNavigationUtil.off(context, Widget)` | 현재 페이지 대체 |
+| `Get.offNamed(String)` | `CustomNavigationUtil.offNamed(context, String)` | 라우트로 대체 |
+| `Get.offAll(Widget)` | `CustomNavigationUtil.offAll(context, Widget)` | 모든 페이지 제거 후 이동 |
+| `Get.offAllNamed(String)` | `CustomNavigationUtil.offAllNamed(context, String)` | 모든 페이지 제거 후 라우트로 이동 |
+| `Get.back()` | `CustomNavigationUtil.back(context)` | 이전 페이지로 돌아가기 |
+| `Get.until(predicate)` | `CustomNavigationUtil.until(context, predicate)` | 조건까지 뒤로 가기 |
+
+자세한 내용은 [NavigationUtil README](../../lib/custom/util/navigation/README.md)를 참고하세요.
+
+---
+
 ## 유틸리티 클래스 요약
 
 | 클래스                 | 위치                          | 의존성               | 주요 용도                                        |
 | ---------------------- | ----------------------------- | -------------------- | ------------------------------------------------ |
-| `CustomCommonUtil`     | `lib/common/`                 | 없음                 | 위젯 헬퍼, 날짜/시간, 문자열, 검증, 포맷팅, 숫자 |
+| `CustomCommonUtil`     | `lib/custom/`                  | 없음                 | 위젯 헬퍼, 날짜/시간, 문자열, 검증, 포맷팅, 숫자 |
 | `CustomStorageUtil`    | `lib/custom/external_util/storage/`    | `shared_preferences` | 로컬 데이터 저장                                 |
-| `CustomCollectionUtil` | `lib/common/util/collection/` | 없음                 | 리스트/맵 조작                                   |
-| `CustomTimerUtil`      | `lib/common/util/timer/`      | 없음                 | 타이머 관리, 코루틴 유사 기능                    |
-| `CustomJsonUtil`       | `lib/common/util/json/`       | 없음                 | JSON 변환                                        |
+| `CustomCollectionUtil` | `lib/custom/util/collection/` | 없음                 | 리스트/맵 조작                                   |
+| `CustomTimerUtil`      | `lib/custom/util/timer/`      | 없음                 | 타이머 관리, 코루틴 유사 기능                    |
+| `CustomJsonUtil`       | `lib/custom/util/json/`       | 없음                 | JSON 변환                                        |
 | `CustomAddressUtil`    | `lib/custom/util/address/`    | `http`               | 위도/경도로 주소 가져오기                        |
 | `CustomNetworkUtil`    | `lib/custom/external_util/network/`    | `http`               | HTTP 통신                                        |
+| `CustomNavigationUtil` | `lib/custom/util/navigation/` | 없음                 | 네비게이션 헬퍼 (GetX 스타일)                    |
 
 ## 예제 페이지
 

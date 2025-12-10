@@ -1,5 +1,5 @@
 import 'custom_text.dart';
-import 'custom_common_util.dart';
+import 'utils_core.dart';
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart'; // PaletteContext extension 사용
 
@@ -34,22 +34,22 @@ Color? _getThemeTextSecondaryColor(BuildContext context) {
   }
 }
 
-/// BottomSheet 항목 정보 클래스
+// BottomSheet 항목 정보 클래스
 class BottomSheetItem {
-  /// 항목의 텍스트 또는 위젯
-  /// String인 경우 CustomText로 자동 변환, Widget인 경우 그대로 사용
+  // 항목의 텍스트 또는 위젯
+  // String인 경우 CustomText로 자동 변환, Widget인 경우 그대로 사용
   final dynamic label;
 
-  /// 항목의 아이콘 (선택사항)
+  // 항목의 아이콘 (선택사항)
   final IconData? icon;
 
-  /// 항목의 텍스트 색상 (선택사항, 기본값: Colors.black)
+  // 항목의 텍스트 색상 (선택사항, 기본값: Colors.black)
   final Color? textColor;
 
-  /// 항목 클릭 시 실행될 콜백
+  // 항목 클릭 시 실행될 콜백
   final VoidCallback? onTap;
 
-  /// 이 항목이 위험한 작업인지 여부 (true일 경우 빨간색으로 표시)
+  // 이 항목이 위험한 작업인지 여부 (true일 경우 빨간색으로 표시)
   final bool isDestructive;
 
   BottomSheetItem({
@@ -64,18 +64,18 @@ class BottomSheetItem {
        );
 }
 
-/// 하단 시트 다이얼로그 헬퍼 클래스
-///
-/// 사용 예시:
-/// ```dart
-/// CustomBottomSheet.show(
-///   context: context,
-///   title: "옵션 선택",
-///   items: [BottomSheetItem(label: "옵션1", onTap: () {})],
-/// )
-/// ```
+// 하단 시트 다이얼로그 헬퍼 클래스
+//
+// 사용 예시:
+// ```dart
+// CustomBottomSheet.show(
+//   context: context,
+//   title: "옵션 선택",
+//   items: [BottomSheetItem(label: "옵션1", onTap: () {})],
+// )
+// ```
 class CustomBottomSheet {
-  /// BottomSheet를 표시하는 정적 메서드
+  // BottomSheet를 표시하는 정적 메서드
   static Future<T?> show<T>({
     required BuildContext context,
     String? title,
@@ -98,7 +98,10 @@ class CustomBottomSheet {
       context: context,
       isDismissible: isDismissible,
       enableDrag: enableDrag,
-      backgroundColor: backgroundColor ?? _getThemeCardBackgroundColor(context) ?? Colors.white,
+      backgroundColor:
+          backgroundColor ??
+          _getThemeCardBackgroundColor(context) ??
+          Colors.white,
       isScrollControlled: isScrollControlled,
       shape: borderRadius != null
           ? RoundedRectangleBorder(
@@ -133,7 +136,9 @@ class CustomBottomSheet {
                             title,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: _getThemeTextPrimaryColor(context) ?? Colors.black,
+                            color:
+                                _getThemeTextPrimaryColor(context) ??
+                                Colors.black,
                           ),
                         if (message != null) ...[
                           if (title != null) const SizedBox(height: 4),
@@ -141,7 +146,9 @@ class CustomBottomSheet {
                             message,
                             fontSize: 14,
                             fontWeight: FontWeight.normal,
-                            color: _getThemeTextSecondaryColor(context) ?? Colors.grey.shade600,
+                            color:
+                                _getThemeTextSecondaryColor(context) ??
+                                Colors.grey.shade600,
                           ),
                         ],
                       ],
@@ -149,8 +156,7 @@ class CustomBottomSheet {
                   ),
 
                 // 구분선
-                if (title != null || message != null)
-                  const Divider(height: 20),
+                if (title != null || message != null) const Divider(height: 20),
 
                 // 항목들
                 ...items!.map((item) {
@@ -164,7 +170,9 @@ class CustomBottomSheet {
                       fontWeight: FontWeight.normal,
                       color: item.isDestructive
                           ? Colors.red
-                          : (item.textColor ?? _getThemeTextPrimaryColor(context) ?? Colors.black),
+                          : (item.textColor ??
+                                _getThemeTextPrimaryColor(context) ??
+                                Colors.black),
                     );
                   } else {
                     // Widget인 경우 그대로 사용
@@ -177,12 +185,14 @@ class CustomBottomSheet {
                             item.icon,
                             color: item.isDestructive
                                 ? Colors.red
-                                : (item.textColor ?? _getThemeTextPrimaryColor(context) ?? Colors.black),
+                                : (item.textColor ??
+                                      _getThemeTextPrimaryColor(context) ??
+                                      Colors.black),
                           )
                         : null,
                     title: labelWidget,
                     onTap: () {
-                      Navigator.pop(ctx, item.onTap);
+                      CustomNavigationUtil.back(ctx, result: item.onTap);
                       item.onTap?.call();
                     },
                   );
@@ -202,4 +212,3 @@ class CustomBottomSheet {
     );
   }
 }
-
