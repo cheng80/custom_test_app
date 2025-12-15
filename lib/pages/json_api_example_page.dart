@@ -76,7 +76,7 @@ class _JsonApiExamplePageState extends State<JsonApiExamplePage> {
                       fontWeight: FontWeight.bold,
                     ),
                     CustomText(
-                      'URL: https://node.cheng80.synology.me/gamedata?folder=SQ1/68-4&gamename=story_quiz_68-4',
+                      'URL: http://swopenapi.seoul.go.kr/api/subway/6f73517352636865353159466c7045/json/realtimeStationArrival/ALL/',
                       fontSize: 12,
                       color: p.textSecondary,
                     ),
@@ -263,7 +263,7 @@ class _JsonApiExamplePageState extends State<JsonApiExamplePage> {
     try {
       // API 요청
       final url = Uri.parse(
-        'https://node.cheng80.synology.me/gamedata?folder=SQ1/68-4&gamename=story_quiz_68-4',
+        'http://swopenapi.seoul.go.kr/api/subway/6f73517352636865353159466c7045/json/realtimeStationArrival/ALL/',
       );
       final response = await http.get(url);
 

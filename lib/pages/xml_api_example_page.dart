@@ -77,7 +77,7 @@ class _XmlApiExamplePageState extends State<XmlApiExamplePage> {
                       fontWeight: FontWeight.bold,
                     ),
                     CustomText(
-                      'URL: http://swopenapi.seoul.go.kr/api/subway/sample/xml/realtimeStationArrival/ALL/',
+                      'URL: http://swopenapi.seoul.go.kr/api/subway/6f73517352636865353159466c7045/xml/realtimeStationArrival/ALL/',
                       fontSize: 12,
                       color: p.textSecondary,
                     ),
