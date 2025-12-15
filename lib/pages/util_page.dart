@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'address_page.dart';
 import 'json_api_example_page.dart';
+import 'network_page.dart';
+import 'storage_page.dart';
 import 'xml_api_example_page.dart';
 import '../custom/util/collection/example.dart';
 import '../custom/util/json/example.dart';
@@ -76,7 +78,12 @@ class UtilPage extends StatelessWidget {
                       child: CustomButton(
                         btnText: '예제 보기',
                         onCallBack: () {
-                          Navigator.pushNamed(context, '/storage');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const StoragePage(),
+                            ),
+                          );
                         },
                       ),
                     ),
@@ -319,7 +326,12 @@ class UtilPage extends StatelessWidget {
                       child: CustomButton(
                         btnText: '예제 보기',
                         onCallBack: () {
-                          Navigator.pushNamed(context, '/network');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const NetworkPage(),
+                            ),
+                          );
                         },
                       ),
                     ),

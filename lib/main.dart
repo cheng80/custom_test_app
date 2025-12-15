@@ -4,17 +4,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'theme/app_colors.dart';
 
 import 'pages/test_home.dart';
-import 'pages/bottom_sheet_page.dart';
-import 'pages/dialog_page.dart';
-import 'pages/layout_widgets_page.dart';
-import 'pages/list_view_page.dart';
-import 'pages/navigation_widgets_page.dart';
-import 'pages/network_page.dart';
-import 'pages/snackbar_action_sheet_page.dart';
-import 'pages/storage_page.dart';
-import 'pages/tab_bar_page.dart';
-import 'pages/text_field_page.dart';
-import 'pages/util_page.dart';
 
 //import 'package:프로젝트명/home.dart';
 void main() {
@@ -67,6 +56,8 @@ class _MyAppState extends State<MyApp> {
         const Locale('ja', 'JP'), // 일본어
       ],
 
+
+      /*
       initialRoute: '/', // 처음 화면 지정
       routes: {
         '/': (context) => TestHome(onToggleTheme: _toggleTheme),
@@ -82,6 +73,8 @@ class _MyAppState extends State<MyApp> {
         '/bottomsheet': (context) => const BottomSheetPage(),
         '/navigation': (context) => const NavigationWidgetsPage(),
       },
+      */
+      home: TestHome(onToggleTheme: _toggleTheme),
     );
   }
 }
