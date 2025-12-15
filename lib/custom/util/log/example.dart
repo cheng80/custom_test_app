@@ -329,4 +329,3 @@ class _LogExamplePageState extends State<LogExamplePage> {
     );
   }
 }
-

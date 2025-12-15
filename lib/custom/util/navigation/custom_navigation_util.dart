@@ -13,39 +13,39 @@ enum PageTransitionType {
 }
 
 // 스와이프 백 제스처가 비활성화된 PageRoute
-// PopScope를 사용하여 iOS 스와이프 백을 완전히 차단
+// PopScope를 사용하여 iOS 스와이프 백만 차단 (뒤로가기 버튼은 허용)
 class _NoSwipeBackPageRoute<T> extends PageRouteBuilder<T> {
   _NoSwipeBackPageRoute({
     required WidgetBuilder builder,
     super.settings,
     PageTransitionType transitionType = PageTransitionType.slide,
   }) : super(
-         pageBuilder: (context, animation, secondaryAnimation) {
-           // PopScope로 감싸서 스와이프 백 제스처만 차단 (뒤로가기 버튼은 허용)
-           return PopScope(
-             canPop: true, // 뒤로가기 버튼은 허용
-             onPopInvokedWithResult: (bool didPop, dynamic result) {
-               // 스와이프 백 제스처로 인한 pop은 무시
-               // 프로그래밍 방식의 pop(Navigator.pop)은 허용
-               if (didPop) {
-                 // 이미 pop이 발생했으므로 다시 push하여 복구
-                 WidgetsBinding.instance.addPostFrameCallback((_) {
-                   if (Navigator.canPop(context) == false) {
-                     Navigator.push<T>(
-                       context,
-                       _NoSwipeBackPageRoute<T>(
-                         builder: builder,
-                         settings: settings,
-                         transitionType: transitionType,
-                       ),
-                     );
-                   }
-                 });
-               }
-             },
-             child: builder(context),
-           );
-         },
+        pageBuilder: (context, animation, secondaryAnimation) {
+          // PopScope로 감싸서 스와이프 백 제스처만 차단 (뒤로가기 버튼은 허용)
+          return PopScope(
+            canPop: false, // 스와이프 백 제스처 차단
+            onPopInvokedWithResult: (bool didPop, dynamic result) {
+              // 스와이프 백 제스처로 인한 pop은 무시하고 복구
+              // 뒤로가기 버튼이나 Navigator.pop()으로 인한 pop은 허용
+              if (didPop) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  // 스와이프 백 제스처로 인한 pop만 복구
+                  if (!Navigator.canPop(context)) {
+                    Navigator.push<T>(
+                      context,
+                      _NoSwipeBackPageRoute<T>(
+                        builder: builder,
+                        settings: settings,
+                        transitionType: transitionType,
+                      ),
+                    );
+                  }
+                });
+              }
+            },
+            child: builder(context),
+          );
+        },
          // fullscreenDialog: true 제거 (이것이 X 아이콘을 표시하는 원인)
          transitionsBuilder: (context, animation, secondaryAnimation, child) {
            switch (transitionType) {
@@ -68,11 +68,14 @@ class _NoSwipeBackPageRoute<T> extends PageRouteBuilder<T> {
                // 페이드 애니메이션
                return FadeTransition(opacity: animation, child: child);
              case PageTransitionType.none:
-               // 애니메이션 없음
+               // 애니메이션 없음 - animation을 무시하고 항상 완료된 상태로 표시
                return child;
            }
          },
          transitionDuration: transitionType == PageTransitionType.none
+             ? Duration.zero
+             : const Duration(milliseconds: 300),
+         reverseTransitionDuration: transitionType == PageTransitionType.none
              ? Duration.zero
              : const Duration(milliseconds: 300),
        );
@@ -215,7 +218,18 @@ class CustomNavigationUtil {
     bool enableSwipeBack = false,
     PageTransitionType transitionType = PageTransitionType.slide,
   }) {
-    if (enableSwipeBack) {
+    if (transitionType == PageTransitionType.none) {
+      // 애니메이션 없이 즉시 전환
+      return Navigator.pushReplacement<T, void>(
+        context,
+        PageRouteBuilder<T>(
+          pageBuilder: (context, animation, secondaryAnimation) => page,
+          transitionDuration: Duration.zero,
+          reverseTransitionDuration: Duration.zero,
+          settings: settings,
+        ),
+      );
+    } else if (enableSwipeBack) {
       return Navigator.pushReplacement<T, void>(
         context,
         MaterialPageRoute<T>(builder: (context) => page, settings: settings),

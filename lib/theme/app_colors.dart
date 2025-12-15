@@ -56,6 +56,7 @@ class AppColors {
       chipSelectedText: Colors.white, // 흰색 텍스트
       chipUnselectedBg: Color(0xFFE3F2FD), // 연한 파랑 배경
       chipUnselectedText: Color(0xFF1565C0), // 진한 파랑 텍스트
+      textOnPrimary: Colors.white, // Primary 배경에 사용할 흰색 텍스트
     ),
     // dailyFlow: DailyFlowColorScheme(
     //   progressMorning: Color(0xFFFF9800), // 주황색 (아침)
@@ -88,6 +89,7 @@ class AppColors {
       chipSelectedText: Colors.white, // 흰색 텍스트 (가독성 향상)
       chipUnselectedBg: Color(0xFF2C2C2C), // 약간 밝은 다크 배경
       chipUnselectedText: Color(0xFFB0BEC5), // 밝은 회색 텍스트
+      textOnPrimary: Colors.white, // Primary 배경에 사용할 흰색 텍스트
     ),
     // dailyFlow: DailyFlowColorScheme(
     //   progressMorning: Color(0xFFFFB74D), // 밝은 주황색 (아침)
