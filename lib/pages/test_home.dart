@@ -1,31 +1,31 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'custom/custom.dart';
-import 'theme/app_colors.dart';
-import 'pages/bottom_sheet_page.dart';
-import 'pages/dialog_page.dart';
-import 'pages/layout_widgets_page.dart';
-import 'pages/list_view_page.dart';
-import 'pages/navigation_widgets_page.dart';
-import 'pages/picker_grid_page.dart';
-import 'pages/snackbar_action_sheet_page.dart';
-import 'pages/tab_bar_page.dart';
-import 'pages/text_field_page.dart';
-import 'pages/util_page.dart';
-import 'core_global_storage_example.dart';
+import '../custom/custom.dart';
+import '../theme/app_colors.dart';
+import 'bottom_sheet_page.dart';
+import 'dialog_page.dart';
+import 'layout_widgets_page.dart';
+import 'list_view_page.dart';
+import 'navigation_widgets_page.dart';
+import 'picker_grid_page.dart';
+import 'snackbar_action_sheet_page.dart';
+import 'tab_bar_page.dart';
+import 'text_field_page.dart';
+import 'util_page.dart';
+import '../core_global_storage_example.dart';
 import 'package:flutter/material.dart';
 
-class Home extends StatefulWidget {
+class TestHome extends StatefulWidget {
   final VoidCallback onToggleTheme;
 
-  const Home({super.key, required this.onToggleTheme});
+  const TestHome({super.key, required this.onToggleTheme});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<TestHome> createState() => _TestHomeState();
 }
 
-class _HomeState extends State<Home> {
+class _TestHomeState extends State<TestHome> {
   //Property
   late bool _themeBool;
   late bool _switchValue;

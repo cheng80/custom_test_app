@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'theme/app_colors.dart';
 
-import 'home.dart';
+import 'pages/test_home.dart';
 import 'pages/bottom_sheet_page.dart';
 import 'pages/dialog_page.dart';
 import 'pages/layout_widgets_page.dart';
@@ -69,7 +69,7 @@ class _MyAppState extends State<MyApp> {
 
       initialRoute: '/', // 처음 화면 지정
       routes: {
-        '/': (context) => Home(onToggleTheme: _toggleTheme),
+        '/': (context) => TestHome(onToggleTheme: _toggleTheme),
         '/util': (context) => const UtilPage(),
         '/storage': (context) => const StoragePage(),
         '/network': (context) => const NetworkPage(),
