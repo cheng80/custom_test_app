@@ -38,6 +38,7 @@ dependencies:
   flutter_localization: ^0.3.3
   shared_preferences: ^2.2.2
   http: ^1.1.0
+  xml: ^6.5.0
 
 dev_dependencies:
   flutter_test:

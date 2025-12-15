@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'address_page.dart';
+import 'json_api_example_page.dart';
+import 'xml_api_example_page.dart';
 import '../custom/util/collection/example.dart';
 import '../custom/util/json/example.dart';
+import '../custom/util/xml/example.dart';
 import '../custom/util/timer/example.dart';
 import '../custom/util/log/example.dart';
 import '../custom/widgets.dart';
@@ -178,6 +181,73 @@ class UtilPage extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => const JsonUtilExamplePage(),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    SizedBox(
+                      width: double.infinity,
+                      child: CustomButton(
+                        btnText: 'JSON API 파싱 예제',
+                        backgroundColor: Colors.blue,
+                        onCallBack: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const JsonApiExamplePage(),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // XmlUtil 예제
+              CustomCard(
+                padding: const EdgeInsets.all(16),
+                child: CustomColumn(
+                  spacing: 12,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomText(
+                      'XmlUtil',
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    CustomText(
+                      'XML 변환 유틸리티 (저장소와 무관한 순수 XML 변환)',
+                      fontSize: 14,
+                      color: Colors.grey[700]!,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: CustomButton(
+                        btnText: '예제 보기',
+                        onCallBack: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const XmlUtilExamplePage(),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    SizedBox(
+                      width: double.infinity,
+                      child: CustomButton(
+                        btnText: 'XML API 파싱 예제',
+                        backgroundColor: Colors.deepOrange,
+                        onCallBack: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const XmlApiExamplePage(),
                             ),
                           );
                         },
