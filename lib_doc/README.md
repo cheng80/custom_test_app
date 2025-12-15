@@ -14,7 +14,7 @@
 
 ### 유틸리티 레퍼런스
 
-- [유틸리티](./Reference/Utilities/06_Utilities.md) - CommonUtil, StorageUtil, CollectionUtil, TimerUtil, JsonUtil, NetworkUtil, NavigationUtil, AddressUtil, GlobalStorage
+- [유틸리티](./Reference/Utilities/06_Utilities.md) - CommonUtil, StorageUtil, CollectionUtil, TimerUtil, JsonUtil, XmlUtil, NetworkUtil, NavigationUtil, AddressUtil, GlobalStorage
 
 ### 기타 문서
 

@@ -944,7 +944,9 @@ CustomTimerUtil.cancelById('counter');
 - 객체 ↔ JSON 변환
 - JSON 검증
 - JSON 포맷팅
+- Map 포맷팅 (디버깅/표시용)
 - JSON 병합/수정
+- 키 검색 (재귀적 검색)
 
 ### 의존성
 
@@ -973,11 +975,30 @@ final user = CustomJsonUtil.fromJson<User>(
 // JSON 포맷팅
 final formatted = CustomJsonUtil.format('{"name":"홍길동","age":25}');
 
+// Map 포맷팅 (디버깅/표시용)
+final map = {'name': '홍길동', 'age': 25, 'address': {'city': '서울'}};
+final formattedMap = CustomJsonUtil.formatMap(map);
+
 // JSON 병합
 final merged = CustomJsonUtil.merge(json1, json2);
 
 // 경로로 값 가져오기
 final name = CustomJsonUtil.getValue(json, 'user.name');
+
+// 키로 검색 (재귀적 검색)
+final json = {
+  'user': {'name': '홍길동', 'age': 25, 'userName': 'hong123'},
+  'admin': {'name': '관리자', 'role': 'admin'},
+};
+final results = CustomJsonUtil.searchKeys(json, 'name');
+// [MapEntry('user.name', '홍길동'), MapEntry('user.userName', 'hong123'), MapEntry('admin.name', '관리자')]
+
+// 대소문자 구분하여 검색
+final results2 = CustomJsonUtil.searchKeys(json, 'Name', caseSensitive: true);
+
+// 정확한 이름만 검색 (부분 일치 제외)
+final results3 = CustomJsonUtil.searchKeys(json, 'name', exactMatch: true);
+// [MapEntry('user.name', '홍길동'), MapEntry('admin.name', '관리자')]
 ```
 
 ### 주요 메서드
@@ -991,12 +1012,105 @@ final name = CustomJsonUtil.getValue(json, 'user.name');
 | `toJson(object)`                    | 객체 → JSON            |
 | `format(jsonString)`                | JSON 포맷팅 (들여쓰기) |
 | `compress(jsonString)`              | JSON 압축 (공백 제거)  |
+| `formatMap(Map map, {int indent})`  | Map 포맷팅 (디버깅/표시용) |
 | `merge(json1, json2)`               | JSON 병합              |
 | `getValue(json, path)`              | 경로로 값 가져오기     |
 | `setValue(json, path, value)`       | 경로로 값 설정         |
 | `removeValue(json, path)`           | 경로로 값 삭제         |
+| `searchKeys(json, searchKey, {caseSensitive, exactMatch})` | 키로 검색 (재귀적 검색) |
 
-자세한 내용은 [JsonUtil README](../../../lib/custom/json/README.md)를 참고하세요.
+자세한 내용은 [JsonUtil README](../../../lib/custom/util/json/README.md)를 참고하세요.
+
+---
+
+## CustomXmlUtil
+
+저장소와 무관한 순수 XML 변환 유틸리티 클래스입니다.
+
+### JsonUtil과의 차이점
+
+- **JsonUtil**: JSON 문자열 변환 (JSON 형식)
+- **XmlUtil**: XML 문자열 변환 (XML 형식)
+
+### 주요 기능
+
+- 기본 XML 파싱 및 검증
+- XML ↔ Map 변환
+- XML ↔ List 변환
+- XML 요소 접근 (텍스트, 속성)
+- XML 포맷팅 (들여쓰기, 압축)
+- XML 생성
+- 키 검색 (재귀적 검색)
+
+### 의존성
+
+```yaml
+dependencies:
+  xml: ^6.5.0
+```
+
+### 기본 사용법
+
+```dart
+// XML 파싱
+final xml = CustomXmlUtil.parse('<root><name>홍길동</name></root>');
+final name = CustomXmlUtil.getText('<root><name>홍길동</name></root>', tag: 'name');
+print(name); // 홍길동
+
+// XML 검증
+if (CustomXmlUtil.isValid('<root><name>홍길동</name></root>')) {
+  print('유효한 XML입니다');
+}
+
+// XML → Map
+final xmlString = '<user><name>홍길동</name><age>25</age></user>';
+final map = CustomXmlUtil.toMap(xmlString);
+print(map?['name']); // 홍길동
+
+// Map → XML
+final mapData = {'name': '홍길동', 'age': 25};
+final xmlString = CustomXmlUtil.fromMap(mapData, rootTag: 'user');
+
+// XML 요소 접근
+final name = CustomXmlUtil.getText(xmlString, tag: 'name');
+final id = CustomXmlUtil.getAttribute(xmlString, tag: 'user', attribute: 'id');
+final names = CustomXmlUtil.getTextList(xmlString, tag: 'name');
+
+// XML 포맷팅
+final formatted = CustomXmlUtil.format('<root><name>홍길동</name></root>');
+final compressed = CustomXmlUtil.compress(formatted);
+
+// XML 리스트 변환
+final xmlString = '<users><user><name>홍길동</name></user><user><name>김철수</name></user></users>';
+final list = CustomXmlUtil.toList(xmlString, tag: 'user');
+
+// XML 생성
+final xml = CustomXmlUtil.createElement('user', text: '홍길동');
+final xmlWithAttr = CustomXmlUtil.createElement(
+  'user',
+  text: '홍길동',
+  attributes: {'id': '1', 'role': 'admin'},
+);
+```
+
+### 주요 메서드
+
+| 메서드                              | 설명                   |
+| ----------------------------------- | ---------------------- |
+| `parse(xmlString)`                  | XML 문자열 → XmlDocument |
+| `isValid(xmlString)`                | XML 유효성 검증       |
+| `toMap(xmlString)`                  | XML → Map             |
+| `fromMap(Map map, {String rootTag})` | Map → XML            |
+| `toList(xmlString, {String tag})`    | XML → List<Map>       |
+| `fromList(List<Map> list, {...})`   | List<Map> → XML       |
+| `getText(xmlString, {String tag})`  | 태그의 텍스트 가져오기 |
+| `getTextList(xmlString, {String tag})` | 태그의 텍스트 리스트 가져오기 |
+| `getAttribute(xmlString, {...})`    | 속성 값 가져오기      |
+| `format(xmlString)`                 | XML 포맷팅 (들여쓰기) |
+| `compress(xmlString)`                | XML 압축 (공백 제거)  |
+| `createElement(tag, {...})`         | XML 요소 생성         |
+
+자세한 내용은 [XmlUtil README](../../../lib/custom/util/xml/README.md)를 참고하세요.
 
 ---
 
@@ -1585,10 +1699,11 @@ context.globalStorage.clear(); // 모든 데이터 삭제
 | `CustomStorageUtil`    | `lib/custom/external_util/storage/`    | `shared_preferences` | 로컬 데이터 저장                                 |
 | `CustomCollectionUtil` | `lib/custom/collection/` | 없음                 | 리스트/맵 조작                                   |
 | `CustomTimerUtil`      | `lib/custom/timer/`      | 없음                 | 타이머 관리, 코루틴 유사 기능                    |
-| `CustomJsonUtil`       | `lib/custom/json/`       | 없음                 | JSON 변환                                        |
-| `CustomAddressUtil`    | `lib/custom/address/`    | `http`               | 위도/경도로 주소 가져오기                        |
+| `CustomJsonUtil`       | `lib/custom/util/json/`       | 없음                 | JSON 변환                                        |
+| `CustomXmlUtil`        | `lib/custom/util/xml/`        | `xml: ^6.5.0`        | XML 변환                                         |
+| `CustomAddressUtil`    | `lib/custom/util/address/`    | `http`               | 위도/경도로 주소 가져오기                        |
 | `CustomNetworkUtil`    | `lib/custom/external_util/network/`    | `http`               | HTTP 통신                                        |
-| `CustomNavigationUtil` | `lib/custom/navigation/` | 없음                 | 네비게이션 헬퍼 (GetX 스타일)                    |
+| `CustomNavigationUtil` | `lib/custom/util/navigation/` | 없음                 | 네비게이션 헬퍼 (GetX 스타일)                    |
 | `GlobalStorage`        | `lib/core/`                   | 없음                 | 전역 인메모리 저장소 (Map, List, 원시 타입)       |
 
 ## 예제 페이지

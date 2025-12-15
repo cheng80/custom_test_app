@@ -67,6 +67,10 @@ lib/
         │   ├── custom_json_util.dart
         │   ├── example.dart
         │   └── README.md
+        ├── xml/                   # XML 변환 유틸리티
+        │   ├── custom_xml_util.dart
+        │   ├── example.dart
+        │   └── README.md
         └── timer/                 # 타이머 유틸리티
             ├── custom_timer_util.dart
             ├── example.dart
@@ -98,6 +102,8 @@ lib/
 │   ├── storage_page.dart         # StorageUtil 예제
 │   ├── network_page.dart         # NetworkUtil 예제
 │   ├── address_page.dart         # AddressUtil 예제
+│   ├── xml_api_example_page.dart # XML API 파싱 예제
+│   ├── json_api_example_page.dart # JSON API 파싱 예제
 │   └── util_page.dart            # 유틸리티 예제
 ├── home.dart                     # 메인 홈 화면 (모든 위젯 예제)
 └── main.dart                     # 앱 진입점
@@ -223,12 +229,28 @@ lib_doc/                           # 개발 문서
 - JSON 검증
 - 객체 ↔ JSON 변환
 - JSON 포맷팅 (들여쓰기, 압축)
+- Map 포맷팅 (디버깅/표시용)
 - JSON 병합/수정 (경로 기반 값 가져오기/설정/삭제)
+- 키 검색 (재귀적 검색, 대소문자 구분/정확한 매칭 옵션)
 - 안전한 JSON 변환 (에러 처리)
 
 **의존성**: `dart:convert` (기본 제공)
 
 **참고**: StorageUtil의 JSON 기능은 저장소 연동용이며, JsonUtil은 저장소와 무관한 순수 JSON 변환 유틸리티입니다.
+
+### CustomXmlUtil
+
+저장소와 무관한 순수 XML 변환 유틸리티:
+
+- XML 파싱 및 검증
+- XML ↔ Map 변환
+- XML ↔ List 변환
+- XML 요소 접근 (텍스트, 속성)
+- XML 포맷팅 (들여쓰기, 압축)
+- XML 생성
+- 키 검색 (재귀적 검색)
+
+**의존성**: `xml: ^6.5.0`
 
 ### CustomTimerUtil
 
@@ -280,6 +302,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   shared_preferences: ^2.2.2 # StorageUtil에서 사용
   http: ^1.1.0 # NetworkUtil, AddressUtil에서 사용
+  xml: ^6.5.0 # XmlUtil에서 사용
 ```
 
 **참고**:
@@ -287,6 +310,7 @@ dependencies:
 - `flutter_localizations`는 DatePicker 및 CupertinoDatePicker의 다국어 지원을 위해 필요합니다.
 - `shared_preferences`는 StorageUtil 사용 시 필요합니다.
 - `http`는 NetworkUtil 및 AddressUtil 사용 시 필요합니다.
+- `xml`은 XmlUtil 사용 시 필요합니다.
 
 ## 🚀 시작하기
 
@@ -557,6 +581,14 @@ final names = CustomCollectionUtil.extractField(records, (r) => r.name);
 final jsonString = CustomJsonUtil.encode({'name': '홍길동', 'age': 25});
 final user = CustomJsonUtil.fromJson<User>(jsonString, (json) => User.fromJson(json));
 
+// JSON 키 검색
+final results = CustomJsonUtil.searchKeys(json, 'name', caseSensitive: false, exactMatch: false);
+
+// XML 변환
+final xmlString = '<user><name>홍길동</name><age>25</age></user>';
+final map = CustomXmlUtil.toMap(xmlString);
+final xmlFromMap = CustomXmlUtil.fromMap({'name': '홍길동', 'age': 25}, rootTag: 'user');
+
 // 타이머 (Unity 코루틴 유사)
 await CustomTimerUtil.waitForSeconds(2.0);
 final debounced = CustomTimerUtil.debounce(() => performSearch(), Duration(milliseconds: 500));
@@ -656,7 +688,7 @@ CustomGridView(
 
 ### 유틸리티 레퍼런스
 
-- [유틸리티](lib_doc/Reference/Utilities/06_Utilities.md) - CommonUtil, StorageUtil, CollectionUtil, TimerUtil, JsonUtil, NetworkUtil
+- [유틸리티](lib_doc/Reference/Utilities/06_Utilities.md) - CommonUtil, StorageUtil, CollectionUtil, TimerUtil, JsonUtil, XmlUtil, NetworkUtil
 
 ### 기타 문서
 
@@ -688,6 +720,7 @@ CustomGridView(
 
 - DebounceUtil / ThrottleUtil (TimerUtil에 통합)
 - JsonUtil (순수 JSON 변환)
+- XmlUtil (순수 XML 변환)
 - NetworkUtil (HTTP 통신)
 - CustomCupertinoDatePicker (iOS 스타일 날짜 선택기)
 - CustomDatePicker (Material Design 날짜 선택)

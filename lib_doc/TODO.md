@@ -29,7 +29,8 @@
 - ✅ **StorageUtil** - 로컬 데이터 저장 유틸리티 (`lib/custom/external_util/storage/`)
 - ✅ **CollectionUtil** - 컬렉션 조작 유틸리티 (`lib/custom/collection/`)
 - ✅ **TimerUtil** - 타이머 관리 유틸리티 (`lib/custom/timer/`)
-- ✅ **JsonUtil** - JSON 변환 유틸리티 (`lib/custom/json/`)
+- ✅ **JsonUtil** - JSON 변환 유틸리티 (`lib/custom/util/json/`)
+- ✅ **XmlUtil** - XML 변환 유틸리티 (`lib/custom/util/xml/`) - xml 패키지 사용
 - ✅ **NetworkUtil** - HTTP 통신 유틸리티 (`lib/custom/external_util/network/`) - http 패키지 사용
 - ✅ **NavigationUtil** - 네비게이션 유틸리티 (`lib/custom/navigation/`) - GetX 스타일 네비게이션
 - ✅ **GlobalStorage** - 전역 인메모리 저장소 (`lib/core/`) - Map, List, 원시 타입 저장
