@@ -32,6 +32,9 @@ class CustomFloatingActionButton extends StatelessWidget {
   // 버튼 위치 (기본값: FloatingActionButtonLocation.endFloat)
   final FloatingActionButtonLocation? location;
 
+  // Hero 태그
+  final Object? heroTag;
+
   // 원형 FloatingActionButton 생성자
   const CustomFloatingActionButton({
     super.key,
@@ -41,6 +44,7 @@ class CustomFloatingActionButton extends StatelessWidget {
     this.foregroundColor,
     this.tooltip,
     this.location,
+    this.heroTag,
   }) : type = FloatingActionButtonType.regular,
        label = null,
        assert(icon != null, 'icon은 필수입니다.');
@@ -54,6 +58,7 @@ class CustomFloatingActionButton extends StatelessWidget {
     this.foregroundColor,
     this.tooltip,
     this.location,
+    this.heroTag,
   }) : type = FloatingActionButtonType.small,
        label = null,
        assert(icon != null, 'icon은 필수입니다.');
@@ -68,6 +73,7 @@ class CustomFloatingActionButton extends StatelessWidget {
     this.foregroundColor,
     this.tooltip,
     this.location,
+    this.heroTag,
   }) : type = FloatingActionButtonType.extended;
 
   @override
@@ -81,6 +87,7 @@ class CustomFloatingActionButton extends StatelessWidget {
           backgroundColor: backgroundColor,
           foregroundColor: foregroundColor,
           tooltip: tooltip,
+          heroTag: heroTag,
           elevation: 12,
           highlightElevation: 16,
           shape: CircleBorder(side: BorderSide(color: Colors.white, width: 3)),
@@ -93,6 +100,7 @@ class CustomFloatingActionButton extends StatelessWidget {
           backgroundColor: backgroundColor,
           foregroundColor: foregroundColor,
           tooltip: tooltip,
+          heroTag: heroTag,
           elevation: 12,
           highlightElevation: 16,
           shape: CircleBorder(
@@ -107,6 +115,7 @@ class CustomFloatingActionButton extends StatelessWidget {
           backgroundColor: backgroundColor,
           foregroundColor: foregroundColor,
           tooltip: tooltip,
+          heroTag: heroTag,
           elevation: 12,
           highlightElevation: 16,
           shape: RoundedRectangleBorder(
