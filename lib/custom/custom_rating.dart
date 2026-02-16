@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../theme/app_colors.dart'; // PaletteContext extension 사용
+import 'custom_theme_helper.dart';
 
 // 별점 위젯
 //
@@ -64,19 +64,10 @@ class CustomRating extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 테마 색상 가져오기 (선택적)
-    Color? themeAccent;
-    Color? themeTextSecondary;
-    try {
-      themeAccent = context.palette.accent;
-      themeTextSecondary = context.palette.textSecondary;
-    } catch (e) {
-      // PaletteContext가 없는 경우 무시
-    }
-
-    final effectiveFilledColor = filledColor ?? themeAccent ?? Colors.amber;
+    final effectiveFilledColor =
+        filledColor ?? CustomThemeHelper.accent(context);
     final effectiveUnfilledColor =
-        unfilledColor ?? themeTextSecondary ?? Colors.grey;
+        unfilledColor ?? CustomThemeHelper.textSecondary(context);
 
     return Row(
       mainAxisSize: MainAxisSize.min,

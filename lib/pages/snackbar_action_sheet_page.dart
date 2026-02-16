@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../custom/widgets.dart';
-import '../theme/app_colors.dart';
+import '../theme/app_theme_colors.dart';
 
 /// SnackBar & ActionSheet 사용 예제 페이지
 class SnackBarActionSheetPage extends StatefulWidget {
@@ -18,7 +18,7 @@ class _SnackBarActionSheetPageState extends State<SnackBarActionSheetPage> {
 
   @override
   Widget build(BuildContext context) {
-    final p = context.palette;
+    final p = context.appTheme;
     return Scaffold(
       backgroundColor: p.background,
       appBar: CustomAppBar(

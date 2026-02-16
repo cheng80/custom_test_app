@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../custom/widgets.dart';
-import '../theme/app_colors.dart';
+import '../theme/app_theme_colors.dart';
 
 /// BottomSheet 사용 예제 페이지
 class BottomSheetPage extends StatefulWidget {
@@ -13,7 +13,7 @@ class BottomSheetPage extends StatefulWidget {
 class _BottomSheetPageState extends State<BottomSheetPage> {
   @override
   Widget build(BuildContext context) {
-    final p = context.palette;
+    final p = context.appTheme;
     return Scaffold(
       backgroundColor: p.background,
       appBar: CustomAppBar(

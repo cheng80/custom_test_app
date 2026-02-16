@@ -1,26 +1,5 @@
 import 'package:flutter/material.dart';
-import '../theme/app_colors.dart'; // PaletteContext extension 사용
-
-// 테마 색상 지원 (선택적)
-// 다른 앱에서도 사용 가능하도록 try-catch로 처리
-Color? _getThemePrimaryColor(BuildContext context) {
-  try {
-    return context.palette.primary;
-  } catch (e) {
-    // PaletteContext가 없는 경우 Material Theme 기본값 사용
-    return Theme.of(context).colorScheme.primary;
-  }
-}
-
-Color? _getThemeTextPrimaryColor(BuildContext context) {
-  try {
-    return context.palette.textPrimary;
-  } catch (e) {
-    // PaletteContext가 없는 경우 Material Theme 기본값 사용
-    final brightness = Theme.of(context).brightness;
-    return brightness == Brightness.dark ? Colors.white : Colors.black87;
-  }
-}
+import 'custom_theme_helper.dart';
 
 // Checkbox 위젯
 //
@@ -98,10 +77,9 @@ class CustomCheckbox extends StatelessWidget {
   Widget build(BuildContext context) {
     // alwaysShowBorder가 true이면 커스텀 렌더링 사용
     if (alwaysShowBorder) {
-      final borderColorValue = borderColor ?? 
-          checkColor ?? 
-          _getThemeTextPrimaryColor(context) ?? 
-          Colors.black87;
+      final borderColorValue = borderColor ??
+          checkColor ??
+          CustomThemeHelper.textPrimary(context);
       
       Widget checkboxWidget = GestureDetector(
         onTap: onChanged != null && value != null
@@ -142,7 +120,7 @@ class CustomCheckbox extends StatelessWidget {
                     labelStyle ??
                     TextStyle(
                       fontSize: 16,
-                      color: _getThemeTextPrimaryColor(context) ?? Colors.black87,
+                      color: CustomThemeHelper.textPrimary(context),
                     ),
               ),
             ),
@@ -165,9 +143,7 @@ class CustomCheckbox extends StatelessWidget {
                 return inactiveColor;
               }
               if (states.contains(WidgetState.selected)) {
-                return activeColor ??
-                    _getThemePrimaryColor(context) ??
-                    Colors.blue;
+                return activeColor ?? CustomThemeHelper.primary(context);
               }
               return inactiveColor;
             }),
@@ -177,9 +153,7 @@ class CustomCheckbox extends StatelessWidget {
             ) {
               if (states.contains(WidgetState.selected)) {
                 final themeColor =
-                    activeColor ??
-                    _getThemePrimaryColor(context) ??
-                    Colors.blue;
+                    activeColor ?? CustomThemeHelper.primary(context);
                 return themeColor.withValues(alpha: 0.12);
               }
               return null;
@@ -210,7 +184,7 @@ class CustomCheckbox extends StatelessWidget {
                   labelStyle ??
                   TextStyle(
                     fontSize: 16,
-                    color: _getThemeTextPrimaryColor(context) ?? Colors.black87,
+                    color: CustomThemeHelper.textPrimary(context),
                   ),
             ),
           ),

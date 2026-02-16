@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../custom/widgets.dart';
-import '../theme/app_colors.dart';
+import '../theme/app_theme_colors.dart';
 
 /// ListView 사용 예제 페이지
 class ListViewPage extends StatefulWidget {
@@ -25,7 +25,7 @@ class _ListViewPageState extends State<ListViewPage> {
 
   @override
   Widget build(BuildContext context) {
-    final p = context.palette;
+    final p = context.appTheme;
     return Scaffold(
       backgroundColor: p.background,
       appBar: CustomAppBar(

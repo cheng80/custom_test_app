@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../custom/external_util/network/custom_network_util.dart';
 import '../custom/widgets.dart';
-import '../theme/app_colors.dart';
+import '../theme/app_theme_colors.dart';
 
 /// NetworkUtil 사용 예제 페이지
 ///
@@ -26,7 +26,7 @@ class _NetworkPageState extends State<NetworkPage> {
 
   @override
   Widget build(BuildContext context) {
-    final p = context.palette;
+    final p = context.appTheme;
     return Scaffold(
       backgroundColor: p.background,
       appBar: CustomAppBar(

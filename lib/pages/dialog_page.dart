@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../custom/widgets.dart';
-import '../theme/app_colors.dart';
+import '../theme/app_theme_colors.dart';
 
 /// Dialog 사용 예제 페이지
 class DialogPage extends StatefulWidget {
@@ -16,7 +16,7 @@ class _DialogPageState extends State<DialogPage> {
 
   @override
   Widget build(BuildContext context) {
-    final p = context.palette;
+    final p = context.appTheme;
     return Scaffold(
       backgroundColor: p.background,
       appBar: CustomAppBar(title: "Dialog 예시", backgroundColor: Colors.orange), // 예제용 색상 유지
@@ -247,7 +247,7 @@ class _DialogPageState extends State<DialogPage> {
                       btnText: "Widget 다이얼로그",
                       backgroundColor: Colors.deepPurple, // 예제용 색상 유지
                       onCallBack: () {
-                        final p = context.palette;
+                        final p = context.appTheme;
                         CustomDialog.show(
                           context,
                           title: Row(

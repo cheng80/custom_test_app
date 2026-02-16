@@ -1,38 +1,7 @@
 import 'custom_text.dart';
+import 'custom_theme_helper.dart';
 import 'utils_core.dart';
 import 'package:flutter/material.dart';
-import '../theme/app_colors.dart'; // PaletteContext extension 사용
-
-// 테마 색상 지원 (선택적)
-// 다른 앱에서도 사용 가능하도록 try-catch로 처리
-Color? _getThemePrimaryColor(BuildContext context) {
-  try {
-    return context.palette.primary;
-  } catch (e) {
-    // PaletteContext가 없는 경우 Material Theme 기본값 사용
-    return Theme.of(context).colorScheme.primary;
-  }
-}
-
-Color? _getThemeTextPrimaryColor(BuildContext context) {
-  try {
-    return context.palette.textPrimary;
-  } catch (e) {
-    // PaletteContext가 없는 경우 Material Theme 기본값 사용
-    final brightness = Theme.of(context).brightness;
-    return brightness == Brightness.dark ? Colors.white : Colors.black;
-  }
-}
-
-Color? _getThemeCardBackgroundColor(BuildContext context) {
-  try {
-    return context.palette.cardBackground;
-  } catch (e) {
-    // PaletteContext가 없는 경우 Material Theme 기본값 사용
-    final brightness = Theme.of(context).brightness;
-    return brightness == Brightness.dark ? Colors.grey[900] : Colors.white;
-  }
-}
 
 // Drawer 메뉴 항목 정보 클래스
 class DrawerItem {
@@ -137,9 +106,7 @@ class CustomDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       backgroundColor:
-          backgroundColor ??
-          _getThemeCardBackgroundColor(context) ??
-          Colors.white,
+          backgroundColor ?? CustomThemeHelper.cardBackground(context),
       width: width,
       child: SafeArea(
         child: Column(
@@ -173,11 +140,9 @@ class CustomDrawer extends StatelessWidget {
                                 : FontWeight.normal,
                             color: item.selected
                                 ? (item.selectedTextColor ??
-                                      _getThemePrimaryColor(context) ??
-                                      Colors.blue)
+                                      CustomThemeHelper.primary(context))
                                 : (item.textColor ??
-                                      _getThemeTextPrimaryColor(context) ??
-                                      Colors.black),
+                                      CustomThemeHelper.textPrimary(context)),
                           );
                         } else {
                           // Widget인 경우 그대로 사용
@@ -191,21 +156,17 @@ class CustomDrawer extends StatelessWidget {
                                   color: item.selected
                                       ? (item.selectedIconColor ??
                                             item.selectedTextColor ??
-                                            _getThemePrimaryColor(context) ??
-                                            Colors.blue)
+                                            CustomThemeHelper.primary(context))
                                       : (item.iconColor ??
                                             item.textColor ??
-                                            _getThemeTextPrimaryColor(
-                                              context,
-                                            ) ??
-                                            Colors.black),
+                                            CustomThemeHelper.textPrimary(context)),
                                 )
                               : null,
                           title: labelWidget,
                           selected: item.selected,
                           selectedTileColor:
                               item.selectedColor ??
-                              (_getThemePrimaryColor(context) ?? Colors.blue)
+                              CustomThemeHelper.primary(context)
                                   .withValues(alpha: 0.1),
                           onTap: () {
                             CustomNavigationUtil.back(context);

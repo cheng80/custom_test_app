@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../custom/widgets.dart';
-import '../theme/app_colors.dart';
+import '../theme/app_theme_colors.dart';
 
 /// Picker 및 Grid 위젯 사용 예제 페이지
 class PickerGridPage extends StatefulWidget {
@@ -36,7 +36,7 @@ class _PickerGridPageState extends State<PickerGridPage> {
 
   @override
   Widget build(BuildContext context) {
-    final p = context.palette;
+    final p = context.appTheme;
     return Scaffold(
       backgroundColor: p.background,
       appBar: CustomAppBar(

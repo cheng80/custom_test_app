@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import '../custom/util/json/custom_json_util.dart';
 import '../custom/util/xml/custom_xml_util.dart';
 import '../custom/widgets.dart';
-import '../theme/app_colors.dart';
+import '../theme/app_theme_colors.dart';
 
 /// 서울시 지하철 실시간 도착 정보 API 파싱 예제 페이지
 class XmlApiExamplePage extends StatefulWidget {
@@ -31,7 +31,7 @@ class _XmlApiExamplePageState extends State<XmlApiExamplePage> {
 
   @override
   Widget build(BuildContext context) {
-    final p = context.palette;
+    final p = context.appTheme;
     return Scaffold(
       backgroundColor: p.background,
       appBar: CustomAppBar(

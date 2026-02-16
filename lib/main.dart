@@ -1,7 +1,8 @@
 //main.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'theme/app_colors.dart';
+import 'theme/app_theme_colors.dart';
+import 'theme/theme_provider.dart';
 
 import 'pages/test_home.dart';
 
@@ -18,31 +19,32 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  AppThemeMode _mode = AppThemeMode.light;
+  ThemeMode _themeMode = ThemeMode.light;
 
   void _toggleTheme() {
     setState(() {
-      _mode = _mode == AppThemeMode.light
-          ? AppThemeMode.dark
-          : AppThemeMode.light;
+      _themeMode = _themeMode == ThemeMode.light
+          ? ThemeMode.dark
+          : ThemeMode.light;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final isDark = _mode == AppThemeMode.dark;
-
-    return MaterialApp(
-      title: 'Main',
-      theme: ThemeData(
-        brightness: Brightness.light,
-        scaffoldBackgroundColor: AppColors.light.background,
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: AppColors.dark.background,
-      ),
-      themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
+    return ThemeProvider(
+      themeMode: _themeMode,
+      onToggleTheme: _toggleTheme,
+      child: MaterialApp(
+            title: 'Main',
+            theme: ThemeData(
+              brightness: Brightness.light,
+              scaffoldBackgroundColor: AppThemeColors.lightBackground,
+            ),
+            darkTheme: ThemeData(
+              brightness: Brightness.dark,
+              scaffoldBackgroundColor: AppThemeColors.darkBackground,
+            ),
+            themeMode: _themeMode,
       debugShowCheckedModeBanner: false, // 우측 상단 디버그 배너 제거
       // 다국어 지원
       localizationsDelegates: [
@@ -74,7 +76,8 @@ class _MyAppState extends State<MyApp> {
         '/navigation': (context) => const NavigationWidgetsPage(),
       },
       */
-      home: TestHome(onToggleTheme: _toggleTheme),
+      home: const TestHome(),
+    ),
     );
   }
 }

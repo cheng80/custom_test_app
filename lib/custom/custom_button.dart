@@ -1,28 +1,7 @@
 import 'custom_text.dart';
 import 'custom_common_util.dart';
+import 'custom_theme_helper.dart';
 import 'package:flutter/material.dart';
-import '../theme/app_colors.dart'; // PaletteContext extension 사용
-
-// 테마 색상 지원 (선택적)
-// 다른 앱에서도 사용 가능하도록 try-catch로 처리
-Color? _getThemePrimaryColor(BuildContext context) {
-  try {
-    return context.palette.primary;
-  } catch (e) {
-    // PaletteContext가 없는 경우 Material Theme 기본값 사용
-    return Theme.of(context).colorScheme.primary;
-  }
-}
-
-Color? _getThemeTextPrimaryColor(BuildContext context) {
-  try {
-    return context.palette.textPrimary;
-  } catch (e) {
-    // PaletteContext가 없는 경우 Material Theme 기본값 사용
-    final brightness = Theme.of(context).brightness;
-    return brightness == Brightness.dark ? Colors.white : Colors.black;
-  }
-}
 
 // 버튼 타입을 선택하는 enum
 enum ButtonType {
@@ -135,7 +114,7 @@ class CustomButton extends StatelessWidget {
           textColor ??
           foregroundColor ??
           (buttonType == ButtonType.outlined
-              ? (_getThemeTextPrimaryColor(context) ?? Colors.black)
+              ? CustomThemeHelper.textPrimary(context)
               : Colors.white);
 
       // CustomText 위젯 생성
@@ -177,7 +156,7 @@ class CustomButton extends StatelessWidget {
   // 기본 버튼 스타일을 생성하는 메서드
   ButtonStyle _createButtonStyle(BuildContext context) {
     final bgColor =
-        backgroundColor ?? _getThemePrimaryColor(context) ?? Colors.blue;
+        backgroundColor ?? CustomThemeHelper.primary(context);
     final minSize = minimumSize ?? const Size(100, 60);
     final radius = borderRadius ?? 10;
 
@@ -210,9 +189,7 @@ class CustomButton extends StatelessWidget {
       case ButtonType.outlined:
         // OutlinedButton: 배경색이 없으므로 기본 텍스트 색상은 테마 텍스트 색상 또는 검은색
         final outlinedFgColor =
-            foregroundColor ??
-            _getThemeTextPrimaryColor(context) ??
-            Colors.black;
+            foregroundColor ?? CustomThemeHelper.textPrimary(context);
         return OutlinedButton.styleFrom(
           minimumSize: fixedSize != null ? null : minSize,
           fixedSize: fixedSize,

@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 import '../custom/util/json/custom_json_util.dart';
 import '../custom/widgets.dart';
-import '../theme/app_colors.dart';
+import '../theme/app_theme_colors.dart';
 
 /// 게임 데이터 JSON API 파싱 예제 페이지
 class JsonApiExamplePage extends StatefulWidget {
@@ -30,7 +30,7 @@ class _JsonApiExamplePageState extends State<JsonApiExamplePage> {
 
   @override
   Widget build(BuildContext context) {
-    final p = context.palette;
+    final p = context.appTheme;
     return Scaffold(
       backgroundColor: p.background,
       appBar: CustomAppBar(

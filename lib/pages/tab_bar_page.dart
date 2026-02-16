@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../custom/widgets.dart';
-import '../theme/app_colors.dart';
+import '../theme/app_theme_colors.dart';
 
 /// TabBar & BottomNavBar 사용 예제 페이지
 class TabBarPage extends StatefulWidget {
@@ -16,7 +16,7 @@ class _TabBarPageState extends State<TabBarPage> {
 
   @override
   Widget build(BuildContext context) {
-    final p = context.palette;
+    final p = context.appTheme;
     return CustomBottomNavBar(
       items: [
         // 아이콘 + 텍스트 (기본)
@@ -59,7 +59,7 @@ class _TabBarPageState extends State<TabBarPage> {
 
   /// 홈 페이지 (상단 탭바 예시)
   Widget _buildHomePage() {
-    final p = context.palette;
+    final p = context.appTheme;
     return Scaffold(
       appBar: CustomAppBar(title: "홈"), // 테마 primary 색상 자동 적용
       body: CustomTabBar(
@@ -78,7 +78,7 @@ class _TabBarPageState extends State<TabBarPage> {
 
   /// 검색 페이지
   Widget _buildSearchPage() {
-    final p = context.palette;
+    final p = context.appTheme;
     return Scaffold(
       appBar: CustomAppBar(title: "검색", backgroundColor: Colors.green), // 예제용 색상 유지
       body: CustomPadding.all(
@@ -105,7 +105,7 @@ class _TabBarPageState extends State<TabBarPage> {
 
   /// 좋아요 페이지
   Widget _buildFavoritePage() {
-    final p = context.palette;
+    final p = context.appTheme;
     return Scaffold(
       appBar: CustomAppBar(title: "좋아요", backgroundColor: Colors.red), // 예제용 색상 유지
       body: CustomPadding.all(
@@ -128,7 +128,7 @@ class _TabBarPageState extends State<TabBarPage> {
 
   /// 프로필 페이지
   Widget _buildProfilePage() {
-    final p = context.palette;
+    final p = context.appTheme;
     return Scaffold(
       appBar: CustomAppBar(title: "프로필", backgroundColor: Colors.purple), // 예제용 색상 유지
       body: CustomPadding.all(

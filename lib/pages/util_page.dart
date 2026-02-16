@@ -11,7 +11,7 @@ import '../custom/util/xml/example.dart';
 import '../custom/util/timer/example.dart';
 import '../custom/util/log/example.dart';
 import '../custom/widgets.dart';
-import '../theme/app_colors.dart';
+import '../theme/app_theme_colors.dart';
 
 /// 유틸리티 예제 페이지 목록
 class UtilPage extends StatelessWidget {
@@ -19,7 +19,7 @@ class UtilPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final p = context.palette;
+    final p = context.appTheme;
     return Scaffold(
       backgroundColor: p.background,
       appBar: CustomAppBar(

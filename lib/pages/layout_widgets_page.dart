@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../custom/widgets.dart';
-import '../theme/app_colors.dart';
+import '../theme/app_theme_colors.dart';
 
 /// 레이아웃 위젯 사용 예제 페이지
 /// CustomExpansionTile, CustomChip, CustomProgressIndicator, CustomRefreshIndicator
@@ -33,7 +33,7 @@ class _LayoutWidgetsPageState extends State<LayoutWidgetsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final p = context.palette;
+    final p = context.appTheme;
     return Scaffold(
       backgroundColor: p.background,
       appBar: CustomAppBar(title: "레이아웃 위젯 예시", backgroundColor: Colors.teal), // 예제용 색상 유지

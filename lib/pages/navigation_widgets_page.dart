@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../custom/widgets.dart';
-import '../theme/app_colors.dart';
+import '../theme/app_theme_colors.dart';
 
 /// 네비게이션 위젯 사용 예제 페이지
 /// CustomFloatingActionButton, CustomDrawer
@@ -18,7 +18,7 @@ class _NavigationWidgetsPageState extends State<NavigationWidgetsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final p = context.palette;
+    final p = context.appTheme;
     return Scaffold(
       backgroundColor: p.background,
       appBar: CustomAppBar(

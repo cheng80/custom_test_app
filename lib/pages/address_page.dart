@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../custom/util/address/custom_address_util.dart';
 import '../custom/widgets.dart';
-import '../theme/app_colors.dart';
+import '../theme/app_theme_colors.dart';
 
 /// AddressUtil 사용 예제 페이지
 class AddressPage extends StatefulWidget {
@@ -26,7 +26,7 @@ class _AddressPageState extends State<AddressPage> {
 
   @override
   Widget build(BuildContext context) {
-    final p = context.palette;
+    final p = context.appTheme;
     return Scaffold(
       backgroundColor: p.background,
       appBar: CustomAppBar(

@@ -2,7 +2,8 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import '../custom/custom.dart';
-import '../theme/app_colors.dart';
+import '../theme/app_theme_colors.dart';
+import '../theme/theme_provider.dart';
 import 'bottom_sheet_page.dart';
 import 'dialog_page.dart';
 import 'layout_widgets_page.dart';
@@ -17,9 +18,7 @@ import '../core_global_storage_example.dart';
 import 'package:flutter/material.dart';
 
 class TestHome extends StatefulWidget {
-  final VoidCallback onToggleTheme;
-
-  const TestHome({super.key, required this.onToggleTheme});
+  const TestHome({super.key});
 
   @override
   State<TestHome> createState() => _TestHomeState();
@@ -60,7 +59,7 @@ class _TestHomeState extends State<TestHome> {
 
   @override
   Widget build(BuildContext context) {
-    final p = context.palette;
+    final p = context.appTheme;
     return Scaffold(
       backgroundColor: p.background,
       appBar: CustomAppBar(
@@ -73,7 +72,7 @@ class _TestHomeState extends State<TestHome> {
               setState(() {
                 _themeBool = value;
               });
-              widget.onToggleTheme();
+              context.toggleTheme();
             },
           ),
         ],
@@ -1107,7 +1106,7 @@ class _TestHomeState extends State<TestHome> {
                             ],
                           );
                         }
-                        final p = context.palette;
+                        final p = context.appTheme;
                         return CustomText(
                           "이미지를 로드할 수 없습니다",
                           fontSize: 12,
@@ -1360,7 +1359,7 @@ class _TestHomeState extends State<TestHome> {
 
   /// 이미지 카드를 생성하는 헬퍼 메서드
   Widget _buildImageCard(String imagePath, String label, BuildContext context) {
-    final p = context.palette;
+    final p = context.appTheme;
     return CustomColumn(
       spacing: 8,
       children: [
@@ -1407,7 +1406,7 @@ class _TestHomeState extends State<TestHome> {
     String description,
     BuildContext context,
   ) {
-    final p = context.palette;
+    final p = context.appTheme;
     return CustomColumn(
       spacing: 8,
       children: [
@@ -1472,7 +1471,7 @@ class _TestHomeState extends State<TestHome> {
     String description,
     BuildContext context,
   ) {
-    final p = context.palette;
+    final p = context.appTheme;
     // 프로젝트 루트의 images 폴더 경로 사용
     final projectRoot = Directory.current.path;
     final imageFile = File('$projectRoot/images/$imageFileName');
@@ -1541,7 +1540,7 @@ class _TestHomeState extends State<TestHome> {
     String description,
     BuildContext context,
   ) {
-    final p = context.palette;
+    final p = context.appTheme;
     return CustomCard(
       borderRadius: 16,
       padding: const EdgeInsets.all(16),

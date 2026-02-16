@@ -2,27 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import '../theme/app_colors.dart'; // PaletteContext extension 사용
-
-// 테마 색상 지원 (선택적)
-// 다른 앱에서도 사용 가능하도록 try-catch로 처리
-Color? _getThemeTextSecondaryColor(BuildContext context) {
-  try {
-    return context.palette.textSecondary;
-  } catch (e) {
-    // PaletteContext가 없는 경우 Material Theme 기본값 사용
-    return Colors.grey[300];
-  }
-}
-
-Color? _getThemeTextSecondaryColorDark(BuildContext context) {
-  try {
-    return context.palette.textSecondary;
-  } catch (e) {
-    // PaletteContext가 없는 경우 Material Theme 기본값 사용
-    return Colors.grey[600];
-  }
-}
+import 'custom_theme_helper.dart';
 
 // Image.asset, Image.file, 또는 Image.memory 위젯
 //
@@ -139,11 +119,11 @@ class CustomImage extends StatelessWidget {
           Container(
             width: width,
             height: height,
-            color: _getThemeTextSecondaryColor(context) ?? Colors.grey[300],
+            color: CustomThemeHelper.textSecondary(context),
             child: Icon(
               Icons.broken_image,
               color:
-                  _getThemeTextSecondaryColorDark(context) ?? Colors.grey[600],
+                  CustomThemeHelper.textSecondary(context),
               size: (width != null && height != null)
                   ? (width! < height! ? width! * 0.5 : height! * 0.5)
                   : 48,

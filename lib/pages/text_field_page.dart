@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../custom/widgets.dart';
-import '../theme/app_colors.dart';
+import '../theme/app_theme_colors.dart';
 
 /// TextField 사용 예제 페이지
 class TextFieldPage extends StatefulWidget {
@@ -51,7 +51,7 @@ class _TextFieldPageState extends State<TextFieldPage> {
       },
       behavior: HitTestBehavior.opaque, // 자식 위젯이 터치를 소비해도 onTap이 호출되도록 설정
       child: Scaffold(
-        backgroundColor: context.palette.background,
+        backgroundColor: context.appTheme.background,
         appBar: CustomAppBar(
           title: "TextField 예시",
           backgroundColor: Colors.green, // 예제용 색상 유지

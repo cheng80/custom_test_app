@@ -1,44 +1,5 @@
 import 'package:flutter/material.dart';
-import '../theme/app_colors.dart'; // PaletteContext extension 사용
-
-// 테마 색상 지원 (선택적)
-// 다른 앱에서도 사용 가능하도록 try-catch로 처리
-Color? _getThemePrimaryColor(BuildContext context) {
-  try {
-    return context.palette.primary;
-  } catch (e) {
-    // PaletteContext가 없는 경우 Material Theme 기본값 사용
-    return Theme.of(context).colorScheme.primary;
-  }
-}
-
-Color? _getThemeTextPrimaryColor(BuildContext context) {
-  try {
-    return context.palette.textPrimary;
-  } catch (e) {
-    // PaletteContext가 없는 경우 Material Theme 기본값 사용
-    final brightness = Theme.of(context).brightness;
-    return brightness == Brightness.dark ? Colors.white : Colors.black;
-  }
-}
-
-Color? _getThemeChipSelectedBgColor(BuildContext context) {
-  try {
-    return context.palette.chipSelectedBg;
-  } catch (e) {
-    // PaletteContext가 없는 경우 Material Theme 기본값 사용
-    return _getThemePrimaryColor(context) ?? Colors.blue;
-  }
-}
-
-Color? _getThemeChipSelectedTextColor(BuildContext context) {
-  try {
-    return context.palette.chipSelectedText;
-  } catch (e) {
-    // PaletteContext가 없는 경우 Material Theme 기본값 사용
-    return Colors.white;
-  }
-}
+import 'custom_theme_helper.dart';
 
 // 태그, 필터, 선택 표시용 Chip 위젯
 //
@@ -139,12 +100,8 @@ class CustomChip extends StatelessWidget {
         label as String,
         style: TextStyle(
           color: selectable && selected
-              ? (selectedLabelColor ??
-                    _getThemeChipSelectedTextColor(context) ??
-                    Colors.white)
-              : (labelColor ??
-                    _getThemeTextPrimaryColor(context) ??
-                    Colors.black),
+              ? (selectedLabelColor ?? CustomThemeHelper.chipSelectedText(context))
+              : (labelColor ?? CustomThemeHelper.textPrimary(context)),
         ),
       );
     } else {
@@ -162,17 +119,11 @@ class CustomChip extends StatelessWidget {
         avatar: avatar,
         backgroundColor: backgroundColor,
         selectedColor:
-            selectedColor ??
-            _getThemeChipSelectedBgColor(context) ??
-            Colors.blue,
+            selectedColor ?? CustomThemeHelper.chipSelectedBg(context),
         labelStyle: TextStyle(
           color: selected
-              ? (selectedLabelColor ??
-                    _getThemeChipSelectedTextColor(context) ??
-                    Colors.white)
-              : (labelColor ??
-                    _getThemeTextPrimaryColor(context) ??
-                    Colors.black),
+              ? (selectedLabelColor ?? CustomThemeHelper.chipSelectedText(context))
+              : (labelColor ?? CustomThemeHelper.textPrimary(context)),
         ),
         padding:
             padding ??
@@ -202,8 +153,7 @@ class CustomChip extends StatelessWidget {
         backgroundColor: backgroundColor,
         deleteIconColor: deleteIconColor,
         labelStyle: TextStyle(
-          color:
-              labelColor ?? _getThemeTextPrimaryColor(context) ?? Colors.black,
+          color: labelColor ?? CustomThemeHelper.textPrimary(context),
         ),
         padding: padding,
         shape: borderRadius != null
@@ -223,8 +173,7 @@ class CustomChip extends StatelessWidget {
         avatar: avatar,
         backgroundColor: backgroundColor,
         labelStyle: TextStyle(
-          color:
-              labelColor ?? _getThemeTextPrimaryColor(context) ?? Colors.black,
+          color: labelColor ?? CustomThemeHelper.textPrimary(context),
         ),
         padding: padding,
         shape: borderRadius != null
