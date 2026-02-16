@@ -137,6 +137,8 @@ class DialogActionGroup {
 // ```dart
 // CustomDialog.show(context, title: "알림", message: "메시지")
 // CustomDialog.show(context, title: "확인", message: "진행하시겠습니까?", type: DialogType.dual, onConfirm: () {})
+// // 바텀시트 위에 표시: useRootNavigator: true (기본값)
+// CustomDialog.show(context, title: "삭제", message: "삭제하시겠습니까?", type: DialogType.dual, useRootNavigator: true)
 // ```
 class CustomDialog {
   // 다이얼로그를 표시하는 정적 메서드
@@ -161,6 +163,7 @@ class CustomDialog {
     List<DialogActionGroup>? customActionGroups,
     List<Widget>? actions,
     bool barrierDismissible = false,
+    bool useRootNavigator = true,
     Color? backgroundColor,
     double? borderRadius,
     MainAxisAlignment actionsAlignment = MainAxisAlignment.center,
@@ -218,6 +221,7 @@ class CustomDialog {
     return showDialog(
       context: context,
       barrierDismissible: barrierDismissible,
+      useRootNavigator: useRootNavigator,
       builder: (ctx) {
         // Dialog 내부에 ScaffoldMessenger와 투명한 Scaffold를 추가하여
         // SnackBar가 Dialog 위에 표시되도록 함

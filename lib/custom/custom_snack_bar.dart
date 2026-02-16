@@ -30,6 +30,59 @@ Color? _getThemeSnackBarTextColor(BuildContext context) {
   }
 }
 
+OverlayEntry? _overlaySnackEntry;
+
+/// Overlay 기반 스낵바 표시 (바텀시트/드로어 위에 표시)
+/// Overlay.of(context, rootOverlay: true) 사용 - 외부 설정 불필요
+void _showOverlaySnackBar(
+  BuildContext context, {
+  required Widget messageWidget,
+  required Color backgroundColor,
+  required Color textColor,
+  Duration duration = const Duration(seconds: 3),
+  EdgeInsetsGeometry margin = const EdgeInsets.symmetric(
+    horizontal: 16,
+    vertical: 12,
+  ),
+  String? actionLabel,
+  VoidCallback? onAction,
+}) {
+  final overlay = Overlay.of(context, rootOverlay: true);
+
+  _overlaySnackEntry?.remove();
+  _overlaySnackEntry = null;
+
+  _overlaySnackEntry = OverlayEntry(
+    builder: (context) {
+      return Positioned(
+        left: 0,
+        right: 0,
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+        child: SafeArea(
+          top: false,
+          child: Padding(
+            padding: margin,
+            child: _OverlaySnackBar(
+              messageWidget: messageWidget,
+              backgroundColor: backgroundColor,
+              textColor: textColor,
+              actionLabel: actionLabel,
+              onAction: onAction,
+            ),
+          ),
+        ),
+      );
+    },
+  );
+
+  overlay.insert(_overlaySnackEntry!);
+
+  Future<void>.delayed(duration, () {
+    _overlaySnackEntry?.remove();
+    _overlaySnackEntry = null;
+  });
+}
+
 // SnackBar 헬퍼 클래스
 //
 // 사용 예시:
@@ -37,6 +90,7 @@ Color? _getThemeSnackBarTextColor(BuildContext context) {
 // CustomSnackBar.show(context, message: "메시지")
 // CustomSnackBar.showSuccess(context, message: "성공했습니다")
 // CustomSnackBar.showError(context, message: "에러가 발생했습니다")
+// CustomSnackBar.showSuccess(context, message: "저장됨", overlay: true)  // 바텀시트 위에 표시
 // ```
 class CustomSnackBar {
   // SnackBar를 표시하는 정적 메서드
@@ -50,6 +104,7 @@ class CustomSnackBar {
     Color? textColor,
     SnackBarBehavior behavior = SnackBarBehavior.fixed,
     EdgeInsetsGeometry? margin,
+    bool overlay = false,
   }) {
     // message가 String인지 Widget인지 확인
     assert(
@@ -72,15 +127,33 @@ class CustomSnackBar {
       messageWidget = message as Widget;
     }
 
+    final effectiveColor =
+        textColor ?? _getThemeSnackBarTextColor(context) ?? Colors.white;
+    final effectiveBg =
+        backgroundColor ??
+        _getThemeSnackBarBackgroundColor(context) ??
+        Colors.grey.shade800;
+
+    if (overlay) {
+      _showOverlaySnackBar(
+        context,
+        messageWidget: messageWidget,
+        backgroundColor: effectiveBg,
+        textColor: effectiveColor,
+        duration: duration,
+        margin: margin ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        actionLabel: actionLabel,
+        onAction: onAction,
+      );
+      return;
+    }
+
     // 전달받은 context를 그대로 사용
     // Dialog 내부에서 사용할 때는 원래 Scaffold의 context를 전달받아 사용
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: messageWidget,
-        backgroundColor:
-            backgroundColor ??
-            _getThemeSnackBarBackgroundColor(context) ??
-            Colors.grey.shade800,
+        backgroundColor: effectiveBg,
         duration: duration,
         behavior: behavior,
         // margin은 floating에서만 사용 가능
@@ -88,7 +161,7 @@ class CustomSnackBar {
         action: actionLabel != null && onAction != null
             ? SnackBarAction(
                 label: actionLabel,
-                textColor: _getThemeSnackBarTextColor(context) ?? Colors.white,
+                textColor: effectiveColor,
                 onPressed: onAction,
               )
             : null,
@@ -105,6 +178,7 @@ class CustomSnackBar {
     Duration duration = const Duration(seconds: 3),
     SnackBarBehavior behavior = SnackBarBehavior.fixed,
     EdgeInsetsGeometry? margin,
+    bool overlay = false,
   }) {
     show(
       context,
@@ -116,6 +190,7 @@ class CustomSnackBar {
       textColor: Colors.white,
       behavior: behavior,
       margin: margin,
+      overlay: overlay,
     );
   }
 
@@ -128,6 +203,7 @@ class CustomSnackBar {
     Duration duration = const Duration(seconds: 4),
     SnackBarBehavior behavior = SnackBarBehavior.fixed,
     EdgeInsetsGeometry? margin,
+    bool overlay = false,
   }) {
     show(
       context,
@@ -139,6 +215,7 @@ class CustomSnackBar {
       textColor: Colors.white,
       behavior: behavior,
       margin: margin,
+      overlay: overlay,
     );
   }
 
@@ -151,6 +228,7 @@ class CustomSnackBar {
     Duration duration = const Duration(seconds: 3),
     SnackBarBehavior behavior = SnackBarBehavior.fixed,
     EdgeInsetsGeometry? margin,
+    bool overlay = false,
   }) {
     show(
       context,
@@ -162,6 +240,7 @@ class CustomSnackBar {
       textColor: Colors.white,
       behavior: behavior,
       margin: margin,
+      overlay: overlay,
     );
   }
 
@@ -174,6 +253,7 @@ class CustomSnackBar {
     Duration duration = const Duration(seconds: 3),
     SnackBarBehavior behavior = SnackBarBehavior.fixed,
     EdgeInsetsGeometry? margin,
+    bool overlay = false,
   }) {
     show(
       context,
@@ -185,6 +265,89 @@ class CustomSnackBar {
       textColor: Colors.white,
       behavior: behavior,
       margin: margin,
+      overlay: overlay,
+    );
+  }
+}
+
+class _OverlaySnackBar extends StatefulWidget {
+  final Widget messageWidget;
+  final Color backgroundColor;
+  final Color textColor;
+  final String? actionLabel;
+  final VoidCallback? onAction;
+
+  const _OverlaySnackBar({
+    required this.messageWidget,
+    required this.backgroundColor,
+    required this.textColor,
+    this.actionLabel,
+    this.onAction,
+  });
+
+  @override
+  State<_OverlaySnackBar> createState() => _OverlaySnackBarState();
+}
+
+class _OverlaySnackBarState extends State<_OverlaySnackBar>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<Offset> _offset;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 220),
+    );
+    _offset = Tween<Offset>(
+      begin: const Offset(0, 0.2),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SlideTransition(
+      position: _offset,
+      child: Material(
+        color: Colors.transparent,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          decoration: BoxDecoration(
+            color: widget.backgroundColor,
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 8,
+                offset: Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Row(
+            children: [
+              Expanded(child: widget.messageWidget),
+              if (widget.actionLabel != null && widget.onAction != null)
+                TextButton(
+                  onPressed: widget.onAction,
+                  child: Text(
+                    widget.actionLabel!,
+                    style: TextStyle(color: widget.textColor),
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
