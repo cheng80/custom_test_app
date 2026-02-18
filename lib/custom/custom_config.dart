@@ -62,9 +62,59 @@ class CustomColors {
       isDark(context) ? textSecondaryDark : textSecondaryLight;
 
   /// [사용자 선택 사항] 다른 앱의 ThemeData와 동기화하고 싶을 때 호출
+  ///
+  /// ## 용도
+  /// custom 폴더를 다른 앱에 복사해서 사용할 때,
+  /// 그 앱의 ThemeData(colorScheme)에 정의된 색상을
+  /// CustomColors의 색상값에 덮어써서 자동으로 맞춰주는 메서드입니다.
+  ///
+  /// ## 언제 필요한가?
+  /// - custom 위젯을 다른 프로젝트에 복사 → 그 앱의 테마 색상에 맞추고 싶을 때
+  /// - CustomColors의 색상을 직접 하드코딩하지 않고, 앱 테마에서 자동으로 가져오고 싶을 때
+  ///
+  /// ## 언제 불필요한가?
+  /// - 이 프로젝트처럼 AppThemeColors/ThemeProvider로 별도 테마 관리 중일 때
+  /// - CustomColors의 색상을 직접 수정해서 쓸 때
+  ///
+  /// ## 호출 위치
+  /// MaterialApp의 builder 또는 앱 최상위 위젯의 build() 내에서 호출합니다.
+  ///
+  /// ```dart
+  /// // 방법 1: MaterialApp의 builder에서 호출
+  /// MaterialApp(
+  ///   theme: myAppTheme,
+  ///   builder: (context, child) {
+  ///     CustomColors.syncWithTheme(context);
+  ///     return child!;
+  ///   },
+  /// );
+  ///
+  /// // 방법 2: 앱 최상위 위젯에서 호출
+  /// @override
+  /// Widget build(BuildContext context) {
+  ///   CustomColors.syncWithTheme(context);
+  ///   return Scaffold(...);
+  /// }
+  /// ```
+  ///
+  /// ## 구현 예시
+  /// 아래 주석을 해제하고 필요한 항목만 매핑하세요.
   static void syncWithTheme(BuildContext context) {
     // final theme = Theme.of(context);
     // final colorScheme = theme.colorScheme;
-    // 필요한 경우 다른 색상들도 동기화 로직 추가 가능
+    //
+    // // 앱 테마 → CustomColors 동기화
+    // primaryLight = colorScheme.primary;
+    // primaryDark = colorScheme.primary;
+    // accentLight = colorScheme.secondary;
+    // accentDark = colorScheme.secondary;
+    // backgroundLight = colorScheme.surface;
+    // backgroundDark = colorScheme.surface;
+    // cardLight = colorScheme.surfaceContainerLowest;
+    // cardDark = colorScheme.surfaceContainerLowest;
+    // textPrimaryLight = colorScheme.onSurface;
+    // textPrimaryDark = colorScheme.onSurface;
+    // textSecondaryLight = colorScheme.onSurfaceVariant;
+    // textSecondaryDark = colorScheme.onSurfaceVariant;
   }
 }

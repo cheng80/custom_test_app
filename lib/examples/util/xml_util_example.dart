@@ -146,7 +146,7 @@ class _XmlUtilExampleState extends State<XmlUtilExample> {
         'specs': {'display': '6.7인치', 'battery': '5000mAh'},
       },
     );
-    final formatted = CustomXmlUtil.format(element ?? '');
+    final formatted = CustomXmlUtil.format(element);
 
     _updateResult(
       '=== XML 엘리먼트 생성 (createElement) ===\n\n'
