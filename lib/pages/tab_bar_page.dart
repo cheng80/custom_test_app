@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../custom/widgets.dart';
-import '../theme/app_theme_colors.dart';
+import '../custom/custom_theme_helper.dart';
 
 /// TabBar & BottomNavBar 사용 예제 페이지
 class TabBarPage extends StatefulWidget {
@@ -16,7 +16,6 @@ class _TabBarPageState extends State<TabBarPage> {
 
   @override
   Widget build(BuildContext context) {
-    final p = context.appTheme;
     return CustomBottomNavBar(
       items: [
         // 아이콘 + 텍스트 (기본)
@@ -43,8 +42,8 @@ class _TabBarPageState extends State<TabBarPage> {
         BottomNavItem(
           label: "프로필",
           page: _buildProfilePage(),
-          selectedColor: Colors.purple,
-          unselectedColor: p.textSecondary,
+          selectedColor: CustomThemeHelper.accent(context),
+          unselectedColor: CustomThemeHelper.textSecondary(context),
         ),
       ],
       currentIndex: _currentBottomNavIndex,
@@ -59,7 +58,6 @@ class _TabBarPageState extends State<TabBarPage> {
 
   /// 홈 페이지 (상단 탭바 예시)
   Widget _buildHomePage() {
-    final p = context.appTheme;
     return Scaffold(
       appBar: CustomAppBar(title: "홈"), // 테마 primary 색상 자동 적용
       body: CustomTabBar(
@@ -78,9 +76,11 @@ class _TabBarPageState extends State<TabBarPage> {
 
   /// 검색 페이지
   Widget _buildSearchPage() {
-    final p = context.appTheme;
     return Scaffold(
-      appBar: CustomAppBar(title: "검색", backgroundColor: Colors.green), // 예제용 색상 유지
+      appBar: CustomAppBar(
+        title: "검색",
+        backgroundColor: CustomThemeHelper.accent(context),
+      ),
       body: CustomPadding.all(
         16.0,
         child: CustomColumn(
@@ -90,12 +90,12 @@ class _TabBarPageState extends State<TabBarPage> {
               "검색 페이지",
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Colors.green, // 예제용 색상 유지
+              color: CustomThemeHelper.accent(context),
             ),
             CustomText(
               "여기에 검색 기능을 구현할 수 있습니다.",
               fontSize: 16,
-              color: p.textSecondary,
+              color: CustomThemeHelper.textSecondary(context),
             ),
           ],
         ),
@@ -105,9 +105,11 @@ class _TabBarPageState extends State<TabBarPage> {
 
   /// 좋아요 페이지
   Widget _buildFavoritePage() {
-    final p = context.appTheme;
     return Scaffold(
-      appBar: CustomAppBar(title: "좋아요", backgroundColor: Colors.red), // 예제용 색상 유지
+      appBar: CustomAppBar(
+        title: "좋아요",
+        backgroundColor: const Color(0xFFD32F2F),
+      ), // 고정 Red 보다는 테마 primary 또는 특정 강조색 권장
       body: CustomPadding.all(
         16.0,
         child: CustomColumn(
@@ -117,9 +119,13 @@ class _TabBarPageState extends State<TabBarPage> {
               "좋아요 페이지",
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Colors.red, // 예제용 색상 유지
+              color: const Color(0xFFD32F2F),
             ),
-            CustomText("좋아요한 항목들을 표시합니다.", fontSize: 16, color: p.textSecondary),
+            CustomText(
+              "좋아요한 항목들을 표시합니다.",
+              fontSize: 16,
+              color: CustomThemeHelper.textSecondary(context),
+            ),
           ],
         ),
       ),
@@ -128,9 +134,11 @@ class _TabBarPageState extends State<TabBarPage> {
 
   /// 프로필 페이지
   Widget _buildProfilePage() {
-    final p = context.appTheme;
     return Scaffold(
-      appBar: CustomAppBar(title: "프로필", backgroundColor: Colors.purple), // 예제용 색상 유지
+      appBar: CustomAppBar(
+        title: "프로필",
+        backgroundColor: CustomThemeHelper.accent(context),
+      ),
       body: CustomPadding.all(
         16.0,
         child: CustomColumn(
@@ -140,9 +148,13 @@ class _TabBarPageState extends State<TabBarPage> {
               "프로필 페이지",
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Colors.purple, // 예제용 색상 유지
+              color: CustomThemeHelper.accent(context),
             ),
-            CustomText("사용자 프로필 정보를 표시합니다.", fontSize: 16, color: p.textSecondary),
+            CustomText(
+              "사용자 프로필 정보를 표시합니다.",
+              fontSize: 16,
+              color: CustomThemeHelper.textSecondary(context),
+            ),
           ],
         ),
       ),

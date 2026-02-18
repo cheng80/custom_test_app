@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'custom_network_util.dart';
+import '../../widgets.dart';
+import '../../custom_theme_helper.dart';
 
 // NetworkUtil 사용 예제 페이지
 class NetworkUtilExamplePage extends StatefulWidget {
@@ -22,53 +24,38 @@ class _NetworkUtilExamplePageState extends State<NetworkUtilExamplePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('NetworkUtil 예제')),
+      backgroundColor: CustomThemeHelper.background(context),
+      appBar: CustomAppBar(title: "NetworkUtil 예제"),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: CustomColumn(
+          spacing: 12,
           children: [
-            ElevatedButton(
-              onPressed: _getExample,
-              child: const Text('GET 요청 예제'),
+            CustomButton(onCallBack: _getExample, btnText: 'GET 요청 예제'),
+            CustomButton(onCallBack: _postExample, btnText: 'POST 요청 예제'),
+            CustomButton(onCallBack: _putExample, btnText: 'PUT 요청 예제'),
+            CustomButton(onCallBack: _deleteExample, btnText: 'DELETE 요청 예제'),
+            CustomButton(
+              onCallBack: _queryParamsExample,
+              btnText: '쿼리 파라미터 예제',
             ),
-            const SizedBox(height: 8),
-            ElevatedButton(
-              onPressed: _postExample,
-              child: const Text('POST 요청 예제'),
-            ),
-            const SizedBox(height: 8),
-            ElevatedButton(
-              onPressed: _putExample,
-              child: const Text('PUT 요청 예제'),
-            ),
-            const SizedBox(height: 8),
-            ElevatedButton(
-              onPressed: _deleteExample,
-              child: const Text('DELETE 요청 예제'),
-            ),
-            const SizedBox(height: 8),
-            ElevatedButton(
-              onPressed: _queryParamsExample,
-              child: const Text('쿼리 파라미터 예제'),
-            ),
-            const SizedBox(height: 8),
-            ElevatedButton(
-              onPressed: _errorHandlingExample,
-              child: const Text('에러 처리 예제'),
+            CustomButton(
+              onCallBack: _errorHandlingExample,
+              btnText: '에러 처리 예제',
             ),
             const SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.grey[200],
+                color: CustomThemeHelper.cardBackground(context),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Text(
+              child: CustomText(
                 _result.isEmpty
                     ? '위 버튼을 눌러 예제를 실행하세요\n\n주의: 실제 API 서버가 필요합니다'
                     : _result,
-                style: const TextStyle(fontFamily: 'monospace'),
+                fontSize: 14,
+                color: CustomThemeHelper.textPrimary(context),
               ),
             ),
           ],

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'custom_storage_util.dart';
+import '../../widgets.dart';
+import '../../custom_theme_helper.dart';
 
 // StorageUtil 사용 예제
 //
@@ -22,6 +24,10 @@ class StorageExampleApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'StorageUtil 예제',
+      theme: ThemeData(
+        useMaterial3: true,
+        primaryColor: const Color(0xFF1976D2),
+      ),
       home: const StorageExamplePage(),
     );
   }
@@ -140,31 +146,30 @@ class _StorageExamplePageState extends State<StorageExamplePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('StorageUtil 예제')),
+      backgroundColor: CustomThemeHelper.background(context),
+      appBar: CustomAppBar(title: "StorageUtil 예제"),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: CustomColumn(
+          spacing: 12,
           children: [
             // 저장된 데이터 표시
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
+            CustomCard(
+              child: CustomPadding.all(
+                16,
+                child: CustomColumn(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: 8,
                   children: [
-                    const Text(
+                    CustomText(
                       '저장된 데이터',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                     ),
-                    const SizedBox(height: 8),
-                    Text('이름: ${_username ?? '없음'}'),
-                    Text('나이: ${_age ?? '없음'}'),
-                    Text('다크모드: ${_isDarkMode ?? '없음'}'),
-                    Text('태그: ${_tags?.join(', ') ?? '없음'}'),
+                    CustomText('이름: ${_username ?? '없음'}'),
+                    CustomText('나이: ${_age ?? '없음'}'),
+                    CustomText('다크모드: ${_isDarkMode ?? '없음'}'),
+                    CustomText('태그: ${_tags?.join(', ') ?? '없음'}'),
                   ],
                 ),
               ),
@@ -172,49 +177,28 @@ class _StorageExamplePageState extends State<StorageExamplePage> {
             const SizedBox(height: 16),
 
             // 기본 타입 저장 버튼
-            ElevatedButton(
-              onPressed: _saveBasicTypes,
-              child: const Text('기본 타입 저장'),
-            ),
-            const SizedBox(height: 8),
+            CustomButton(onCallBack: _saveBasicTypes, btnText: '기본 타입 저장'),
 
             // 객체 저장 버튼
-            ElevatedButton(onPressed: _saveObject, child: const Text('객체 저장')),
-            const SizedBox(height: 8),
+            CustomButton(onCallBack: _saveObject, btnText: '객체 저장'),
 
             // 리스트 저장 버튼
-            ElevatedButton(onPressed: _saveList, child: const Text('리스트 저장')),
-            const SizedBox(height: 8),
+            CustomButton(onCallBack: _saveList, btnText: '리스트 저장'),
 
             // 키 삭제 버튼
-            ElevatedButton(
-              onPressed: _removeKey,
-              child: const Text('키 삭제 (username)'),
-            ),
-            const SizedBox(height: 8),
+            CustomButton(onCallBack: _removeKey, btnText: '키 삭제 (username)'),
 
             // 키 존재 여부 확인 버튼
-            ElevatedButton(
-              onPressed: _checkKey,
-              child: const Text('키 존재 여부 확인'),
-            ),
-            const SizedBox(height: 8),
+            CustomButton(onCallBack: _checkKey, btnText: '키 존재 여부 확인'),
 
             // 모든 키 가져오기 버튼
-            ElevatedButton(
-              onPressed: _getAllKeys,
-              child: const Text('모든 키 가져오기'),
-            ),
-            const SizedBox(height: 8),
+            CustomButton(onCallBack: _getAllKeys, btnText: '모든 키 가져오기'),
 
             // 모든 데이터 삭제 버튼
-            ElevatedButton(
-              onPressed: _clearAll,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                foregroundColor: Colors.white,
-              ),
-              child: const Text('모든 데이터 삭제'),
+            CustomButton(
+              onCallBack: _clearAll,
+              backgroundColor: const Color(0xFFD32F2F),
+              btnText: '모든 데이터 삭제',
             ),
           ],
         ),

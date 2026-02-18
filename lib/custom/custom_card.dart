@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'custom_theme_helper.dart';
 
 // Material Design Card 위젯
 //
@@ -52,6 +53,7 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 기본 값들 설정
+    final cardColor = color ?? CustomThemeHelper.cardBackground(context);
     final cardElevation = elevation ?? 2.0;
     final radius = borderRadius ?? 12.0;
     final cardPadding = padding ?? const EdgeInsets.all(16);
@@ -60,7 +62,7 @@ class CustomCard extends StatelessWidget {
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius));
 
     Widget card = Card(
-      color: color,
+      color: cardColor,
       elevation: cardElevation,
       shape: cardShape,
       margin: margin,

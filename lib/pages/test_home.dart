@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import '../custom/custom.dart';
+import '../custom/custom_theme_helper.dart';
 import '../theme/app_theme_colors.dart';
 import '../theme/theme_provider.dart';
 import 'bottom_sheet_page.dart';
@@ -121,7 +122,6 @@ class _TestHomeState extends State<TestHome> {
                     ),
                     CustomButton(
                       btnText: "TextField 예시",
-                      // backgroundColor를 지정하지 않으면 테마 primary 색상 자동 적용
                       onCallBack: () {
                         Navigator.push(
                           context,
@@ -133,7 +133,9 @@ class _TestHomeState extends State<TestHome> {
                     ),
                     CustomButton(
                       btnText: "ListView 예시",
-                      backgroundColor: Colors.purple,
+                      backgroundColor: CustomThemeHelper.accent(
+                        context,
+                      ).withValues(alpha: 0.8),
                       onCallBack: () {
                         Navigator.push(
                           context,
@@ -145,7 +147,9 @@ class _TestHomeState extends State<TestHome> {
                     ),
                     CustomButton(
                       btnText: "Dialog 예시",
-                      backgroundColor: Colors.orange,
+                      backgroundColor: CustomThemeHelper.accent(
+                        context,
+                      ).withValues(alpha: 0.9),
                       onCallBack: () {
                         Navigator.push(
                           context,
@@ -157,7 +161,7 @@ class _TestHomeState extends State<TestHome> {
                     ),
                     CustomButton(
                       btnText: "TabBar 예시",
-                      backgroundColor: Colors.indigo,
+                      backgroundColor: CustomThemeHelper.primary(context),
                       onCallBack: () {
                         Navigator.push(
                           context,
@@ -169,7 +173,9 @@ class _TestHomeState extends State<TestHome> {
                     ),
                     CustomButton(
                       btnText: "SnackBar & ActionSheet",
-                      backgroundColor: Colors.purple,
+                      backgroundColor: CustomThemeHelper.accent(
+                        context,
+                      ).withValues(alpha: 0.8),
                       onCallBack: () {
                         Navigator.push(
                           context,
@@ -182,7 +188,7 @@ class _TestHomeState extends State<TestHome> {
                     ),
                     CustomButton(
                       btnText: "Picker & Grid 예시",
-                      backgroundColor: Colors.indigo,
+                      backgroundColor: CustomThemeHelper.primary(context),
                       onCallBack: () {
                         Navigator.push(
                           context,
@@ -194,7 +200,9 @@ class _TestHomeState extends State<TestHome> {
                     ),
                     CustomButton(
                       btnText: "레이아웃 위젯 예시",
-                      backgroundColor: Colors.teal,
+                      backgroundColor: CustomThemeHelper.accent(
+                        context,
+                      ).withValues(alpha: 0.7),
                       onCallBack: () {
                         Navigator.push(
                           context,
@@ -206,7 +214,9 @@ class _TestHomeState extends State<TestHome> {
                     ),
                     CustomButton(
                       btnText: "BottomSheet 예시",
-                      backgroundColor: Colors.purple,
+                      backgroundColor: CustomThemeHelper.accent(
+                        context,
+                      ).withValues(alpha: 0.8),
                       onCallBack: () {
                         Navigator.push(
                           context,
@@ -218,7 +228,7 @@ class _TestHomeState extends State<TestHome> {
                     ),
                     CustomButton(
                       btnText: "네비게이션 위젯 예시",
-                      backgroundColor: Colors.indigo,
+                      backgroundColor: CustomThemeHelper.primary(context),
                       onCallBack: () {
                         Navigator.push(
                           context,
@@ -311,7 +321,7 @@ class _TestHomeState extends State<TestHome> {
                           child: CustomButton(
                             btnText: "Elevated",
                             buttonType: ButtonType.elevated,
-                            backgroundColor: Colors.green,
+                            backgroundColor: CustomThemeHelper.accent(context),
                             onCallBack: () => print("ElevatedButton 클릭"),
                           ),
                         ),
@@ -319,7 +329,7 @@ class _TestHomeState extends State<TestHome> {
                           child: CustomButton(
                             btnText: "Outlined",
                             buttonType: ButtonType.outlined,
-                            backgroundColor: Colors.red,
+                            backgroundColor: const Color(0xFFD32F2F),
                             onCallBack: () => print("OutlinedButton 클릭"),
                           ),
                         ),
@@ -330,7 +340,7 @@ class _TestHomeState extends State<TestHome> {
                       "Widget 사용 예시",
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: p.primary,
+                      color: CustomThemeHelper.primary(context),
                     ),
                     CustomButton(
                       btnText: Row(
@@ -349,7 +359,7 @@ class _TestHomeState extends State<TestHome> {
                           ),
                         ],
                       ),
-                      backgroundColor: Colors.purple,
+                      backgroundColor: CustomThemeHelper.accent(context),
                       onCallBack: () => print("Widget 버튼 클릭"),
                     ),
                     const SizedBox(height: 16),
@@ -357,7 +367,7 @@ class _TestHomeState extends State<TestHome> {
                       "DropdownButton 예시",
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: p.primary,
+                      color: CustomThemeHelper.primary(context),
                     ),
                     CustomDropdownButton<String>(
                       value: _selectedDropdownValue,
@@ -368,15 +378,17 @@ class _TestHomeState extends State<TestHome> {
                           _selectedDropdownValue = value;
                         });
                       },
-                      backgroundColor: Colors.white,
-                      borderColor: Colors.grey.shade300,
+                      backgroundColor: CustomThemeHelper.background(context),
+                      borderColor: CustomThemeHelper.textSecondary(
+                        context,
+                      ).withValues(alpha: 0.3),
                       borderRadius: 8,
                     ),
                     if (_selectedDropdownValue != null)
                       CustomText(
                         "선택된 값: $_selectedDropdownValue",
                         fontSize: 14,
-                        color: p.primary,
+                        color: CustomThemeHelper.primary(context),
                       ),
                     const SizedBox(height: 12),
                     CustomText(
@@ -393,16 +405,18 @@ class _TestHomeState extends State<TestHome> {
                           _selectedDropdownValue = value;
                         });
                       },
-                      backgroundColor: Colors.blue.shade50,
-                      borderColor: Colors.blue,
+                      backgroundColor: CustomThemeHelper.primary(
+                        context,
+                      ).withValues(alpha: 0.1),
+                      borderColor: CustomThemeHelper.primary(context),
                       borderWidth: 2,
                       borderRadius: 12,
-                      textStyle: const TextStyle(
+                      textStyle: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.blue,
+                        color: CustomThemeHelper.primary(context),
                       ),
-                      iconColor: Colors.blue,
+                      iconColor: CustomThemeHelper.primary(context),
                     ),
                   ],
                 ),
@@ -424,7 +438,7 @@ class _TestHomeState extends State<TestHome> {
                     CustomText(
                       "배경색과 둥근 모서리를 적용한 아이콘 버튼들",
                       fontSize: 14,
-                      color: p.textSecondary,
+                      color: CustomThemeHelper.textSecondary(context),
                     ),
                     CustomRow(
                       spacing: 12,
@@ -432,16 +446,20 @@ class _TestHomeState extends State<TestHome> {
                       children: [
                         CustomIconButton(
                           icon: Icons.favorite,
-                          iconColor: Colors.red,
-                          backgroundColor: Colors.red.shade50,
+                          iconColor: const Color(0xFFD32F2F),
+                          backgroundColor: const Color(
+                            0xFFD32F2F,
+                          ).withValues(alpha: 0.1),
                           borderRadius: 8,
                           onPressed: () => print("좋아요 클릭"),
                           tooltip: "좋아요",
                         ),
                         CustomIconButton(
                           icon: Icons.share,
-                          iconColor: Colors.blue,
-                          backgroundColor: Colors.blue.shade50,
+                          iconColor: CustomThemeHelper.primary(context),
+                          backgroundColor: CustomThemeHelper.primary(
+                            context,
+                          ).withValues(alpha: 0.1),
                           borderRadius: 8,
                           onPressed: () => print("공유 클릭"),
                           tooltip: "공유",
@@ -449,15 +467,17 @@ class _TestHomeState extends State<TestHome> {
                         CustomIconButton(
                           icon: Icons.bookmark,
                           iconColor: Colors.amber,
-                          backgroundColor: Colors.amber.shade50,
+                          backgroundColor: Colors.amber.withValues(alpha: 0.1),
                           borderRadius: 8,
                           onPressed: () => print("북마크 클릭"),
                           tooltip: "북마크",
                         ),
                         CustomIconButton(
                           icon: Icons.delete,
-                          iconColor: Colors.grey,
-                          backgroundColor: Colors.grey.shade100,
+                          iconColor: CustomThemeHelper.textSecondary(context),
+                          backgroundColor: CustomThemeHelper.textSecondary(
+                            context,
+                          ).withValues(alpha: 0.1),
                           borderRadius: 8,
                           onPressed: () => print("삭제 클릭"),
                           tooltip: "삭제",
@@ -484,7 +504,7 @@ class _TestHomeState extends State<TestHome> {
                     CustomText(
                       "Switch, Checkbox, Radio, Slider 위젯 사용 예시",
                       fontSize: 14,
-                      color: p.textSecondary,
+                      color: CustomThemeHelper.textSecondary(context),
                     ),
                     // Switch 예시
                     CustomColumn(
@@ -515,7 +535,7 @@ class _TestHomeState extends State<TestHome> {
                                   _switchValue = !value;
                                 });
                               },
-                              activeColor: Colors.green,
+                              activeColor: CustomThemeHelper.accent(context),
                               label: "다크 모드",
                             ),
                           ],
@@ -553,7 +573,7 @@ class _TestHomeState extends State<TestHome> {
                                   _checkboxValue = value;
                                 });
                               },
-                              activeColor: Colors.purple,
+                              activeColor: CustomThemeHelper.accent(context),
                               label: "개인정보 처리방침 동의",
                             ),
                           ],
@@ -604,14 +624,13 @@ class _TestHomeState extends State<TestHome> {
                                   _radioValue = value;
                                 });
                               },
-                              activeColor: Colors.teal,
+                              activeColor: CustomThemeHelper.accent(context),
                               label: "옵션 3",
                             ),
                           ],
                         ),
                       ],
                     ),
-                    const Divider(),
                     // Slider 예시
                     CustomColumn(
                       spacing: 12,
@@ -629,7 +648,7 @@ class _TestHomeState extends State<TestHome> {
                           divisions: 10,
                           title: "볼륨 조절",
                           showValue: true,
-                          activeColor: Colors.blue,
+                          activeColor: CustomThemeHelper.primary(context),
                           onChanged: (value) {
                             setState(() {
                               _sliderValue = value;
@@ -643,7 +662,7 @@ class _TestHomeState extends State<TestHome> {
                           max: 1,
                           title: "진행률",
                           showValue: true,
-                          activeColor: Colors.green,
+                          activeColor: CustomThemeHelper.accent(context),
                           onChanged: (value) {
                             setState(() {
                               _sliderValue = value * 100;
@@ -666,7 +685,7 @@ class _TestHomeState extends State<TestHome> {
                         CustomText(
                           "별을 클릭하여 점수를 선택할 수 있습니다",
                           fontSize: 14,
-                          color: p.textSecondary,
+                          color: CustomThemeHelper.textSecondary(context),
                         ),
                         CustomRating(
                           rating: _rating,
@@ -698,7 +717,9 @@ class _TestHomeState extends State<TestHome> {
                           },
                           starSize: 32.0,
                           filledColor: Colors.orange,
-                          unfilledColor: Colors.grey.shade300,
+                          unfilledColor: CustomThemeHelper.textSecondary(
+                            context,
+                          ).withValues(alpha: 0.2),
                           starSpacing: 8.0,
                         ),
                         const SizedBox(height: 8),
@@ -732,7 +753,7 @@ class _TestHomeState extends State<TestHome> {
                               CustomText(
                                 "별점을 선택해주세요",
                                 fontSize: 14,
-                                color: p.textSecondary,
+                                color: CustomThemeHelper.textSecondary(context),
                               ),
                               CustomRating(
                                 rating: _rating,
@@ -764,7 +785,9 @@ class _TestHomeState extends State<TestHome> {
                                   _ratingCommentController.text.isNotEmpty)
                                 CustomButton(
                                   btnText: "리뷰 제출",
-                                  backgroundColor: Colors.green,
+                                  backgroundColor: CustomThemeHelper.accent(
+                                    context,
+                                  ),
                                   onCallBack: () {
                                     // 리뷰 제출 로직
                                     print(
@@ -784,7 +807,7 @@ class _TestHomeState extends State<TestHome> {
                         CustomText(
                           "별 이외의 아이콘도 사용할 수 있습니다",
                           fontSize: 12,
-                          color: p.textSecondary,
+                          color: CustomThemeHelper.textSecondary(context),
                         ),
                         const SizedBox(height: 8),
                         CustomColumn(
@@ -805,8 +828,10 @@ class _TestHomeState extends State<TestHome> {
                               },
                               filledIcon: Icons.favorite,
                               unfilledIcon: Icons.favorite_border,
-                              filledColor: Colors.red,
-                              unfilledColor: Colors.grey.shade300,
+                              filledColor: const Color(0xFFD32F2F),
+                              unfilledColor: CustomThemeHelper.textSecondary(
+                                context,
+                              ).withValues(alpha: 0.2),
                               starSize: 28.0,
                             ),
                             CustomText(
@@ -823,8 +848,10 @@ class _TestHomeState extends State<TestHome> {
                               },
                               filledIcon: Icons.thumb_up,
                               unfilledIcon: Icons.thumb_up_outlined,
-                              filledColor: Colors.blue,
-                              unfilledColor: Colors.grey.shade300,
+                              filledColor: CustomThemeHelper.primary(context),
+                              unfilledColor: CustomThemeHelper.textSecondary(
+                                context,
+                              ).withValues(alpha: 0.2),
                               starSize: 28.0,
                             ),
                             CustomText(
@@ -842,7 +869,9 @@ class _TestHomeState extends State<TestHome> {
                               filledIcon: Icons.diamond,
                               unfilledIcon: Icons.diamond_outlined,
                               filledColor: Colors.cyan,
-                              unfilledColor: Colors.grey.shade300,
+                              unfilledColor: CustomThemeHelper.textSecondary(
+                                context,
+                              ).withValues(alpha: 0.2),
                               starSize: 28.0,
                             ),
                             CustomText(
@@ -857,7 +886,9 @@ class _TestHomeState extends State<TestHome> {
                               unfilledIcon:
                                   Icons.local_fire_department_outlined,
                               filledColor: Colors.orange,
-                              unfilledColor: Colors.grey.shade300,
+                              unfilledColor: CustomThemeHelper.textSecondary(
+                                context,
+                              ).withValues(alpha: 0.2),
                               starSize: 28.0,
                             ),
                           ],
@@ -884,7 +915,7 @@ class _TestHomeState extends State<TestHome> {
                     CustomText(
                       "CustomImage 위젯을 사용한 이미지 표시 예시",
                       fontSize: 14,
-                      color: p.textSecondary,
+                      color: CustomThemeHelper.textSecondary(context),
                     ),
                     // 첫 번째 행: 3개 이미지
                     CustomRow(
@@ -983,12 +1014,12 @@ class _TestHomeState extends State<TestHome> {
                     CustomText(
                       "CustomImage.file()을 사용한 파일 이미지 표시 예시",
                       fontSize: 14,
-                      color: p.textSecondary,
+                      color: CustomThemeHelper.textSecondary(context),
                     ),
                     CustomText(
                       "File 이미지는 디바이스의 파일 시스템에서 이미지를 로드합니다.",
                       fontSize: 12,
-                      color: p.textSecondary,
+                      color: CustomThemeHelper.textSecondary(context),
                     ),
                     const SizedBox(height: 8),
                     // File 이미지 예시
@@ -1016,7 +1047,9 @@ class _TestHomeState extends State<TestHome> {
                     const SizedBox(height: 8),
                     CustomContainer(
                       padding: const EdgeInsets.all(12),
-                      backgroundColor: Colors.blue.shade50,
+                      backgroundColor: CustomThemeHelper.primary(
+                        context,
+                      ).withValues(alpha: 0.1),
                       borderRadius: 8,
                       child: CustomColumn(
                         spacing: 8,
@@ -1026,7 +1059,7 @@ class _TestHomeState extends State<TestHome> {
                             "💡 사용 방법",
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
-                            color: Colors.blue.shade900,
+                            color: CustomThemeHelper.primary(context),
                           ),
                           CustomText(
                             "// File 이미지 사용\n"
@@ -1040,7 +1073,7 @@ class _TestHomeState extends State<TestHome> {
                             "  fit: BoxFit.cover,\n"
                             ")",
                             fontSize: 12,
-                            color: Colors.blue.shade800,
+                            color: CustomThemeHelper.textSecondary(context),
                           ),
                         ],
                       ),
@@ -1065,12 +1098,12 @@ class _TestHomeState extends State<TestHome> {
                     CustomText(
                       "CustomImage.memory()을 사용한 메모리 이미지 표시 예시",
                       fontSize: 14,
-                      color: p.textSecondary,
+                      color: CustomThemeHelper.textSecondary(context),
                     ),
                     CustomText(
                       "Memory 이미지는 바이트 데이터(Uint8List)로부터 이미지를 로드합니다.",
                       fontSize: 12,
-                      color: p.textSecondary,
+                      color: CustomThemeHelper.textSecondary(context),
                     ),
                     const SizedBox(height: 8),
                     // Memory 이미지 예시
@@ -1106,18 +1139,19 @@ class _TestHomeState extends State<TestHome> {
                             ],
                           );
                         }
-                        final p = context.appTheme;
                         return CustomText(
                           "이미지를 로드할 수 없습니다",
                           fontSize: 12,
-                          color: p.textSecondary,
+                          color: CustomThemeHelper.textSecondary(context),
                         );
                       },
                     ),
                     const SizedBox(height: 8),
                     CustomContainer(
                       padding: const EdgeInsets.all(12),
-                      backgroundColor: Colors.purple.shade50,
+                      backgroundColor: CustomThemeHelper.accent(
+                        context,
+                      ).withValues(alpha: 0.1),
                       borderRadius: 8,
                       child: CustomColumn(
                         spacing: 8,
@@ -1127,7 +1161,7 @@ class _TestHomeState extends State<TestHome> {
                             "💡 사용 방법",
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
-                            color: Colors.purple.shade900,
+                            color: CustomThemeHelper.accent(context),
                           ),
                           CustomText(
                             "// Memory 이미지 사용\n"
@@ -1140,7 +1174,7 @@ class _TestHomeState extends State<TestHome> {
                             "  fit: BoxFit.cover,\n"
                             ")",
                             fontSize: 12,
-                            color: Colors.purple.shade800,
+                            color: CustomThemeHelper.textSecondary(context),
                           ),
                         ],
                       ),
@@ -1165,13 +1199,17 @@ class _TestHomeState extends State<TestHome> {
                     CustomText(
                       "여러 위젯을 조합한 실제 사용 예시",
                       fontSize: 14,
-                      color: p.textSecondary,
+                      color: CustomThemeHelper.textSecondary(context),
                     ),
                     CustomContainer(
                       padding: const EdgeInsets.all(16),
-                      backgroundColor: Colors.blue.shade50,
+                      backgroundColor: CustomThemeHelper.primary(
+                        context,
+                      ).withValues(alpha: 0.1),
                       borderRadius: 12,
-                      borderColor: Colors.blue.shade200,
+                      borderColor: CustomThemeHelper.primary(
+                        context,
+                      ).withValues(alpha: 0.3),
                       borderWidth: 1,
                       child: CustomColumn(
                         spacing: 12,
@@ -1201,21 +1239,25 @@ class _TestHomeState extends State<TestHome> {
                                     CustomText(
                                       "귀여운 고양이입니다",
                                       fontSize: 14,
-                                      color: p.textSecondary,
+                                      color: CustomThemeHelper.textSecondary(
+                                        context,
+                                      ),
                                     ),
                                     CustomRow(
                                       spacing: 8,
                                       children: [
                                         CustomIconButton(
                                           icon: Icons.favorite_border,
-                                          iconColor: Colors.red,
+                                          iconColor: const Color(0xFFD32F2F),
                                           iconSize: 20,
                                           size: 36,
                                           onPressed: () => print("좋아요"),
                                         ),
                                         CustomIconButton(
                                           icon: Icons.comment,
-                                          iconColor: Colors.blue,
+                                          iconColor: CustomThemeHelper.primary(
+                                            context,
+                                          ),
                                           iconSize: 20,
                                           size: 36,
                                           onPressed: () => print("댓글"),
@@ -1229,7 +1271,7 @@ class _TestHomeState extends State<TestHome> {
                           ),
                           CustomButton(
                             btnText: "더보기",
-                            backgroundColor: Colors.blue,
+                            backgroundColor: CustomThemeHelper.primary(context),
                             onCallBack: () => print("더보기 클릭"),
                           ),
                         ],
@@ -1255,7 +1297,7 @@ class _TestHomeState extends State<TestHome> {
                     CustomText(
                       "CustomCard를 사용한 정보 카드 예시",
                       fontSize: 14,
-                      color: p.textSecondary,
+                      color: CustomThemeHelper.textSecondary(context),
                     ),
                     _buildAnimalCard(
                       "images/dog.png",
@@ -1285,7 +1327,7 @@ class _TestHomeState extends State<TestHome> {
                     CustomText(
                       "두 위젯의 차이점과 사용 시나리오",
                       fontSize: 14,
-                      color: p.textSecondary,
+                      color: CustomThemeHelper.textSecondary(context),
                     ),
                     CustomRow(
                       spacing: 12,
@@ -1307,7 +1349,9 @@ class _TestHomeState extends State<TestHome> {
                                   "Material Design Card 기반\n기본 elevation 적용",
                                   fontSize: 12,
                                   fontWeight: FontWeight.normal,
-                                  color: Colors.grey.shade700,
+                                  color: CustomThemeHelper.textSecondary(
+                                    context,
+                                  ),
                                 ),
                               ],
                             ),
@@ -1359,7 +1403,6 @@ class _TestHomeState extends State<TestHome> {
 
   /// 이미지 카드를 생성하는 헬퍼 메서드
   Widget _buildImageCard(String imagePath, String label, BuildContext context) {
-    final p = context.appTheme;
     return CustomColumn(
       spacing: 8,
       children: [
@@ -1379,7 +1422,7 @@ class _TestHomeState extends State<TestHome> {
           fontSize: 14,
           fontWeight: FontWeight.w500,
           textAlign: TextAlign.center,
-          color: p.textPrimary,
+          color: CustomThemeHelper.textPrimary(context),
         ),
       ],
     );
@@ -1406,7 +1449,6 @@ class _TestHomeState extends State<TestHome> {
     String description,
     BuildContext context,
   ) {
-    final p = context.appTheme;
     return CustomColumn(
       spacing: 8,
       children: [
@@ -1421,7 +1463,9 @@ class _TestHomeState extends State<TestHome> {
                 imageBytes,
                 fit: BoxFit.cover,
                 errorWidget: Container(
-                  color: Colors.grey.shade200,
+                  color: CustomThemeHelper.textSecondary(
+                    context,
+                  ).withValues(alpha: 0.1),
                   child: CustomColumn(
                     mainAxisAlignment: MainAxisAlignment.center,
                     spacing: 8,
@@ -1429,12 +1473,14 @@ class _TestHomeState extends State<TestHome> {
                       Icon(
                         Icons.broken_image,
                         size: 40,
-                        color: Colors.grey.shade400,
+                        color: CustomThemeHelper.textSecondary(
+                          context,
+                        ).withValues(alpha: 0.4),
                       ),
                       CustomText(
                         "이미지를 표시할 수 없습니다",
                         fontSize: 12,
-                        color: p.textSecondary,
+                        color: CustomThemeHelper.textSecondary(context),
                       ),
                     ],
                   ),
@@ -1455,7 +1501,7 @@ class _TestHomeState extends State<TestHome> {
             CustomText(
               description,
               fontSize: 10,
-              color: Colors.grey.shade600,
+              color: CustomThemeHelper.textSecondary(context),
               textAlign: TextAlign.center,
             ),
           ],
@@ -1471,7 +1517,6 @@ class _TestHomeState extends State<TestHome> {
     String description,
     BuildContext context,
   ) {
-    final p = context.appTheme;
     // 프로젝트 루트의 images 폴더 경로 사용
     final projectRoot = Directory.current.path;
     final imageFile = File('$projectRoot/images/$imageFileName');
@@ -1490,7 +1535,9 @@ class _TestHomeState extends State<TestHome> {
                 imageFile,
                 fit: BoxFit.cover,
                 errorWidget: Container(
-                  color: Colors.grey.shade200,
+                  color: CustomThemeHelper.textSecondary(
+                    context,
+                  ).withValues(alpha: 0.1),
                   child: CustomColumn(
                     mainAxisAlignment: MainAxisAlignment.center,
                     spacing: 8,
@@ -1498,12 +1545,14 @@ class _TestHomeState extends State<TestHome> {
                       Icon(
                         Icons.broken_image,
                         size: 40,
-                        color: Colors.grey.shade400,
+                        color: CustomThemeHelper.textSecondary(
+                          context,
+                        ).withValues(alpha: 0.4),
                       ),
                       CustomText(
                         "이미지를 찾을 수 없습니다",
                         fontSize: 12,
-                        color: p.textSecondary,
+                        color: CustomThemeHelper.textSecondary(context),
                       ),
                     ],
                   ),
@@ -1524,7 +1573,7 @@ class _TestHomeState extends State<TestHome> {
             CustomText(
               description,
               fontSize: 10,
-              color: Colors.grey.shade600,
+              color: CustomThemeHelper.textSecondary(context),
               textAlign: TextAlign.center,
             ),
           ],
@@ -1540,7 +1589,6 @@ class _TestHomeState extends State<TestHome> {
     String description,
     BuildContext context,
   ) {
-    final p = context.appTheme;
     return CustomCard(
       borderRadius: 16,
       padding: const EdgeInsets.all(16),
@@ -1567,9 +1615,13 @@ class _TestHomeState extends State<TestHome> {
                     title,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: p.textPrimary,
+                    color: CustomThemeHelper.textPrimary(context),
                   ),
-                  CustomText(description, fontSize: 14, color: p.textSecondary),
+                  CustomText(
+                    description,
+                    fontSize: 14,
+                    color: CustomThemeHelper.textSecondary(context),
+                  ),
                 ],
               ),
             ],
@@ -1580,21 +1632,23 @@ class _TestHomeState extends State<TestHome> {
             children: [
               CustomIconButton(
                 icon: Icons.favorite,
-                iconColor: Colors.red,
-                backgroundColor: Colors.red.shade50,
+                iconColor: const Color(0xFFD32F2F),
+                backgroundColor: const Color(0xFFD32F2F).withValues(alpha: 0.1),
                 borderRadius: 8,
                 onPressed: () => print("$title 좋아요"),
               ),
               CustomIconButton(
                 icon: Icons.share,
-                iconColor: Colors.blue,
-                backgroundColor: Colors.blue.shade50,
+                iconColor: CustomThemeHelper.primary(context),
+                backgroundColor: CustomThemeHelper.primary(
+                  context,
+                ).withValues(alpha: 0.1),
                 borderRadius: 8,
                 onPressed: () => print("$title 공유"),
               ),
               CustomButton(
                 btnText: "상세보기",
-                backgroundColor: Colors.blue,
+                backgroundColor: CustomThemeHelper.primary(context),
                 minimumSize: const Size(100, 40),
                 onCallBack: () => print("$title 상세보기"),
               ),
